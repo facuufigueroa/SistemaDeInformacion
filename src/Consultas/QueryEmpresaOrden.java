@@ -31,4 +31,25 @@ public class QueryEmpresaOrden {
         }
        return empresaOrdenList;
     }
+
+     public ArrayList<String> listarPorNombre(){
+        ArrayList<String> empresaOrdenList = new ArrayList<>();
+        Connection conn = Conexion.getConnection();
+        Statement st;
+        try {
+            String sql = "SELECT empresa FROM empresa_orden";
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                empresaOrdenList.add(rs.getString("empresa"));
+            }
+        } catch (NumberFormatException | SQLException e) {
+            System.out.println(e);
+        }
+       return empresaOrdenList;
+    }
+
+
+
+
 }

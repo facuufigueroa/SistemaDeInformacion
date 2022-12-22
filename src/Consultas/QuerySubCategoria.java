@@ -19,7 +19,7 @@ public class QuerySubCategoria {
         Connection conn = Conexion.getConnection();
         Statement st;
         try {
-            String sql = "SELECT * FROM subcategorias";
+            String sql = "SELECT * FROM subcategorias ORDER BY subcategorias.nombre";
             st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {

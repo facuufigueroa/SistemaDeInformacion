@@ -74,5 +74,21 @@ public class QueryCuentas {
        return cuentas;
     }
     
+    public ArrayList<String> listarPorNombre(){
+        ArrayList<String> cuentas = new ArrayList<>();
+        Connection conn = Conexion.getConnection();
+        Statement st;
+        try {
+            String sql = "SELECT nombre FROM cuentas ORDER BY cuentas.nombre";
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                cuentas.add(rs.getString("nombre"));
+            }
+        } catch (NumberFormatException | SQLException e) {
+            System.out.println(e);
+        }
+       return cuentas;
+    }
     
 }

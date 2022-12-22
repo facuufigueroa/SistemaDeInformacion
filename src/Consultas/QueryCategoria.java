@@ -3,7 +3,6 @@ package Consultas;
 
 import DataBase.Conexion;
 import Model.Categoria;
-import Model.Cuentas;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -73,5 +72,21 @@ public class QueryCategoria {
        return categoriaList;
     }
     
+    public ArrayList<String> listarPorNombre(){
+        ArrayList<String> categoriaList = new ArrayList<>();
+        Connection conn = Conexion.getConnection();
+        Statement st;
+        try {
+            String sql = "SELECT DISTINCT nombre FROM categorias ORDER BY categorias.nombre";
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                categoriaList.add(rs.getString("nombre"));
+            }
+        } catch (NumberFormatException | SQLException e) {
+            System.out.println(e);
+        }
+       return categoriaList;
+    }
     
 }
