@@ -8,14 +8,18 @@ import Consultas.QuerySubCategoria;
 import Consultas.QueryTipoCategoria;
 import Consultas.QueryTipoCuenta;
 import Model.Categoria;
+import Model.Cuentas;
 import Model.SubCategoria;
 import Model.TipoCategoria;
 import Model.TipoCuenta;
 import View.Transacciones;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 
-public class TransaccionesController {
+public class TransaccionesController implements ActionListener{
     
     QueryCategoria queryCategoria = new QueryCategoria();
     QueryCuentas queryCuentas = new QueryCuentas();
@@ -23,18 +27,20 @@ public class TransaccionesController {
     QuerySubCategoria querySubCat = new QuerySubCategoria();
     QueryTipoCategoria queryTCat = new QueryTipoCategoria();
     QueryEmpresaOrden queryEO = new QueryEmpresaOrden();
-    
+    DefaultTableModel modelo = new DefaultTableModel();
     
     Transacciones transacciones = new Transacciones();
     
 
     public TransaccionesController() {
+        iniciarTabla();
         iniciarComboBoxTipoCuenta();
         iniciarComboBoxTipoCategoria();
         iniciarComboBoxCuentas();
         iniciarComboBoxCategoria();
         iniciarcomboBoxSubcategoria();
-        iniciarComboBoxEmpresa();        
+        iniciarComboBoxEmpresa();     
+        this.transacciones.cbbCuentas.addActionListener(this);
     }
     
     
@@ -51,11 +57,22 @@ public class TransaccionesController {
         }
     }
     
+    
+    public void accionTipoCuenta(ActionEvent e){
+        if(e.getSource() == transacciones.cbbCuentas){
+            int id_cuenta = queryCuentas.obtenerIdCuentaPorNombre((String) transacciones.cbbCuentas.getSelectedItem());
+            transacciones.cbbTipoCuenta.setSelectedItem(queryCuentas.obtenerTipoCuenta(id_cuenta));
+        }
+    }
+    
+    
+    
     public void iniciarComboBoxCuentas(){
         ArrayList<String> nombreCuentas = queryCuentas.listarPorNombre();
         for(String c : nombreCuentas){
             transacciones.cbbCuentas.addItem(c);
         }
+  
     }
     
     public void iniciarComboBoxTipoCategoria(){
@@ -86,5 +103,41 @@ public class TransaccionesController {
         }
     }
     
-    
+    public void iniciarTabla (){
+        //ArrayList<Categoria> categoriaLista = queryCat.listarCategorias();
+        modelo = new DefaultTableModel(){
+            public boolean isCellEditable(int fila, int columna){
+                if(columna == 1 && columna == 2 && columna == 3){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+        };
+       
+        modelo.addColumn("Fecha");
+        modelo.addColumn("Descripcion");
+        modelo.addColumn("Salidas");
+        modelo.addColumn("Entradas");
+        modelo.addColumn("Retenciones_g");
+        modelo.addColumn("Ret. Ingresos Brutos");
+        modelo.addColumn("A impuesto IVA");
+        modelo.addColumn("A IVA");
+        
+        transacciones.tablaTransacciones.setRowHeight(15);
+        transacciones.tablaTransacciones.setModel(modelo);
+        /*for(Categoria cat : categoriaLista){
+            String[] dato = new String[2];
+            dato[0] = cat.getNombre().toUpperCase();
+            dato[1] = cat.getTipoCategoria().toUpperCase();
+            modelo.addRow(dato);
+        }*/
+       
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        accionTipoCuenta(e);
+    }
 }
