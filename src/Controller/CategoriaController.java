@@ -3,7 +3,7 @@ package Controller;
 
 import Consultas.QueryCategoria;
 import Model.Categoria;
-import View.FormCategoria;
+import View.MenuPrincipal;
 import java.util.ArrayList;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -12,21 +12,17 @@ import javax.swing.table.DefaultTableModel;
 
 public class CategoriaController {
     
-    FormCategoria formCat = new FormCategoria();
     QueryCategoria queryCat = new QueryCategoria();
     DefaultTableModel modelo = new DefaultTableModel();
 
-    public CategoriaController() {
-        iniciarTabla();
-        centrarContenidoTabla();
+    public CategoriaController(MenuPrincipal menu) {
+        iniciarTabla(menu);
+        centrarContenidoTabla(menu);
     }
     
-    public void loadCatView(){
-       formCat.setVisible(true);
-       formCat.setLocationRelativeTo(null);
-    }
     
-    public void iniciarTabla (){
+    
+    public void iniciarTabla (MenuPrincipal menu){
         ArrayList<Categoria> categoriaLista = queryCat.listarCategorias();
         modelo = new DefaultTableModel(){
             public boolean isCellEditable(int fila, int columna){
@@ -41,8 +37,8 @@ public class CategoriaController {
        
         modelo.addColumn("NOMBRE");
         modelo.addColumn("TIPO CATEGORIA");
-        formCat.tablaCategoria.setRowHeight(25);
-        formCat.tablaCategoria.setModel(modelo);
+        menu.tablaCategoria.setRowHeight(25);
+        menu.tablaCategoria.setModel(modelo);
         for(Categoria cat : categoriaLista){
             String[] dato = new String[2];
             dato[0] = cat.getNombre().toUpperCase();
@@ -52,11 +48,11 @@ public class CategoriaController {
        
     }
     
-    public void centrarContenidoTabla(){
+    public void centrarContenidoTabla(MenuPrincipal menu){
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
-        formCat.tablaCategoria.getColumnModel().getColumn(0).setCellRenderer(tcr);
-        formCat.tablaCategoria.getColumnModel().getColumn(1).setCellRenderer(tcr);
+        menu.tablaCategoria.getColumnModel().getColumn(0).setCellRenderer(tcr);
+        menu.tablaCategoria.getColumnModel().getColumn(1).setCellRenderer(tcr);
 
     }
 }

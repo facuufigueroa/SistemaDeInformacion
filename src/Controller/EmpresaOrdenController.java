@@ -4,6 +4,7 @@ package Controller;
 import Consultas.QueryEmpresaOrden;
 import Model.EmpresaOrden;
 import View.FormEmpresaOrden;
+import View.MenuPrincipal;
 import java.util.ArrayList;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -14,20 +15,17 @@ public class EmpresaOrdenController {
     QueryEmpresaOrden queryEO = new QueryEmpresaOrden();
     FormEmpresaOrden formEO = new FormEmpresaOrden();
     DefaultTableModel modelo = new DefaultTableModel();
+    MenuPrincipal empresaOrdenView = new MenuPrincipal();
     
-    public void loadEmpresa(){
-        formEO.setVisible(true);
-        formEO.setLocationRelativeTo(null);
+    
+    public EmpresaOrdenController(MenuPrincipal menu) {
+        iniciarTabla(menu);
+        centrarContenidoTabla(menu);
     }
     
-    public EmpresaOrdenController() {
-        iniciarTabla();
-        centrarContenidoTabla();
-    }
+   
     
-    
-    
-    public void iniciarTabla (){
+    public void iniciarTabla (MenuPrincipal menu){
         ArrayList<EmpresaOrden> empresaOrdenList = queryEO.listarEmpresaOrden();
         modelo = new DefaultTableModel(){
             public boolean isCellEditable(int fila, int columna){
@@ -41,8 +39,8 @@ public class EmpresaOrdenController {
         };
         modelo.addColumn("NOMBRE");
         modelo.addColumn("C-U-I-T");
-        formEO.tablaEmpresa.setRowHeight(25);
-        formEO.tablaEmpresa.setModel(modelo);
+        menu.tablaEmpresa.setRowHeight(25);
+        menu.tablaEmpresa.setModel(modelo);
         for(EmpresaOrden eo : empresaOrdenList){
             String[] dato = new String[2];
             dato[0] = eo.getNombre().toUpperCase();
@@ -51,10 +49,10 @@ public class EmpresaOrdenController {
         }
     }
     
-    public void centrarContenidoTabla(){
+    public void centrarContenidoTabla(MenuPrincipal menu){
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
-        formEO.tablaEmpresa.getColumnModel().getColumn(0).setCellRenderer(tcr);
+        menu.tablaEmpresa.getColumnModel().getColumn(0).setCellRenderer(tcr);
   
     }
     

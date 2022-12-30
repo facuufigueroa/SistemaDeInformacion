@@ -4,8 +4,8 @@ package Controller;
 
 import Consultas.QueryTipoCategoria;
 import Model.TipoCategoria;
-import Model.TipoCuenta;
 import View.FormTipoCategoria;
+import View.MenuPrincipal;
 import java.util.ArrayList;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -18,18 +18,13 @@ public class TipoCategoriaController {
     QueryTipoCategoria queryTC = new QueryTipoCategoria();
     DefaultTableModel modelo = new DefaultTableModel();
 
-    public void loadTipoCategoria(){
-       formTipoCat.setVisible(true);
-       formTipoCat.setLocationRelativeTo(null);
+    
+    public TipoCategoriaController(MenuPrincipal menu) {
+        iniciarTabla(menu);
+        centrarContenidoTabla(menu);
     }
     
-   
-    public TipoCategoriaController() {
-        iniciarTabla();
-        centrarContenidoTabla();
-    }
-    
-    public void iniciarTabla (){
+    public void iniciarTabla (MenuPrincipal menu){
         ArrayList<TipoCategoria> tipoCategoria = queryTC.listarTiposCat();
         modelo = new DefaultTableModel(){
             public boolean isCellEditable(int fila, int columna){
@@ -42,8 +37,8 @@ public class TipoCategoriaController {
             }
         };
         modelo.addColumn("TIPO CATEGORIAS");
-        formTipoCat.tablaTipoCategorias.setRowHeight(25);
-        formTipoCat.tablaTipoCategorias.setModel(modelo);
+        menu.tablaTipoCategorias.setRowHeight(25);
+        menu.tablaTipoCategorias.setModel(modelo);
         for(TipoCategoria tipoC : tipoCategoria){
             String[] dato = new String[1];
             dato[0] = tipoC.getNombre().toUpperCase();
@@ -52,10 +47,10 @@ public class TipoCategoriaController {
        
     }
     
-    public void centrarContenidoTabla(){
+    public void centrarContenidoTabla(MenuPrincipal menu){
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
-        formTipoCat.tablaTipoCategorias.getColumnModel().getColumn(0).setCellRenderer(tcr);
+        menu.tablaTipoCategorias.getColumnModel().getColumn(0).setCellRenderer(tcr);
     }
     
 }

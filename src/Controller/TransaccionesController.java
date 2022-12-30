@@ -7,8 +7,6 @@ import Consultas.QueryEmpresaOrden;
 import Consultas.QuerySubCategoria;
 import Consultas.QueryTipoCategoria;
 import Consultas.QueryTipoCuenta;
-import Model.Categoria;
-import Model.Cuentas;
 import Model.SubCategoria;
 import Model.TipoCategoria;
 import Model.TipoCuenta;

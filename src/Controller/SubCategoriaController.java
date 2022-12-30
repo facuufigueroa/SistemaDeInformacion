@@ -3,8 +3,7 @@ package Controller;
 
 import Consultas.QuerySubCategoria;
 import Model.SubCategoria;
-import Model.TipoCuenta;
-import View.FormSubCategoria;
+import View.MenuPrincipal;
 import java.util.ArrayList;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -12,24 +11,17 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class SubCategoriaController {
-    
-    FormSubCategoria formSubCat = new FormSubCategoria();
+
     QuerySubCategoria querySubCat = new QuerySubCategoria();
     DefaultTableModel modelo = new DefaultTableModel();
 
-    public SubCategoriaController() {
-        iniciarTabla();
-        centrarContenidoTabla();
+    public SubCategoriaController(MenuPrincipal menu) {
+        iniciarTabla(menu);
+        centrarContenidoTabla(menu);
     }
     
     
-    
-    public void loadFormSubCat(){
-       formSubCat.setVisible(true);
-       formSubCat.setLocationRelativeTo(null);
-    }
-    
-    public void iniciarTabla (){
+    public void iniciarTabla (MenuPrincipal menu){
         ArrayList<SubCategoria> subCatList = querySubCat.listarSubCat();
         modelo = new DefaultTableModel(){
             public boolean isCellEditable(int fila, int columna){
@@ -42,8 +34,8 @@ public class SubCategoriaController {
             }
         };
         modelo.addColumn("SUB-CATEGORIAS");
-        formSubCat.tablaSubCategoria.setRowHeight(25);
-        formSubCat.tablaSubCategoria.setModel(modelo);
+        menu.tablaSubCategoria.setRowHeight(25);
+        menu.tablaSubCategoria.setModel(modelo);
         for(SubCategoria subC : subCatList){
             String[] dato = new String[1];
             dato[0] = subC.getNombre().toUpperCase();
@@ -51,10 +43,10 @@ public class SubCategoriaController {
         }
     }
     
-    public void centrarContenidoTabla(){
+    public void centrarContenidoTabla(MenuPrincipal menu){
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
-        formSubCat.tablaSubCategoria.getColumnModel().getColumn(0).setCellRenderer(tcr);
+        menu.tablaSubCategoria.getColumnModel().getColumn(0).setCellRenderer(tcr);
   
     }
 }

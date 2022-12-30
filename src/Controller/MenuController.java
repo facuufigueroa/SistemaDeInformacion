@@ -2,7 +2,9 @@
 package Controller;
 
 import Consultas.QueryCuentas;
+import Consultas.QueryTipoCuenta;
 import Model.Cuentas;
+import Model.TipoCuenta;
 import View.MenuPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,17 +20,17 @@ public class MenuController implements ActionListener {
     MenuPrincipal menuPrincipal = new MenuPrincipal();
     TransaccionesController transaccionController = new TransaccionesController();
     TipoCuentasController tipoCuentaController = new TipoCuentasController();
-    TipoCategoriaController tipoCatController = new TipoCategoriaController();
-    SubCategoriaController subCatController = new SubCategoriaController();
-    CategoriaController categoriaController = new CategoriaController();
-    EmpresaOrdenController EOController = new EmpresaOrdenController();
     
     
     
-    /*--------- CUENTAS ----------------------------------------------------------*/
     QueryCuentas queryCuenta = new QueryCuentas();
     DefaultTableModel modelCuentas = new DefaultTableModel();
-    /*----------- FIN CUENTAS -----------------------------------------------------*/
+    
+    
+    QueryTipoCuenta queryTipoC = new QueryTipoCuenta();
+    DefaultTableModel modelTipoCuentas = new DefaultTableModel();
+
+    
     
     
     
@@ -36,24 +38,29 @@ public class MenuController implements ActionListener {
     
     public MenuController() {
         this.menuPrincipal.btnNewTransaccion.addActionListener(this);
-        this.menuPrincipal.btnTipoCuenta.addActionListener(this);
-        this.menuPrincipal.btnTipoCategoria.addActionListener(this);
-        this.menuPrincipal.btnSubCategoria.addActionListener(this);
-        this.menuPrincipal.btnCategoria.addActionListener(this);
         this.menuPrincipal.btnEmpresaOrden.addActionListener(this);
         
+        
         iniciarTablaCuentas();
-        centrarCotenidoTabla(menuPrincipal.tablaCuentas);
-       
+        centrarCotenidoTablaCuentas(menuPrincipal.tablaCuentas);
+        
+        iniciarTablaTipoCuentas();
+        centrarCotenidoTablaTipoCuentas(menuPrincipal.tablaTipoCuenta);
+        
+        EmpresaOrdenController eo = new EmpresaOrdenController(menuPrincipal);
+        CategoriaController categoriaController = new CategoriaController(menuPrincipal);
+        TipoCategoriaController tipoCatController = new TipoCategoriaController(menuPrincipal);
+        SubCategoriaController subCatController = new SubCategoriaController(menuPrincipal);
+            
+        
+        VerTransaccionesController verTransacciones = new VerTransaccionesController(menuPrincipal);
+
+        
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
         newTransaccion(e);
-        adminTipoCuentas(e);
-        adminTipoCategoria(e);
-        adminSubCategoria(e);
-        adminCategoria(e);
         adminEmpresaOrden(e);
     }
     
@@ -70,33 +77,12 @@ public class MenuController implements ActionListener {
         }
     } 
     
-    public void adminTipoCuentas(ActionEvent e){
-        if(e.getSource() == menuPrincipal.btnTipoCuenta){
-            tipoCuentaController.loadTipoCuenta();
-        }
-    }
     
-    public void adminTipoCategoria(ActionEvent e){
-        if(e.getSource() == menuPrincipal.btnTipoCategoria){
-            tipoCatController.loadTipoCategoria();
-        }
-    }
     
-    public void adminSubCategoria(ActionEvent e){
-        if(e.getSource() == menuPrincipal.btnSubCategoria){
-            subCatController.loadFormSubCat();
-        }
-    }
-    
-    public void adminCategoria(ActionEvent e){
-        if(e.getSource() == menuPrincipal.btnCategoria){
-            categoriaController.loadCatView();
-        }
-    }
     
     public void adminEmpresaOrden(ActionEvent e){
         if(e.getSource() == menuPrincipal.btnEmpresaOrden){
-            EOController.loadEmpresa();
+           
         }
     }
     
@@ -129,14 +115,47 @@ public class MenuController implements ActionListener {
        
     }
     
-    public void centrarCotenidoTabla(JTable tabla){
+    public void centrarCotenidoTablaCuentas(JTable tabla){
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
         tabla.getColumnModel().getColumn(1).setCellRenderer(tcr);
-
     }
     
     /*---------- Fin todo sobre CUENTAS ------------------------------------*/
     
+    
+    public void iniciarTablaTipoCuentas (){
+        ArrayList<TipoCuenta> tipoCuentasLista = queryTipoC.listarTipoCuentas();
+        modelTipoCuentas = new DefaultTableModel(){
+            public boolean isCellEditable(int fila, int columna){
+                if(columna == 1 && columna == 2 && columna == 3){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+        };
+        modelTipoCuentas.addColumn("Tipo Cuentas");
+        menuPrincipal.tablaTipoCuenta.setRowHeight(25);
+        menuPrincipal.tablaTipoCuenta.setModel(modelTipoCuentas);
+        for(TipoCuenta tipoC : tipoCuentasLista){
+            String[] dato = new String[1];
+            dato[0] = tipoC.getNombre().toUpperCase();
+            modelTipoCuentas.addRow(dato);
+        }
+    }
+    
+    public void centrarCotenidoTablaTipoCuentas(JTable tabla){
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        tabla.getColumnModel().getColumn(0).setCellRenderer(tcr);
+    }
+    
+    public void verTransacciones(ActionEvent e){
+        if(e.getSource() == menuPrincipal.btnVerTransacciones){
+            
+        }
+    }
 }
