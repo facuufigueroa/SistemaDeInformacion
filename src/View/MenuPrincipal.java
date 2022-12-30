@@ -35,9 +35,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnNewTransaccion = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         btnVerTransacciones = new javax.swing.JButton();
-        btnNewTransaccion2 = new javax.swing.JButton();
-        btnNewTransaccion3 = new javax.swing.JButton();
-        btnNewTransaccion4 = new javax.swing.JButton();
         jInternalFrame5 = new javax.swing.JInternalFrame();
         jPanel5 = new javax.swing.JPanel();
         labelBienvenido = new javax.swing.JLabel();
@@ -91,7 +88,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         jInternalFrame4 = new javax.swing.JInternalFrame();
         jPanel4 = new javax.swing.JPanel();
-        btnEmpresaOrden = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -168,39 +164,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnNewTransaccion2.setBackground(new java.awt.Color(0, 0, 0));
-        btnNewTransaccion2.setFont(new java.awt.Font("Malgun Gothic", 0, 16)); // NOI18N
-        btnNewTransaccion2.setForeground(new java.awt.Color(255, 255, 255));
-        btnNewTransaccion2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/transaccion.png"))); // NOI18N
-        btnNewTransaccion2.setText("Ver Transacciones Por Sub-Categoria");
-        btnNewTransaccion2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewTransaccion2ActionPerformed(evt);
-            }
-        });
-
-        btnNewTransaccion3.setBackground(new java.awt.Color(0, 0, 0));
-        btnNewTransaccion3.setFont(new java.awt.Font("Malgun Gothic", 0, 16)); // NOI18N
-        btnNewTransaccion3.setForeground(new java.awt.Color(255, 255, 255));
-        btnNewTransaccion3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/transaccion.png"))); // NOI18N
-        btnNewTransaccion3.setText("Ver Transacciones Por Cuenta");
-        btnNewTransaccion3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewTransaccion3ActionPerformed(evt);
-            }
-        });
-
-        btnNewTransaccion4.setBackground(new java.awt.Color(0, 0, 0));
-        btnNewTransaccion4.setFont(new java.awt.Font("Malgun Gothic", 0, 16)); // NOI18N
-        btnNewTransaccion4.setForeground(new java.awt.Color(255, 255, 255));
-        btnNewTransaccion4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/transaccion.png"))); // NOI18N
-        btnNewTransaccion4.setText("Ver Transacciones Por Categoria");
-        btnNewTransaccion4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewTransaccion4ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -213,14 +176,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
                             .addComponent(labelBienvenido1)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(btnNewTransaccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnVerTransacciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(btnNewTransaccion3, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnVerTransacciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnNewTransaccion2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnNewTransaccion4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 329, Short.MAX_VALUE)
+                        .addGap(0, 678, Short.MAX_VALUE)
                         .addComponent(jLabel10)))
                 .addContainerGap())
         );
@@ -233,16 +192,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(btnNewTransaccion, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addComponent(btnVerTransacciones, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(btnNewTransaccion3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnNewTransaccion2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(btnNewTransaccion4, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jInternalFrame2Layout = new javax.swing.GroupLayout(jInternalFrame2.getContentPane());
@@ -845,17 +797,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(0, 0, 51));
         jPanel4.setForeground(new java.awt.Color(0, 0, 51));
 
-        btnEmpresaOrden.setBackground(new java.awt.Color(0, 0, 0));
-        btnEmpresaOrden.setFont(new java.awt.Font("Malgun Gothic", 0, 16)); // NOI18N
-        btnEmpresaOrden.setForeground(new java.awt.Color(255, 255, 255));
-        btnEmpresaOrden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/compania.png"))); // NOI18N
-        btnEmpresaOrden.setText("Formulario EmpresaOrden");
-        btnEmpresaOrden.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEmpresaOrdenActionPerformed(evt);
-            }
-        });
-
         jLabel6.setFont(new java.awt.Font("Arial Narrow", 1, 28)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/compania.png"))); // NOI18N
@@ -979,20 +920,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(43, 43, 43)
-                        .addComponent(btnEmpresaOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(513, Short.MAX_VALUE))
+                    .addComponent(jLabel6))
+                .addContainerGap(557, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(btnEmpresaOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
+                .addGap(32, 32, 32)
+                .addComponent(jLabel6)
+                .addGap(30, 30, 30)
                 .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(15, 15, 15))
         );
@@ -1028,25 +964,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnNewTransaccionActionPerformed
 
-    private void btnEmpresaOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpresaOrdenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEmpresaOrdenActionPerformed
-
     private void btnVerTransaccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerTransaccionesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVerTransaccionesActionPerformed
-
-    private void btnNewTransaccion2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTransaccion2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNewTransaccion2ActionPerformed
-
-    private void btnNewTransaccion3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTransaccion3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNewTransaccion3ActionPerformed
-
-    private void btnNewTransaccion4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTransaccion4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNewTransaccion4ActionPerformed
 
     private void btnGuardarTipoCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarTipoCuentaActionPerformed
         // TODO add your handling code here:
@@ -1105,14 +1025,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnEmpresaOrden;
     public javax.swing.JButton btnGuardarTipoCuenta;
     public javax.swing.JButton btnGuardarTipoCuenta1;
     public javax.swing.JButton btnGuardarTipoCuenta3;
     public javax.swing.JButton btnNewTransaccion;
-    public javax.swing.JButton btnNewTransaccion2;
-    public javax.swing.JButton btnNewTransaccion3;
-    public javax.swing.JButton btnNewTransaccion4;
     public javax.swing.JButton btnVerTransacciones;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;

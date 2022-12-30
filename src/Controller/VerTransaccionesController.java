@@ -1,7 +1,13 @@
 
 package Controller;
 
+import Consultas.QueryCategoria;
+import Consultas.QueryCuentas;
+import Consultas.QueryEmpresaOrden;
+import Consultas.QuerySubCategoria;
 import Model.Categoria;
+import Model.SubCategoria;
+import Model.TipoCategoria;
 import View.FormVerTransacciones;
 import View.MenuPrincipal;
 import java.awt.event.ActionEvent;
@@ -15,14 +21,23 @@ public class VerTransaccionesController implements ActionListener{
     FormVerTransacciones formVerT = new FormVerTransacciones();
     MenuPrincipal viewMenu = new MenuPrincipal();
     DefaultTableModel modelo = new DefaultTableModel();
-    
+    QueryCategoria queryCategoria = new QueryCategoria();
+    QueryCuentas queryCuentas = new QueryCuentas();
+    QuerySubCategoria querySubCat = new QuerySubCategoria();
+    QueryEmpresaOrden queryEO = new QueryEmpresaOrden();
+
     
     
     public VerTransaccionesController(MenuPrincipal menu) {
         formVerT.setLocationRelativeTo(null);
         this.viewMenu = menu;
         viewMenu.btnVerTransacciones.addActionListener(this);
+        
         iniciarTabla();
+        iniciarComboBoxBuscarCategoria();
+        iniciarComboBoxBuscarCuentas();
+        iniciarcomboBoxBuscarSubcategoria();
+        iniciarComboBoxBuscarEmpresa();
     }
 
     @Override
@@ -32,7 +47,6 @@ public class VerTransaccionesController implements ActionListener{
     
     public void loadVerTransacciones(ActionEvent e){
         if(e.getSource() == viewMenu.btnVerTransacciones){
-            System.out.println("hola");
             formVerT.setVisible(true);
         }
     }
@@ -68,10 +82,33 @@ public class VerTransaccionesController implements ActionListener{
     
     
     
+    public void iniciarComboBoxBuscarCategoria(){
+        ArrayList<String> listCategoria = queryCategoria.listarPorNombre();
+        for(String c : listCategoria){
+            formVerT.cbbBuscarCategoria.addItem(c);
+        }
+    }
     
+    public void iniciarComboBoxBuscarCuentas(){
+        ArrayList<String> nombreCuentas = queryCuentas.listarPorNombre();
+        for(String c : nombreCuentas){
+            formVerT.cbbBuscarCuenta.addItem(c);
+        }
+    }
     
+    public void iniciarcomboBoxBuscarSubcategoria(){
+        ArrayList<SubCategoria> listSubCategoria = querySubCat.listarSubCat();
+        for(SubCategoria subCat : listSubCategoria){
+            formVerT.cbbSubCategoria.addItem(subCat.getNombre());
+        }
+    }
     
-    
+    public void iniciarComboBoxBuscarEmpresa(){
+        ArrayList<String> listEmpresas = queryEO.listarPorNombre();
+        for(String emp : listEmpresas){
+            formVerT.cbbEmpresa.addItem(emp);
+        }
+    }
     
     
     

@@ -38,7 +38,6 @@ public class MenuController implements ActionListener {
     
     public MenuController() {
         this.menuPrincipal.btnNewTransaccion.addActionListener(this);
-        this.menuPrincipal.btnEmpresaOrden.addActionListener(this);
         
         
         iniciarTablaCuentas();
@@ -61,7 +60,6 @@ public class MenuController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         newTransaccion(e);
-        adminEmpresaOrden(e);
     }
     
     
@@ -78,13 +76,6 @@ public class MenuController implements ActionListener {
     } 
     
     
-    
-    
-    public void adminEmpresaOrden(ActionEvent e){
-        if(e.getSource() == menuPrincipal.btnEmpresaOrden){
-           
-        }
-    }
     
     /*------------------- Todo sobre cuentas ---------------------------------*/
     
