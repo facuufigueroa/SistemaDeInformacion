@@ -74,7 +74,7 @@ public class TipoCuentasController implements ActionListener{
             }
             else{
                 JOptionPane.showMessageDialog(null,"Error al intentar agregar un Tipo De Cuenta. \n"
-                        + "Verifique que el campo nombre del tipo de cuenta no esté vacio.");
+                        + "Verifique que el campo nombre del tipo de cuenta no esté vacio.","Eror - Verifique",0);
             }
         }
     }

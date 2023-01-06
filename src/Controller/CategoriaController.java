@@ -101,7 +101,7 @@ public class CategoriaController implements ActionListener{
             else{
                 JOptionPane.showMessageDialog(null, "Error al intentar agregar Categoria \n"
                         + "1 ) Verifique que haya escrito un nombre para la categoria \n"
-                        + "2 ) Verifique que haya seleccionado un tipo de categoria");
+                        + "2 ) Verifique que haya seleccionado un tipo de categoria","Error - Verifique",0);
             }
         }
     }

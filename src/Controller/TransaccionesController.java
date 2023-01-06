@@ -62,10 +62,11 @@ public class TransaccionesController implements ActionListener{
     
     
     public void accionTipoCuenta(ActionEvent e){
-        /*if(e.getSource() == transacciones.cbbCuentas){
-            int id_cuenta = queryCuentas.obtenerIdCuentaPorNombre((String) transacciones.cbbCuentas.getSelectedItem());
-            transacciones.cbbTipoCuenta.setSelectedItem(queryCuentas.obtenerTipoCuenta(id_cuenta));
-        }*/
+        if(e.getSource() == transacciones.cbbCuentas){
+            int id_tipo_cuenta = queryCuentas.obtenerIdTipoCuenta2((String) transacciones.cbbCuentas.getSelectedItem());
+            transacciones.cbbTipoCuenta.setSelectedItem(queryCuentas.obtenerNombreTipoCuenta(id_tipo_cuenta));
+        }
+   
     }
     
     

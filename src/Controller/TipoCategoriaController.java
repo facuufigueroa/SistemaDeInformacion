@@ -78,7 +78,7 @@ public class TipoCategoriaController implements ActionListener{
             else{
                 JOptionPane.showMessageDialog(null, "Error al guardar. \n"
                         + "Verifique que el campo nombre del Tipo De Categoria \n"
-                        + "no esté vacio.");
+                        + "no esté vacio.","Error - Verifique",0);
             }
         }
     }

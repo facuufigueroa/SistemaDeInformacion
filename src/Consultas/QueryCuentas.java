@@ -53,26 +53,7 @@ public class QueryCuentas {
         }
        return cuentas;
     }
-    
-    public int obtenerIdTipoCuentaPorNombre(String nombre){
-        int id_cuenta=0;
-        PreparedStatement ps = null;
-        Connection conn = Conexion.getConnection();
-        try {
-            String sql = "SELECT idtipo_cuenta FROM tipo_cuenta WHERE tipo_cuenta = '" + nombre + "'";
-            ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery(sql);
-            if (rs.next()) {
-                id_cuenta = rs.getInt(1);
-            }
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-        return id_cuenta;
-    }
-    
+   
      public void agregarCuenta(Cuentas cuenta){
         PreparedStatement ps;
         Connection conn = getConnection();
@@ -92,4 +73,98 @@ public class QueryCuentas {
             }
         }
     }
+     
+      
+    public int obtenerIdCuentaPorNombre(String nombre){
+        int id_cuenta=0;
+        PreparedStatement ps = null;
+        Connection conn = Conexion.getConnection();
+        try {
+            String sql = "SELECT c.idcuenta \n" +
+                            "FROM cuentas AS c\n" +
+                            "WHERE c.nombre = '" + nombre + "'";
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                id_cuenta = rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return id_cuenta;
+    }
+    
+    public String obtenerNombreTipoCuenta(int id_cuenta){
+        String nombreTipoCuenta = "";
+        PreparedStatement ps = null;
+        Connection conn = Conexion.getConnection();
+        try {
+            String sql = "SELECT t.tipo_cuenta as nombre_tipo_cuenta \n" +
+                            "FROM tipo_cuenta as t\n" +
+                            "WHERE t.idtipo_cuenta = " + id_cuenta ;
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                nombreTipoCuenta = rs.getString(1);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return nombreTipoCuenta;
+    }
+    
+    
+    public int obtenerIdTipoCuenta(String nombre){
+        int id_tipo_cuenta =0;
+        PreparedStatement ps = null;
+        Connection conn = Conexion.getConnection();
+        try {
+            String sql = "SELECT t.idtipo_cuenta\n" +
+                            "FROM tipo_cuenta as t\n" +
+                            "WHERE t.tipo_cuenta ='" + nombre + "'";
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                id_tipo_cuenta = rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return id_tipo_cuenta;
+    }
+    
+    public int obtenerIdTipoCuenta2(String nombre){
+        int id_tipo_cuenta =0;
+        PreparedStatement ps = null;
+        Connection conn = Conexion.getConnection();
+        try {
+            String sql = "SELECT t.idtipo_cuenta\n" +
+                            "FROM cuentas AS c\n" +
+                            "INNER JOIN tipo_cuenta AS t\n" +
+                            "ON t.idtipo_cuenta = c.id_tipo_cuenta\n" +
+                            "WHERE c.nombre ='" + nombre + "'";
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                id_tipo_cuenta = rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return id_tipo_cuenta;
+    }
+    
+    
+    
+    
+    
+    
 }

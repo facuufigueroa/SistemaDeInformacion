@@ -85,7 +85,7 @@ public class EmpresaOrdenController implements ActionListener{
                 JOptionPane.showMessageDialog(null, "Error al guardar. \n"
                         + "Hay campos sin completar, complete los campos. \n"
                         + "1) Verifique que el campo NOMBRE no esté vacio. \n"
-                        + "2) Verifique que el campo CUIT no esté vacio");
+                        + "2) Verifique que el campo CUIT no esté vacio","Error - Verifique",0);
             }
         }  
     }

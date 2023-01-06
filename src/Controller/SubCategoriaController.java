@@ -75,7 +75,7 @@ public class SubCategoriaController implements ActionListener{
             else{
                 JOptionPane.showMessageDialog(null, "Error al guardar. \n"
                         + "Verifique que el campo del nombre de la subcategoria \n"
-                        + "este completo.");
+                        + "este completo.","Error - Verifique",0);
             }
         }
     }

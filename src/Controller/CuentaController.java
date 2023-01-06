@@ -80,7 +80,7 @@ public class CuentaController implements ActionListener {
             if(!verificarBlanco()){
                 Cuentas cuenta = new Cuentas();
                 cuenta.setNombre(cuentaView.txtNomCuenta.getText());
-                int id_tipoCuenta = queryCuenta.obtenerIdTipoCuentaPorNombre(cuentaView.cbbTipoCuenta.getSelectedItem().toString());
+                int id_tipoCuenta = queryCuenta.obtenerIdTipoCuenta(cuentaView.cbbTipoCuenta.getSelectedItem().toString());
                 cuenta.setId_tipoCuenta(id_tipoCuenta);
                 queryCuenta.agregarCuenta(cuenta);
                 JOptionPane.showMessageDialog(null, "Cuenta "+cuentaView.txtNomCuenta.getText().toUpperCase()+" agregada con éxito");
@@ -92,7 +92,7 @@ public class CuentaController implements ActionListener {
             else{
                 JOptionPane.showMessageDialog(null, "Error al intentar agregar una cuenta. \n"
                         + "1 ) Verifique que haya escrito un nombre en el campo 'Nombre Cuenta' \n"
-                        + "2 ) Verifique que haya seleccionado un tipo de cuenta");
+                        + "2 ) Verifique que haya seleccionado un tipo de cuenta","Error - Verifique",0);
             }
         }
     }
