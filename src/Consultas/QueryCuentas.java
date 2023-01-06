@@ -2,6 +2,7 @@
 package Consultas;
 
 import DataBase.Conexion;
+import static DataBase.Conexion.getConnection;
 import Model.Cuentas;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,68 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class QueryCuentas {
-    
-    
-    
-    
-    
-    
-    public String obtenerTipoCuenta(int idTipoCuenta){
-        String nombreTipoCuenta = "";
-        PreparedStatement ps = null;
-        Connection conn = Conexion.getConnection();
-        try {
-            String sql = "SELECT tipo_cuenta FROM tipo_cuenta WHERE idtipo_cuenta = " + idTipoCuenta;
-            ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery(sql);
-            if (rs.next()) {
-                nombreTipoCuenta = rs.getString("tipo_cuenta");
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-        return nombreTipoCuenta;
-    }
-    
-    public int obtenerIdCuentaPorNombre(String nombre){
-        int id_cuenta=0;
-        PreparedStatement ps = null;
-        Connection conn = Conexion.getConnection();
-        try {
-            String sql = "SELECT id_tipo_cuenta FROM cuentas WHERE nombre = '" + nombre + "'";
-            ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery(sql);
-            if (rs.next()) {
-                id_cuenta = rs.getInt(1);
-            }
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-        return id_cuenta;
-    }
-    
-    public ArrayList<Cuentas> listarCuentas(){
-        ArrayList<Cuentas> cuentas = new ArrayList<>();
-        Connection conn = Conexion.getConnection();
-        Statement st;
-        try {
-            String sql = "SELECT * FROM cuentas";
-            st = conn.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            while (rs.next()) {
-                Cuentas cuenta = new Cuentas();
-                cuenta.setNombre(rs.getString("nombre"));
-                cuenta.setTipoCuenta(obtenerTipoCuenta(obtenerIdCuentaPorNombre(cuenta.getNombre())));
-                cuentas.add(cuenta);
-            }
-        } catch (NumberFormatException | SQLException e) {
-            System.out.println(e);
-        }
-       return cuentas;
-    }
+   
     
     public ArrayList<String> listarPorNombre(){
         ArrayList<String> cuentas = new ArrayList<>();
@@ -91,4 +31,65 @@ public class QueryCuentas {
        return cuentas;
     }
     
+    public ArrayList<Cuentas> listarCuentas2(){
+        ArrayList<Cuentas> cuentas = new ArrayList<>();
+        Connection conn = Conexion.getConnection();
+        Statement st;
+        try {
+            String sql = "SELECT c.nombre as 'nom_cuenta', t.tipo_cuenta as 'nombre_tipo_cuenta'\n" +
+                            "FROM cuentas as c\n" +
+                            "INNER JOIN tipo_cuenta as t\n" +
+                            "ON t.idtipo_cuenta = c.id_tipo_cuenta";
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                Cuentas cuenta = new Cuentas();
+                cuenta.setNombre(rs.getString("nom_cuenta"));
+                cuenta.setTipoCuenta(rs.getString("nombre_tipo_cuenta"));
+                cuentas.add(cuenta);
+            }
+        } catch (NumberFormatException | SQLException e) {
+            System.out.println(e);
+        }
+       return cuentas;
+    }
+    
+    public int obtenerIdTipoCuentaPorNombre(String nombre){
+        int id_cuenta=0;
+        PreparedStatement ps = null;
+        Connection conn = Conexion.getConnection();
+        try {
+            String sql = "SELECT idtipo_cuenta FROM tipo_cuenta WHERE tipo_cuenta = '" + nombre + "'";
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                id_cuenta = rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return id_cuenta;
+    }
+    
+     public void agregarCuenta(Cuentas cuenta){
+        PreparedStatement ps;
+        Connection conn = getConnection();
+        String sql = "INSERT INTO cuentas(nombre,id_tipo_cuenta) VALUES(?,?) ";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, cuenta.getNombre());
+            ps.setInt(2, cuenta.getId_tipoCuenta());
+            ps.execute();
+        } catch (SQLException e) {
+            System.err.println(e);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+        }
+    }
 }

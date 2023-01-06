@@ -7,6 +7,7 @@ import Consultas.QueryEmpresaOrden;
 import Consultas.QuerySubCategoria;
 import Consultas.QueryTipoCategoria;
 import Consultas.QueryTipoCuenta;
+import Model.Categoria;
 import Model.SubCategoria;
 import Model.TipoCategoria;
 import Model.TipoCuenta;
@@ -26,9 +27,10 @@ public class TransaccionesController implements ActionListener{
     QueryTipoCategoria queryTCat = new QueryTipoCategoria();
     QueryEmpresaOrden queryEO = new QueryEmpresaOrden();
     DefaultTableModel modelo = new DefaultTableModel();
+    ArrayList<String> listCategoria = queryCategoria.listarPorNombre();
     
     Transacciones transacciones = new Transacciones();
-    
+    CompraVentaIvaController compVentController = new CompraVentaIvaController();
 
     public TransaccionesController() {
         iniciarTabla();
@@ -39,9 +41,11 @@ public class TransaccionesController implements ActionListener{
         iniciarcomboBoxSubcategoria();
         iniciarComboBoxEmpresa();     
         this.transacciones.cbbCuentas.addActionListener(this);
+        
+        this.transacciones.btnCompraVentasIVA.addActionListener(this);
     }
     
-    
+   
     
     public void loadNewTransaccion(){
        transacciones.setVisible(true);
@@ -50,6 +54,7 @@ public class TransaccionesController implements ActionListener{
     
     public void iniciarComboBoxTipoCuenta(){
         ArrayList<TipoCuenta> listTipoCuentas = queryTCuenta.listarTipoCuentas();
+        transacciones.cbbTipoCuenta.removeAllItems();
         for(TipoCuenta tc : listTipoCuentas){
             transacciones.cbbTipoCuenta.addItem(tc.getNombre());
         }
@@ -57,16 +62,17 @@ public class TransaccionesController implements ActionListener{
     
     
     public void accionTipoCuenta(ActionEvent e){
-        if(e.getSource() == transacciones.cbbCuentas){
+        /*if(e.getSource() == transacciones.cbbCuentas){
             int id_cuenta = queryCuentas.obtenerIdCuentaPorNombre((String) transacciones.cbbCuentas.getSelectedItem());
             transacciones.cbbTipoCuenta.setSelectedItem(queryCuentas.obtenerTipoCuenta(id_cuenta));
-        }
+        }*/
     }
     
     
     
     public void iniciarComboBoxCuentas(){
         ArrayList<String> nombreCuentas = queryCuentas.listarPorNombre();
+        transacciones.cbbCuentas.removeAllItems();
         for(String c : nombreCuentas){
             transacciones.cbbCuentas.addItem(c);
         }
@@ -81,7 +87,7 @@ public class TransaccionesController implements ActionListener{
     }
     
     public void iniciarComboBoxCategoria(){
-        ArrayList<String> listCategoria = queryCategoria.listarPorNombre();
+        transacciones.cbbCategorias.removeAllItems();
         for(String cat : listCategoria){
             transacciones.cbbCategorias.addItem(cat);
         }
@@ -137,5 +143,20 @@ public class TransaccionesController implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         accionTipoCuenta(e);
+        loadComprasVentas(e);
+    }
+    
+    
+    public void loadComprasVentas(ActionEvent e){
+        if(e.getSource() == transacciones.btnCompraVentasIVA){
+            compVentController.loadComVentaIva();
+        }
+    }
+    
+    public void updateComboBoxCategoria(ArrayList<Categoria> listCat){
+        ArrayList<Categoria> listCategoria = listCat;
+        for(Categoria cat : listCategoria){
+            transacciones.cbbCategorias.addItem(cat.getNombre());
+        }
     }
 }

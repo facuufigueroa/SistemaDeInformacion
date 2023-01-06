@@ -2,9 +2,11 @@
 package Consultas;
 
 import DataBase.Conexion;
+import static DataBase.Conexion.getConnection;
+import Model.EmpresaOrden;
 import Model.SubCategoria;
-import Model.TipoCategoria;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -31,5 +33,24 @@ public class QuerySubCategoria {
             System.out.println(e);
         }
        return subCategoriaList;
+    }
+    
+    public void agregarSubcategoria(SubCategoria subcategoria){
+        PreparedStatement ps = null;
+        Connection conn = getConnection();
+        String sql = "INSERT INTO subcategorias (nombre) VALUES(?) ";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, subcategoria.getNombre());
+            ps.execute();
+        } catch (SQLException e) {
+            System.err.println(e);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+        }
     }
 }
