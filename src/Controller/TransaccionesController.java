@@ -43,6 +43,7 @@ public class TransaccionesController implements ActionListener{
         this.transacciones.cbbCuentas.addActionListener(this);
         
         this.transacciones.btnCompraVentasIVA.addActionListener(this);
+        this.transacciones.cbbCategorias.addActionListener(this);
     }
     
    
@@ -66,7 +67,6 @@ public class TransaccionesController implements ActionListener{
             int id_tipo_cuenta = queryCuentas.obtenerIdTipoCuenta2((String) transacciones.cbbCuentas.getSelectedItem());
             transacciones.cbbTipoCuenta.setSelectedItem(queryCuentas.obtenerNombreTipoCuenta(id_tipo_cuenta));
         }
-   
     }
     
     
@@ -145,6 +145,7 @@ public class TransaccionesController implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         accionTipoCuenta(e);
         loadComprasVentas(e);
+        accionTipoCategoria(e);
     }
     
     
@@ -158,6 +159,14 @@ public class TransaccionesController implements ActionListener{
         ArrayList<Categoria> listCategoria = listCat;
         for(Categoria cat : listCategoria){
             transacciones.cbbCategorias.addItem(cat.getNombre());
+        }
+    }
+    
+    public void accionTipoCategoria(ActionEvent e){
+        if(e.getSource() == transacciones.cbbCategorias){
+            int id_tipo_categoria = queryCategoria.obtenerIdTipoCat((String) transacciones.cbbCategorias.getSelectedItem());
+            
+            transacciones.cbbTipoCategoria.setSelectedItem(queryCategoria.obtenerNombreTipoCat(id_tipo_categoria));
         }
     }
 }

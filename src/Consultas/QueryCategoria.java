@@ -39,7 +39,10 @@ public class QueryCategoria {
         PreparedStatement ps = null;
         Connection conn = Conexion.getConnection();
         try {
-            String sql = "SELECT idtipo_categoria FROM tipo_categoria WHERE nombre = '" + nombre + "'";
+            String sql = "SELECT t.idtipo_categoria\n" +
+                        "FROM tipo_categoria AS t\n" +
+                        "INNER JOIN categorias AS c\n" +
+                        "ON t.idtipo_categoria '" + nombre + "'";
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery(sql);
             if (rs.next()) {
@@ -138,4 +141,47 @@ public class QueryCategoria {
         }
        return categoriaList;
     }
+    
+    /* Traer la id  tipo categoria con el nombre de la categoria*/
+    public int obtenerIdTipoCat(String nombre){
+        int id_categoria=0;
+        PreparedStatement ps = null;
+        Connection conn = Conexion.getConnection();
+        try {
+            String sql = "SELECT DISTINCT c.id_tipo_categoria \n" +
+                            "FROM categorias as c \n" +
+                            "WHERE c.nombre = '" + nombre + "'";
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                id_categoria = rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return id_categoria;
+    }
+    
+     public String obtenerNombreTipoCat(int idCat){
+        String nombreTipoCat = "";
+        PreparedStatement ps = null;
+        Connection conn = Conexion.getConnection();
+        try {
+            String sql = "SELECT t.nombre \n" +
+                            "FROM tipo_categoria AS t \n" +
+                            "WHERE t.idtipo_categoria = " + idCat;
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                nombreTipoCat = rs.getString("nombre");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return nombreTipoCat;
+    }
+    
 }
