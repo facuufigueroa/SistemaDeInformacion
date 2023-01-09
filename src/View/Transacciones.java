@@ -219,6 +219,8 @@ public class Transacciones extends javax.swing.JFrame {
         checkAIva.setFont(new java.awt.Font("Arial Narrow", 1, 22)); // NOI18N
         checkAIva.setText("A IVA ?");
 
+        tablaTransacciones.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        tablaTransacciones.setForeground(new java.awt.Color(0, 0, 0));
         tablaTransacciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

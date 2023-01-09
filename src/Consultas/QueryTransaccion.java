@@ -1,13 +1,17 @@
 
 package Consultas;
 
+import DataBase.Conexion;
 import static DataBase.Conexion.getConnection;
 import Model.Categoria;
 import Model.Transaccion;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 
 public class QueryTransaccion {
@@ -42,5 +46,32 @@ public class QueryTransaccion {
                 System.out.println(e);
             }
         }
+    }
+     
+    public ArrayList<Transaccion> listarTransacciones(){
+        ArrayList<Transaccion> tList = new ArrayList<>();
+        Connection conn = Conexion.getConnection();
+        Statement st;
+        try {
+            String sql = "SELECT * FROM transacciones AS t ORDER BY t.fecha DESC";
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while (rs.next()) {
+                Transaccion t = new Transaccion();
+                t.setFecha(rs.getDate("fecha"));
+                t.setDescripcion(rs.getString("descripcion"));
+                t.setSalida(rs.getFloat("salidas"));
+                t.setEntrada(rs.getFloat("entradas"));
+                t.setRetenciones_g(rs.getFloat("retenciones_g"));
+                t.setRet_ing_brutos(rs.getFloat("ret_ingresos_brutos"));
+                t.setA_impuesto(rs.getBoolean("a_impuestos_iva"));
+                t.setA_iva(rs.getBoolean("a_iva"));
+                tList.add(t);
+            }
+        } catch (NumberFormatException | SQLException e) {
+            System.out.println(e);
+        }
+       return tList;
     }
 }

@@ -22,6 +22,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -36,6 +37,9 @@ public class TransaccionesController implements ActionListener{
     QueryEmpresaOrden queryEO = new QueryEmpresaOrden();
     DefaultTableModel modelo = new DefaultTableModel();
     ArrayList<String> listCategoria = queryCategoria.listarPorNombre();
+
+
+  
     
     Transacciones transacciones = new Transacciones();
     CompraVentaIvaController compVentController = new CompraVentaIvaController();
@@ -44,6 +48,7 @@ public class TransaccionesController implements ActionListener{
    
 
     public TransaccionesController() {
+        iniciarCamposEnCero();
         iniciarTabla();
         iniciarComboBoxTipoCuenta();
         iniciarComboBoxTipoCategoria();
@@ -55,6 +60,8 @@ public class TransaccionesController implements ActionListener{
         
         this.transacciones.btnCompraVentasIVA.addActionListener(this);
         this.transacciones.cbbCategorias.addActionListener(this);
+        
+        
     }
     
     @Override
@@ -129,7 +136,7 @@ public class TransaccionesController implements ActionListener{
     }
     
     public void iniciarTabla (){
-        //ArrayList<Categoria> categoriaLista = queryCat.listarCategorias();
+        ArrayList<Transaccion> listTransac= queryTransaccion.listarTransacciones();
         modelo = new DefaultTableModel(){
             public boolean isCellEditable(int fila, int columna){
                 if(columna == 1 && columna == 2 && columna == 3){
@@ -152,21 +159,69 @@ public class TransaccionesController implements ActionListener{
         
         transacciones.tablaTransacciones.setRowHeight(15);
         transacciones.tablaTransacciones.setModel(modelo);
-        /*for(Categoria cat : categoriaLista){
-            String[] dato = new String[2];
-            dato[0] = cat.getNombre().toUpperCase();
-            dato[1] = cat.getTipoCategoria().toUpperCase();
+        transacciones.tablaTransacciones.setRowHeight(25);
+       
+        for(Transaccion t: listTransac){
+            String[] dato = new String[9];
+            dato[0] = t.getFecha().toString();
+            dato[1] = t.getDescripcion();
+            dato[2]= "$"+String.valueOf(t.getSalida());
+            dato[3]= "$"+String.valueOf(t.getEntrada());
+            dato[4]="$"+String.valueOf(t.getRetenciones_g());
+            dato[5]="$"+String.valueOf(t.getRet_ing_brutos());
+            dato[6]=convertAImpues(String.valueOf(t.isA_impuesto()));
+            dato[7]=convertAIVA(String.valueOf(t.isA_iva()));
             modelo.addRow(dato);
-        }*/
+        }
        
     }
-
+    
+    public String convertAImpues(String a_imp){
+        if(a_imp.equals("true")){
+            return "Si";
+        }
+        else{
+           if(a_imp.equals("false")){
+               return "No";
+           }
+        }
+        return "";
+    }
+    
+    public String convertAIVA(String a_iva){
+        if(a_iva.equals("true")){
+            return "Si";
+        }
+        else{
+           if(a_iva.equals("false")){
+               return "No";
+           }
+        }
+        return "";
+    }
+    
    
     public void loadComprasVentas(ActionEvent e) throws ParseException{
         if(e.getSource() == transacciones.btnCompraVentasIVA){
             /*compVentController.loadComVentaIva();*/
-            queryTransaccion.addTransaccion(obtenerTransaccion());
-        }
+            if(!verificarVacios()){
+                queryTransaccion.addTransaccion(obtenerTransaccion());
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"<html><p style = \"font:14px\"> Error al guardar Transacción - Campos incompletos.</p/</html> \n"
+                +"<html><p style = \"font:12px\"> Verifique algunas de las siguientes opciones: </p/</html> \n"+
+                        "<html><p style = \"font:12px\">1) Haya seleccionado una cuenta.</p/</html> \n"
+                        +"<html><p style = \"font:12px\">2) Haya seleccionado un tipo de categoria.</p/</html> \n"
+                        +"<html><p style = \"font:12px\">3) Haya seleccionado un tipo de cuenta.</p/</html> \n"
+                        +"<html><p style = \"font:12px\">4) Haya seleccionado una fecha.</p/</html> \n"+
+                        "<html><p style = \"font:12px\">5) Haya seleccionado una empresa/orden.</p/</html> \n"
+                        +"<html><p style = \"font:12px\">6) Haya seleccionado una categoria.</p/</html> \n"+
+                        "<html><p style = \"font:12px\">7) Haya seleccionado una sub-categoria.</p/</html> \n"+
+                        "<html><p style = \"font:12px\">8) Haya escrito una descripción.</p/</html>\n"+
+                        "<html><p style = \"font:12px\">9) Haya escrito un numero de cheque o numero de factura. </p/</html>","EROR, VERIFIQUE CAMPOS",0
+                );
+            }
+        }   
     }
     
     public void updateComboBoxCategoria(ArrayList<Categoria> listCat){
@@ -248,4 +303,29 @@ public class TransaccionesController implements ActionListener{
         return false;
     }
     
+    public boolean verificarVacios(){
+        if( transacciones.cbbCuentas.getSelectedItem().equals("") ||
+               transacciones.cbbTipoCategoria.getSelectedItem().equals("") ||
+                transacciones.cbbTipoCuenta.getSelectedItem().equals("") ||
+                transacciones.txtFecha == null ||
+                transacciones.cbbEmpresa.getSelectedItem().equals("") ||
+                transacciones.cbbCategorias.getSelectedItem().equals("") ||
+                transacciones.cbbSubCategoria.getSelectedItem().equals("") ||
+                transacciones.txtDescripcion.getText().equals("") ||
+                transacciones.txtNumCheque.getText().equals("") ||
+                transacciones.txtNumFact.getText().equals("")
+                )
+            return true;
+        return false;
+    }
+    
+    public void iniciarCamposEnCero(){
+        transacciones.txtCantidad.setText("0");
+        transacciones.txtSalida.setText("0");
+        transacciones.txtEntrada.setText("0");
+        transacciones.txtRetG.setText("0");
+        transacciones.txtRetIngBrut.setText("0");
+        transacciones.txtNumCheque.setText("-");
+        transacciones.txtNumFact.setText("-");
+    }
 }
