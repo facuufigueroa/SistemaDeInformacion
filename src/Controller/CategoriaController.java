@@ -23,10 +23,12 @@ public class CategoriaController implements ActionListener{
     MenuPrincipal catView = new MenuPrincipal();
     QueryTipoCategoria queryTCat = new QueryTipoCategoria();
     Transacciones transacciones = new Transacciones();
+    TransaccionesController tc = new TransaccionesController();
     
     
-    public CategoriaController(MenuPrincipal menu) {
+    public CategoriaController(MenuPrincipal menu, TransaccionesController tc) {
         this.catView = menu;
+        this.tc=tc;
         iniciarTabla();
         centrarContenidoTabla();
         catView.btnSaveCat.addActionListener(this);
@@ -95,8 +97,8 @@ public class CategoriaController implements ActionListener{
                 JOptionPane.showMessageDialog(null, "Categoria "+catView.txtNomCat.getText()+" guardada con éxito");
                 iniciarTabla();
                 centrarContenidoTabla();
-                TransaccionesController tc = new TransaccionesController();
-                tc.iniciarComboBoxCategoria(); //arreglar
+                
+                 //arreglar
         }
             else{
                 JOptionPane.showMessageDialog(null, "Error al intentar agregar Categoria \n"

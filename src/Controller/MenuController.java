@@ -16,12 +16,12 @@ public class MenuController implements ActionListener {
     
     public MenuController() {
         this.menuPrincipal.btnNewTransaccion.addActionListener(this);
-        
+
         
         CuentaController cuentaC = new CuentaController(menuPrincipal);
         TipoCuentasController tc = new TipoCuentasController(menuPrincipal);
         EmpresaOrdenController eo = new EmpresaOrdenController(menuPrincipal);
-        CategoriaController categoriaController = new CategoriaController(menuPrincipal);
+        CategoriaController categoriaController = new CategoriaController(menuPrincipal,transaccionController);
         TipoCategoriaController tipoCatController = new TipoCategoriaController(menuPrincipal);
         SubCategoriaController subCatController = new SubCategoriaController(menuPrincipal);
             

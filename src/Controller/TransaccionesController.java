@@ -7,19 +7,27 @@ import Consultas.QueryEmpresaOrden;
 import Consultas.QuerySubCategoria;
 import Consultas.QueryTipoCategoria;
 import Consultas.QueryTipoCuenta;
+import Consultas.QueryTransaccion;
 import Model.Categoria;
 import Model.SubCategoria;
 import Model.TipoCategoria;
 import Model.TipoCuenta;
+import Model.Transaccion;
 import View.Transacciones;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import static java.lang.Integer.parseInt;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 
 public class TransaccionesController implements ActionListener{
     
+  
     QueryCategoria queryCategoria = new QueryCategoria();
     QueryCuentas queryCuentas = new QueryCuentas();
     QueryTipoCuenta queryTCuenta = new QueryTipoCuenta();
@@ -31,6 +39,9 @@ public class TransaccionesController implements ActionListener{
     
     Transacciones transacciones = new Transacciones();
     CompraVentaIvaController compVentController = new CompraVentaIvaController();
+    
+    QueryTransaccion queryTransaccion = new QueryTransaccion();
+   
 
     public TransaccionesController() {
         iniciarTabla();
@@ -46,7 +57,16 @@ public class TransaccionesController implements ActionListener{
         this.transacciones.cbbCategorias.addActionListener(this);
     }
     
-   
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        accionTipoCuenta(e);
+        try {
+            loadComprasVentas(e);
+        } catch (ParseException ex) {
+            Logger.getLogger(TransaccionesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        accionTipoCategoria(e);
+    }
     
     public void loadNewTransaccion(){
        transacciones.setVisible(true);
@@ -141,17 +161,11 @@ public class TransaccionesController implements ActionListener{
        
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        accionTipoCuenta(e);
-        loadComprasVentas(e);
-        accionTipoCategoria(e);
-    }
-    
-    
-    public void loadComprasVentas(ActionEvent e){
+   
+    public void loadComprasVentas(ActionEvent e) throws ParseException{
         if(e.getSource() == transacciones.btnCompraVentasIVA){
-            compVentController.loadComVentaIva();
+            /*compVentController.loadComVentaIva();*/
+            queryTransaccion.addTransaccion(obtenerTransaccion());
         }
     }
     
@@ -169,4 +183,69 @@ public class TransaccionesController implements ActionListener{
             transacciones.cbbTipoCategoria.setSelectedItem(queryCategoria.obtenerNombreTipoCat(id_tipo_categoria));
         }
     }
+    
+    /*Es para qe no pueda modificar el tipo de cuenta para la cuenta correspondiente y
+    para que no pueda modificar el tipo de categoria para la categoria correspondiente.
+    */
+    public void deshabilitarComboBox(){
+        transacciones.cbbTipoCategoria.setEnabled(false);
+        transacciones.cbbTipoCategoria.setEditable(false);
+    }
+    
+    /*Método para crear el objeto transacción*/
+    public Transaccion obtenerTransaccion() throws ParseException{
+        Transaccion t = new Transaccion();
+        t.setIdCuenta(queryCuentas.obtenerIdCuentaPorNombre((String) transacciones.cbbCuentas.getSelectedItem()));
+        
+        if("".equals(transacciones.txtNumCheque.getText())){
+            t.setNumChequeFact(transacciones.txtNumFact.getText());
+        }
+      
+        if("".equals(transacciones.txtNumFact.getText())){
+            t.setNumChequeFact(transacciones.txtNumCheque.getText()); //Puede ser numCheque o
+        }
+       
+        java.sql.Date sqlDate = new java.sql.Date(transacciones.txtFecha.getDate().getTime());
+        t.setFecha(sqlDate);
+        
+        t.setDescripcion(transacciones.txtDescripcion.getText());
+        
+        t.setIdOrdenEmp(queryEO.obtenerIdEmpresaPorNombre((String) transacciones.cbbEmpresa.getSelectedItem()));
+        
+        t.setCantidad(parseInt(transacciones.txtCantidad.getText()));
+        
+        t.setIdCat(queryCategoria.obtenerIdCatePorNombre((String) transacciones.cbbCategorias.getSelectedItem()));
+        
+        t.setIdSubCat(querySubCat.obtenerIdSubCatPorNombre((String) transacciones.cbbSubCategoria.getSelectedItem()));
+    
+        NumberFormat f = NumberFormat.getInstance();
+        t.setSalida((float) f.parse(transacciones.txtSalida.getText()).doubleValue());
+        
+        t.setEntrada((float) f.parse(transacciones.txtEntrada.getText()).doubleValue());
+        
+        t.setRetenciones_g((float) f.parse(transacciones.txtRetG.getText()).doubleValue());
+        
+        t.setRet_ing_brutos((float) f.parse(transacciones.txtRetIngBrut.getText()).doubleValue());
+        
+        t.setA_impuesto(obtenerSetImpuesto());
+        
+        t.setA_iva(a_iva());
+        
+        return t;
+    }
+            
+    public boolean obtenerSetImpuesto(){
+        if(transacciones.cbbImp.getSelectedItem() == "Sí"){
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean a_iva(){
+        if(transacciones.checkAIva.isSelected()){
+            return true;
+        }
+        return false;
+    }
+    
 }

@@ -101,7 +101,26 @@ public class QueryEmpresaOrden {
     }
     
     
-    
+    public int obtenerIdEmpresaPorNombre(String nombre){
+        int id_emp=0;
+        PreparedStatement ps = null;
+        Connection conn = Conexion.getConnection();
+        try {
+            String sql = "SELECT e.idempresa_orden \n" +
+                            "FROM empresa_orden AS e\n" +
+                            "WHERE e.empresa = '" + nombre + "'";
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                id_emp = rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return id_emp;
+    }
     
     
 

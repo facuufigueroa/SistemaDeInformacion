@@ -39,10 +39,9 @@ public class QueryCategoria {
         PreparedStatement ps = null;
         Connection conn = Conexion.getConnection();
         try {
-            String sql = "SELECT t.idtipo_categoria\n" +
-                        "FROM tipo_categoria AS t\n" +
-                        "INNER JOIN categorias AS c\n" +
-                        "ON t.idtipo_categoria '" + nombre + "'";
+            String sql = "SELECT idtipo_categoria\n" +
+                        "FROM tipo_categoria AS tc\n" +
+                        "WHERE tc.nombre = '" + nombre + "'";
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery(sql);
             if (rs.next()) {
@@ -184,4 +183,24 @@ public class QueryCategoria {
         return nombreTipoCat;
     }
     
+     public int obtenerIdCatePorNombre(String nombre){
+        int id_cat=0;
+        PreparedStatement ps = null;
+        Connection conn = Conexion.getConnection();
+        try {
+            String sql = "SELECT c.idcategorias \n" +
+                            "FROM categorias AS c\n" +
+                            "WHERE c.nombre = '" + nombre + "'";
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                id_cat = rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return id_cat;
+    }
 }

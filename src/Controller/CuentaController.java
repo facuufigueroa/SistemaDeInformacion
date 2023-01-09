@@ -19,7 +19,7 @@ public class CuentaController implements ActionListener {
     DefaultTableModel modelCuentas = new DefaultTableModel();
     MenuPrincipal cuentaView = new MenuPrincipal();
     QueryTipoCuenta queryT  = new QueryTipoCuenta();
-    
+   
     public CuentaController(MenuPrincipal menu) {
         this.cuentaView=menu;
         iniciarTablaCuentas();
