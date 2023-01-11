@@ -19,6 +19,8 @@ public class CuentaController implements ActionListener {
     DefaultTableModel modelCuentas = new DefaultTableModel();
     MenuPrincipal cuentaView = new MenuPrincipal();
     QueryTipoCuenta queryT  = new QueryTipoCuenta();
+    
+    
    
     public CuentaController(MenuPrincipal menu) {
         this.cuentaView=menu;
@@ -83,9 +85,16 @@ public class CuentaController implements ActionListener {
                 int id_tipoCuenta = queryCuenta.obtenerIdTipoCuenta(cuentaView.cbbTipoCuenta.getSelectedItem().toString());
                 cuenta.setId_tipoCuenta(id_tipoCuenta);
                 queryCuenta.agregarCuenta(cuenta);
+                
                 JOptionPane.showMessageDialog(null, "Cuenta "+cuentaView.txtNomCuenta.getText().toUpperCase()+" agregada con éxito");
+                
+                
                 iniciarTablaCuentas();
+                
                 iniciarCbbTipoCuenta();
+                
+                
+                
                 cuentaView.txtNomCuenta.setText("");
                 
             }

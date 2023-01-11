@@ -104,7 +104,6 @@ public class TransaccionesController implements ActionListener{
         for(String c : nombreCuentas){
             transacciones.cbbCuentas.addItem(c);
         }
-  
     }
     
     public void iniciarComboBoxTipoCategoria(){
@@ -203,12 +202,14 @@ public class TransaccionesController implements ActionListener{
    
     public void loadComprasVentas(ActionEvent e) throws ParseException{
         if(e.getSource() == transacciones.btnCompraVentasIVA){
-            /*compVentController.loadComVentaIva();*/
             if(!verificarVacios()){
                 queryTransaccion.addTransaccion(obtenerTransaccion());
+                iniciarTabla();
+                compVentController.loadComVentaIva();
+                
             }
             else{
-                JOptionPane.showMessageDialog(null,"<html><p style = \"font:14px\"> Error al guardar Transacción - Campos incompletos.</p/</html> \n"
+                JOptionPane.showMessageDialog(null,"<html><p style = \"font:14px\"> Error al continuar con la Transacción - Campos incompletos.</p/</html> \n"
                 +"<html><p style = \"font:12px\"> Verifique algunas de las siguientes opciones: </p/</html> \n"+
                         "<html><p style = \"font:12px\">1) Haya seleccionado una cuenta.</p/</html> \n"
                         +"<html><p style = \"font:12px\">2) Haya seleccionado un tipo de categoria.</p/</html> \n"
@@ -307,12 +308,12 @@ public class TransaccionesController implements ActionListener{
         if( transacciones.cbbCuentas.getSelectedItem().equals("") ||
                transacciones.cbbTipoCategoria.getSelectedItem().equals("") ||
                 transacciones.cbbTipoCuenta.getSelectedItem().equals("") ||
-                transacciones.txtFecha == null ||
+                transacciones.txtFecha.getDate() == null ||
                 transacciones.cbbEmpresa.getSelectedItem().equals("") ||
                 transacciones.cbbCategorias.getSelectedItem().equals("") ||
                 transacciones.cbbSubCategoria.getSelectedItem().equals("") ||
                 transacciones.txtDescripcion.getText().equals("") ||
-                transacciones.txtNumCheque.getText().equals("") ||
+                transacciones.txtNumCheque.getText().equals("") &&
                 transacciones.txtNumFact.getText().equals("")
                 )
             return true;
@@ -325,7 +326,21 @@ public class TransaccionesController implements ActionListener{
         transacciones.txtEntrada.setText("0");
         transacciones.txtRetG.setText("0");
         transacciones.txtRetIngBrut.setText("0");
-        transacciones.txtNumCheque.setText("-");
-        transacciones.txtNumFact.setText("-");
-    }
+        }
+    
+    public void setearCamposEnCero(){
+        transacciones.txtCantidad.setText("0");
+        transacciones.txtSalida.setText("0");
+        transacciones.txtEntrada.setText("0");
+        transacciones.txtRetG.setText("0");
+        transacciones.txtRetIngBrut.setText("0");
+        iniciarComboBoxTipoCuenta();
+        iniciarComboBoxTipoCategoria();
+        iniciarComboBoxCuentas();
+        iniciarComboBoxCategoria();
+        iniciarcomboBoxSubcategoria();
+        iniciarComboBoxEmpresa();  
+        transacciones.txtFecha.setDate(null);
+        transacciones.txtDescripcion.setText("");
+        }
 }

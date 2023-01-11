@@ -26,9 +26,9 @@ public class CategoriaController implements ActionListener{
     TransaccionesController tc = new TransaccionesController();
     
     
-    public CategoriaController(MenuPrincipal menu, TransaccionesController tc) {
+    public CategoriaController(MenuPrincipal menu) {
         this.catView = menu;
-        this.tc=tc;
+     
         iniciarTabla();
         centrarContenidoTabla();
         catView.btnSaveCat.addActionListener(this);

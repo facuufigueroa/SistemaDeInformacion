@@ -3,7 +3,6 @@ package Consultas;
 
 import DataBase.Conexion;
 import static DataBase.Conexion.getConnection;
-import Model.Categoria;
 import Model.Transaccion;
 import java.sql.Connection;
 import java.sql.Date;
@@ -73,5 +72,24 @@ public class QueryTransaccion {
             System.out.println(e);
         }
        return tList;
+    }
+    
+    public int obtenerMaxId(){
+        int max_id=0;
+        PreparedStatement ps = null;
+        Connection conn = Conexion.getConnection();
+        try {
+            String sql = "SELECT MAX(idtransacciones)\n" +
+                            "FROM transacciones";
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                max_id = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return max_id ;
     }
 }

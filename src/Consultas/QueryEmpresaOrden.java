@@ -122,6 +122,26 @@ public class QueryEmpresaOrden {
         return id_emp;
     }
     
+    public String obtenerCuitPorNombre(String nombre){
+        String cuit = "";
+        PreparedStatement ps = null;
+        Connection conn = Conexion.getConnection();
+        try {
+            String sql = "SELECT e.cuit \n" +
+                            "FROM empresa_orden AS e\n" +
+                            "WHERE e.empresa = '" + nombre + "'";
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                cuit = rs.getString("cuit");
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return cuit;
+    }
     
 
 
