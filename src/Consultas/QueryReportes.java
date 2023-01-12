@@ -62,17 +62,17 @@ public class QueryReportes {
         return total;
     }
     
-    public Double total_concepto_no_grav(){
+    public Double total_concepto_no_grav_sellos(){
         double total = 0.0;
         PreparedStatement ps = null;
         Connection conn = Conexion.getConnection();
         try {
-            String sql = "SELECT TRUNCATE(SUM(cvi.concepto_no_grav),2) AS concepto_no_grav\n" +
-                            "FROM compra_ventas_iva as cvi";
+            String sql = "SELECT TRUNCATE(SUM(cvi.c_no_grav_sellos ),2) AS c_no_grav_sellos \n" +
+                    "FROM compra_ventas_iva as cvi";
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery(sql);
             if (rs.next()) {
-                total = rs.getDouble("concepto_no_grav");
+                total = rs.getDouble("c_no_grav_sellos");
             }
         } catch (Exception e) {
             System.out.println(e);

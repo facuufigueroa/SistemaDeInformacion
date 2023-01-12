@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -47,7 +46,7 @@ public class ReporteLibroVentasIVA {
           
             JasperPrint mostrarReporte = JasperFillManager.fillReport(jasperMasterReport,parametro, conn);
             JasperViewer reporteMaster = new JasperViewer(mostrarReporte,false);
-            reporteMaster.setTitle("LIBRO VENTAS IVA");
+            reporteMaster.setTitle("Libro IVA - VENTAS ");
             reporteMaster.setVisible(true);
            
             

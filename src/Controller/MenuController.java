@@ -89,7 +89,7 @@ public class MenuController implements ActionListener {
             /* Total total_ite_iva_dere_reg*/
             double t3= queryReport.total_ite_iva_dere_reg();
             /* Total total_concepto_no_grav*/
-            double t4 = queryReport.total_concepto_no_grav();
+            double t4 = queryReport.total_concepto_no_grav_sellos();
             /* Total total_ret_ii_bb_vent*/
             double t5 = queryReport.total_ret_ii_bb_vent();
             /* Total total_ret_ganancias */
