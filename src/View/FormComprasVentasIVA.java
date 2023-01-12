@@ -232,7 +232,7 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
 
         btnFinalizar.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         btnFinalizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/hecho.png"))); // NOI18N
-        btnFinalizar.setText("Finalizar Transaccion");
+        btnFinalizar.setText("Finalizar Operación");
 
         txtImpNetoGrav.setForeground(new java.awt.Color(0, 0, 0));
         txtImpNetoGrav.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
@@ -606,123 +606,63 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
     }//GEN-LAST:event_txtIntNumeralesActionPerformed
 
     private void txtImpNetoGravKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtImpNetoGravKeyTyped
-        int key = evt.getKeyChar();
-        boolean numeros= key >=48 && key<=57;
-        if(!numeros){
-            evt.consume();
-        }
+       
     }//GEN-LAST:event_txtImpNetoGravKeyTyped
 
     private void txtIvaFactKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIvaFactKeyTyped
-        int key = evt.getKeyChar();
-        boolean numeros= key >=48 && key<=57;
-        if(!numeros){
-            evt.consume();
-        }
+       
     }//GEN-LAST:event_txtIvaFactKeyTyped
 
     private void txtImpInternoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtImpInternoKeyTyped
-        int key = evt.getKeyChar();
-        boolean numeros= key >=48 && key<=57;
-        if(!numeros){
-            evt.consume();
-        }
+        
     }//GEN-LAST:event_txtImpInternoKeyTyped
 
     private void txtConceptoNoGravKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConceptoNoGravKeyTyped
-        int key = evt.getKeyChar();
-        boolean numeros= key >=48 && key<=57;
-        if(!numeros){
-            evt.consume();
-        }
+        
     }//GEN-LAST:event_txtConceptoNoGravKeyTyped
 
     private void txtPercepcionIVAKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPercepcionIVAKeyTyped
-        int key = evt.getKeyChar();
-        boolean numeros= key >=48 && key<=57;
-        if(!numeros){
-            evt.consume();
-        }
+        
     }//GEN-LAST:event_txtPercepcionIVAKeyTyped
 
     private void txtRetGananKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRetGananKeyTyped
-       int key = evt.getKeyChar();
-        boolean numeros= key >=48 && key<=57;
-        if(!numeros){
-            evt.consume();
-        }
+       
     }//GEN-LAST:event_txtRetGananKeyTyped
 
     private void txtPercIvaCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPercIvaCKeyTyped
-        int key = evt.getKeyChar();
-        boolean numeros= key >=48 && key<=57;
-        if(!numeros){
-            evt.consume();
-        }
+        
     }//GEN-LAST:event_txtPercIvaCKeyTyped
 
     private void txtImpTotalFactKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtImpTotalFactKeyTyped
-        int key = evt.getKeyChar();
-        boolean numeros= key >=48 && key<=57;
-        if(!numeros){
-            evt.consume();
-        }
+       
     }//GEN-LAST:event_txtImpTotalFactKeyTyped
 
     private void txtIvaDereRegKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIvaDereRegKeyTyped
-        int key = evt.getKeyChar();
-        boolean numeros= key >=48 && key<=57;
-        if(!numeros){
-            evt.consume();
-        }
+        
     }//GEN-LAST:event_txtIvaDereRegKeyTyped
 
     private void txtCNoGravSellosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCNoGravSellosKeyTyped
-        int key = evt.getKeyChar();
-        boolean numeros= key >=48 && key<=57;
-        if(!numeros){
-            evt.consume();
-        }
+      
     }//GEN-LAST:event_txtCNoGravSellosKeyTyped
 
     private void txtRetIiBbVKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRetIiBbVKeyTyped
-       int key = evt.getKeyChar();
-        boolean numeros= key >=48 && key<=57;
-        if(!numeros){
-            evt.consume();
-        }
+       
     }//GEN-LAST:event_txtRetIiBbVKeyTyped
 
     private void txtIvaRg212KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIvaRg212KeyTyped
-        int key = evt.getKeyChar();
-        boolean numeros= key >=48 && key<=57;
-        if(!numeros){
-            evt.consume();
-        }
+        
     }//GEN-LAST:event_txtIvaRg212KeyTyped
 
     private void txtGravLey25413KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGravLey25413KeyTyped
-        int key = evt.getKeyChar();
-        boolean numeros= key >=48 && key<=57;
-        if(!numeros){
-            evt.consume();
-        }
+       
     }//GEN-LAST:event_txtGravLey25413KeyTyped
 
     private void txtIntNumeralesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIntNumeralesKeyTyped
-       int key = evt.getKeyChar();
-        boolean numeros= key >=48 && key<=57;
-        if(!numeros){
-            evt.consume();
-        }
+       
     }//GEN-LAST:event_txtIntNumeralesKeyTyped
 
     private void txtOtrosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtOtrosKeyTyped
-        int key = evt.getKeyChar();
-        boolean numeros= key >=48 && key<=57;
-        if(!numeros){
-            evt.consume();
-        }
+      
     }//GEN-LAST:event_txtOtrosKeyTyped
 
     /**

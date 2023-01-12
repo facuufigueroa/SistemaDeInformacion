@@ -344,7 +344,7 @@
                                                               <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                                                                   <Component id="btnNewTransaccion3" alignment="1" min="-2" pref="277" max="-2" attributes="0"/>
                                                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                                      <Component id="btnNewTransaccion1" alignment="0" max="32767" attributes="0"/>
+                                                                      <Component id="btnLibroVentas" alignment="0" max="32767" attributes="0"/>
                                                                       <Component id="btnNewTransaccion2" alignment="0" pref="277" max="32767" attributes="0"/>
                                                                   </Group>
                                                               </Group>
@@ -403,7 +403,7 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="btnNewTransaccion2" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                          <Component id="btnNewTransaccion1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnLibroVentas" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                           <Component id="btnNewTransaccion3" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
@@ -450,7 +450,7 @@
                     <Property name="text" type="java.lang.String" value="Informes"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnNewTransaccion1">
+                <Component class="javax.swing.JButton" name="btnLibroVentas">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="66" green="66" red="66" type="rgb"/>
@@ -467,7 +467,7 @@
                     <Property name="text" type="java.lang.String" value="D1_Libro IVA Ventas"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNewTransaccion1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLibroVentasActionPerformed"/>
                   </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

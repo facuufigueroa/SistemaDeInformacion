@@ -9,6 +9,8 @@ import Consultas.QueryTipoCategoria;
 import Consultas.QueryTipoCuenta;
 import Consultas.QueryTransaccion;
 import Model.Categoria;
+import Model.Cuentas;
+import Model.EmpresaOrden;
 import Model.SubCategoria;
 import Model.TipoCategoria;
 import Model.TipoCuenta;
@@ -50,12 +52,12 @@ public class TransaccionesController implements ActionListener{
     public TransaccionesController() {
         iniciarCamposEnCero();
         iniciarTabla();
-        iniciarComboBoxTipoCuenta();
+        /*iniciarComboBoxTipoCuenta();
         iniciarComboBoxTipoCategoria();
         iniciarComboBoxCuentas();
         iniciarComboBoxCategoria();
         iniciarcomboBoxSubcategoria();
-        iniciarComboBoxEmpresa();     
+        iniciarComboBoxEmpresa();  */   
         this.transacciones.cbbCuentas.addActionListener(this);
         
         this.transacciones.btnCompraVentasIVA.addActionListener(this);
@@ -83,6 +85,9 @@ public class TransaccionesController implements ActionListener{
     public void iniciarComboBoxTipoCuenta(){
         ArrayList<TipoCuenta> listTipoCuentas = queryTCuenta.listarTipoCuentas();
         transacciones.cbbTipoCuenta.removeAllItems();
+        TipoCuenta t = new TipoCuenta();
+        t.setNombre("");
+        listTipoCuentas.add(0, t);
         for(TipoCuenta tc : listTipoCuentas){
             transacciones.cbbTipoCuenta.addItem(tc.getNombre());
         }
@@ -101,6 +106,9 @@ public class TransaccionesController implements ActionListener{
     public void iniciarComboBoxCuentas(){
         ArrayList<String> nombreCuentas = queryCuentas.listarPorNombre();
         transacciones.cbbCuentas.removeAllItems();
+        Cuentas ct = new Cuentas();
+        ct.setNombre("");
+        nombreCuentas.add(0, ct.getNombre());
         for(String c : nombreCuentas){
             transacciones.cbbCuentas.addItem(c);
         }
@@ -108,6 +116,9 @@ public class TransaccionesController implements ActionListener{
     
     public void iniciarComboBoxTipoCategoria(){
         ArrayList<TipoCategoria> listTipoCategoria = queryTCat.listarTiposCat();
+        TipoCategoria t = new TipoCategoria();
+        t.setNombre("");
+        listTipoCategoria.add(0, t);
         for(TipoCategoria tcc : listTipoCategoria){
             transacciones.cbbTipoCategoria.addItem(tcc.getNombre());
         }
@@ -115,6 +126,9 @@ public class TransaccionesController implements ActionListener{
     
     public void iniciarComboBoxCategoria(){
         transacciones.cbbCategorias.removeAllItems();
+        Categoria ca = new Categoria();
+        ca.setNombre("");
+        listCategoria.add(0, ca.getNombre());
         for(String cat : listCategoria){
             transacciones.cbbCategorias.addItem(cat);
         }
@@ -122,6 +136,9 @@ public class TransaccionesController implements ActionListener{
     
     public void iniciarcomboBoxSubcategoria(){
         ArrayList<SubCategoria> listSubCategoria = querySubCat.listarSubCat();
+        SubCategoria subca = new SubCategoria();
+        subca.setNombre("");
+        listSubCategoria.add(0, subca);
         for(SubCategoria subCat : listSubCategoria){
             transacciones.cbbSubCategoria.addItem(subCat.getNombre());
         }
@@ -129,6 +146,9 @@ public class TransaccionesController implements ActionListener{
     
     public void iniciarComboBoxEmpresa(){
         ArrayList<String> listEmpresas = queryEO.listarPorNombre();
+        EmpresaOrden e = new EmpresaOrden();
+        e.setNombre("");
+        listEmpresas.add(0, e.getNombre());
         for(String emp : listEmpresas){
             transacciones.cbbEmpresa.addItem(emp);
         }
@@ -219,7 +239,7 @@ public class TransaccionesController implements ActionListener{
                         +"<html><p style = \"font:12px\">6) Haya seleccionado una categoria.</p/</html> \n"+
                         "<html><p style = \"font:12px\">7) Haya seleccionado una sub-categoria.</p/</html> \n"+
                         "<html><p style = \"font:12px\">8) Haya escrito una descripción.</p/</html>\n"+
-                        "<html><p style = \"font:12px\">9) Haya escrito un numero de cheque o numero de factura. </p/</html>","EROR, VERIFIQUE CAMPOS",0
+                        "<html><p style = \"font:12px\">9) Haya escrito un numero de cheque o numero de factura. </p/</html>","ERROR, VERIFIQUE CAMPOS",0
                 );
             }
         }   

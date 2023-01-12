@@ -41,7 +41,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jInternalFrame5 = new javax.swing.JInternalFrame();
         jPanel5 = new javax.swing.JPanel();
         labelBienvenido = new javax.swing.JLabel();
-        btnNewTransaccion1 = new javax.swing.JButton();
+        btnLibroVentas = new javax.swing.JButton();
         btnNewTransaccion2 = new javax.swing.JButton();
         btnNewTransaccion3 = new javax.swing.JButton();
         btnNewTransaccion4 = new javax.swing.JButton();
@@ -247,14 +247,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         labelBienvenido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/collection.png"))); // NOI18N
         labelBienvenido.setText("Informes");
 
-        btnNewTransaccion1.setBackground(new java.awt.Color(102, 102, 102));
-        btnNewTransaccion1.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        btnNewTransaccion1.setForeground(new java.awt.Color(255, 255, 255));
-        btnNewTransaccion1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/documentos.png"))); // NOI18N
-        btnNewTransaccion1.setText("D1_Libro IVA Ventas");
-        btnNewTransaccion1.addActionListener(new java.awt.event.ActionListener() {
+        btnLibroVentas.setBackground(new java.awt.Color(102, 102, 102));
+        btnLibroVentas.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        btnLibroVentas.setForeground(new java.awt.Color(255, 255, 255));
+        btnLibroVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/documentos.png"))); // NOI18N
+        btnLibroVentas.setText("D1_Libro IVA Ventas");
+        btnLibroVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewTransaccion1ActionPerformed(evt);
+                btnLibroVentasActionPerformed(evt);
             }
         });
 
@@ -490,7 +490,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                         .addComponent(btnNewTransaccion3, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                            .addComponent(btnNewTransaccion1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                            .addComponent(btnLibroVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                             .addComponent(btnNewTransaccion2, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)))
                                                     .addComponent(btnNewTransaccion13, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(btnNewTransaccion12)))))
@@ -534,7 +534,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnNewTransaccion2)
                                 .addGap(10, 10, 10)
-                                .addComponent(btnNewTransaccion1)
+                                .addComponent(btnLibroVentas)
                                 .addGap(10, 10, 10)
                                 .addComponent(btnNewTransaccion3)
                                 .addGap(10, 10, 10)
@@ -1307,9 +1307,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnGuardarSubCatActionPerformed
 
-    private void btnNewTransaccion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTransaccion1ActionPerformed
+    private void btnLibroVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLibroVentasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnNewTransaccion1ActionPerformed
+    }//GEN-LAST:event_btnLibroVentasActionPerformed
 
     private void btnNewTransaccion2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTransaccion2ActionPerformed
         // TODO add your handling code here:
@@ -1397,8 +1397,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public javax.swing.JButton btnGuardarEmpresa;
     public javax.swing.JButton btnGuardarSubCat;
     public javax.swing.JButton btnGuardarTipoCuenta;
+    public javax.swing.JButton btnLibroVentas;
     public javax.swing.JButton btnNewTransaccion;
-    public javax.swing.JButton btnNewTransaccion1;
     public javax.swing.JButton btnNewTransaccion10;
     public javax.swing.JButton btnNewTransaccion11;
     public javax.swing.JButton btnNewTransaccion12;

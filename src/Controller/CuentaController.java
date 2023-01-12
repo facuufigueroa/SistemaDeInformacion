@@ -93,8 +93,6 @@ public class CuentaController implements ActionListener {
                 
                 iniciarCbbTipoCuenta();
                 
-                
-                
                 cuentaView.txtNomCuenta.setText("");
                 
             }

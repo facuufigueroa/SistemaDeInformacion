@@ -177,12 +177,22 @@ public class Transacciones extends javax.swing.JFrame {
                 txtSalidaActionPerformed(evt);
             }
         });
+        txtSalida.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSalidaKeyTyped(evt);
+            }
+        });
 
         txtEntrada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.00"))));
         txtEntrada.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
         txtEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEntradaActionPerformed(evt);
+            }
+        });
+        txtEntrada.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEntradaKeyTyped(evt);
             }
         });
 
@@ -512,6 +522,22 @@ public class Transacciones extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtRetIngBrutKeyTyped
+
+    private void txtSalidaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSalidaKeyTyped
+        int key = evt.getKeyChar();
+        boolean numeros= key >=48 && key<=57;
+        if(!numeros){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtSalidaKeyTyped
+
+    private void txtEntradaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEntradaKeyTyped
+        int key = evt.getKeyChar();
+        boolean numeros= key >=48 && key<=57;
+        if(!numeros){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtEntradaKeyTyped
 
     /**
      * @param args the command line arguments
