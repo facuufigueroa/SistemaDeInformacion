@@ -33,6 +33,7 @@ public class CompraVentaIvaController implements ActionListener{
         setearCamosEnCero();
         iniciarComboBoxEmpresa();
         iniciarComboBoxCuit();
+        iniciarComboBoxOperacion();
         
         this.formCVI.cbbEmpresa.addActionListener(this);
         formCVI.labelIdTransaccion.setText(String.valueOf(queryT.obtenerMaxId()));
@@ -61,6 +62,13 @@ public class CompraVentaIvaController implements ActionListener{
         for(String emp : listEmpresas){
             formCVI.cbbEmpresa.addItem(emp);
         }
+    }
+    
+    public void iniciarComboBoxOperacion(){
+        formCVI.cbbOperacion.addItem("");
+        formCVI.cbbOperacion.addItem("Venta");
+        formCVI.cbbOperacion.addItem("Compra");
+        
     }
     
     /*Muestra el cuit y el nombre de la empresa juntos*/
@@ -104,9 +112,10 @@ public class CompraVentaIvaController implements ActionListener{
                 JOptionPane.showMessageDialog(null,"<html><p style = \"font:14px\"> Error - Campos incompletos.</p/</html> \n"
                         + "<html><p style = \"font:12px\">Verifique que: </p/</html>\n"
                         +"<html><p style = \"font:12px\">1) Haya seleccionado una Fecha </p/</html>\n"
-                        +"<html><p style = \"font:12px\">2) Haya escrito un Tipo de Comprobante </p/</html>\n"
-                        +"<html><p style = \"font:12px\">3) Haya escrito un Numero de Comprobante </p/</html>\n"
-                        +"<html><p style = \"font:12px\">4) Haya seleccionado una Empresa/Orden </p/</html> \n"
+                        +"<html><p style = \"font:12px\">2) Haya seleccionado la Operación correspondiente </p/</html>\n"
+                        +"<html><p style = \"font:12px\">3) Haya escrito un Tipo de Comprobante </p/</html>\n"
+                        +"<html><p style = \"font:12px\">4) Haya escrito un Numero de Comprobante </p/</html>\n"
+                        +"<html><p style = \"font:12px\">5) Haya seleccionado una Empresa/Orden </p/</html> \n"
                         +"<html><p style = \"font:12px\">¡ Una vez completado los campos faltantes </p/</html> \n"
                         + "<html><p style = \"font:12px\">  presione nuevamente el boton Finalizar Operación !</p/</html>"
                         + "","Eror - Verifique",0);
@@ -117,14 +126,16 @@ public class CompraVentaIvaController implements ActionListener{
     
     public CompraVentaIva newCompraVenta() throws ParseException{
         CompraVentaIva cvi = new CompraVentaIva();
-        cvi.setOperacion(formCVI.txtOperacion.getText());
+        
+        String operacion = (String) formCVI.cbbOperacion.getSelectedItem();
+        cvi.setOperacion(operacion.toLowerCase());
         
         java.sql.Date sqlDate = new java.sql.Date(formCVI.txtFecha.getDate().getTime());
         cvi.setFecha(sqlDate);
         
         cvi.setTipo_comprobante(formCVI.txtTipoComprobante.getText());
         
-        cvi.setNumComprobante(parseInt(formCVI.txtNumComprobante.getText()));
+        cvi.setNumComprobante(formCVI.txtNumComprobante.getText());
         
         cvi.setEmpresa((String) formCVI.cbbEmpresa.getSelectedItem());
         
@@ -164,6 +175,9 @@ public class CompraVentaIvaController implements ActionListener{
         
         cvi.setIdTransaccion(queryT.obtenerMaxId());
         
+        cvi.setOperaciones_exentas((float) f.parse(formCVI.txtOpExentas.getText()).doubleValue());
+
+        
         return cvi;
     }
 
@@ -192,10 +206,11 @@ public class CompraVentaIvaController implements ActionListener{
         formCVI.txtGravLey25413.setText("0");
         formCVI.txtIntNumerales.setText("0");
         formCVI.txtOtros.setText("0");
+        formCVI.txtOpExentas.setText("0");
     }
     
     public boolean verificarBlancos(){
-        if(formCVI.txtFecha.getDate() == null || formCVI.txtOperacion.getText().equals("")
+        if(formCVI.txtFecha.getDate() == null || formCVI.cbbOperacion.getSelectedItem().equals("")
                 || formCVI.txtTipoComprobante.getText().equals("") || 
                 formCVI.txtNumComprobante.getText().equals("")
                 || formCVI.cbbEmpresa.getSelectedItem().equals("")

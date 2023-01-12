@@ -12,7 +12,7 @@ public class CompraVentaIva {
     private String operacion;
     private Date fecha;
     private String tipo_comprobante;
-    private int numComprobante;
+    private String numComprobante;
     private String cuit;
     
     private float imp_neto_grav;
@@ -30,6 +30,7 @@ public class CompraVentaIva {
     private float grav_ley_25413;
     private float int_numerales;
     private float otros;
+    private float operaciones_exentas;
     
     private String empresa;
 
@@ -38,7 +39,7 @@ public class CompraVentaIva {
     
     
 
-    public CompraVentaIva(int idTransaccion, String operacion, Date fecha, String tipo_comprobante, int numComprobante, String cuit, float imp_neto_grav, float iva_facturado, float imp_interno, float concep_no_grav, float percepcion_iva, float ret_ganancias, float perc_iibb_compra, float imp_total_fact, float ite_iva_dere_reg, float c_no_grav_sellos, float ret_iibb_venta, float iva_rg_212, float grav_ley_25413, float int_numerales, float otros, String empresa) {
+    public CompraVentaIva(int idTransaccion, String operacion, Date fecha, String tipo_comprobante, String numComprobante, String cuit, float imp_neto_grav, float iva_facturado, float imp_interno, float concep_no_grav, float percepcion_iva, float ret_ganancias, float perc_iibb_compra, float imp_total_fact, float ite_iva_dere_reg, float c_no_grav_sellos, float ret_iibb_venta, float iva_rg_212, float grav_ley_25413, float int_numerales, float otros, String empresa,float operaciones_exentas) {
         this.idTransaccion = idTransaccion;
         this.operacion = operacion;
         this.fecha = fecha;
@@ -61,6 +62,7 @@ public class CompraVentaIva {
         this.int_numerales = int_numerales;
         this.otros = otros;
         this.empresa = empresa;
+        this.operaciones_exentas = operaciones_exentas;
     }
 
     public int getIdTransaccion() {
@@ -95,11 +97,11 @@ public class CompraVentaIva {
         this.tipo_comprobante = tipo_comprobante;
     }
 
-    public int getNumComprobante() {
+    public String getNumComprobante() {
         return numComprobante;
     }
 
-    public void setNumComprobante(int numComprobante) {
+    public void setNumComprobante(String numComprobante) {
         this.numComprobante = numComprobante;
     }
 
@@ -237,6 +239,14 @@ public class CompraVentaIva {
 
     public void setEmpresa(String empresa) {
         this.empresa = empresa;
+    }
+
+    public float getOperaciones_exentas() {
+        return operaciones_exentas;
+    }
+
+    public void setOperaciones_exentas(float operaciones_exentas) {
+        this.operaciones_exentas = operaciones_exentas;
     }
     
     

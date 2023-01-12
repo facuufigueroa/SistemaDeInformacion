@@ -13,13 +13,13 @@ public class QueryCompraVentaIVA {
     public void agregarCompraVenta(CompraVentaIva cvi){
         PreparedStatement ps;
         Connection conn = getConnection();
-        String sql = "INSERT INTO compra_ventas_iva (operacion,fecha,tipo_comprobante,nro_comprobante,cuit,imp_neto_grav,iva_facturado,imp_interno,concepto_no_grav,percepcion_iva,ret_ganancias,perc_iibb_compra,imp_total_fac,ite_iva_dere_reg,c_no_grav_sellos,ret_ii_bb_venta,iva_rg_212,grav_ley_25413,int_numerales,otros,id_transaccion,nombre) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO compra_ventas_iva (operacion,fecha,tipo_comprobante,nro_comprobante,cuit,imp_neto_grav,iva_facturado,imp_interno,concepto_no_grav,percepcion_iva,ret_ganancias,perc_iibb_compra,imp_total_fac,ite_iva_dere_reg,c_no_grav_sellos,ret_ii_bb_venta,iva_rg_212,grav_ley_25413,int_numerales,otros,id_transaccion,nombre,operaciones_exentas) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = conn.prepareStatement(sql);
             ps.setString(1, cvi.getOperacion());
             ps.setDate(2, cvi.getFecha());
             ps.setString(3,cvi.getTipo_comprobante());
-            ps.setInt(4, cvi.getNumComprobante());
+            ps.setString(4, cvi.getNumComprobante());
             ps.setString(5, cvi.getCuit());
             ps.setFloat(6,cvi.getImp_neto_grav());
             ps.setFloat(7, cvi.getIva_facturado());
@@ -41,6 +41,7 @@ public class QueryCompraVentaIVA {
             
             ps.setString(22, cvi.getEmpresa());
             
+            ps.setFloat(23, cvi.getOperaciones_exentas());
            
             ps.execute();
         } catch (SQLException e) {
