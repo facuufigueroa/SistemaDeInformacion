@@ -42,7 +42,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         labelBienvenido = new javax.swing.JLabel();
         btnLibroVentas = new javax.swing.JButton();
-        btnNewTransaccion2 = new javax.swing.JButton();
+        btnLibroIvaCompras = new javax.swing.JButton();
         btnNewTransaccion3 = new javax.swing.JButton();
         btnNewTransaccion4 = new javax.swing.JButton();
         btnNewTransaccion5 = new javax.swing.JButton();
@@ -258,14 +258,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnNewTransaccion2.setBackground(new java.awt.Color(102, 102, 102));
-        btnNewTransaccion2.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        btnNewTransaccion2.setForeground(new java.awt.Color(255, 255, 255));
-        btnNewTransaccion2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/documentos.png"))); // NOI18N
-        btnNewTransaccion2.setText("D1_Libro IVA Compras");
-        btnNewTransaccion2.addActionListener(new java.awt.event.ActionListener() {
+        btnLibroIvaCompras.setBackground(new java.awt.Color(102, 102, 102));
+        btnLibroIvaCompras.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        btnLibroIvaCompras.setForeground(new java.awt.Color(255, 255, 255));
+        btnLibroIvaCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/documentos.png"))); // NOI18N
+        btnLibroIvaCompras.setText("D1_Libro IVA Compras");
+        btnLibroIvaCompras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewTransaccion2ActionPerformed(evt);
+                btnLibroIvaComprasActionPerformed(evt);
             }
         });
 
@@ -491,7 +491,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                                         .addComponent(btnNewTransaccion3, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                             .addComponent(btnLibroVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                            .addComponent(btnNewTransaccion2, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)))
+                                                            .addComponent(btnLibroIvaCompras, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)))
                                                     .addComponent(btnNewTransaccion13, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(btnNewTransaccion12)))))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
@@ -532,7 +532,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel24)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnNewTransaccion2)
+                                .addComponent(btnLibroIvaCompras)
                                 .addGap(10, 10, 10)
                                 .addComponent(btnLibroVentas)
                                 .addGap(10, 10, 10)
@@ -1311,9 +1311,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLibroVentasActionPerformed
 
-    private void btnNewTransaccion2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTransaccion2ActionPerformed
+    private void btnLibroIvaComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLibroIvaComprasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnNewTransaccion2ActionPerformed
+    }//GEN-LAST:event_btnLibroIvaComprasActionPerformed
 
     private void btnNewTransaccion3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTransaccion3ActionPerformed
         // TODO add your handling code here:
@@ -1397,6 +1397,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public javax.swing.JButton btnGuardarEmpresa;
     public javax.swing.JButton btnGuardarSubCat;
     public javax.swing.JButton btnGuardarTipoCuenta;
+    public javax.swing.JButton btnLibroIvaCompras;
     public javax.swing.JButton btnLibroVentas;
     public javax.swing.JButton btnNewTransaccion;
     public javax.swing.JButton btnNewTransaccion10;
@@ -1405,7 +1406,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public javax.swing.JButton btnNewTransaccion13;
     public javax.swing.JButton btnNewTransaccion14;
     public javax.swing.JButton btnNewTransaccion15;
-    public javax.swing.JButton btnNewTransaccion2;
     public javax.swing.JButton btnNewTransaccion3;
     public javax.swing.JButton btnNewTransaccion4;
     public javax.swing.JButton btnNewTransaccion5;

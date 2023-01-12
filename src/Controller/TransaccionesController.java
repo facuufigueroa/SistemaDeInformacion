@@ -225,6 +225,7 @@ public class TransaccionesController implements ActionListener{
             if(!verificarVacios()){
                 queryTransaccion.addTransaccion(obtenerTransaccion());
                 iniciarTabla();
+                transacciones.setVisible(false);
                 compVentController.loadComVentaIva();
                 
             }

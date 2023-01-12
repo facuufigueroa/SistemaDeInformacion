@@ -3,12 +3,14 @@ package Controller;
 
 
 import Consultas.QueryReportes;
+import Reportes.ReporteLibroComprasIVA;
 import Reportes.ReporteLibroVentasIVA;
 import View.FormFechas;
 import View.MenuPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import javax.swing.JOptionPane;
 
 
 
@@ -16,7 +18,8 @@ public class MenuController implements ActionListener {
     
     MenuPrincipal menuPrincipal = new MenuPrincipal();
     TransaccionesController transaccionController = new TransaccionesController();
-    FormFechas formFecha = new FormFechas();
+    FormFechas formFechaVentas = new FormFechas();
+    FormFechas formFechaCompras = new FormFechas();
     QueryReportes queryReport = new QueryReportes();
        
     
@@ -35,14 +38,21 @@ public class MenuController implements ActionListener {
         VerTransaccionesController verTransacciones = new VerTransaccionesController(menuPrincipal);
         
         this.menuPrincipal.btnLibroVentas.addActionListener(this);
-        this.formFecha.btnBuscar.addActionListener(this);
+        
+        this.formFechaVentas.btnBuscar.addActionListener(this);
+        
+
+        this.menuPrincipal.btnLibroIvaCompras.addActionListener(this);
+        this.formFechaCompras.btnBuscar.addActionListener(this);
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
         newTransaccion(e);
         reporteLibroVentas(e);
+        reporteLibroCompras(e);
         loadReporteLibroVentas(e);
+        loadReporteLibroCompras(e);
     }
     
     
@@ -72,15 +82,16 @@ public class MenuController implements ActionListener {
     
     public void reporteLibroVentas(ActionEvent e){
         if(e.getSource() == menuPrincipal.btnLibroVentas){
-            formFecha.setVisible(true);
+            formFechaVentas.setVisible(true);
             
         }
     }
     
     public void loadReporteLibroVentas(ActionEvent e){
-        if(e.getSource() == formFecha.btnBuscar){
-            java.sql.Date fecha_desde = new java.sql.Date(formFecha.txtFechaDesde.getDate().getTime());
-            java.sql.Date fecha_hasta = new java.sql.Date(formFecha.txtFechaHasta.getDate().getTime());
+        
+        if(e.getSource() == formFechaVentas.btnBuscar){
+            java.sql.Date fecha_desde = new java.sql.Date(formFechaVentas.txtFechaDesde.getDate().getTime());
+            java.sql.Date fecha_hasta = new java.sql.Date(formFechaVentas.txtFechaHasta.getDate().getTime());
             
             /*Total Imp_Neto_Grav*/
             double t1 = queryReport.totalImp_Neto_Grav();
@@ -101,9 +112,44 @@ public class MenuController implements ActionListener {
             
             ReporteLibroVentasIVA reportLVI = new ReporteLibroVentasIVA();
             reportLVI.conexionReporte(fecha_desde,fecha_hasta,t1,t2,t3,t4,t5,t6,t7,t8);
-            formFecha.setVisible(false);
+            formFechaVentas.setVisible(false);
         }
     }
     
+    public void reporteLibroCompras(ActionEvent e){
+        if(e.getSource() == menuPrincipal.btnLibroIvaCompras){
+            formFechaCompras.setVisible(true);
+        }
+    }
+    
+    public void loadReporteLibroCompras(ActionEvent e){
+     
+        if(e.getSource() == formFechaCompras.btnBuscar){
+            
+            java.sql.Date fecha_desde = new java.sql.Date(formFechaCompras.txtFechaDesde.getDate().getTime());
+            java.sql.Date fecha_hasta = new java.sql.Date(formFechaCompras.txtFechaHasta.getDate().getTime());
+            
+            /*Total Imp_Neto_Grav*/
+            double t1 = queryReport.totalImp_Neto_Grav_c();
+            /*Total total_ivaFact*/
+            double t2 = queryReport.total_ivaFact_c();
+            /* Total total_ite_iva_dere_reg*/
+            double t3= queryReport.total_imp_interno_c();
+            /* Total total_concepto_no_grav*/
+            double t4 = queryReport.total_concepto_no_grav_c();
+            /* Total total_ret_ii_bb_vent*/
+            double t5 = queryReport.total_perc_iibb_compra_c();
+            /* Total total_ret_ganancias */
+            double t6 = queryReport.total_ret_ganancias_c();
+            /* Total total_ret_iva() */
+            double t7 = queryReport.total_ret_iva_c();
+            /* Total total_imp_total_fac() */
+            double t8= queryReport.total_imp_total_fac_c();
+           
+            ReporteLibroComprasIVA reportLCI = new ReporteLibroComprasIVA();
+            reportLCI.openReportCompras(fecha_desde,fecha_hasta,t1,t2,t3,t4,t5,t6,t7,t8);
+            formFechaCompras.setVisible(false);
+        }
+    }
     
 }
