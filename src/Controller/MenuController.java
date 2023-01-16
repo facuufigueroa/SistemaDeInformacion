@@ -3,6 +3,7 @@ package Controller;
 
 
 import Consultas.QueryReportes;
+import Reportes.ReporteCuentasACobrar;
 import Reportes.ReporteLibroComprasIVA;
 import Reportes.ReporteLibroVentasIVA;
 import View.FormFechas;
@@ -10,6 +11,7 @@ import View.MenuPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 
@@ -20,6 +22,7 @@ public class MenuController implements ActionListener {
     TransaccionesController transaccionController = new TransaccionesController();
     FormFechas formFechaVentas = new FormFechas();
     FormFechas formFechaCompras = new FormFechas();
+    FormFechas formFechaReportCAC = new FormFechas();
     QueryReportes queryReport = new QueryReportes();
        
     
@@ -44,6 +47,10 @@ public class MenuController implements ActionListener {
 
         this.menuPrincipal.btnLibroIvaCompras.addActionListener(this);
         this.formFechaCompras.btnBuscar.addActionListener(this);
+        
+        
+        this.menuPrincipal.btnReportCuentasAC.addActionListener(this);
+        this.formFechaReportCAC.btnBuscar.addActionListener(this);
     }
     
     @Override
@@ -53,6 +60,8 @@ public class MenuController implements ActionListener {
         reporteLibroCompras(e);
         loadReporteLibroVentas(e);
         loadReporteLibroCompras(e);
+        loadReporteCuentasACobrar(e);
+        accionVerCuentasACobrar(e);
     }
     
     
@@ -152,4 +161,27 @@ public class MenuController implements ActionListener {
         }
     }
     
+    public void accionVerCuentasACobrar(ActionEvent e){
+        if(e.getSource() == menuPrincipal.btnReportCuentasAC){
+            formFechaReportCAC.setVisible(true);
+        }
+    }
+    
+    public void loadReporteCuentasACobrar(ActionEvent e){
+        if(e.getSource() == formFechaReportCAC.btnBuscar){
+            
+            java.sql.Date fecha_desde = new java.sql.Date(formFechaReportCAC.txtFechaDesde.getDate().getTime());
+            java.sql.Date fecha_hasta = new java.sql.Date(formFechaReportCAC.txtFechaHasta.getDate().getTime());
+            
+            ArrayList<Double> array = queryReport.totales();
+            double total_e = array.get(0);
+            double total_s = array.get(1);
+            ReporteCuentasACobrar reportC = new ReporteCuentasACobrar();
+            reportC.openReportCuentasACobrar(total_e,total_s,fecha_desde,fecha_hasta);
+        }
+    }
+    
+     
+    
+
 }

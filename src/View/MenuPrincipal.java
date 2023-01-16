@@ -57,7 +57,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         btnNewTransaccion11 = new javax.swing.JButton();
         jLabel26 = new javax.swing.JLabel();
-        btnNewTransaccion12 = new javax.swing.JButton();
+        btnReportCuentasAC = new javax.swing.JButton();
         btnNewTransaccion13 = new javax.swing.JButton();
         btnNewTransaccion14 = new javax.swing.JButton();
         btnNewTransaccion15 = new javax.swing.JButton();
@@ -396,14 +396,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cat reportes.png"))); // NOI18N
         jLabel26.setText("Categoria E");
 
-        btnNewTransaccion12.setBackground(new java.awt.Color(102, 102, 102));
-        btnNewTransaccion12.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        btnNewTransaccion12.setForeground(new java.awt.Color(255, 255, 255));
-        btnNewTransaccion12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/documentos.png"))); // NOI18N
-        btnNewTransaccion12.setText("E1_ Cuentas a Cobrar");
-        btnNewTransaccion12.addActionListener(new java.awt.event.ActionListener() {
+        btnReportCuentasAC.setBackground(new java.awt.Color(102, 102, 102));
+        btnReportCuentasAC.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        btnReportCuentasAC.setForeground(new java.awt.Color(255, 255, 255));
+        btnReportCuentasAC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/documentos.png"))); // NOI18N
+        btnReportCuentasAC.setText("E1_ Cuentas a Cobrar");
+        btnReportCuentasAC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewTransaccion12ActionPerformed(evt);
+                btnReportCuentasACActionPerformed(evt);
             }
         });
 
@@ -493,7 +493,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                                             .addComponent(btnLibroVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                             .addComponent(btnLibroIvaCompras, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)))
                                                     .addComponent(btnNewTransaccion13, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(btnNewTransaccion12)))))
+                                                    .addComponent(btnReportCuentasAC)))))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                                         .addGap(63, 63, 63)
                                         .addComponent(btnNewTransaccion11, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -542,7 +542,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                 .addGap(19, 19, 19)
                                 .addComponent(jLabel26)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnNewTransaccion12, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnReportCuentasAC, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(10, 10, 10)
                                 .addComponent(btnNewTransaccion13, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(10, 10, 10)
@@ -1351,9 +1351,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnNewTransaccion11ActionPerformed
 
-    private void btnNewTransaccion12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTransaccion12ActionPerformed
+    private void btnReportCuentasACActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportCuentasACActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnNewTransaccion12ActionPerformed
+    }//GEN-LAST:event_btnReportCuentasACActionPerformed
 
     private void btnNewTransaccion13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTransaccion13ActionPerformed
         // TODO add your handling code here:
@@ -1402,7 +1402,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public javax.swing.JButton btnNewTransaccion;
     public javax.swing.JButton btnNewTransaccion10;
     public javax.swing.JButton btnNewTransaccion11;
-    public javax.swing.JButton btnNewTransaccion12;
     public javax.swing.JButton btnNewTransaccion13;
     public javax.swing.JButton btnNewTransaccion14;
     public javax.swing.JButton btnNewTransaccion15;
@@ -1413,6 +1412,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public javax.swing.JButton btnNewTransaccion7;
     public javax.swing.JButton btnNewTransaccion8;
     public javax.swing.JButton btnNewTransaccion9;
+    public javax.swing.JButton btnReportCuentasAC;
     public javax.swing.JButton btnSaveCat;
     public javax.swing.JButton btnSaveTipoCat;
     public javax.swing.JButton btnVerTransacciones;

@@ -5,6 +5,7 @@ import DataBase.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class QueryReportes {
     
@@ -299,4 +300,31 @@ public class QueryReportes {
         }
         return total;
     }
+    
+    
+    /* Totales salidas y entradas de cuentas a cobrar*/
+    public ArrayList totales(){
+        double total = 0.0;
+        PreparedStatement ps = null;
+        Connection conn = Conexion.getConnection();
+        ArrayList<Double> totalesArray = new ArrayList<>();
+        try {
+            String sql = "SELECT  DISTINCT TRUNCATE(SUM(t.salidas),2) as total_salidas,\n" +
+                            "TRUNCATE(SUM(t.entradas),2) as total_entradas\n" +
+                            "FROM empresa_orden as e\n" +
+                            "INNER JOIN transacciones as t on t.id_orden_empresa = e.idempresa_orden\n" +
+                            "INNER JOIN cuentas as c on c.idcuenta = t.id_cuenta\n" +
+                            "WHERE c.idcuenta = 12 ";
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                totalesArray.add(0, rs.getDouble("total_entradas"));
+                totalesArray.add(1, rs.getDouble("total_salidas"));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return totalesArray;
+    }
+    
 }

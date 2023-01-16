@@ -349,7 +349,7 @@
                                                                   </Group>
                                                               </Group>
                                                               <Component id="btnNewTransaccion13" min="-2" pref="203" max="-2" attributes="0"/>
-                                                              <Component id="btnNewTransaccion12" min="-2" max="-2" attributes="0"/>
+                                                              <Component id="btnReportCuentasAC" min="-2" max="-2" attributes="0"/>
                                                           </Group>
                                                       </Group>
                                                   </Group>
@@ -411,7 +411,7 @@
                                           <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                                           <Component id="jLabel26" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="btnNewTransaccion12" min="-2" pref="39" max="-2" attributes="0"/>
+                                          <Component id="btnReportCuentasAC" min="-2" pref="39" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                           <Component id="btnNewTransaccion13" min="-2" pref="39" max="-2" attributes="0"/>
                                       </Group>
@@ -782,7 +782,7 @@
                     <Property name="text" type="java.lang.String" value="Categoria E"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnNewTransaccion12">
+                <Component class="javax.swing.JButton" name="btnReportCuentasAC">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="66" green="66" red="66" type="rgb"/>
@@ -799,7 +799,7 @@
                     <Property name="text" type="java.lang.String" value="E1_ Cuentas a Cobrar"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNewTransaccion12ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReportCuentasACActionPerformed"/>
                   </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
