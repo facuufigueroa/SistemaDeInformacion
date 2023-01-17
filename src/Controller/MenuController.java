@@ -3,6 +3,7 @@ package Controller;
 
 
 import Consultas.QueryReportes;
+import Reportes.ReporteCuentaAPagar;
 import Reportes.ReporteCuentasACobrar;
 import Reportes.ReporteLibroComprasIVA;
 import Reportes.ReporteLibroVentasIVA;
@@ -23,6 +24,7 @@ public class MenuController implements ActionListener {
     FormFechas formFechaVentas = new FormFechas();
     FormFechas formFechaCompras = new FormFechas();
     FormFechas formFechaReportCAC = new FormFechas();
+    FormFechas formFechaReportCAP = new FormFechas();
     QueryReportes queryReport = new QueryReportes();
        
     
@@ -51,6 +53,9 @@ public class MenuController implements ActionListener {
         
         this.menuPrincipal.btnReportCuentasAC.addActionListener(this);
         this.formFechaReportCAC.btnBuscar.addActionListener(this);
+    
+        this.menuPrincipal.btnCuentasAPagar.addActionListener(this);
+        this.formFechaReportCAP.btnBuscar.addActionListener(this);
     }
     
     @Override
@@ -62,6 +67,8 @@ public class MenuController implements ActionListener {
         loadReporteLibroCompras(e);
         loadReporteCuentasACobrar(e);
         accionVerCuentasACobrar(e);
+        accionVerCuentasAPagar(e);
+        loadReporteCuentasAPagar(e);
     }
     
     
@@ -164,6 +171,7 @@ public class MenuController implements ActionListener {
     public void accionVerCuentasACobrar(ActionEvent e){
         if(e.getSource() == menuPrincipal.btnReportCuentasAC){
             formFechaReportCAC.setVisible(true);
+            formFechaReportCAC.setLocationRelativeTo(null);
         }
     }
     
@@ -173,7 +181,7 @@ public class MenuController implements ActionListener {
             java.sql.Date fecha_desde = new java.sql.Date(formFechaReportCAC.txtFechaDesde.getDate().getTime());
             java.sql.Date fecha_hasta = new java.sql.Date(formFechaReportCAC.txtFechaHasta.getDate().getTime());
             
-            ArrayList<Double> array = queryReport.totales();
+            ArrayList<Double> array = queryReport.totales(fecha_desde,fecha_hasta);
             double total_e = array.get(0);
             double total_s = array.get(1);
             ReporteCuentasACobrar reportC = new ReporteCuentasACobrar();
@@ -181,7 +189,25 @@ public class MenuController implements ActionListener {
         }
     }
     
-     
+     public void accionVerCuentasAPagar(ActionEvent e){
+        if(e.getSource() == menuPrincipal.btnCuentasAPagar){
+            formFechaReportCAP.setVisible(true);
+            formFechaReportCAP.setLocationRelativeTo(null);
+        }
+    }
     
-
+    public void loadReporteCuentasAPagar(ActionEvent e){
+        if(e.getSource() == formFechaReportCAP.btnBuscar){
+            
+            java.sql.Date fecha_desde = new java.sql.Date(formFechaReportCAP.txtFechaDesde.getDate().getTime());
+            java.sql.Date fecha_hasta = new java.sql.Date(formFechaReportCAP.txtFechaHasta.getDate().getTime());
+            
+            ArrayList<Double> array = queryReport.totales_c_ap(fecha_desde,fecha_hasta);
+            double total_e = array.get(0);
+            double total_s = array.get(1);
+            ReporteCuentaAPagar reportAP = new ReporteCuentaAPagar();
+            reportAP.openReportCuentasAPagar(total_e,total_s,fecha_desde,fecha_hasta);
+        }
+    } 
+     
 }

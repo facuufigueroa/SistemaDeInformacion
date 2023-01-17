@@ -37,13 +37,23 @@ public class FormFechas extends javax.swing.JFrame {
         btnBuscar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Ingrese fecha desde , hasta");
+        setResizable(false);
+
+        jPanel1.setBackground(new java.awt.Color(18, 18, 61));
+
+        txtFechaDesde.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/calendario (1).png"))); // NOI18N
         jLabel1.setText("Fecha Desde");
 
+        txtFechaHasta.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+
         jLabel2.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/calendario (1).png"))); // NOI18N
         jLabel2.setText("Fecha Hasta");
 
@@ -52,6 +62,7 @@ public class FormFechas extends javax.swing.JFrame {
         btnBuscar.setText("Buscar");
 
         jLabel3.setFont(new java.awt.Font("Arial Narrow", 3, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Seleccione Fecha");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

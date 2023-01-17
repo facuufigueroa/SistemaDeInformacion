@@ -21,7 +21,7 @@
  transacciones.entradas
 FROM empresa_orden INNER JOIN
 (cuentas INNER JOIN transacciones ON cuentas.idcuenta=transacciones.id_cuenta) ON empresa_orden.idempresa_orden=transacciones.id_orden_empresa
-WHERE cuentas.nombre="Cuentas a Cobrar"
+WHERE cuentas.idcuenta=13
 AND empresa_orden.idempresa_orden =  $P{idempresa}]]>
 	</queryString>
 	<field name="idcuenta" class="java.lang.Integer">

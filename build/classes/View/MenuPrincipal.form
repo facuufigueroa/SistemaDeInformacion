@@ -348,7 +348,7 @@
                                                                       <Component id="btnLibroIvaCompras" alignment="0" pref="277" max="32767" attributes="0"/>
                                                                   </Group>
                                                               </Group>
-                                                              <Component id="btnNewTransaccion13" min="-2" pref="203" max="-2" attributes="0"/>
+                                                              <Component id="btnCuentasAPagar" min="-2" pref="203" max="-2" attributes="0"/>
                                                               <Component id="btnReportCuentasAC" min="-2" max="-2" attributes="0"/>
                                                           </Group>
                                                       </Group>
@@ -413,7 +413,7 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="btnReportCuentasAC" min="-2" pref="39" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                          <Component id="btnNewTransaccion13" min="-2" pref="39" max="-2" attributes="0"/>
+                                          <Component id="btnCuentasAPagar" min="-2" pref="39" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
@@ -805,7 +805,7 @@
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnNewTransaccion13">
+                <Component class="javax.swing.JButton" name="btnCuentasAPagar">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="66" green="66" red="66" type="rgb"/>
@@ -822,7 +822,7 @@
                     <Property name="text" type="java.lang.String" value="E1_ Cuentas a Pagar"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNewTransaccion13ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCuentasAPagarActionPerformed"/>
                   </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
