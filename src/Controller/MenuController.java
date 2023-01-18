@@ -5,15 +5,14 @@ package Controller;
 import Consultas.QueryReportes;
 import Reportes.ReporteCuentaAPagar;
 import Reportes.ReporteCuentasACobrar;
+import Reportes.ReporteJMRT;
 import Reportes.ReporteLibroComprasIVA;
 import Reportes.ReporteLibroVentasIVA;
 import View.FormFechas;
 import View.MenuPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 
 
@@ -25,6 +24,7 @@ public class MenuController implements ActionListener {
     FormFechas formFechaCompras = new FormFechas();
     FormFechas formFechaReportCAC = new FormFechas();
     FormFechas formFechaReportCAP = new FormFechas();
+    FormFechas formFechaReportJMR = new FormFechas();
     QueryReportes queryReport = new QueryReportes();
        
     
@@ -56,6 +56,9 @@ public class MenuController implements ActionListener {
     
         this.menuPrincipal.btnCuentasAPagar.addActionListener(this);
         this.formFechaReportCAP.btnBuscar.addActionListener(this);
+        
+        this.formFechaReportJMR.btnBuscar.addActionListener(this);
+        this.menuPrincipal.btnJMRT.addActionListener(this);
     }
     
     @Override
@@ -69,6 +72,8 @@ public class MenuController implements ActionListener {
         accionVerCuentasACobrar(e);
         accionVerCuentasAPagar(e);
         loadReporteCuentasAPagar(e);
+        accionVerJMRTransacciones(e);
+        loadReporteJMRT(e);
     }
     
     
@@ -210,4 +215,24 @@ public class MenuController implements ActionListener {
         }
     } 
      
+    public void accionVerJMRTransacciones(ActionEvent e){
+        if(e.getSource() == menuPrincipal.btnJMRT){
+            formFechaReportJMR.setVisible(true);
+            formFechaReportJMR.setLocationRelativeTo(null);
+        }
+    }
+    
+    public void loadReporteJMRT(ActionEvent e){
+        if(e.getSource() == formFechaReportJMR.btnBuscar){
+            
+            java.sql.Date fecha_desde = new java.sql.Date(formFechaReportJMR.txtFechaDesde.getDate().getTime());
+            java.sql.Date fecha_hasta = new java.sql.Date(formFechaReportJMR.txtFechaHasta.getDate().getTime());
+            
+            ArrayList<Double> array = queryReport.totales_jmr(fecha_desde,fecha_hasta);
+            double total_e = array.get(0);
+            double total_s = array.get(1);
+            ReporteJMRT reportJMR = new ReporteJMRT();
+            reportJMR.openReportJMRTransacciones(total_e,total_s,fecha_desde,fecha_hasta);
+        }
+    } 
 }

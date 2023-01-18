@@ -321,7 +321,7 @@
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                                           <Component id="btnNewTransaccion7" alignment="0" max="32767" attributes="0"/>
-                                                          <Component id="btnNewTransaccion6" alignment="0" max="32767" attributes="0"/>
+                                                          <Component id="btnJMRT" alignment="0" max="32767" attributes="0"/>
                                                           <Component id="btnNewTransaccion5" alignment="0" min="-2" max="-2" attributes="0"/>
                                                       </Group>
                                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -390,7 +390,7 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="btnNewTransaccion5" min="-2" pref="39" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                          <Component id="btnNewTransaccion6" min="-2" pref="39" max="-2" attributes="0"/>
+                                          <Component id="btnJMRT" min="-2" pref="39" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                           <Component id="btnNewTransaccion7" min="-2" pref="41" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
@@ -565,7 +565,7 @@
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnNewTransaccion6">
+                <Component class="javax.swing.JButton" name="btnJMRT">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="66" green="66" red="66" type="rgb"/>
@@ -582,7 +582,7 @@
                     <Property name="text" type="java.lang.String" value="B_ JMR Transacciones"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNewTransaccion6ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnJMRTActionPerformed"/>
                   </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

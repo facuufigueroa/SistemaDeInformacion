@@ -350,4 +350,36 @@ public class QueryReportes {
         }
         return totalesArray;
     }
+    
+    /* Totales salidas y entradas de JMR transacciones*/
+    public ArrayList totales_jmr(Date fecha_desde, Date fecha_hasta){
+        PreparedStatement ps = null;
+        Connection conn = Conexion.getConnection();
+        ArrayList<Double> totalesArray = new ArrayList<>();
+        try {
+            String sql = "SELECT DISTINCT TRUNCATE(SUM(t.salidas),2) as suma_salidas, TRUNCATE(SUM(t.entradas),2) as suma_entradas\n" +
+                            "FROM categorias as c\n" +
+                            "INNER JOIN tipo_categoria as tc ON c.id_tipo_categoria = tc.idtipo_categoria\n" +
+                            "INNER JOIN transacciones as t ON t.id_categoria = c.idcategorias\n" +
+                            "WHERE tc.idtipo_categoria=40\n" +
+                            "Or tc.idtipo_categoria=32 \n" +
+                            "Or tc.idtipo_categoria=33\n" +
+                            "Or tc.idtipo_categoria=35\n" +
+                            "Or tc.idtipo_categoria=37\n" +
+                            "Or tc.idtipo_categoria=38\n" +
+                            "And c.idcategorias<>121 \n" +
+                            "And c.idcategorias<>138 AND t.fecha BETWEEN '"+ fecha_desde + "' "+ " AND '" + fecha_hasta+"'";
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                totalesArray.add(0, rs.getDouble("suma_entradas"));
+                totalesArray.add(1, rs.getDouble("suma_salidas"));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return totalesArray;
+    }
+    
+    
 }
