@@ -5,6 +5,7 @@ package Controller;
 import Consultas.QueryReportes;
 import Reportes.ReporteCuentaAPagar;
 import Reportes.ReporteCuentasACobrar;
+import Reportes.ReporteElRocioT;
 import Reportes.ReporteJMRT;
 import Reportes.ReporteLibroComprasIVA;
 import Reportes.ReporteLibroVentasIVA;
@@ -25,6 +26,7 @@ public class MenuController implements ActionListener {
     FormFechas formFechaReportCAC = new FormFechas();
     FormFechas formFechaReportCAP = new FormFechas();
     FormFechas formFechaReportJMR = new FormFechas();
+    FormFechas formFechaReportElRocio = new FormFechas();
     QueryReportes queryReport = new QueryReportes();
        
     
@@ -59,6 +61,9 @@ public class MenuController implements ActionListener {
         
         this.formFechaReportJMR.btnBuscar.addActionListener(this);
         this.menuPrincipal.btnJMRT.addActionListener(this);
+        
+        this.formFechaReportElRocio.btnBuscar.addActionListener(this);
+        this.menuPrincipal.btnElRocioT.addActionListener(this);
     }
     
     @Override
@@ -74,6 +79,8 @@ public class MenuController implements ActionListener {
         loadReporteCuentasAPagar(e);
         accionVerJMRTransacciones(e);
         loadReporteJMRT(e);
+        accionVerElRocioTransacciones(e);
+        loadReporteElRocio(e);
     }
     
     
@@ -133,7 +140,9 @@ public class MenuController implements ActionListener {
             
             ReporteLibroVentasIVA reportLVI = new ReporteLibroVentasIVA();
             reportLVI.conexionReporte(fecha_desde,fecha_hasta,t1,t2,t3,t4,t5,t6,t7,t8);
+            nullFechas(formFechaVentas);
             formFechaVentas.setVisible(false);
+            
         }
     }
     
@@ -169,7 +178,9 @@ public class MenuController implements ActionListener {
            
             ReporteLibroComprasIVA reportLCI = new ReporteLibroComprasIVA();
             reportLCI.openReportCompras(fecha_desde,fecha_hasta,t1,t2,t3,t4,t5,t6,t7,t8);
+            nullFechas(formFechaCompras);
             formFechaCompras.setVisible(false);
+           
         }
     }
     
@@ -191,6 +202,8 @@ public class MenuController implements ActionListener {
             double total_s = array.get(1);
             ReporteCuentasACobrar reportC = new ReporteCuentasACobrar();
             reportC.openReportCuentasACobrar(total_e,total_s,fecha_desde,fecha_hasta);
+            nullFechas(formFechaReportCAC);
+            formFechaReportCAC.setVisible(false);
         }
     }
     
@@ -212,6 +225,8 @@ public class MenuController implements ActionListener {
             double total_s = array.get(1);
             ReporteCuentaAPagar reportAP = new ReporteCuentaAPagar();
             reportAP.openReportCuentasAPagar(total_e,total_s,fecha_desde,fecha_hasta);
+            nullFechas(formFechaReportCAP);
+            formFechaReportCAP.setVisible(false);
         }
     } 
      
@@ -224,7 +239,7 @@ public class MenuController implements ActionListener {
     
     public void loadReporteJMRT(ActionEvent e){
         if(e.getSource() == formFechaReportJMR.btnBuscar){
-            
+            formFechaReportJMR.setVisible(false);
             java.sql.Date fecha_desde = new java.sql.Date(formFechaReportJMR.txtFechaDesde.getDate().getTime());
             java.sql.Date fecha_hasta = new java.sql.Date(formFechaReportJMR.txtFechaHasta.getDate().getTime());
             
@@ -233,6 +248,33 @@ public class MenuController implements ActionListener {
             double total_s = array.get(1);
             ReporteJMRT reportJMR = new ReporteJMRT();
             reportJMR.openReportJMRTransacciones(total_e,total_s,fecha_desde,fecha_hasta);
+            nullFechas(formFechaReportJMR);
+            formFechaReportJMR.setVisible(false);
         }
     } 
+    
+    public void accionVerElRocioTransacciones(ActionEvent e){
+        if(e.getSource() == menuPrincipal.btnElRocioT){
+            formFechaReportElRocio.setVisible(true);
+            formFechaReportElRocio.setLocationRelativeTo(null);
+        }
+    }
+    
+    public void loadReporteElRocio(ActionEvent e){
+        if(e.getSource() == formFechaReportElRocio.btnBuscar){
+            formFechaReportElRocio.setVisible(false);
+            java.sql.Date fecha_desde = new java.sql.Date(formFechaReportElRocio.txtFechaDesde.getDate().getTime());
+            java.sql.Date fecha_hasta = new java.sql.Date(formFechaReportElRocio.txtFechaHasta.getDate().getTime());
+           
+            ReporteElRocioT reportElRocio = new ReporteElRocioT();
+            reportElRocio.openReportElRocio(fecha_desde,fecha_hasta);
+            nullFechas(formFechaReportElRocio);
+            formFechaReportElRocio.setVisible(false);
+        }
+    } 
+    
+    public void nullFechas(FormFechas fecha){
+        fecha.txtFechaDesde.setDate(null);
+        fecha.txtFechaHasta.setDate(null);
+    }
 }

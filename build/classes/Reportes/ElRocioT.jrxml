@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ElRocioT" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="48fa40fd-a28a-48cb-820c-a554ee0fbe2f">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SistemaInformacion2"/>
+	<parameter name="fecha_desde" class="java.sql.Date"/>
+	<parameter name="fecha_hasta" class="java.sql.Date"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT DISTINCT tc.nombre AS tipo_categoria,
+c.nombre AS categoria,
+t.id_categoria,
+tc.idtipo_categoria
+FROM tipo_categoria AS tc
+INNER JOIN categorias AS c ON tc.idtipo_categoria = c.id_tipo_categoria
+INNER JOIN transacciones AS t ON c.idcategorias = t.id_categoria
+WHERE tc.nombre<>"zz) JMR: G. Sucesión" 
+AND tc.nombre<>"Juan E.Roqués" 
+AND tc.nombre<>"Transferencias" 
+AND tc.nombre<>"zz) María Amalia Roqués" 
+AND tc.nombre<>"Sin clasificar" 
+AND tc.nombre<>"zz) Anita Roqués" 
+AND tc.nombre<>"nn) sucesiones" 
+AND tc.nombre<>"y) JMR: a. Ingresos" 
+AND tc.nombre<>"z) JMR: b. egresos" 
+AND tc.nombre<>"zz) JMR: c. gastos profesionales" 
+AND tc.nombre<>"zz) JMR: d. Gastos propiedades" 
+AND tc.nombre<>"María Amalia Roqués" 
+AND tc.nombre<>"uu) Bienes personales" 
+AND tc.nombre<>"Saldos al 1 de enero"
+AND c.nombre<>"Juan E." 
+AND c.nombre<>"IT" 
+AND c.nombre<>"TA" 
+AND c.nombre<>"TE" 
+AND c.nombre<>"saldo al 1 de enero" 
+AND c.nombre<>"transferencias Bco."
+ORDER BY tc.nombre
+]]>
+	</queryString>
+	<field name="tipo_categoria" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="tipo_categoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tipo_categoria"/>
+	</field>
+	<field name="categoria" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="categoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="categorias"/>
+	</field>
+	<field name="id_categoria" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="id_categoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="transacciones"/>
+	</field>
+	<field name="idtipo_categoria" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="idtipo_categoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tipo_categoria"/>
+	</field>
+	<variable name="totales_entradas" class="java.lang.Float"/>
+	<variable name="t_entradas" class="java.lang.Float" calculation="Sum"/>
+	<variable name="t_salidas" class="java.lang.Float" calculation="Sum"/>
+	<variable name="t_ret_ganadas" class="java.lang.Float" calculation="Sum"/>
+	<variable name="t_ret_ing_brutos" class="java.lang.Float" calculation="Sum"/>
+	<group name="tipo_categoria">
+		<groupExpression><![CDATA[$F{tipo_categoria}]]></groupExpression>
+	</group>
+	<group name="categoria">
+		<groupExpression><![CDATA[$F{categoria}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="110" splitType="Stretch">
+			<staticText>
+				<reportElement x="160" y="0" width="259" height="44" forecolor="#07245E" uuid="3101106c-90cc-49a5-9a32-f0b117bceb49"/>
+				<textElement textAlignment="Center">
+					<font size="26" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[El Rocio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="35" width="259" height="35" forecolor="#07245E" uuid="8bcac79c-a829-4ec8-b78d-383d420f8300"/>
+				<textElement textAlignment="Center">
+					<font size="22" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Transacciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="80" width="110" height="30" uuid="e52664f5-e7be-4fa9-a49b-c63baf3dbfa2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Con fecha desde:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="80" width="50" height="30" uuid="a68d44b1-865f-474f-8130-11727a5c26ca"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[hasta:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="80" width="70" height="30" uuid="bebbf226-ccd7-4b69-bb79-e88f61cdccd2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fecha_desde}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="80" width="70" height="30" uuid="61fdad49-0dbf-4205-9686-9dcc9125ad7d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fecha_hasta}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="163" splitType="Stretch">
+			<subreport>
+				<reportElement x="-11" y="30" width="560" height="130" uuid="bea0bb60-df93-4ed1-bf1b-dac2361462d2"/>
+				<subreportParameter name="idcategoria">
+					<subreportParameterExpression><![CDATA[$F{id_categoria}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idtipo_categoria">
+					<subreportParameterExpression><![CDATA[$F{idtipo_categoria}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fecha_desde">
+					<subreportParameterExpression><![CDATA[$P{fecha_desde}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fecha_hasta">
+					<subreportParameterExpression><![CDATA[$P{fecha_hasta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="suma_entradas" toVariable="t_entradas" calculation="Sum"/>
+				<returnValue subreportVariable="suma_salidas" toVariable="t_salidas" calculation="Sum"/>
+				<returnValue subreportVariable="sum_ret_ganancias" toVariable="t_ret_ganadas" calculation="Sum"/>
+				<returnValue subreportVariable="sum_ret_ing_brutos" toVariable="t_ret_ing_brutos" calculation="Sum"/>
+				<subreportExpression><![CDATA[".\\Reportes\\SubReporteElRocio.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement x="110" y="0" width="270" height="30" uuid="161656b5-bd75-4225-bf04-69f8004cf19e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipo_categoria}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="110" height="30" uuid="199443d8-1383-426b-bde3-e7161c782c57"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo Categoria: ]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<summary>
+		<band height="85" splitType="Stretch">
+			<textField>
+				<reportElement x="180" y="50" width="90" height="30" uuid="eced6293-1856-419c-9619-249c9480961c"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{t_entradas}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="10" width="170" height="30" uuid="b0b59fe3-5760-4a1d-9e56-95237d86b8cf"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Resumen sumas totales:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="280" y="50" width="80" height="30" uuid="96893dd3-155d-4272-bde2-9009b60493a9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{t_salidas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="50" width="70" height="30" uuid="202c41c7-7a73-4932-a9f4-7617f58ffb57"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{t_ret_ganadas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="50" width="70" height="30" uuid="c3a7562e-9c54-41fc-a09a-05f93770f406"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{t_ret_ing_brutos}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="170" y="20" width="100" height="30" uuid="cb2ad1e2-e30a-4afd-987c-9bd72a680a3e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Entradas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="20" width="80" height="30" uuid="b08457d8-deaf-4383-a30b-6f19d5f663fd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Salidas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="10" width="70" height="40" uuid="20db88d9-0c82-4515-8e0a-8c2447d48bb0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Ret. Ganancias]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="10" width="70" height="40" uuid="30cf898d-edf6-4010-be3b-34f5cd17d356"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Ret. Ing. Brutos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="50" width="10" height="30" uuid="50709099-385b-48da-87ba-429eddbe58a8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[$]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="50" width="10" height="30" uuid="6ef50e65-0028-47b9-9383-e6b710527286"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[$]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="50" width="10" height="30" uuid="caf1609e-a4e1-421c-a63a-974cf5b22112"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[$]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="50" width="10" height="30" uuid="7ed5f1a3-2813-450a-84bb-795ad8b15515"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[$]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="1f84c4a6-b56f-4fe4-ba7d-12ae42fbc1c2">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</summary>
+</jasperReport>
