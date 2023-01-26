@@ -4,6 +4,7 @@ package Controller;
 
 import Consultas.QueryReportes;
 import Reportes.ReportJMRContador;
+import Reportes.ReportMarContador;
 import Reportes.ReportMarTransaccion;
 import Reportes.ReportRocioContador;
 import Reportes.ReporteCuentaAPagar;
@@ -33,6 +34,7 @@ public class MenuController implements ActionListener {
     FormFechas formFechaReportMar = new FormFechas();
     FormFechas formFechaReportElRocioContador = new FormFechas();
     FormFechas formFechaReportJMRContador = new FormFechas();
+    FormFechas formFechaReportMARContador = new FormFechas();
     QueryReportes queryReport = new QueryReportes();
        
     
@@ -79,6 +81,9 @@ public class MenuController implements ActionListener {
         
         this.menuPrincipal.btnJmrContador.addActionListener(this);
         this.formFechaReportJMRContador.btnBuscar.addActionListener(this);
+        
+        this.menuPrincipal.btnMARContador.addActionListener(this);
+        this.formFechaReportMARContador.btnBuscar.addActionListener(this);
     }
     
     @Override
@@ -102,6 +107,8 @@ public class MenuController implements ActionListener {
         loadReporteElRocioContador(e);
         accionVerJMRContador(e);
         loadReporteJMRContador(e);
+        accionVerMARContador(e);
+        loadReporteMARContador(e);
     }
     
     
@@ -355,6 +362,26 @@ public class MenuController implements ActionListener {
             ReportJMRContador reportJMRCont = new ReportJMRContador();
             reportJMRCont.openReportJMRContador(fecha_desde,fecha_hasta);
             nullFechas(formFechaReportJMRContador);
+           
+        }
+    }
+    
+    public void accionVerMARContador(ActionEvent e){
+        if(e.getSource() == menuPrincipal.btnMARContador){
+            formFechaReportMARContador.setVisible(true);
+            formFechaReportMARContador.setLocationRelativeTo(null);
+        }
+    }
+     
+    public void loadReporteMARContador(ActionEvent e){
+        if(e.getSource() == formFechaReportMARContador.btnBuscar){
+            formFechaReportMARContador.setVisible(false);
+            java.sql.Date fecha_desde = new java.sql.Date(formFechaReportMARContador.txtFechaDesde.getDate().getTime());
+            java.sql.Date fecha_hasta = new java.sql.Date(formFechaReportMARContador.txtFechaHasta.getDate().getTime());
+           
+            ReportMarContador reportMarCont = new ReportMarContador();
+            reportMarCont.openReportMARContador(fecha_desde,fecha_hasta);
+            nullFechas(formFechaReportMARContador);
            
         }
     }
