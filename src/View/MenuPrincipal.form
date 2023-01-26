@@ -300,7 +300,7 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="btnNewTransaccion9" max="32767" attributes="0"/>
+                                              <Component id="btnJmrContador" max="32767" attributes="0"/>
                                               <Component id="btnNewTransaccion10" alignment="1" max="32767" attributes="0"/>
                                               <Component id="btnRocioContador" max="32767" attributes="0"/>
                                           </Group>
@@ -396,7 +396,7 @@
                                           <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                           <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="btnNewTransaccion9" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnJmrContador" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
                                           <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
@@ -643,7 +643,7 @@
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnNewTransaccion9">
+                <Component class="javax.swing.JButton" name="btnJmrContador">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="66" green="66" red="66" type="rgb"/>
@@ -660,7 +660,7 @@
                     <Property name="text" type="java.lang.String" value="C_ JMR Informe Para Contador"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNewTransaccion9ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnJmrContadorActionPerformed"/>
                   </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

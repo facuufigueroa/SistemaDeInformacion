@@ -49,7 +49,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnJMRT = new javax.swing.JButton();
         btnMarT = new javax.swing.JButton();
         btnRocioContador = new javax.swing.JButton();
-        btnNewTransaccion9 = new javax.swing.JButton();
+        btnJmrContador = new javax.swing.JButton();
         btnNewTransaccion10 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -338,14 +338,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnNewTransaccion9.setBackground(new java.awt.Color(102, 102, 102));
-        btnNewTransaccion9.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        btnNewTransaccion9.setForeground(new java.awt.Color(255, 255, 255));
-        btnNewTransaccion9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/documentos.png"))); // NOI18N
-        btnNewTransaccion9.setText("C_ JMR Informe Para Contador");
-        btnNewTransaccion9.addActionListener(new java.awt.event.ActionListener() {
+        btnJmrContador.setBackground(new java.awt.Color(102, 102, 102));
+        btnJmrContador.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        btnJmrContador.setForeground(new java.awt.Color(255, 255, 255));
+        btnJmrContador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/documentos.png"))); // NOI18N
+        btnJmrContador.setText("C_ JMR Informe Para Contador");
+        btnJmrContador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewTransaccion9ActionPerformed(evt);
+                btnJmrContadorActionPerformed(evt);
             }
         });
 
@@ -455,7 +455,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(btnNewTransaccion9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnJmrContador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnNewTransaccion10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnRocioContador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 486, Short.MAX_VALUE)
@@ -528,7 +528,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                 .addGap(12, 12, 12)
                                 .addComponent(jLabel25)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnNewTransaccion9))
+                                .addComponent(btnJmrContador))
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel24)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1339,9 +1339,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRocioContadorActionPerformed
 
-    private void btnNewTransaccion9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTransaccion9ActionPerformed
+    private void btnJmrContadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJmrContadorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnNewTransaccion9ActionPerformed
+    }//GEN-LAST:event_btnJmrContadorActionPerformed
 
     private void btnNewTransaccion10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTransaccion10ActionPerformed
         // TODO add your handling code here:
@@ -1400,6 +1400,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public javax.swing.JButton btnGuardarSubCat;
     public javax.swing.JButton btnGuardarTipoCuenta;
     public javax.swing.JButton btnJMRT;
+    public javax.swing.JButton btnJmrContador;
     public javax.swing.JButton btnLibroIvaCompras;
     public javax.swing.JButton btnLibroVentas;
     public javax.swing.JButton btnMarT;
@@ -1410,7 +1411,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public javax.swing.JButton btnNewTransaccion15;
     public javax.swing.JButton btnNewTransaccion3;
     public javax.swing.JButton btnNewTransaccion4;
-    public javax.swing.JButton btnNewTransaccion9;
     public javax.swing.JButton btnReportCuentasAC;
     public javax.swing.JButton btnRocioContador;
     public javax.swing.JButton btnSaveCat;

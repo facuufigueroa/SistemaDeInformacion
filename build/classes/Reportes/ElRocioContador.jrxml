@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubReportElRocioContador" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="4745aead-5ee0-475e-895e-1ac2afabc6ee">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SistemaInformacion2"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="100"/>
 	<parameter name="fecha_desde" class="java.sql.Date"/>
 	<parameter name="fecha_hasta" class="java.sql.Date"/>
-	<queryString language="SQL">
+	<queryString>
 		<![CDATA[SELECT tc.nombre as tipo_categoria, c.nombre as categoria,t.salidas,t.entradas,t.fecha,t.cantidad,
 t.descripcion
 FROM tipo_categoria as tc
@@ -42,22 +44,27 @@ ORDER BY tc.nombre,c.nombre,t.fecha]]>
 	<field name="salidas" class="java.lang.Float">
 		<property name="com.jaspersoft.studio.field.label" value="salidas"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="transacciones"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="entradas" class="java.lang.Float">
 		<property name="com.jaspersoft.studio.field.label" value="entradas"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="transacciones"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="fecha" class="java.sql.Date">
 		<property name="com.jaspersoft.studio.field.label" value="fecha"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="transacciones"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="cantidad" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.label" value="cantidad"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="transacciones"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="descripcion" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="descripcion"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="transacciones"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<variable name="sum_cant_cat" class="java.lang.Integer" resetType="Group" resetGroup="Group2" calculation="Sum">
 		<variableExpression><![CDATA[$F{cantidad}]]></variableExpression>
@@ -249,7 +256,7 @@ ORDER BY tc.nombre,c.nombre,t.fecha]]>
 					<text><![CDATA[Suma total por Categoria:]]></text>
 				</staticText>
 				<line>
-					<reportElement x="1" y="39" width="480" height="1" uuid="97c67495-3ae5-49a2-ba27-b6c6cb64f658">
+					<reportElement x="1" y="38" width="479" height="2" uuid="97c67495-3ae5-49a2-ba27-b6c6cb64f658">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
 				</line>
@@ -337,13 +344,10 @@ Informe Contador]]></text>
 				<text><![CDATA[Descripción]]></text>
 			</staticText>
 			<line>
-				<reportElement x="0" y="70" width="481" height="1" uuid="190896f2-2bb3-49a2-bda0-6bfbf4b26002"/>
+				<reportElement x="0" y="70" width="482" height="1" uuid="190896f2-2bb3-49a2-bda0-6bfbf4b26002"/>
 			</line>
 			<line>
-				<reportElement x="0" y="40" width="480" height="1" uuid="f51f594a-9bc5-48fa-be23-606d641fbe24"/>
-			</line>
-			<line>
-				<reportElement x="480" y="40" width="1" height="30" uuid="fba06af0-b65d-4e49-8374-00a988e3247b"/>
+				<reportElement x="0" y="40" width="482" height="1" uuid="f51f594a-9bc5-48fa-be23-606d641fbe24"/>
 			</line>
 			<line>
 				<reportElement x="381" y="40" width="1" height="30" uuid="7ea628f2-9bb9-41da-af47-cda80f38d978"/>
@@ -388,6 +392,9 @@ Informe Contador]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{fecha_hasta}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="481" y="41" width="1" height="30" uuid="d7924d2b-a8ae-44f1-9f57-255594f0c862"/>
+			</line>
 		</band>
 	</columnHeader>
 	<detail>
@@ -460,7 +467,7 @@ Informe Contador]]></text>
 				<reportElement x="1" y="0" width="1" height="30" uuid="226fc388-14d2-422a-88ed-aa12b1dd6833"/>
 			</line>
 			<staticText>
-				<reportElement x="385" y="6" width="10" height="18" uuid="69e3f90d-70b6-4c58-ba80-3e97b295e587"/>
+				<reportElement x="381" y="7" width="10" height="18" uuid="69e3f90d-70b6-4c58-ba80-3e97b295e587"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14"/>
 				</textElement>
@@ -474,7 +481,7 @@ Informe Contador]]></text>
 				<text><![CDATA[$]]></text>
 			</staticText>
 			<line>
-				<reportElement x="0" y="0" width="481" height="1" uuid="92b80201-eab7-498e-9ef4-1a9dd101b00a"/>
+				<reportElement x="0" y="0" width="480" height="1" uuid="92b80201-eab7-498e-9ef4-1a9dd101b00a"/>
 			</line>
 		</band>
 	</detail>
