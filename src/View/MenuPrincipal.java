@@ -47,8 +47,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnNewTransaccion4 = new javax.swing.JButton();
         btnElRocioT = new javax.swing.JButton();
         btnJMRT = new javax.swing.JButton();
-        btnNewTransaccion7 = new javax.swing.JButton();
-        btnNewTransaccion8 = new javax.swing.JButton();
+        btnMarT = new javax.swing.JButton();
+        btnRocioContador = new javax.swing.JButton();
         btnNewTransaccion9 = new javax.swing.JButton();
         btnNewTransaccion10 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
@@ -313,28 +313,28 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnNewTransaccion7.setBackground(new java.awt.Color(102, 102, 102));
-        btnNewTransaccion7.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        btnNewTransaccion7.setForeground(new java.awt.Color(255, 255, 255));
-        btnNewTransaccion7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/documentos.png"))); // NOI18N
-        btnNewTransaccion7.setText("B_ MAR Transacciones");
-        btnNewTransaccion7.setMaximumSize(new java.awt.Dimension(193, 39));
-        btnNewTransaccion7.setMinimumSize(new java.awt.Dimension(193, 39));
-        btnNewTransaccion7.setPreferredSize(new java.awt.Dimension(193, 39));
-        btnNewTransaccion7.addActionListener(new java.awt.event.ActionListener() {
+        btnMarT.setBackground(new java.awt.Color(102, 102, 102));
+        btnMarT.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        btnMarT.setForeground(new java.awt.Color(255, 255, 255));
+        btnMarT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/documentos.png"))); // NOI18N
+        btnMarT.setText("B_ MAR Transacciones");
+        btnMarT.setMaximumSize(new java.awt.Dimension(193, 39));
+        btnMarT.setMinimumSize(new java.awt.Dimension(193, 39));
+        btnMarT.setPreferredSize(new java.awt.Dimension(193, 39));
+        btnMarT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewTransaccion7ActionPerformed(evt);
+                btnMarTActionPerformed(evt);
             }
         });
 
-        btnNewTransaccion8.setBackground(new java.awt.Color(102, 102, 102));
-        btnNewTransaccion8.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        btnNewTransaccion8.setForeground(new java.awt.Color(255, 255, 255));
-        btnNewTransaccion8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/documentos.png"))); // NOI18N
-        btnNewTransaccion8.setText("C_ El Rocio Informe Para Contador");
-        btnNewTransaccion8.addActionListener(new java.awt.event.ActionListener() {
+        btnRocioContador.setBackground(new java.awt.Color(102, 102, 102));
+        btnRocioContador.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        btnRocioContador.setForeground(new java.awt.Color(255, 255, 255));
+        btnRocioContador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/documentos.png"))); // NOI18N
+        btnRocioContador.setText("C_ El Rocio Informe Para Contador");
+        btnRocioContador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewTransaccion8ActionPerformed(evt);
+                btnRocioContadorActionPerformed(evt);
             }
         });
 
@@ -457,7 +457,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(btnNewTransaccion9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnNewTransaccion10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnNewTransaccion8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(btnRocioContador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 486, Short.MAX_VALUE)
                         .addComponent(jLabel27)
                         .addGap(46, 46, 46))
@@ -471,7 +471,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                         .addGap(6, 6, 6)
                                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(btnNewTransaccion7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(btnMarT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(btnJMRT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(btnElRocioT, javax.swing.GroupLayout.Alignment.LEADING))
                                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -524,7 +524,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                 .addGap(10, 10, 10)
                                 .addComponent(btnJMRT, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(10, 10, 10)
-                                .addComponent(btnNewTransaccion7, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnMarT, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(12, 12, 12)
                                 .addComponent(jLabel25)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -546,7 +546,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                 .addGap(10, 10, 10)
                                 .addComponent(btnCuentasAPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(10, 10, 10)
-                        .addComponent(btnNewTransaccion8)
+                        .addComponent(btnRocioContador)
                         .addGap(10, 10, 10)
                         .addComponent(btnNewTransaccion10)
                         .addContainerGap(28, Short.MAX_VALUE))
@@ -1331,13 +1331,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnJMRTActionPerformed
 
-    private void btnNewTransaccion7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTransaccion7ActionPerformed
+    private void btnMarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMarTActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnNewTransaccion7ActionPerformed
+    }//GEN-LAST:event_btnMarTActionPerformed
 
-    private void btnNewTransaccion8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTransaccion8ActionPerformed
+    private void btnRocioContadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRocioContadorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnNewTransaccion8ActionPerformed
+    }//GEN-LAST:event_btnRocioContadorActionPerformed
 
     private void btnNewTransaccion9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTransaccion9ActionPerformed
         // TODO add your handling code here:
@@ -1402,6 +1402,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public javax.swing.JButton btnJMRT;
     public javax.swing.JButton btnLibroIvaCompras;
     public javax.swing.JButton btnLibroVentas;
+    public javax.swing.JButton btnMarT;
     public javax.swing.JButton btnNewTransaccion;
     public javax.swing.JButton btnNewTransaccion10;
     public javax.swing.JButton btnNewTransaccion11;
@@ -1409,10 +1410,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public javax.swing.JButton btnNewTransaccion15;
     public javax.swing.JButton btnNewTransaccion3;
     public javax.swing.JButton btnNewTransaccion4;
-    public javax.swing.JButton btnNewTransaccion7;
-    public javax.swing.JButton btnNewTransaccion8;
     public javax.swing.JButton btnNewTransaccion9;
     public javax.swing.JButton btnReportCuentasAC;
+    public javax.swing.JButton btnRocioContador;
     public javax.swing.JButton btnSaveCat;
     public javax.swing.JButton btnSaveTipoCat;
     public javax.swing.JButton btnVerTransacciones;

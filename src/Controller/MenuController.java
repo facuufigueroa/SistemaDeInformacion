@@ -3,6 +3,8 @@ package Controller;
 
 
 import Consultas.QueryReportes;
+import Reportes.ReportMarTransaccion;
+import Reportes.ReportRocioContador;
 import Reportes.ReporteCuentaAPagar;
 import Reportes.ReporteCuentasACobrar;
 import Reportes.ReporteElRocioT;
@@ -27,6 +29,8 @@ public class MenuController implements ActionListener {
     FormFechas formFechaReportCAP = new FormFechas();
     FormFechas formFechaReportJMR = new FormFechas();
     FormFechas formFechaReportElRocio = new FormFechas();
+    FormFechas formFechaReportMar = new FormFechas();
+    FormFechas formFechaReportElRocioContador = new FormFechas();
     QueryReportes queryReport = new QueryReportes();
        
     
@@ -64,6 +68,12 @@ public class MenuController implements ActionListener {
         
         this.formFechaReportElRocio.btnBuscar.addActionListener(this);
         this.menuPrincipal.btnElRocioT.addActionListener(this);
+        
+        this.formFechaReportMar.btnBuscar.addActionListener(this);
+        this.menuPrincipal.btnMarT.addActionListener(this);
+        
+        this.menuPrincipal.btnRocioContador.addActionListener(this);
+        this.formFechaReportElRocioContador.btnBuscar.addActionListener(this);
     }
     
     @Override
@@ -81,6 +91,10 @@ public class MenuController implements ActionListener {
         loadReporteJMRT(e);
         accionVerElRocioTransacciones(e);
         loadReporteElRocio(e);
+        accionVerMarTransacciones(e);
+        loadReporteMar(e);
+        accionVerElRocioContador(e);
+        loadReporteElRocioContador(e);
     }
     
     
@@ -276,5 +290,45 @@ public class MenuController implements ActionListener {
     public void nullFechas(FormFechas fecha){
         fecha.txtFechaDesde.setDate(null);
         fecha.txtFechaHasta.setDate(null);
+    }
+    
+     public void accionVerMarTransacciones(ActionEvent e){
+        if(e.getSource() == menuPrincipal.btnMarT){
+            formFechaReportMar.setVisible(true);
+            formFechaReportMar.setLocationRelativeTo(null);
+        }
+    }
+     
+    public void loadReporteMar(ActionEvent e){
+        if(e.getSource() == formFechaReportMar.btnBuscar){
+            formFechaReportMar.setVisible(false);
+            java.sql.Date fecha_desde = new java.sql.Date(formFechaReportMar.txtFechaDesde.getDate().getTime());
+            java.sql.Date fecha_hasta = new java.sql.Date(formFechaReportMar.txtFechaHasta.getDate().getTime());
+           
+            ReportMarTransaccion reportMar = new ReportMarTransaccion();
+            reportMar.openReportMarTransacciones(fecha_desde,fecha_hasta);
+            nullFechas(formFechaReportMar);
+           
+        }
+    } 
+    
+    public void accionVerElRocioContador(ActionEvent e){
+        if(e.getSource() == menuPrincipal.btnRocioContador){
+            formFechaReportElRocioContador.setVisible(true);
+            formFechaReportElRocioContador.setLocationRelativeTo(null);
+        }
+    }
+     
+    public void loadReporteElRocioContador(ActionEvent e){
+        if(e.getSource() == formFechaReportElRocioContador.btnBuscar){
+            formFechaReportElRocioContador.setVisible(false);
+            java.sql.Date fecha_desde = new java.sql.Date(formFechaReportElRocioContador.txtFechaDesde.getDate().getTime());
+            java.sql.Date fecha_hasta = new java.sql.Date(formFechaReportElRocioContador.txtFechaHasta.getDate().getTime());
+           
+            ReportRocioContador reportRoContador = new ReportRocioContador();
+            reportRoContador.openReportElRocioContador(fecha_desde,fecha_hasta);
+            nullFechas(formFechaReportMar);
+           
+        }
     }
 }
