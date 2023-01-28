@@ -29,7 +29,7 @@ And (tc.nombre)<>"Saldos al 1 de enero")
 And ((c.nombre)<>"saldo al 1 de enero" 
 And (c.nombre)<>"transferencias Bco.") 
 And ((t.a_impuestos_iva)=1) 
-And (((tc.nombre)<>"zz) María Amalia Roqués")<>"transferencias"))
+And (((tc.nombre)<>"tt) María Amalia Roqués")<>"transferencias"))
 And t.fecha BETWEEN  $P{fecha_desde} And  $P{fecha_hasta} 
 ORDER BY tc.nombre,c.nombre,t.fecha]]>
 	</queryString>
