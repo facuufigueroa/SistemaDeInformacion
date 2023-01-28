@@ -52,16 +52,15 @@ public class TransaccionesController implements ActionListener{
     public TransaccionesController() {
         iniciarCamposEnCero();
         iniciarTabla();
-        /*iniciarComboBoxTipoCuenta();
-        iniciarComboBoxTipoCategoria();
-        iniciarComboBoxCuentas();
-        iniciarComboBoxCategoria();
-        iniciarcomboBoxSubcategoria();
-        iniciarComboBoxEmpresa();  */   
         this.transacciones.cbbCuentas.addActionListener(this);
         
         this.transacciones.btnCompraVentasIVA.addActionListener(this);
         this.transacciones.cbbCategorias.addActionListener(this);
+        
+        this.transacciones.cbbEleccionCheqFact.addActionListener(this);
+        this.transacciones.txtNumFact.setEnabled(false);
+        this.transacciones.txtNumCheque.setEnabled(false);
+        this.transacciones.txtTipoFact.setEnabled(false);
         
         
     }
@@ -75,6 +74,7 @@ public class TransaccionesController implements ActionListener{
             Logger.getLogger(TransaccionesController.class.getName()).log(Level.SEVERE, null, ex);
         }
         accionTipoCategoria(e);
+        accionSelecionCheqFact(e);
     }
     
     public void loadNewTransaccion(){
@@ -101,7 +101,25 @@ public class TransaccionesController implements ActionListener{
         }
     }
     
-    
+    public void accionSelecionCheqFact(ActionEvent e){
+        if(e.getSource() == transacciones.cbbEleccionCheqFact){
+            if(transacciones.cbbEleccionCheqFact.getSelectedItem().equals("Cheque")){
+                transacciones.txtNumCheque.setEnabled(true);
+                transacciones.txtNumFact.setEnabled(false);
+                transacciones.txtTipoFact.setEnabled(false);
+                transacciones.txtTipoFact.setText("");
+                transacciones.txtNumFact.setText("");
+            }
+            else{
+                if(transacciones.cbbEleccionCheqFact.getSelectedItem().equals("Factura")){
+                    transacciones.txtNumFact.setEnabled(true);
+                    transacciones.txtTipoFact.setEnabled(true);
+                    transacciones.txtNumCheque.setEnabled(false);
+                    transacciones.txtNumCheque.setText("");
+                }
+            }
+        }
+    }
     
     public void iniciarComboBoxCuentas(){
         ArrayList<String> nombreCuentas = queryCuentas.listarPorNombre();
@@ -171,8 +189,6 @@ public class TransaccionesController implements ActionListener{
         modelo.addColumn("Descripcion");
         modelo.addColumn("Salidas");
         modelo.addColumn("Entradas");
-        modelo.addColumn("Retenciones_g");
-        modelo.addColumn("Ret. Ingresos Brutos");
         modelo.addColumn("A impuesto IVA");
         modelo.addColumn("A IVA");
         
@@ -181,15 +197,13 @@ public class TransaccionesController implements ActionListener{
         transacciones.tablaTransacciones.setRowHeight(25);
        
         for(Transaccion t: listTransac){
-            String[] dato = new String[9];
+            String[] dato = new String[7];
             dato[0] = t.getFecha().toString();
             dato[1] = t.getDescripcion();
             dato[2]= "$"+String.valueOf(t.getSalida());
             dato[3]= "$"+String.valueOf(t.getEntrada());
-            dato[4]="$"+String.valueOf(t.getRetenciones_g());
-            dato[5]="$"+String.valueOf(t.getRet_ing_brutos());
-            dato[6]=convertAImpues(String.valueOf(t.isA_impuesto()));
-            dato[7]=convertAIVA(String.valueOf(t.isA_iva()));
+            dato[4]=convertAImpues(String.valueOf(t.isA_impuesto()));
+            dato[5]=convertAIVA(String.valueOf(t.isA_iva()));
             modelo.addRow(dato);
         }
        
@@ -223,27 +237,25 @@ public class TransaccionesController implements ActionListener{
     public void loadComprasVentas(ActionEvent e) throws ParseException{
         if(e.getSource() == transacciones.btnCompraVentasIVA){
             if(!verificarVacios()){
-                queryTransaccion.addTransaccion(obtenerTransaccion());
-                iniciarTabla();
-                transacciones.setVisible(false);
-                compVentController.loadComVentaIva();
-                
-            }
-            else{
-                JOptionPane.showMessageDialog(null,"<html><p style = \"font:14px\"> Error al continuar con la Transacción - Campos incompletos.</p/</html> \n"
-                +"<html><p style = \"font:12px\"> Verifique algunas de las siguientes opciones: </p/</html> \n"+
-                        "<html><p style = \"font:12px\">1) Haya seleccionado una cuenta.</p/</html> \n"
-                        +"<html><p style = \"font:12px\">2) Haya seleccionado un tipo de categoria.</p/</html> \n"
-                        +"<html><p style = \"font:12px\">3) Haya seleccionado un tipo de cuenta.</p/</html> \n"
-                        +"<html><p style = \"font:12px\">4) Haya seleccionado una fecha.</p/</html> \n"+
-                        "<html><p style = \"font:12px\">5) Haya seleccionado una empresa/orden.</p/</html> \n"
-                        +"<html><p style = \"font:12px\">6) Haya seleccionado una categoria.</p/</html> \n"+
-                        "<html><p style = \"font:12px\">7) Haya seleccionado una sub-categoria.</p/</html> \n"+
-                        "<html><p style = \"font:12px\">8) Haya escrito una descripción.</p/</html>\n"+
-                        "<html><p style = \"font:12px\">9) Haya escrito un numero de cheque o numero de factura. </p/</html>","ERROR, VERIFIQUE CAMPOS",0
-                );
-            }
-        }   
+                    queryTransaccion.addTransaccion(obtenerTransaccion());
+                    iniciarTabla();
+                    compVentController.loadComVentaIva();
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"<html><p style = \"font:14px\"> Error al continuar con la Transacción - Campos incompletos.</p/</html> \n"
+                    +"<html><p style = \"font:12px\"> Verifique algunas de las siguientes opciones: </p/</html> \n"+
+                            "<html><p style = \"font:12px\">1) Haya seleccionado una cuenta.</p/</html> \n"
+                            +"<html><p style = \"font:12px\">2) Haya seleccionado un tipo de categoria.</p/</html> \n"
+                            +"<html><p style = \"font:12px\">3) Haya seleccionado un tipo de cuenta.</p/</html> \n"
+                            +"<html><p style = \"font:12px\">4) Haya seleccionado una fecha.</p/</html> \n"+
+                            "<html><p style = \"font:12px\">5) Haya seleccionado una empresa/orden.</p/</html> \n"
+                            +"<html><p style = \"font:12px\">6) Haya seleccionado una categoria.</p/</html> \n"+
+                            "<html><p style = \"font:12px\">7) Haya seleccionado una sub-categoria.</p/</html> \n"+
+                            "<html><p style = \"font:12px\">8) Haya escrito una descripción.</p/</html>\n"+
+                            "<html><p style = \"font:12px\">9) Haya escrito un numero de cheque o numero de factura. </p/</html>","ERROR, VERIFIQUE CAMPOS",0
+                    );
+                }
+            }   
     }
     
     public void updateComboBoxCategoria(ArrayList<Categoria> listCat){
@@ -275,13 +287,13 @@ public class TransaccionesController implements ActionListener{
         t.setIdCuenta(queryCuentas.obtenerIdCuentaPorNombre((String) transacciones.cbbCuentas.getSelectedItem()));
         
         if("".equals(transacciones.txtNumCheque.getText())){
-            t.setNumChequeFact(transacciones.txtNumFact.getText());
+            t.setNumChequeFact(transacciones.txtTipoFact.getText().toUpperCase()+"-"+transacciones.txtNumFact.getText());
         }
       
         if("".equals(transacciones.txtNumFact.getText())){
             t.setNumChequeFact(transacciones.txtNumCheque.getText()); //Puede ser numCheque o
         }
-       
+        System.out.println(t.getNumChequeFact());
         java.sql.Date sqlDate = new java.sql.Date(transacciones.txtFecha.getDate().getTime());
         t.setFecha(sqlDate);
         
@@ -299,11 +311,7 @@ public class TransaccionesController implements ActionListener{
         t.setSalida((float) f.parse(transacciones.txtSalida.getText()).doubleValue());
         
         t.setEntrada((float) f.parse(transacciones.txtEntrada.getText()).doubleValue());
-        
-        t.setRetenciones_g((float) f.parse(transacciones.txtRetG.getText()).doubleValue());
-        
-        t.setRet_ing_brutos((float) f.parse(transacciones.txtRetIngBrut.getText()).doubleValue());
-        
+      
         t.setA_impuesto(obtenerSetImpuesto());
         
         t.setA_iva(a_iva());
@@ -335,7 +343,8 @@ public class TransaccionesController implements ActionListener{
                 transacciones.cbbSubCategoria.getSelectedItem().equals("") ||
                 transacciones.txtDescripcion.getText().equals("") ||
                 transacciones.txtNumCheque.getText().equals("") &&
-                transacciones.txtNumFact.getText().equals("")
+                transacciones.txtNumFact.getText().equals("") &&
+                transacciones.txtTipoFact.getText().equals("")
                 )
             return true;
         return false;
@@ -345,16 +354,15 @@ public class TransaccionesController implements ActionListener{
         transacciones.txtCantidad.setText("0");
         transacciones.txtSalida.setText("0");
         transacciones.txtEntrada.setText("0");
-        transacciones.txtRetG.setText("0");
-        transacciones.txtRetIngBrut.setText("0");
+        transacciones.txtNumFact.setText("");
+        transacciones.txtNumCheque.setText("");
+        transacciones.txtTipoFact.setText("");
         }
     
     public void setearCamposEnCero(){
         transacciones.txtCantidad.setText("0");
         transacciones.txtSalida.setText("0");
         transacciones.txtEntrada.setText("0");
-        transacciones.txtRetG.setText("0");
-        transacciones.txtRetIngBrut.setText("0");
         iniciarComboBoxTipoCuenta();
         iniciarComboBoxTipoCategoria();
         iniciarComboBoxCuentas();
@@ -364,4 +372,7 @@ public class TransaccionesController implements ActionListener{
         transacciones.txtFecha.setDate(null);
         transacciones.txtDescripcion.setText("");
         }
+    
+  
+            
 }

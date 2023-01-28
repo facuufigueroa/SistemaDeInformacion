@@ -107,6 +107,7 @@ public class CompraVentaIvaController implements ActionListener{
                 queryCVI.agregarCompraVenta(newCompraVenta());
                 JOptionPane.showMessageDialog(null,"<html><p style = \"font:14px\"> El registro se efectuó correctamente </p/</html> \n","Operación Finalizada",1);
                 formCVI.setVisible(false);
+                
             }
             else{
                 JOptionPane.showMessageDialog(null,"<html><p style = \"font:14px\"> Error - Campos incompletos.</p/</html> \n"
