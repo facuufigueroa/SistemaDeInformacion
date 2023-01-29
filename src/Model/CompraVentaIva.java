@@ -1,20 +1,19 @@
-
 package Model;
 
 import java.sql.Date;
 
 public class CompraVentaIva {
-    
+
     /*Attributes foreign keys*/
     private int idTransaccion;
-    
+
     /*Common Attributes*/
     private String operacion;
     private Date fecha;
     private String tipo_comprobante;
     private String numComprobante;
     private String cuit;
-    
+
     private float imp_neto_grav;
     private float iva_facturado;
     private float imp_interno;
@@ -31,15 +30,16 @@ public class CompraVentaIva {
     private float int_numerales;
     private float otros;
     private float operaciones_exentas;
-    
+    private float ing_brutos;
+    private float ret_iva;
+    private float imp_r_ing_brutos;
+
     private String empresa;
 
     public CompraVentaIva() {
     }
-    
-    
 
-    public CompraVentaIva(int idTransaccion, String operacion, Date fecha, String tipo_comprobante, String numComprobante, String cuit, float imp_neto_grav, float iva_facturado, float imp_interno, float concep_no_grav, float percepcion_iva, float ret_ganancias, float perc_iibb_compra, float imp_total_fact, float ite_iva_dere_reg, float c_no_grav_sellos, float ret_iibb_venta, float iva_rg_212, float grav_ley_25413, float int_numerales, float otros, String empresa,float operaciones_exentas) {
+    public CompraVentaIva(int idTransaccion, String operacion, Date fecha, String tipo_comprobante, String numComprobante, String cuit, float imp_neto_grav, float iva_facturado, float imp_interno, float concep_no_grav, float percepcion_iva, float ret_ganancias, float perc_iibb_compra, float imp_total_fact, float ite_iva_dere_reg, float c_no_grav_sellos, float ret_iibb_venta, float iva_rg_212, float grav_ley_25413, float int_numerales, float otros, float operaciones_exentas, float ing_brutos, float ret_iva, float imp_r_ing_brutos, String empresa) {
         this.idTransaccion = idTransaccion;
         this.operacion = operacion;
         this.fecha = fecha;
@@ -61,8 +61,11 @@ public class CompraVentaIva {
         this.grav_ley_25413 = grav_ley_25413;
         this.int_numerales = int_numerales;
         this.otros = otros;
-        this.empresa = empresa;
         this.operaciones_exentas = operaciones_exentas;
+        this.ing_brutos = ing_brutos;
+        this.ret_iva = ret_iva;
+        this.imp_r_ing_brutos = imp_r_ing_brutos;
+        this.empresa = empresa;
     }
 
     public int getIdTransaccion() {
@@ -248,6 +251,29 @@ public class CompraVentaIva {
     public void setOperaciones_exentas(float operaciones_exentas) {
         this.operaciones_exentas = operaciones_exentas;
     }
-    
-    
+
+    public float getIng_brutos() {
+        return ing_brutos;
+    }
+
+    public void setIng_brutos(float ing_brutos) {
+        this.ing_brutos = ing_brutos;
+    }
+
+    public float getRet_iva() {
+        return ret_iva;
+    }
+
+    public void setRet_iva(float ret_iva) {
+        this.ret_iva = ret_iva;
+    }
+
+    public float getImp_r_ing_brutos() {
+        return imp_r_ing_brutos;
+    }
+
+    public void setImp_r_ing_brutos(float imp_r_ing_brutos) {
+        this.imp_r_ing_brutos = imp_r_ing_brutos;
+    }
+
 }

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ElRocioT" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="48fa40fd-a28a-48cb-820c-a554ee0fbe2f">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SistemaInformacion2"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="fecha_desde" class="java.sql.Date"/>
 	<parameter name="fecha_hasta" class="java.sql.Date"/>
-	<queryString language="SQL">
+	<queryString>
 		<![CDATA[SELECT DISTINCT tc.nombre AS tipo_categoria,
 c.nombre AS categoria,
 t.id_categoria,
@@ -33,8 +35,7 @@ AND c.nombre<>"TA"
 AND c.nombre<>"TE" 
 AND c.nombre<>"saldo al 1 de enero" 
 AND c.nombre<>"transferencias Bco."
-ORDER BY tc.nombre
-]]>
+ORDER BY tc.nombre]]>
 	</queryString>
 	<field name="tipo_categoria" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="tipo_categoria"/>
@@ -55,8 +56,6 @@ ORDER BY tc.nombre
 	<variable name="totales_entradas" class="java.lang.Float"/>
 	<variable name="t_entradas" class="java.lang.Float" calculation="Sum"/>
 	<variable name="t_salidas" class="java.lang.Float" calculation="Sum"/>
-	<variable name="t_ret_ganadas" class="java.lang.Float" calculation="Sum"/>
-	<variable name="t_ret_ing_brutos" class="java.lang.Float" calculation="Sum"/>
 	<group name="tipo_categoria">
 		<groupExpression><![CDATA[$F{tipo_categoria}]]></groupExpression>
 	</group>
@@ -131,8 +130,6 @@ ORDER BY tc.nombre
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<returnValue subreportVariable="suma_entradas" toVariable="t_entradas" calculation="Sum"/>
 				<returnValue subreportVariable="suma_salidas" toVariable="t_salidas" calculation="Sum"/>
-				<returnValue subreportVariable="sum_ret_ganancias" toVariable="t_ret_ganadas" calculation="Sum"/>
-				<returnValue subreportVariable="sum_ret_ing_brutos" toVariable="t_ret_ing_brutos" calculation="Sum"/>
 				<subreportExpression><![CDATA[".\\Reportes\\SubReporteElRocio.jasper"]]></subreportExpression>
 			</subreport>
 			<textField>
@@ -174,20 +171,6 @@ ORDER BY tc.nombre
 				</textElement>
 				<textFieldExpression><![CDATA[$V{t_salidas}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="370" y="50" width="70" height="30" uuid="202c41c7-7a73-4932-a9f4-7617f58ffb57"/>
-				<textElement verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{t_ret_ganadas}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="450" y="50" width="70" height="30" uuid="c3a7562e-9c54-41fc-a09a-05f93770f406"/>
-				<textElement verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{t_ret_ing_brutos}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="170" y="20" width="100" height="30" uuid="cb2ad1e2-e30a-4afd-987c-9bd72a680a3e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -203,20 +186,6 @@ ORDER BY tc.nombre
 				<text><![CDATA[Total Salidas]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="370" y="10" width="70" height="40" uuid="20db88d9-0c82-4515-8e0a-8c2447d48bb0"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Total Ret. Ganancias]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="450" y="10" width="70" height="40" uuid="30cf898d-edf6-4010-be3b-34f5cd17d356"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Total Ret. Ing. Brutos]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="170" y="50" width="10" height="30" uuid="50709099-385b-48da-87ba-429eddbe58a8"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
@@ -225,20 +194,6 @@ ORDER BY tc.nombre
 			</staticText>
 			<staticText>
 				<reportElement x="270" y="50" width="10" height="30" uuid="6ef50e65-0028-47b9-9383-e6b710527286"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[$]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="360" y="50" width="10" height="30" uuid="caf1609e-a4e1-421c-a63a-974cf5b22112"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[$]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="440" y="50" width="10" height="30" uuid="7ed5f1a3-2813-450a-84bb-795ad8b15515"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>

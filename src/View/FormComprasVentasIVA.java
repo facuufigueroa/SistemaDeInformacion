@@ -76,6 +76,12 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
         txtOpExentas = new javax.swing.JFormattedTextField();
         jLabel26 = new javax.swing.JLabel();
         cbbOperacion = new javax.swing.JComboBox<>();
+        txtIngBrutos = new javax.swing.JFormattedTextField();
+        jLabel27 = new javax.swing.JLabel();
+        txtRetIva = new javax.swing.JFormattedTextField();
+        jLabel28 = new javax.swing.JLabel();
+        txtImpRIngBrutos = new javax.swing.JFormattedTextField();
+        jLabel29 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CompraVentasIVA");
@@ -388,6 +394,45 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
         cbbOperacion.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
         cbbOperacion.setForeground(new java.awt.Color(0, 0, 0));
 
+        txtIngBrutos.setForeground(new java.awt.Color(0, 0, 0));
+        txtIngBrutos.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
+        txtIngBrutos.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtIngBrutos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIngBrutosKeyTyped(evt);
+            }
+        });
+
+        jLabel27.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel27.setText("Ing. Brutos");
+
+        txtRetIva.setForeground(new java.awt.Color(0, 0, 0));
+        txtRetIva.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
+        txtRetIva.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtRetIva.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRetIvaKeyTyped(evt);
+            }
+        });
+
+        jLabel28.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel28.setText("Retencion IVA");
+
+        txtImpRIngBrutos.setForeground(new java.awt.Color(0, 0, 0));
+        txtImpRIngBrutos.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
+        txtImpRIngBrutos.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtImpRIngBrutos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtImpRIngBrutosKeyTyped(evt);
+            }
+        });
+
+        jLabel29.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel29.setText("Imp. R. Ing. Brutos");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -477,6 +522,10 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel28)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtRetIva, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel26)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtOpExentas, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -484,7 +533,16 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
                                 .addComponent(jLabel24)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtOtros, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnFinalizar))
+                            .addComponent(btnFinalizar)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel29)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtImpRIngBrutos, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel27)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtIngBrutos, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(36, 36, 36))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -534,7 +592,7 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
                             .addComponent(txtImpInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel14)
@@ -585,13 +643,25 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtOpExentas, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(19, 19, 19)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtIngBrutos, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtRetIva, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtImpRIngBrutos, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGap(1, 1, 1)
                                         .addComponent(txtOtros, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(8, 8, 8)
+                                .addGap(18, 18, 18)
                                 .addComponent(btnFinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(41, 41, 41))
         );
@@ -687,6 +757,18 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtOpExentasKeyTyped
 
+    private void txtIngBrutosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIngBrutosKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIngBrutosKeyTyped
+
+    private void txtRetIvaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRetIvaKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRetIvaKeyTyped
+
+    private void txtImpRIngBrutosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtImpRIngBrutosKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtImpRIngBrutosKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -746,6 +828,9 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -760,7 +845,9 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
     public javax.swing.JFormattedTextField txtGravLey25413;
     public javax.swing.JFormattedTextField txtImpInterno;
     public javax.swing.JFormattedTextField txtImpNetoGrav;
+    public javax.swing.JFormattedTextField txtImpRIngBrutos;
     public javax.swing.JFormattedTextField txtImpTotalFact;
+    public javax.swing.JFormattedTextField txtIngBrutos;
     public javax.swing.JFormattedTextField txtIntNumerales;
     public javax.swing.JFormattedTextField txtIvaDereReg;
     public javax.swing.JFormattedTextField txtIvaFact;
@@ -772,6 +859,7 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
     public javax.swing.JFormattedTextField txtPercepcionIVA;
     public javax.swing.JFormattedTextField txtRetGanan;
     public javax.swing.JFormattedTextField txtRetIiBbV;
+    public javax.swing.JFormattedTextField txtRetIva;
     public javax.swing.JTextField txtTipoComprobante;
     // End of variables declaration//GEN-END:variables
 }

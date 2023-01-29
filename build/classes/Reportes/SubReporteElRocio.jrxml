@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubReporteElRocio" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="4872a3c4-819b-48c1-b625-86e3d626882c">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SistemaInformacion2"/>
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="993"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="idcategoria" class="java.lang.Integer"/>
 	<parameter name="idtipo_categoria" class="java.lang.Integer"/>
 	<parameter name="fecha_desde" class="java.sql.Date"/>
 	<parameter name="fecha_hasta" class="java.sql.Date"/>
-	<queryString language="SQL">
+	<queryString>
 		<![CDATA[SELECT tc.nombre as tipo_categoria,
 c.nombre as categoria,
 t.idtransacciones,
@@ -16,8 +18,6 @@ t.descripcion,
 t.cantidad,
 t.entradas,
 t.salidas,
-t.retenciones_g,
-t.ret_ingresos_brutos,
 t.a_impuestos_iva
 FROM tipo_categoria AS tc
 INNER JOIN categorias AS c ON tc.idtipo_categoria = c.id_tipo_categoria
@@ -25,8 +25,7 @@ INNER JOIN transacciones AS t ON c.idcategorias = t.id_categoria
 WHERE c.idcategorias =   $P{idcategoria} 
 AND tc.idtipo_categoria =   $P{idtipo_categoria} 
 AND t.fecha BETWEEN $P{fecha_desde} AND $P{fecha_hasta} 
-ORDER BY t.fecha
-]]>
+ORDER BY t.fecha]]>
 	</queryString>
 	<field name="tipo_categoria" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="tipo_categoria"/>
@@ -39,38 +38,37 @@ ORDER BY t.fecha
 	<field name="idtransacciones" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.label" value="idtransacciones"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="transacciones"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="fecha" class="java.sql.Date">
 		<property name="com.jaspersoft.studio.field.label" value="fecha"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="transacciones"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="descripcion" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="descripcion"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="transacciones"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="cantidad" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.label" value="cantidad"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="transacciones"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="entradas" class="java.lang.Float">
 		<property name="com.jaspersoft.studio.field.label" value="entradas"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="transacciones"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="salidas" class="java.lang.Float">
 		<property name="com.jaspersoft.studio.field.label" value="salidas"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="transacciones"/>
-	</field>
-	<field name="retenciones_g" class="java.lang.Float">
-		<property name="com.jaspersoft.studio.field.label" value="retenciones_g"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="transacciones"/>
-	</field>
-	<field name="ret_ingresos_brutos" class="java.lang.Float">
-		<property name="com.jaspersoft.studio.field.label" value="ret_ingresos_brutos"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="transacciones"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="a_impuestos_iva" class="java.lang.Boolean">
 		<property name="com.jaspersoft.studio.field.label" value="a_impuestos_iva"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="transacciones"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<variable name="suma_entradas" class="java.lang.Float" calculation="Sum">
 		<variableExpression><![CDATA[$F{entradas}]]></variableExpression>
@@ -78,14 +76,6 @@ ORDER BY t.fecha
 	</variable>
 	<variable name="suma_salidas" class="java.lang.Float" calculation="Sum">
 		<variableExpression><![CDATA[$F{salidas}]]></variableExpression>
-		<initialValueExpression><![CDATA[0]]></initialValueExpression>
-	</variable>
-	<variable name="sum_ret_ganancias" class="java.lang.Float" calculation="Sum">
-		<variableExpression><![CDATA[$F{retenciones_g}]]></variableExpression>
-		<initialValueExpression><![CDATA[0]]></initialValueExpression>
-	</variable>
-	<variable name="sum_ret_ing_brutos" class="java.lang.Float" calculation="Sum">
-		<variableExpression><![CDATA[$F{ret_ingresos_brutos}]]></variableExpression>
 		<initialValueExpression><![CDATA[0]]></initialValueExpression>
 	</variable>
 	<group name="tipo_categoria">
@@ -111,12 +101,6 @@ ORDER BY t.fecha
 	</group>
 	<group name="salidas">
 		<groupExpression><![CDATA[$F{salidas}]]></groupExpression>
-	</group>
-	<group name="retenciones_g">
-		<groupExpression><![CDATA[$F{retenciones_g}]]></groupExpression>
-	</group>
-	<group name="ret_ingresos_brutos">
-		<groupExpression><![CDATA[$F{ret_ingresos_brutos}]]></groupExpression>
 	</group>
 	<group name="a_impuestos_iva">
 		<groupExpression><![CDATA[$F{a_impuestos_iva}]]></groupExpression>
@@ -172,7 +156,7 @@ ORDER BY t.fecha
 				<text><![CDATA[Salidas]]></text>
 			</staticText>
 			<line>
-				<reportElement x="0" y="61" width="550" height="1" uuid="e44223ba-1931-4056-8512-1b5e522b0035">
+				<reportElement x="0" y="61" width="410" height="1" uuid="e44223ba-1931-4056-8512-1b5e522b0035">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 			</line>
@@ -182,7 +166,7 @@ ORDER BY t.fecha
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="0" y="30" width="550" height="1" uuid="bc2cb779-da94-44ca-a6e2-4c3648228ba1">
+				<reportElement x="0" y="30" width="411" height="1" uuid="bc2cb779-da94-44ca-a6e2-4c3648228ba1">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 			</line>
@@ -208,34 +192,6 @@ ORDER BY t.fecha
 			</line>
 			<line>
 				<reportElement x="50" y="30" width="1" height="31" uuid="fe35a751-deb0-4805-8161-94bf9d395976">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-			</line>
-			<staticText>
-				<reportElement x="411" y="31" width="69" height="30" uuid="b4700796-b2e3-4b50-b8f0-d1ac278494c0">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d6899bcc-e401-4d39-888b-96942f0ba6fb"/>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Ret. Ganancias]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="480" y="31" width="70" height="30" uuid="4e6f47b7-e2f6-4952-a199-1acb91f40f13">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d6899bcc-e401-4d39-888b-96942f0ba6fb"/>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Ret. Ingr. Brutos]]></text>
-			</staticText>
-			<line>
-				<reportElement x="480" y="31" width="1" height="31" uuid="b622fa40-da7b-4b1e-a771-f1a821f8d751">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-			</line>
-			<line>
-				<reportElement x="550" y="31" width="1" height="31" uuid="858ea1d6-0b41-49f1-bb3b-9bf23909ab3f">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 			</line>
@@ -303,32 +259,9 @@ ORDER BY t.fecha
 				</textElement>
 				<textFieldExpression><![CDATA[$F{salidas}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="411" y="0" width="70" height="30" uuid="7a314a83-ca5b-4734-8e6c-1fe324ef0c83">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9e683571-69f1-4065-8517-f27dff8f836a"/>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{retenciones_g}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="480" y="0" width="71" height="30" uuid="29668643-b11f-4a5d-9160-3f3b78063568">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7ddd1704-3b1f-4462-808a-fd396eb15164"/>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{ret_ingresos_brutos}]]></textFieldExpression>
-			</textField>
 			<line>
-				<reportElement x="0" y="30" width="550" height="1" uuid="54285dba-9c51-499e-a274-6343f381bc4c">
+				<reportElement x="0" y="30" width="411" height="1" uuid="54285dba-9c51-499e-a274-6343f381bc4c">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-			</line>
-			<line>
-				<reportElement x="550" y="0" width="1" height="31" uuid="683d0aa1-a0d1-47c7-815d-1a73377f4efb">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 			</line>
 			<line>
@@ -352,11 +285,6 @@ ORDER BY t.fecha
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="480" y="-2" width="1" height="31" uuid="52fcb3d2-c54e-4575-8646-dcb79eee6645">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-			</line>
-			<line>
 				<reportElement x="110" y="0" width="1" height="31" uuid="ccdd15c5-cfda-491f-925a-08bc9c40e9bb">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -375,20 +303,6 @@ ORDER BY t.fecha
 			</staticText>
 			<staticText>
 				<reportElement x="340" y="7" width="10" height="18" uuid="ff8b9bef-2cc4-4aca-a795-091c6fd94638"/>
-				<textElement textAlignment="Left">
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[$]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="410" y="7" width="10" height="18" uuid="41d7101e-1480-42b2-9b37-db214d91f7f2"/>
-				<textElement textAlignment="Left">
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[$]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="480" y="7" width="10" height="18" uuid="fe2e4205-4827-4bf0-b493-5b865e795ba6"/>
 				<textElement textAlignment="Left">
 					<font size="12"/>
 				</textElement>
@@ -425,24 +339,6 @@ ORDER BY t.fecha
 				</textElement>
 				<textFieldExpression><![CDATA[$V{suma_salidas}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="420" y="0" width="64" height="30" uuid="c28cf0f1-2ad7-4955-a497-41498a4265e8">
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{sum_ret_ganancias}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="490" y="0" width="64" height="30" uuid="db009115-f399-41b9-9fd0-4c78ff924c1d">
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{sum_ret_ing_brutos}]]></textFieldExpression>
-			</textField>
 			<line>
 				<reportElement x="270" y="0" width="1" height="31" uuid="46beb3ae-3f04-4a00-9a9a-9e0fa6901481">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -454,22 +350,12 @@ ORDER BY t.fecha
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="410" y="-2" width="1" height="31" uuid="0a335998-45d0-4127-b4ce-89ae091a11b7">
+				<reportElement x="410" y="-2" width="1" height="33" uuid="0a335998-45d0-4127-b4ce-89ae091a11b7">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="480" y="-2" width="1" height="31" uuid="3afc020a-31b9-4b6a-b7d5-869bc6409a9b">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-			</line>
-			<line>
-				<reportElement x="550" y="0" width="1" height="31" uuid="ad40f2ed-42e6-49ba-9b32-0da605038c2a">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-			</line>
-			<line>
-				<reportElement x="201" y="31" width="349" height="1" uuid="2df9b551-1ef9-4c8c-a40d-8bef8e8be733">
+				<reportElement x="201" y="31" width="210" height="1" uuid="2df9b551-1ef9-4c8c-a40d-8bef8e8be733">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 			</line>
@@ -487,20 +373,6 @@ ORDER BY t.fecha
 			</staticText>
 			<staticText>
 				<reportElement x="340" y="7" width="10" height="18" uuid="10dd5eee-f569-4b19-8533-e270f0323bc6"/>
-				<textElement textAlignment="Left">
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[$]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="410" y="7" width="10" height="18" uuid="7d9f56a1-515b-4932-86db-0e53764c1076"/>
-				<textElement textAlignment="Left">
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[$]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="480" y="7" width="10" height="18" uuid="90f7ed3c-c3d9-49ad-b98a-ca2f41330886"/>
 				<textElement textAlignment="Left">
 					<font size="12"/>
 				</textElement>
