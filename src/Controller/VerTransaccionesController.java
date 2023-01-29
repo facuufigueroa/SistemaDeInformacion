@@ -12,6 +12,7 @@ import View.FormVerTransacciones;
 import View.MenuPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import static java.lang.Float.parseFloat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -92,8 +93,8 @@ public class VerTransaccionesController implements ActionListener{
             dato[0] = t.getFecha().toString();
             dato[1] = t.getDescripcion();
             dato[2]= String.valueOf(t.getCantidad());
-            dato[3]=" $ "+String.valueOf((float) t.getSalida());
-            dato[4] = " $ "+String.valueOf(t.getEntrada());
+            dato[3]="$"+String.valueOf((float) t.getSalida());
+            dato[4] = "$"+String.valueOf(t.getEntrada());
             dato[5]= cambiarFormatoIVA(t.isA_impuesto());
             dato[6] = cambiarFormatoIVA(t.isA_iva());
             String empresa = queryVerT.obtenerEmpresa(t.getIdOrdenEmp());
@@ -106,6 +107,8 @@ public class VerTransaccionesController implements ActionListener{
     public void accionBuscarPorCat(ActionEvent e){
         ArrayList<Transaccion> listTransacciones = new ArrayList<>();
         if(e.getSource() == formVerT.cbbBuscarCategoria){
+            formVerT.txtEntradas.setText(""); 
+            formVerT.txtSalidas.setText("");
             if(formVerT.txtFechaDesde.getDate() != null && formVerT.txtFechaHasta.getDate() != null){
                
                 java.sql.Date sqlFechaDesde = new java.sql.Date(formVerT.txtFechaDesde.getDate().getTime());
@@ -118,7 +121,9 @@ public class VerTransaccionesController implements ActionListener{
                 String categoria = (String) formVerT.cbbBuscarCategoria.getSelectedItem();
                 listTransacciones = queryVerT.obtenerTransaccionesPorCategorias(categoria,fecha_desde,fecha_hasta);
                 formVerT.txtBusqueda.setText(categoria);
-                iniciarTabla(listTransacciones);               
+                iniciarTabla(listTransacciones);  
+                formVerT.txtEntradas.setText(obtenerSumaEntradas()); 
+                formVerT.txtSalidas.setText(obtenerSumaSalidas());
             }
             else{
                 JOptionPane.showMessageDialog(null, "Error al buscar transacción. \n"
@@ -131,6 +136,8 @@ public class VerTransaccionesController implements ActionListener{
     public void accionBuscarPorSubCat(ActionEvent e){
         ArrayList<Transaccion> listTransacciones = new ArrayList<>();
         if(e.getSource() == formVerT.cbbSubCategoria){
+            formVerT.txtEntradas.setText(""); 
+            formVerT.txtSalidas.setText("");
             if(formVerT.txtFechaDesde.getDate() != null && formVerT.txtFechaHasta.getDate() != null){
                
                 java.sql.Date sqlFechaDesde = new java.sql.Date(formVerT.txtFechaDesde.getDate().getTime());
@@ -144,6 +151,8 @@ public class VerTransaccionesController implements ActionListener{
                 listTransacciones = queryVerT.obtenerTransaccionesPorSubCategoria(subcategoria,fecha_desde,fecha_hasta);
                 formVerT.txtBusqueda.setText(subcategoria);
                 iniciarTabla(listTransacciones);
+                formVerT.txtEntradas.setText(obtenerSumaEntradas()); 
+                formVerT.txtSalidas.setText(obtenerSumaSalidas());
             }
             else{
                 JOptionPane.showMessageDialog(null, "Error al buscar transacción. \n"
@@ -156,6 +165,8 @@ public class VerTransaccionesController implements ActionListener{
     public void accionBuscarPorCuenta(ActionEvent e){
         ArrayList<Transaccion> listTransacciones = new ArrayList<>();
         if(e.getSource() == formVerT.cbbBuscarCuenta){
+            formVerT.txtEntradas.setText(""); 
+            formVerT.txtSalidas.setText("");
             if(formVerT.txtFechaDesde.getDate() != null && formVerT.txtFechaHasta.getDate() != null){
                
                 java.sql.Date sqlFechaDesde = new java.sql.Date(formVerT.txtFechaDesde.getDate().getTime());
@@ -169,6 +180,8 @@ public class VerTransaccionesController implements ActionListener{
                 listTransacciones = queryVerT.obtenerTransaccionesPorCuenta(cuenta,fecha_desde,fecha_hasta);
                 formVerT.txtBusqueda.setText(cuenta);
                 iniciarTabla(listTransacciones);
+                formVerT.txtEntradas.setText(obtenerSumaEntradas()); 
+                formVerT.txtSalidas.setText(obtenerSumaSalidas());
             }
             else{
                 JOptionPane.showMessageDialog(null, "Error al buscar transacción. \n"
@@ -181,6 +194,8 @@ public class VerTransaccionesController implements ActionListener{
     public void accionBuscarPorEmpresa(ActionEvent e){
         ArrayList<Transaccion> listTransacciones = new ArrayList<>();
         if(e.getSource() == formVerT.cbbEmpresa){
+            formVerT.txtEntradas.setText(""); 
+            formVerT.txtSalidas.setText("");
             if(formVerT.txtFechaDesde.getDate() != null && formVerT.txtFechaHasta.getDate() != null){
                
                 java.sql.Date sqlFechaDesde = new java.sql.Date(formVerT.txtFechaDesde.getDate().getTime());
@@ -194,6 +209,8 @@ public class VerTransaccionesController implements ActionListener{
                 listTransacciones = queryVerT.obtenerTransaccionesPorEmpresa(empresa,fecha_desde,fecha_hasta);
                 formVerT.txtBusqueda.setText(empresa);
                 iniciarTabla(listTransacciones);
+                formVerT.txtEntradas.setText(obtenerSumaEntradas()); 
+                formVerT.txtSalidas.setText(obtenerSumaSalidas());
             }
             else{
                 JOptionPane.showMessageDialog(null, "Error al buscar transacción. \n"
@@ -203,8 +220,29 @@ public class VerTransaccionesController implements ActionListener{
         }
     }
     
+    public String obtenerSumaEntradas(){
+        String entradasString = "";
+        float entradas=(float) 0.0;
+        for (int i = 0; i < formVerT.tablaVerTransacciones.getRowCount(); i++) {
+            
+            String entradaSin$ = (formVerT.tablaVerTransacciones.getValueAt(i, 4)).toString().substring(1);
+            entradas += parseFloat(entradaSin$);
+        }
+        entradasString = "$"+String.valueOf(entradas);
+        return entradasString; 
+    }
     
-    
+    public String obtenerSumaSalidas(){
+        String salidasString = "";
+        float salidas=(float) 0.0;
+        for (int i = 0; i < formVerT.tablaVerTransacciones.getRowCount(); i++) {
+            
+            String salidaSin$ = (formVerT.tablaVerTransacciones.getValueAt(i, 3)).toString().substring(1);
+            salidas += parseFloat(salidaSin$);
+        }
+        salidasString = "$"+String.valueOf(salidas);
+        return salidasString; 
+    }
     
     
     
