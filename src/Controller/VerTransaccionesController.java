@@ -32,16 +32,18 @@ public class VerTransaccionesController implements ActionListener {
         this.viewMenu = menu;
         viewMenu.btnVerTransacciones.addActionListener(this);
 
-        /*iniciarTabla();*/
+        /*iniciarTabla();
         iniciarComboBoxBuscarCategoria();
         iniciarComboBoxBuscarCuentas();
         iniciarcomboBoxBuscarSubcategoria();
-        iniciarComboBoxBuscarEmpresa();
+        iniciarComboBoxBuscarEmpresa();*/
+        setearNullCampos();
 
         formVerT.cbbBuscarCategoria.addActionListener(this);
         formVerT.cbbSubCategoria.addActionListener(this);
         formVerT.cbbBuscarCuenta.addActionListener(this);
         formVerT.cbbEmpresa.addActionListener(this);
+        formVerT.btnLimpiar.addActionListener(this);
 
     }
 
@@ -52,6 +54,7 @@ public class VerTransaccionesController implements ActionListener {
         accionBuscarPorSubCat(e);
         accionBuscarPorCuenta(e);
         accionBuscarPorEmpresa(e);
+        accionLimpiar(e);
     }
 
     public void loadVerTransacciones(ActionEvent e) {
@@ -256,6 +259,27 @@ public class VerTransaccionesController implements ActionListener {
         for (String emp : listEmpresas) {
             formVerT.cbbEmpresa.addItem(emp);
         }
+    }
+
+    public void accionLimpiar(ActionEvent e) {
+        ArrayList<Transaccion> arrayVacio = new ArrayList<>();
+        if (e.getSource() == formVerT.btnLimpiar) {
+            setearNullCampos();
+            iniciarTabla(arrayVacio);
+        }
+    }
+
+    public void setearNullCampos() {
+        formVerT.txtFechaDesde.setDate(null);
+        formVerT.txtFechaHasta.setDate(null);
+        formVerT.txtBusqueda.setText("");
+        formVerT.txtSalidas.setText("");
+        formVerT.txtEntradas.setText("");
+        iniciarComboBoxBuscarCategoria();
+        iniciarComboBoxBuscarCuentas();
+        iniciarcomboBoxBuscarSubcategoria();
+        iniciarComboBoxBuscarEmpresa();
+
     }
 
     public MenuPrincipal getViewMeu() {

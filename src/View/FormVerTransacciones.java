@@ -51,7 +51,7 @@ public class FormVerTransacciones extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txtSalidas = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
         txtBusqueda = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
 
@@ -233,9 +233,9 @@ public class FormVerTransacciones extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Total Salidas");
 
-        jButton5.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/limpiar.png"))); // NOI18N
-        jButton5.setText("Limpiar Búsquedas");
+        btnLimpiar.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/limpiar.png"))); // NOI18N
+        btnLimpiar.setText("Limpiar Búsquedas");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -253,7 +253,7 @@ public class FormVerTransacciones extends javax.swing.JFrame {
                 .addGap(76, 76, 76))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(247, 247, 247)
-                .addComponent(jButton5)
+                .addComponent(btnLimpiar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -266,7 +266,7 @@ public class FormVerTransacciones extends javax.swing.JFrame {
                     .addComponent(txtSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 47, Short.MAX_VALUE)
+                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -402,11 +402,11 @@ public class FormVerTransacciones extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnLimpiar;
     public javax.swing.JComboBox<String> cbbBuscarCategoria;
     public javax.swing.JComboBox<String> cbbBuscarCuenta;
     public javax.swing.JComboBox<String> cbbEmpresa;
     public javax.swing.JComboBox<String> cbbSubCategoria;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

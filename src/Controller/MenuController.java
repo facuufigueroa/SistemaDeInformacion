@@ -1,6 +1,7 @@
 package Controller;
 
 import Consultas.QueryReportes;
+import Reportes.ReportByT;
 import Reportes.ReportJMRContador;
 import Reportes.ReportMarContador;
 import Reportes.ReportMarTransaccion;
@@ -36,6 +37,7 @@ public class MenuController implements ActionListener {
     FormFechas formFechaReportElRocioContador = new FormFechas();
     FormFechas formFechaReportJMRContador = new FormFechas();
     FormFechas formFechaReportMARContador = new FormFechas();
+    FormFechas formFechaReportByT = new FormFechas();
     QueryReportes queryReport = new QueryReportes();
 
     public MenuController() {
@@ -47,9 +49,9 @@ public class MenuController implements ActionListener {
         CategoriaController categoriaController = new CategoriaController(menuPrincipal);
         TipoCategoriaController tipoCatController = new TipoCategoriaController(menuPrincipal);
         SubCategoriaController subCatController = new SubCategoriaController(menuPrincipal);
-
         VerTransaccionesController verTransacciones = new VerTransaccionesController(menuPrincipal);
-
+        MantenimientoController mantController = new MantenimientoController(menuPrincipal);
+        
         this.menuPrincipal.btnLibroVentas.addActionListener(this);
 
         this.formFechaVentas.btnBuscar.addActionListener(this);
@@ -80,6 +82,9 @@ public class MenuController implements ActionListener {
 
         this.menuPrincipal.btnMARContador.addActionListener(this);
         this.formFechaReportMARContador.btnBuscar.addActionListener(this);
+    
+        this.menuPrincipal.btnByT.addActionListener(this);
+        this.formFechaReportByT.btnBuscar.addActionListener(this);
     }
 
     @Override
@@ -108,6 +113,8 @@ public class MenuController implements ActionListener {
             loadReporteJMRContador(e);
             accionVerMARContador(e);
             loadReporteMARContador(e);
+            accionVerBancosYTarjetas(e);
+            loadReportByT(e);
         } catch (ParseException ex) {
             Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -507,6 +514,40 @@ public class MenuController implements ActionListener {
 
     public boolean verificacionFechas(JDateChooser txtFechaDesde, JDateChooser txtFechaHasta) throws ParseException {
         return txtFechaDesde.getDate() == null || txtFechaHasta.getDate() == null;
+    }
+    
+    public void accionVerBancosYTarjetas(ActionEvent e) {
+        if (e.getSource() == menuPrincipal.btnByT) {
+            formFechaReportByT.setVisible(true);
+            formFechaReportByT.setLocationRelativeTo(null);
+        }
+    }
+
+    public void loadReportByT(ActionEvent e) throws ParseException {
+        if (e.getSource() == formFechaReportByT.btnBuscar) {
+            if (!verificacionFechas(formFechaReportByT.txtFechaDesde, formFechaReportByT.txtFechaHasta)) {
+                java.sql.Date fecha_desde = new java.sql.Date(formFechaReportByT.txtFechaDesde.getDate().getTime());
+                java.sql.Date fecha_hasta = new java.sql.Date(formFechaReportByT.txtFechaHasta.getDate().getTime());
+
+                if ((fecha_desde.compareTo(fecha_hasta) < 0) || (fecha_hasta.compareTo(fecha_desde) > 0)) {
+
+                    formFechaReportByT.setVisible(false);
+
+                    ReportByT reportByT = new ReportByT();
+                    reportByT.openReportByT(fecha_desde, fecha_hasta);
+                    
+                    nullFechas(formFechaReportByT);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error con la elección de fechas. \n"
+                            + "1)Verifique que no haya seleccionado una fecha desde MAYOR a fecha hasta. \n"
+                            + "2) Verifique que no haya seleccionado una fecha hasta MENOR a fecha desde");
+
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Campo fecha_desde o fecha_hasta estan vacio. \n"
+                        + "Complete los campos y nuevamente presione el boton Buscar.");
+            }
+        }
     }
 
 }

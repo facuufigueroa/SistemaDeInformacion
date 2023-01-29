@@ -43,7 +43,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         labelBienvenido = new javax.swing.JLabel();
         btnLibroVentas = new javax.swing.JButton();
         btnLibroIvaCompras = new javax.swing.JButton();
-        btnNewTransaccion3 = new javax.swing.JButton();
+        btnByT = new javax.swing.JButton();
         btnNewTransaccion4 = new javax.swing.JButton();
         btnElRocioT = new javax.swing.JButton();
         btnJMRT = new javax.swing.JButton();
@@ -125,6 +125,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaEmpresa = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
+        jInternalFrame7 = new javax.swing.JInternalFrame();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jPanel14 = new javax.swing.JPanel();
+        jLabel30 = new javax.swing.JLabel();
+        btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SISTEMA DE INFORMACIÓN");
@@ -269,14 +276,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnNewTransaccion3.setBackground(new java.awt.Color(102, 102, 102));
-        btnNewTransaccion3.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        btnNewTransaccion3.setForeground(new java.awt.Color(255, 255, 255));
-        btnNewTransaccion3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/documentos.png"))); // NOI18N
-        btnNewTransaccion3.setText("D_ Contador - Bancos y Tarjetas");
-        btnNewTransaccion3.addActionListener(new java.awt.event.ActionListener() {
+        btnByT.setBackground(new java.awt.Color(102, 102, 102));
+        btnByT.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        btnByT.setForeground(new java.awt.Color(255, 255, 255));
+        btnByT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/documentos.png"))); // NOI18N
+        btnByT.setText("D_ Contador - Bancos y Tarjetas");
+        btnByT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewTransaccion3ActionPerformed(evt);
+                btnByTActionPerformed(evt);
             }
         });
 
@@ -488,7 +495,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                                 .addGap(6, 6, 6)
                                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(btnNewTransaccion3, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btnByT, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                             .addComponent(btnLibroVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                             .addComponent(btnLibroIvaCompras, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)))
@@ -536,7 +543,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                 .addGap(10, 10, 10)
                                 .addComponent(btnLibroVentas)
                                 .addGap(10, 10, 10)
-                                .addComponent(btnNewTransaccion3)
+                                .addComponent(btnByT)
                                 .addGap(10, 10, 10)
                                 .addComponent(btnNewTransaccion11)
                                 .addGap(19, 19, 19)
@@ -1265,6 +1272,87 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Empresa / Orden", new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cliente.png")), jInternalFrame4); // NOI18N
 
+        jInternalFrame7.setVisible(true);
+
+        jPanel12.setBackground(new java.awt.Color(0, 0, 51));
+
+        jLabel28.setFont(new java.awt.Font("Arial Narrow", 3, 22)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/seguridad.png"))); // NOI18N
+        jLabel28.setText("El objetivo de esta sección es poder administrar la base de datos del sistema en base a las transacciones registradas");
+
+        jLabel29.setFont(new java.awt.Font("Arial Narrow", 3, 22)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel29.setText("Se usará de ser necesario eliminar transacciones para poder trabajar con transacciones sobre el año actual");
+
+        jPanel14.setBackground(new java.awt.Color(14, 18, 66));
+
+        jLabel30.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel30.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel30.setText("Eliminar Transacciones");
+
+        btnEliminar.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/proteccion-de-datos.png"))); // NOI18N
+        btnEliminar.setText("Eliminar");
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnEliminar)
+                    .addComponent(jLabel30))
+                .addContainerGap(793, Short.MAX_VALUE))
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel30)
+                .addGap(18, 18, 18)
+                .addComponent(btnEliminar)
+                .addContainerGap(46, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel29)
+                    .addComponent(jLabel28)
+                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(189, Short.MAX_VALUE))
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(404, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jInternalFrame7Layout = new javax.swing.GroupLayout(jInternalFrame7.getContentPane());
+        jInternalFrame7.getContentPane().setLayout(jInternalFrame7Layout);
+        jInternalFrame7Layout.setHorizontalGroup(
+            jInternalFrame7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jInternalFrame7Layout.setVerticalGroup(
+            jInternalFrame7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Mantenimiento", new javax.swing.ImageIcon(getClass().getResource("/Imagenes/mantenimiento-web.png")), jInternalFrame7); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1315,9 +1403,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLibroIvaComprasActionPerformed
 
-    private void btnNewTransaccion3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTransaccion3ActionPerformed
+    private void btnByTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnByTActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnNewTransaccion3ActionPerformed
+    }//GEN-LAST:event_btnByTActionPerformed
 
     private void btnNewTransaccion4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTransaccion4ActionPerformed
         // TODO add your handling code here:
@@ -1393,8 +1481,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnByT;
     public javax.swing.JButton btnCuentasAPagar;
     public javax.swing.JButton btnElRocioT;
+    public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnGuardarCuenta;
     public javax.swing.JButton btnGuardarEmpresa;
     public javax.swing.JButton btnGuardarSubCat;
@@ -1409,7 +1499,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public javax.swing.JButton btnNewTransaccion11;
     public javax.swing.JButton btnNewTransaccion14;
     public javax.swing.JButton btnNewTransaccion15;
-    public javax.swing.JButton btnNewTransaccion3;
     public javax.swing.JButton btnNewTransaccion4;
     public javax.swing.JButton btnReportCuentasAC;
     public javax.swing.JButton btnRocioContador;
@@ -1425,6 +1514,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JInternalFrame jInternalFrame4;
     private javax.swing.JInternalFrame jInternalFrame5;
     private javax.swing.JInternalFrame jInternalFrame6;
+    private javax.swing.JInternalFrame jInternalFrame7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1445,7 +1535,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1455,7 +1548,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
