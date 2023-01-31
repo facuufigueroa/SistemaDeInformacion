@@ -92,6 +92,8 @@ public class CategoriaController implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Categoria " + catView.txtNomCat.getText() + " guardada con éxito");
                 iniciarTabla();
                 centrarContenidoTabla();
+                catView.txtNomCat.setText("");
+                
 
                 //arreglar
             } else {

@@ -80,6 +80,8 @@ public class EmpresaOrdenController implements ActionListener{
                 queryEO.agregarEmpresa(empresa);
                 JOptionPane.showMessageDialog(null,"Empresa/Orden "+empresaOrdenView.txtNombreEmpresa.getText().toUpperCase() + " guardada con éxito" );
                 iniciarTabla();
+                empresaOrdenView.txtNombreEmpresa.setText("");
+                empresaOrdenView.txtCuitEmpresa.setText("");
             }
             else{
                 JOptionPane.showMessageDialog(null, "Error al guardar. \n"

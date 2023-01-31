@@ -22,6 +22,8 @@ public class MantenimientoController implements ActionListener {
 
         this.menu.btnEliminar.addActionListener(this);
         this.formFechaMant.btnBuscar.addActionListener(this);
+        this.formFechaMant.btnBuscar.setText("Borrar");
+        
     }
 
     @Override
