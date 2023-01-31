@@ -1,6 +1,7 @@
 package Controller;
 
 import Consultas.QueryCategoria;
+import Consultas.QueryCompraVentaIVA;
 import Consultas.QueryCuentas;
 import Consultas.QueryEmpresaOrden;
 import Consultas.QuerySubCategoria;
@@ -8,12 +9,14 @@ import Consultas.QueryTipoCategoria;
 import Consultas.QueryTipoCuenta;
 import Consultas.QueryTransaccion;
 import Model.Categoria;
+import Model.CompraVentaIva;
 import Model.Cuentas;
 import Model.EmpresaOrden;
 import Model.SubCategoria;
 import Model.TipoCategoria;
 import Model.TipoCuenta;
 import Model.Transaccion;
+import View.FormComprasVentasIVA;
 import View.Transacciones;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,12 +38,19 @@ public class TransaccionesController implements ActionListener {
     QueryTipoCategoria queryTCat = new QueryTipoCategoria();
     QueryEmpresaOrden queryEO = new QueryEmpresaOrden();
     DefaultTableModel modelo = new DefaultTableModel();
-    ArrayList<String> listCategoria = queryCategoria.listarPorNombre();
 
     Transacciones transacciones = new Transacciones();
-    CompraVentaIvaController compVentController = new CompraVentaIvaController();
+    
 
     QueryTransaccion queryTransaccion = new QueryTransaccion();
+    
+    private static TransaccionesController tSingleton;
+
+    /* todo cvi*/
+    FormComprasVentasIVA formCVI = new FormComprasVentasIVA();
+    QueryTransaccion queryT = new QueryTransaccion();
+    QueryCompraVentaIVA queryCVI = new QueryCompraVentaIVA();
+    private int id_transaccion;
 
     public TransaccionesController() {
         iniciarCamposEnCero();
@@ -54,14 +64,27 @@ public class TransaccionesController implements ActionListener {
         this.transacciones.txtNumFact.setEnabled(false);
         this.transacciones.txtNumCheque.setEnabled(false);
         this.transacciones.txtTipoFact.setEnabled(false);
+        
+        /*TODO CVI*/
+        setearCamosEnCeroCVI();
+        iniciarComboBoxEmpresaCVI();
+        iniciarComboBoxCuit();
+        iniciarComboBoxOperacion();
+        
+        this.formCVI.cbbEmpresa.addActionListener(this);
+        formCVI.labelIdTransaccion.setText(String.valueOf(queryT.obtenerMaxId()));
 
+        this.formCVI.btnFinalizar.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         accionTipoCuenta(e);
+        accionEmpresa(e);
         try {
             loadComprasVentas(e);
+            accionCompraVenta(e);
+
         } catch (ParseException ex) {
             Logger.getLogger(TransaccionesController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -94,14 +117,22 @@ public class TransaccionesController implements ActionListener {
 
     public void accionSelecionCheqFact(ActionEvent e) {
         if (e.getSource() == transacciones.cbbEleccionCheqFact) {
-            if (transacciones.cbbEleccionCheqFact.getSelectedItem().equals("Cheque")) {
-                transacciones.txtNumCheque.setEnabled(true);
+            if (transacciones.cbbEleccionCheqFact.getSelectedItem().equals("")) {
+                transacciones.txtNumCheque.setEnabled(false);
                 transacciones.txtNumFact.setEnabled(false);
                 transacciones.txtTipoFact.setEnabled(false);
                 transacciones.txtTipoFact.setText("");
                 transacciones.txtNumFact.setText("");
+                transacciones.txtNumCheque.setText("");
             } else {
-                if (transacciones.cbbEleccionCheqFact.getSelectedItem().equals("Factura")) {
+                if (transacciones.cbbEleccionCheqFact.getSelectedItem().equals("Cheque")) {
+                    transacciones.txtNumCheque.setEnabled(true);
+                    transacciones.txtNumFact.setEnabled(false);
+                    transacciones.txtTipoFact.setEnabled(false);
+                    transacciones.txtTipoFact.setText("");
+                    transacciones.txtNumFact.setText("");
+                }
+                else if (transacciones.cbbEleccionCheqFact.getSelectedItem().equals("Factura")) {
                     transacciones.txtNumFact.setEnabled(true);
                     transacciones.txtTipoFact.setEnabled(true);
                     transacciones.txtNumCheque.setEnabled(false);
@@ -112,8 +143,8 @@ public class TransaccionesController implements ActionListener {
     }
 
     public void iniciarComboBoxCuentas() {
-        ArrayList<String> nombreCuentas = queryCuentas.listarPorNombre();
         transacciones.cbbCuentas.removeAllItems();
+        ArrayList<String> nombreCuentas = queryCuentas.listarPorNombre();
         Cuentas ct = new Cuentas();
         ct.setNombre("");
         nombreCuentas.add(0, ct.getNombre());
@@ -123,6 +154,7 @@ public class TransaccionesController implements ActionListener {
     }
 
     public void iniciarComboBoxTipoCategoria() {
+        transacciones.cbbTipoCategoria.removeAllItems();
         ArrayList<TipoCategoria> listTipoCategoria = queryTCat.listarTiposCat();
         TipoCategoria t = new TipoCategoria();
         t.setNombre("");
@@ -134,6 +166,7 @@ public class TransaccionesController implements ActionListener {
 
     public void iniciarComboBoxCategoria() {
         transacciones.cbbCategorias.removeAllItems();
+        ArrayList<String> listCategoria = queryCategoria.listarPorNombre();
         Categoria ca = new Categoria();
         ca.setNombre("");
         listCategoria.add(0, ca.getNombre());
@@ -143,6 +176,7 @@ public class TransaccionesController implements ActionListener {
     }
 
     public void iniciarcomboBoxSubcategoria() {
+        transacciones.cbbSubCategoria.removeAllItems();
         ArrayList<SubCategoria> listSubCategoria = querySubCat.listarSubCat();
         SubCategoria subca = new SubCategoria();
         subca.setNombre("");
@@ -153,6 +187,7 @@ public class TransaccionesController implements ActionListener {
     }
 
     public void iniciarComboBoxEmpresa() {
+        transacciones.cbbEmpresa.removeAllItems();
         ArrayList<String> listEmpresas = queryEO.listarPorNombre();
         EmpresaOrden e = new EmpresaOrden();
         e.setNombre("");
@@ -225,7 +260,7 @@ public class TransaccionesController implements ActionListener {
             if (!verificarVacios()) {
                 queryTransaccion.addTransaccion(obtenerTransaccion());
                 iniciarTabla();
-                compVentController.loadComVentaIva();
+                loadComVentaIva();
             } else {
                 JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\"> Error al continuar con la Transacción - Campos incompletos.</p/</html> \n"
                         + "<html><p style = \"font:12px\"> Verifique algunas de las siguientes opciones: </p/</html> \n"
@@ -278,7 +313,7 @@ public class TransaccionesController implements ActionListener {
         if ("".equals(transacciones.txtNumFact.getText())) {
             t.setNumChequeFact(transacciones.txtNumCheque.getText()); //Puede ser numCheque o
         }
-        System.out.println(t.getNumChequeFact());
+        
         java.sql.Date sqlDate = new java.sql.Date(transacciones.txtFecha.getDate().getTime());
         t.setFecha(sqlDate);
 
@@ -339,15 +374,19 @@ public class TransaccionesController implements ActionListener {
         transacciones.txtCantidad.setText("0");
         transacciones.txtSalida.setText("0");
         transacciones.txtEntrada.setText("0");
-        transacciones.txtNumFact.setText("");
         transacciones.txtNumCheque.setText("");
         transacciones.txtTipoFact.setText("");
+        transacciones.txtNumFact.setText("");
+
     }
 
     public void setearCamposEnCero() {
         transacciones.txtCantidad.setText("0");
         transacciones.txtSalida.setText("0");
         transacciones.txtEntrada.setText("0");
+        transacciones.txtNumCheque.setText("");
+        transacciones.txtTipoFact.setText("");
+        transacciones.txtNumFact.setText("");
         iniciarComboBoxTipoCuenta();
         iniciarComboBoxTipoCategoria();
         iniciarComboBoxCuentas();
@@ -358,4 +397,203 @@ public class TransaccionesController implements ActionListener {
         transacciones.txtDescripcion.setText("");
     }
 
+    public void iniciarTablaMain() {
+        modelo.addColumn("Fecha");
+        modelo.addColumn("Descripcion");
+        modelo.addColumn("Salidas");
+        modelo.addColumn("Entradas");
+        modelo.addColumn("A impuesto IVA");
+        modelo.addColumn("A IVA");
+
+        transacciones.tablaTransacciones.setRowHeight(15);
+        transacciones.tablaTransacciones.setModel(modelo);
+        transacciones.tablaTransacciones.setRowHeight(25);
+
+    }
+
+    /* Todo compra venta IVA*/
+    
+    public void loadComVentaIva() {
+        formCVI.setVisible(true);
+        formCVI.setLocationRelativeTo(null);
+    }
+
+    public void iniciarComboBoxEmpresaCVI() {
+        ArrayList<String> listEmpresas = queryEO.listarPorNombre();
+        EmpresaOrden e = new EmpresaOrden();
+        e.setNombre("");
+        listEmpresas.add(0, e.getNombre());
+        for (String emp : listEmpresas) {
+            formCVI.cbbEmpresa.addItem(emp);
+        }
+    }
+
+    public void iniciarComboBoxOperacion() {
+        formCVI.cbbOperacion.addItem("");
+        formCVI.cbbOperacion.addItem("Venta");
+        formCVI.cbbOperacion.addItem("Compra");
+        formCVI.cbbOperacion.addItem("Banco");
+
+    }
+
+    /*Muestra el cuit y el nombre de la empresa juntos*/
+    public void iniciarComboBoxCuit() {
+        ArrayList<EmpresaOrden> listEmpresas = queryEO.listarEmpresaOrden();
+        EmpresaOrden e = new EmpresaOrden();
+        e.setNombre("");
+        e.setCuit("");
+        listEmpresas.add(0, e);
+        for (EmpresaOrden emp : listEmpresas) {
+            formCVI.cbbCuitEmpresa.addItem(emp.getCuit());
+        }
+    }
+
+    public void accionEmpresa(ActionEvent e) {
+        if (e.getSource() == formCVI.cbbEmpresa) {
+            String cuit = queryEO.obtenerCuitPorNombre(formCVI.cbbEmpresa.getSelectedItem().toString());
+            formCVI.cbbCuitEmpresa.setSelectedItem(cuit);
+
+        }
+    }
+    
+    public void accionCompraVenta(ActionEvent e) throws ParseException {
+        if (e.getSource() == formCVI.btnFinalizar) {
+            if (!verificarBlancos()) {
+                
+                queryCVI.agregarCompraVenta(newCompraVenta());
+                JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\"> El registro se efectuó correctamente </p/</html> \n", "Operación Finalizada", 1);
+                setearCamosEnCeroCVI();
+                formCVI.setVisible(false);
+                setearCamposEnCero();
+                
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\"> Error - Campos incompletos.</p/</html> \n"
+                        + "<html><p style = \"font:12px\">Verifique que: </p/</html>\n"
+                        + "<html><p style = \"font:12px\">1) Haya seleccionado una Fecha </p/</html>\n"
+                        + "<html><p style = \"font:12px\">2) Haya seleccionado la Operación correspondiente </p/</html>\n"
+                        + "<html><p style = \"font:12px\">3) Haya escrito un Tipo de Comprobante </p/</html>\n"
+                        + "<html><p style = \"font:12px\">4) Haya escrito un Numero de Comprobante </p/</html>\n"
+                        + "<html><p style = \"font:12px\">5) Haya seleccionado una Empresa/Orden </p/</html> \n"
+                        + "<html><p style = \"font:12px\">¡ Una vez completado los campos faltantes </p/</html> \n"
+                        + "<html><p style = \"font:12px\">  presione nuevamente el boton Finalizar Operación !</p/</html>"
+                        + "", "Eror - Verifique", 0);
+            }
+        }
+
+    }
+
+    public CompraVentaIva newCompraVenta() throws ParseException {
+        CompraVentaIva cvi = new CompraVentaIva();
+
+        String operacion = (String) formCVI.cbbOperacion.getSelectedItem();
+        cvi.setOperacion(operacion.toLowerCase());
+
+        java.sql.Date sqlDate = new java.sql.Date(formCVI.txtFecha.getDate().getTime());
+        cvi.setFecha(sqlDate);
+
+        cvi.setTipo_comprobante(formCVI.txtTipoComprobante.getText());
+
+        cvi.setNumComprobante(formCVI.txtNumComprobante.getText());
+
+        cvi.setEmpresa((String) formCVI.cbbEmpresa.getSelectedItem());
+
+        cvi.setCuit((String) formCVI.cbbCuitEmpresa.getSelectedItem());
+
+        NumberFormat f = NumberFormat.getInstance();
+        
+        cvi.setImp_neto_grav((float) f.parse(verificarBlanco(formCVI.txtImpNetoGrav.getText())).doubleValue());
+       
+        cvi.setIva_facturado((float) f.parse(verificarBlanco(formCVI.txtIvaFact.getText())).doubleValue());
+
+        cvi.setImp_interno((float) f.parse(verificarBlanco(formCVI.txtImpInterno.getText())).doubleValue());
+
+        cvi.setConcep_no_grav((float) f.parse(verificarBlanco(formCVI.txtConceptoNoGrav.getText())).doubleValue());
+
+        cvi.setPercepcion_iva((float) f.parse(verificarBlanco(formCVI.txtPercepcionIVA.getText())).doubleValue());
+
+        cvi.setRet_ganancias((float) f.parse(verificarBlanco(formCVI.txtRetGanan.getText())).doubleValue());
+
+        cvi.setPerc_iibb_compra((float) f.parse(verificarBlanco(formCVI.txtPercIvaC.getText())).doubleValue());
+
+        cvi.setImp_total_fact((float) f.parse(verificarBlanco(formCVI.txtImpTotalFact.getText())).doubleValue());
+
+        cvi.setIte_iva_dere_reg((float) f.parse(verificarBlanco(formCVI.txtIvaDereReg.getText())).doubleValue());
+
+        cvi.setC_no_grav_sellos((float) f.parse(verificarBlanco(formCVI.txtCNoGravSellos.getText())).doubleValue());
+
+        cvi.setRet_iibb_venta((float) f.parse(verificarBlanco(formCVI.txtRetIiBbV.getText())).doubleValue());
+
+        cvi.setIva_rg_212((float) f.parse(verificarBlanco(formCVI.txtIvaRg212.getText())).doubleValue());
+
+        cvi.setGrav_ley_25413((float) f.parse(verificarBlanco(formCVI.txtGravLey25413.getText())).doubleValue());
+
+        cvi.setInt_numerales((float) f.parse(verificarBlanco(formCVI.txtIntNumerales.getText())).doubleValue());
+
+        cvi.setOtros((float) f.parse(verificarBlanco(formCVI.txtOtros.getText())).doubleValue());
+
+        cvi.setIdTransaccion(queryT.obtenerMaxId());
+
+        cvi.setOperaciones_exentas((float) f.parse(verificarBlanco(formCVI.txtOpExentas.getText())).doubleValue());
+
+        cvi.setIng_brutos((float) f.parse(verificarBlanco(formCVI.txtIngBrutos.getText())).doubleValue());
+        
+        cvi.setRet_iva((float) f.parse(verificarBlanco(formCVI.txtRetIva.getText())).doubleValue());
+        
+        cvi.setImp_r_ing_brutos((float) f.parse(verificarBlanco(formCVI.txtImpRIngBrutos.getText())).doubleValue());
+        
+        
+        
+        return cvi;
+    }
+
+    public int getId_transaccion() {
+        return id_transaccion;
+    }
+
+    public void setId_transaccion(int id_transaccion) {
+        this.id_transaccion = id_transaccion;
+    }
+
+    public void setearCamosEnCeroCVI() {
+        formCVI.txtNumComprobante.setText("0");
+        formCVI.txtImpNetoGrav.setText("0.0");
+        formCVI.txtIvaFact.setText("0.0");
+        formCVI.txtImpInterno.setText("0.0");
+        formCVI.txtConceptoNoGrav.setText("0.0");
+        formCVI.txtPercepcionIVA.setText("0.0");
+        formCVI.txtRetGanan.setText("0.0");
+        formCVI.txtPercIvaC.setText("0.0");
+        formCVI.txtImpTotalFact.setText("0.0");
+        formCVI.txtIvaDereReg.setText("0.0");
+        formCVI.txtCNoGravSellos.setText("0.0");
+        formCVI.txtRetIiBbV.setText("0.0");
+        formCVI.txtIvaRg212.setText("0.0");
+        formCVI.txtGravLey25413.setText("0.0");
+        formCVI.txtIntNumerales.setText("0.0");
+        formCVI.txtOtros.setText("0.0");
+        formCVI.txtOpExentas.setText("0.0");
+        formCVI.txtIngBrutos.setText("0.0");
+        formCVI.txtRetIva.setText("0.0");
+        formCVI.txtImpRIngBrutos.setText("0.0");
+    }
+
+    public boolean verificarBlancos() {
+        if (formCVI.txtFecha.getDate() == null || formCVI.cbbOperacion.getSelectedItem().equals("")
+                || formCVI.txtTipoComprobante.getText().equals("")
+                || formCVI.txtNumComprobante.getText().equals("")
+                || formCVI.cbbEmpresa.getSelectedItem().equals("")) {
+            return true;
+        }
+        return false;
+    }
+    
+    public String verificarBlanco(String numero){
+        if(numero.equals("")){
+            return "0";
+        }
+        else{
+            return numero;
+        }
+    }
 }

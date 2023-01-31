@@ -3,7 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Facundo/Desktop/Work/SistemaDeInformacion/src/Reportes/Bancos%20y%20Tarjetas.jrxml</file>
+            <file>file:/C:/Users/Facundo/Desktop/Work/SistemaDeInformacion/src/Controller/TransaccionesController.java</file>
+            <file>file:/C:/Users/Facundo/Desktop/Work/SistemaDeInformacion/src/Controller/CompraVentaIvaController.java</file>
+            <file>file:/C:/Users/Facundo/Desktop/Work/SistemaDeInformacion/src/Consultas/QueryCompraVentaIVA.java</file>
+            <file>file:/C:/Users/Facundo/Desktop/Work/SistemaDeInformacion/src/Consultas/QueryTransaccion.java</file>
         </group>
     </open-files>
 </project-private>
