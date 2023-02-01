@@ -19,6 +19,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -41,6 +43,7 @@ public class MenuController implements ActionListener {
     QueryReportes queryReport = new QueryReportes();
 
     public MenuController() {
+        obtenerAño();
         this.menuPrincipal.btnNewTransaccion.addActionListener(this);
 
         CuentaController cuentaC = new CuentaController(menuPrincipal);
@@ -549,5 +552,10 @@ public class MenuController implements ActionListener {
             }
         }
     }
-
+    
+    public void obtenerAño(){
+        Calendar fecha = new GregorianCalendar();
+        int año = fecha.get(Calendar.YEAR);  
+        menuPrincipal.labelAño.setText("AÑO ACTUAL: "+String.valueOf(año));
+    }
 }

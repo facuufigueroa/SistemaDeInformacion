@@ -32,6 +32,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jPanel1 = new javax.swing.JPanel();
+        labelAño = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
         jInternalFrame2 = new javax.swing.JInternalFrame();
         jPanel2 = new javax.swing.JPanel();
         labelBienvenido1 = new javax.swing.JLabel();
@@ -146,6 +148,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 0, 51));
         jPanel1.setForeground(new java.awt.Color(0, 0, 51));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        labelAño.setFont(new java.awt.Font("Lucida Sans", 1, 60)); // NOI18N
+        labelAño.setForeground(new java.awt.Color(255, 255, 255));
+        labelAño.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelAño.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/128.png"))); // NOI18N
+        jPanel1.add(labelAño, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 1120, 250));
+
+        jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logo2.png"))); // NOI18N
+        jPanel1.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 460, 470, 170));
 
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
@@ -1539,6 +1550,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1566,6 +1578,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
+    public javax.swing.JLabel labelAño;
     private javax.swing.JLabel labelBienvenido;
     private javax.swing.JLabel labelBienvenido1;
     private javax.swing.JLabel labelBienvenido2;
