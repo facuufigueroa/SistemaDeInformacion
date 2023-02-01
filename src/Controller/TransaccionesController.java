@@ -40,10 +40,9 @@ public class TransaccionesController implements ActionListener {
     DefaultTableModel modelo = new DefaultTableModel();
 
     Transacciones transacciones = new Transacciones();
-    
 
     QueryTransaccion queryTransaccion = new QueryTransaccion();
-    
+
     private static TransaccionesController tSingleton;
 
     /* todo cvi*/
@@ -64,17 +63,19 @@ public class TransaccionesController implements ActionListener {
         this.transacciones.txtNumFact.setEnabled(false);
         this.transacciones.txtNumCheque.setEnabled(false);
         this.transacciones.txtTipoFact.setEnabled(false);
-        
+
         /*TODO CVI*/
         setearCamosEnCeroCVI();
         iniciarComboBoxEmpresaCVI();
         iniciarComboBoxCuit();
         iniciarComboBoxOperacion();
-        
+
         this.formCVI.cbbEmpresa.addActionListener(this);
         formCVI.labelIdTransaccion.setText(String.valueOf(queryT.obtenerMaxId()));
 
         this.formCVI.btnFinalizar.addActionListener(this);
+        
+        
     }
 
     @Override
@@ -131,8 +132,7 @@ public class TransaccionesController implements ActionListener {
                     transacciones.txtTipoFact.setEnabled(false);
                     transacciones.txtTipoFact.setText("");
                     transacciones.txtNumFact.setText("");
-                }
-                else if (transacciones.cbbEleccionCheqFact.getSelectedItem().equals("Factura")) {
+                } else if (transacciones.cbbEleccionCheqFact.getSelectedItem().equals("Factura")) {
                     transacciones.txtNumFact.setEnabled(true);
                     transacciones.txtTipoFact.setEnabled(true);
                     transacciones.txtNumCheque.setEnabled(false);
@@ -258,9 +258,14 @@ public class TransaccionesController implements ActionListener {
     public void loadComprasVentas(ActionEvent e) throws ParseException {
         if (e.getSource() == transacciones.btnCompraVentasIVA) {
             if (!verificarVacios()) {
-                queryTransaccion.addTransaccion(obtenerTransaccion());
-                iniciarTabla();
-                loadComVentaIva();
+                if (!queryTransaccion.verificarCodigoT(obtenerTransaccion().getCodigo())) {
+                    queryTransaccion.addTransaccion(obtenerTransaccion());
+                    iniciarTabla();
+                    loadComVentaIva();
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\"> Error al continuar con la Transacción - Ya existe codigo</p/</html>");
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\"> Error al continuar con la Transacción - Campos incompletos.</p/</html> \n"
                         + "<html><p style = \"font:12px\"> Verifique algunas de las siguientes opciones: </p/</html> \n"
@@ -304,6 +309,9 @@ public class TransaccionesController implements ActionListener {
     /*Método para crear el objeto transacción*/
     public Transaccion obtenerTransaccion() throws ParseException {
         Transaccion t = new Transaccion();
+
+        t.setCodigo("T-" + queryT.obtenerMaxId());
+
         t.setIdCuenta(queryCuentas.obtenerIdCuentaPorNombre((String) transacciones.cbbCuentas.getSelectedItem()));
 
         if ("".equals(transacciones.txtNumCheque.getText())) {
@@ -313,7 +321,7 @@ public class TransaccionesController implements ActionListener {
         if ("".equals(transacciones.txtNumFact.getText())) {
             t.setNumChequeFact(transacciones.txtNumCheque.getText()); //Puede ser numCheque o
         }
-        
+
         java.sql.Date sqlDate = new java.sql.Date(transacciones.txtFecha.getDate().getTime());
         t.setFecha(sqlDate);
 
@@ -412,7 +420,6 @@ public class TransaccionesController implements ActionListener {
     }
 
     /* Todo compra venta IVA*/
-    
     public void loadComVentaIva() {
         formCVI.setVisible(true);
         formCVI.setLocationRelativeTo(null);
@@ -455,18 +462,17 @@ public class TransaccionesController implements ActionListener {
 
         }
     }
-    
+
     public void accionCompraVenta(ActionEvent e) throws ParseException {
         if (e.getSource() == formCVI.btnFinalizar) {
             if (!verificarBlancos()) {
-                
+
                 queryCVI.agregarCompraVenta(newCompraVenta());
                 JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\"> El registro se efectuó correctamente </p/</html> \n", "Operación Finalizada", 1);
                 setearCamosEnCeroCVI();
                 formCVI.setVisible(false);
                 setearCamposEnCero();
-                
-                
+
             } else {
                 JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\"> Error - Campos incompletos.</p/</html> \n"
                         + "<html><p style = \"font:12px\">Verifique que: </p/</html>\n"
@@ -501,9 +507,9 @@ public class TransaccionesController implements ActionListener {
         cvi.setCuit((String) formCVI.cbbCuitEmpresa.getSelectedItem());
 
         NumberFormat f = NumberFormat.getInstance();
-        
+
         cvi.setImp_neto_grav((float) f.parse(verificarBlanco(formCVI.txtImpNetoGrav.getText())).doubleValue());
-       
+
         cvi.setIva_facturado((float) f.parse(verificarBlanco(formCVI.txtIvaFact.getText())).doubleValue());
 
         cvi.setImp_interno((float) f.parse(verificarBlanco(formCVI.txtImpInterno.getText())).doubleValue());
@@ -537,13 +543,11 @@ public class TransaccionesController implements ActionListener {
         cvi.setOperaciones_exentas((float) f.parse(verificarBlanco(formCVI.txtOpExentas.getText())).doubleValue());
 
         cvi.setIng_brutos((float) f.parse(verificarBlanco(formCVI.txtIngBrutos.getText())).doubleValue());
-        
+
         cvi.setRet_iva((float) f.parse(verificarBlanco(formCVI.txtRetIva.getText())).doubleValue());
-        
+
         cvi.setImp_r_ing_brutos((float) f.parse(verificarBlanco(formCVI.txtImpRIngBrutos.getText())).doubleValue());
-        
-        
-        
+
         return cvi;
     }
 
@@ -587,12 +591,11 @@ public class TransaccionesController implements ActionListener {
         }
         return false;
     }
-    
-    public String verificarBlanco(String numero){
-        if(numero.equals("")){
+
+    public String verificarBlanco(String numero) {
+        if (numero.equals("")) {
             return "0";
-        }
-        else{
+        } else {
             return numero;
         }
     }

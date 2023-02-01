@@ -7,6 +7,7 @@ import java.util.Date;
 public class Transaccion {
     
     private int idTransaccion;
+    private String codigo;
     /*Foreign Key*/
     private int idCuenta;
     private int idOrdenEmp;
@@ -26,7 +27,8 @@ public class Transaccion {
     private boolean a_iva;
     private boolean a_impuesto;
 
-    public Transaccion(int idTransaccion, int idCuenta, int idOrdenEmp, int idCat, int idSubCat, String numChequeFact, Date fecha, String descripcion, int cantidad, float salida, float entrada, float retenciones_g, float ret_ing_brutos, boolean a_iva, boolean a_impuesto) {
+    public Transaccion(String codigo,int idTransaccion, int idCuenta, int idOrdenEmp, int idCat, int idSubCat, String numChequeFact, Date fecha, String descripcion, int cantidad, float salida, float entrada, float retenciones_g, float ret_ing_brutos, boolean a_iva, boolean a_impuesto) {
+        this.codigo=codigo;
         this.idTransaccion = idTransaccion;
         this.idCuenta = idCuenta;
         this.idOrdenEmp = idOrdenEmp;
@@ -182,6 +184,14 @@ public class Transaccion {
 
     public void setA_impuesto(boolean a_impuesto) {
         this.a_impuesto = a_impuesto;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
    

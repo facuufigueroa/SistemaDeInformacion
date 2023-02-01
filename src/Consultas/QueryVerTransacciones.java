@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class QueryVerTransacciones {
@@ -159,4 +161,80 @@ public class QueryVerTransacciones {
 
         return transaccionesList;
     }
+    
+    public Transaccion obtenerTransaccion(int numT){
+        String nombre = "";
+        PreparedStatement ps = null;
+        Connection conn = conexion.getConnection();
+        Transaccion trans = new Transaccion();
+        try {
+            String sql = "SELECT t.idtransacciones,t.codigo,t.fecha,t.descripcion,t.salidas,t.entradas,t.a_impuestos_iva,t.a_iva FROM transacciones as t WHERE t.idtransacciones= " +numT;
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                trans.setIdTransaccion(rs.getInt("idtransacciones"));
+                trans.setCodigo(rs.getString("codigo"));
+                trans.setDescripcion(rs.getString("descripcion"));
+                trans.setFecha(rs.getDate("fecha"));
+                trans.setSalida(rs.getFloat("salidas"));
+                trans.setEntrada(rs.getFloat("entradas"));
+                trans.setA_impuesto(rs.getBoolean("a_impuestos_iva"));
+                trans.setA_iva(rs.getBoolean("a_iva"));
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return trans;
+    }
+    
+    
+    
+    public ArrayList<Transaccion> listarTransacciones(){
+        ArrayList<Transaccion> tList = new ArrayList<>();
+        Connection conn = Conexion.getConnection();
+        Statement st;
+        try {
+            String sql = "SELECT * FROM transacciones AS t ORDER BY t.fecha ASC";
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while (rs.next()) {
+                Transaccion t = new Transaccion();
+                t.setIdTransaccion(rs.getInt("idtransacciones"));
+                t.setCodigo(rs.getString("codigo"));
+                t.setFecha(rs.getDate("fecha"));
+                t.setDescripcion(rs.getString("descripcion"));
+                t.setSalida(rs.getFloat("salidas"));
+                t.setEntrada(rs.getFloat("entradas"));
+                t.setA_impuesto(rs.getBoolean("a_impuestos_iva"));
+                t.setA_iva(rs.getBoolean("a_iva"));
+                tList.add(t);
+            }
+        } catch (NumberFormatException | SQLException e) {
+            System.out.println(e);
+        }
+       return tList;
+    }
+    
+    public boolean existeIdTransaccion(int id){
+        
+        PreparedStatement ps = null;
+        Connection conn = conexion.getConnection();
+        try {
+            String sql = "SELECT * FROM transacciones as t WHERE t.idtransacciones =" +id;
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                return true;
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return false;
+    }
+    
 }

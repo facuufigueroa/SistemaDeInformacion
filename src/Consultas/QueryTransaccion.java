@@ -18,21 +18,22 @@ public class QueryTransaccion {
      public void addTransaccion(Transaccion t){
         PreparedStatement ps;
         Connection conn = getConnection();
-        String sql = "INSERT INTO transacciones(id_cuenta,cheque_fact,fecha,descripcion,id_orden_empresa,cantidad,id_categoria,id_subcategoria,salidas,entradas,a_impuestos_iva,a_iva) VALUES(?,?,?,?,?,?,?,?,?,?,?,?) ";
+        String sql = "INSERT INTO transacciones(codigo,id_cuenta,cheque_fact,fecha,descripcion,id_orden_empresa,cantidad,id_categoria,id_subcategoria,salidas,entradas,a_impuestos_iva,a_iva) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?) ";
         try {
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, t.getIdCuenta());
-            ps.setString(2, t.getNumChequeFact());
-            ps.setDate(3, (Date) t.getFecha());
-            ps.setString(4, t.getDescripcion());
-            ps.setInt(5, t.getIdOrdenEmp());
-            ps.setInt(6,t.getCantidad());
-            ps.setInt(7, t.getIdCat());
-            ps.setInt(8, t.getIdSubCat());
-            ps.setFloat(9, t.getSalida());
-            ps.setFloat(10, t.getEntrada());
-            ps.setBoolean(11, t.isA_impuesto());
-            ps.setBoolean(12, t.isA_iva());
+            ps.setString(1, t.getCodigo());
+            ps.setInt(2, t.getIdCuenta());
+            ps.setString(3, t.getNumChequeFact());
+            ps.setDate(4, (Date) t.getFecha());
+            ps.setString(5, t.getDescripcion());
+            ps.setInt(6, t.getIdOrdenEmp());
+            ps.setInt(7,t.getCantidad());
+            ps.setInt(8, t.getIdCat());
+            ps.setInt(9, t.getIdSubCat());
+            ps.setFloat(10, t.getSalida());
+            ps.setFloat(11, t.getEntrada());
+            ps.setBoolean(12, t.isA_impuesto());
+            ps.setBoolean(13, t.isA_iva());
             ps.execute();
         } catch (SQLException e) {
             System.err.println(e);
@@ -87,5 +88,90 @@ public class QueryTransaccion {
         }
 
         return max_id ;
+    }
+    
+    public void eliminarTransaccion(){
+        PreparedStatement ps = null;
+        Connection conn = getConnection();
+
+        String sql = "DELETE FROM transacciones WHERE idtransacciones = ?";
+
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.err.println(e);
+       
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+
+        }
+    }
+    
+     public void modificarTransaccion(Transaccion t, String idtransaccion){
+        PreparedStatement ps = null;
+        Connection con = getConnection();
+
+        String sql = "UPDATE transacciones SET fecha = ?,salidas = ? , entradas = ? WHERE idtransacciones = ?";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setDate(1, (Date) t.getFecha());
+            ps.setFloat(2,t.getSalida());
+            ps.setFloat(2,t.getEntrada());
+            ps.setInt(4, t.getIdTransaccion());
+            ps.executeUpdate();
+      
+        } catch (SQLException e) {
+            System.err.println(e);
+            
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+        }
+    }
+     
+    public int obtenerIdTransaccion(String codigo){
+        int id=0;
+        PreparedStatement ps = null;
+        Connection conn = Conexion.getConnection();
+        try {
+            String sql = "SELECT idtransacciones\n" +
+                            "FROM transacciones AS t WHERE t.codigo = "+codigo+"'";
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return id ;
+    }
+    
+    public boolean verificarCodigoT(String codigo){
+        PreparedStatement ps = null;
+        Connection conn = Conexion.getConnection();
+        try {
+            String sql = "SELECT *" +
+                            "FROM transacciones AS t WHERE t.codigo = '"+codigo+"'";
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return false;
     }
 }

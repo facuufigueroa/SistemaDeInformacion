@@ -12,6 +12,7 @@ import View.MenuPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import static java.lang.Float.parseFloat;
+import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -31,7 +32,7 @@ public class VerTransaccionesController implements ActionListener {
         formVerT.setLocationRelativeTo(null);
         this.viewMenu = menu;
         viewMenu.btnVerTransacciones.addActionListener(this);
-
+        iniciarTabla2();
         /*iniciarTabla();
         iniciarComboBoxBuscarCategoria();
         iniciarComboBoxBuscarCuentas();
@@ -45,6 +46,8 @@ public class VerTransaccionesController implements ActionListener {
         formVerT.cbbEmpresa.addActionListener(this);
         formVerT.btnLimpiar.addActionListener(this);
 
+        formVerT.btnBuscarT.addActionListener(this);
+        formVerT.btnEditar.addActionListener(this);
     }
 
     @Override
@@ -55,6 +58,7 @@ public class VerTransaccionesController implements ActionListener {
         accionBuscarPorCuenta(e);
         accionBuscarPorEmpresa(e);
         accionLimpiar(e);
+        accionBuscar(e);
     }
 
     public void loadVerTransacciones(ActionEvent e) {
@@ -265,7 +269,7 @@ public class VerTransaccionesController implements ActionListener {
         ArrayList<Transaccion> arrayVacio = new ArrayList<>();
         if (e.getSource() == formVerT.btnLimpiar) {
             setearNullCampos();
-            iniciarTabla(arrayVacio);
+            iniciarTabla2();
         }
     }
 
@@ -275,6 +279,7 @@ public class VerTransaccionesController implements ActionListener {
         formVerT.txtBusqueda.setText("");
         formVerT.txtSalidas.setText("");
         formVerT.txtEntradas.setText("");
+        formVerT.txtNum.setText("");
         iniciarComboBoxBuscarCategoria();
         iniciarComboBoxBuscarCuentas();
         iniciarcomboBoxBuscarSubcategoria();
@@ -290,4 +295,110 @@ public class VerTransaccionesController implements ActionListener {
         this.viewMenu = viewMeu;
     }
 
+    public void accionBuscarTransaccion(ActionEvent e) {
+        if (e.getSource() == formVerT.btnBuscarT) {
+
+        }
+    }
+
+    public void iniciarTabla2() {
+        ArrayList<Transaccion> listT = queryVerT.listarTransacciones();
+        modelo = new DefaultTableModel() {
+            public boolean isCellEditable(int fila, int columna) {
+                if (columna == 1 && columna == 2 && columna == 3) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        };
+
+        modelo.addColumn("N° Transacc.");
+        modelo.addColumn("Codigo Transacc.");
+        modelo.addColumn("Fecha");
+        modelo.addColumn("Descripción");
+        modelo.addColumn("Cantidad");
+        modelo.addColumn("Salidas");
+        modelo.addColumn("Entradas");
+        modelo.addColumn("A Impuesto ?");
+        modelo.addColumn(" A IVA ?");
+
+        formVerT.tablaVerTransacciones.setRowHeight(25);
+        formVerT.tablaVerTransacciones.setModel(modelo);
+        for (Transaccion t : listT) {
+            String[] dato = new String[10];
+            dato[0] = String.valueOf(t.getIdTransaccion());
+            dato[1] = t.getCodigo();
+            dato[2] = t.getFecha().toString();
+            dato[3] = t.getDescripcion();
+            dato[4] = String.valueOf(t.getCantidad());
+            dato[5] = "$" + String.valueOf((float) t.getSalida());
+            dato[6] = "$" + String.valueOf(t.getEntrada());
+            dato[7] = cambiarFormatoIVA(t.isA_impuesto());
+            dato[8] = cambiarFormatoIVA(t.isA_iva());
+
+            modelo.addRow(dato);
+        }
+
+    }
+
+    public void accionBuscar(ActionEvent e) {
+        if (e.getSource() == formVerT.btnBuscarT) {
+            if(formVerT.txtNum.getText() != ""){
+                String numero = formVerT.txtNum.getText();
+                if(queryVerT.existeIdTransaccion(Integer.parseInt(numero))){
+                    iniciarTabla3(queryVerT.obtenerTransaccion(Integer.parseInt(numero)));
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "No existe Transacción con número: "+numero);
+                }
+                
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "No ingreso Número de Transacción \n"
+                        + "Ingrese Número Valido");
+            }
+            
+        }
+    }
+
+    public void iniciarTabla3(Transaccion t) {
+        ArrayList<Transaccion> listT = queryVerT.listarTransacciones();
+        modelo = new DefaultTableModel() {
+            public boolean isCellEditable(int fila, int columna) {
+                if (columna == 1 && columna == 2 && columna == 3) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        };
+
+        modelo.addColumn("N° Transacc.");
+        modelo.addColumn("Codigo Transacc.");
+        modelo.addColumn("Fecha");
+        modelo.addColumn("Descripción");
+        modelo.addColumn("Cantidad");
+        modelo.addColumn("Salidas");
+        modelo.addColumn("Entradas");
+        modelo.addColumn("A Impuesto ?");
+        modelo.addColumn(" A IVA ?");
+
+        formVerT.tablaVerTransacciones.setRowHeight(25);
+        formVerT.tablaVerTransacciones.setModel(modelo);
+
+        String[] dato = new String[10];
+        dato[0] = String.valueOf(t.getIdTransaccion());
+        dato[1] = t.getCodigo();
+        dato[2] = t.getFecha().toString();
+        dato[3] = t.getDescripcion();
+        dato[4] = String.valueOf(t.getCantidad());
+        dato[5] = "$" + String.valueOf((float) t.getSalida());
+        dato[6] = "$" + String.valueOf(t.getEntrada());
+        dato[7] = cambiarFormatoIVA(t.isA_impuesto());
+        dato[8] = cambiarFormatoIVA(t.isA_iva());
+
+        modelo.addRow(dato);
+
+    }
 }
