@@ -202,6 +202,7 @@ public class QueryVerTransacciones {
                 t.setIdTransaccion(rs.getInt("idtransacciones"));
                 t.setCodigo(rs.getString("codigo"));
                 t.setFecha(rs.getDate("fecha"));
+                t.setCantidad(rs.getInt("cantidad"));
                 t.setDescripcion(rs.getString("descripcion"));
                 t.setSalida(rs.getFloat("salidas"));
                 t.setEntrada(rs.getFloat("entradas"));
@@ -319,18 +320,18 @@ public class QueryVerTransacciones {
         try {
             ps = con.prepareStatement(sql);
             ps.setDate(1, (Date) cvi.getFecha());
-            ps.setString(2,cvi.getTipo_comprobante());
-            ps.setString(3,cvi.getNumComprobante());
-            ps.setFloat(4,cvi.getImp_neto_grav());
-            ps.setFloat(5,cvi.getIva_facturado());
+            ps.setString(2, cvi.getTipo_comprobante());
+            ps.setString(3, cvi.getNumComprobante());
+            ps.setFloat(4, cvi.getImp_neto_grav());
+            ps.setFloat(5, cvi.getIva_facturado());
             ps.setFloat(6, cvi.getImp_interno());
             ps.setFloat(7, cvi.getConcep_no_grav());
             ps.setFloat(8, cvi.getPercepcion_iva());
             ps.setFloat(9, cvi.getRet_ganancias());
             ps.setFloat(10, cvi.getPerc_iibb_compra());
             ps.setFloat(11, cvi.getImp_total_fact());
-            ps.setFloat(12,cvi.getIte_iva_dere_reg());
-            ps.setFloat(13,cvi.getC_no_grav_sellos());
+            ps.setFloat(12, cvi.getIte_iva_dere_reg());
+            ps.setFloat(13, cvi.getC_no_grav_sellos());
             ps.setFloat(14, cvi.getRet_iibb_venta());
             ps.setFloat(15, cvi.getIva_rg_212());
             ps.setFloat(16, cvi.getGrav_ley_25413());

@@ -39,7 +39,7 @@ public class VerTransaccionesController implements ActionListener {
         this.viewMenu = menu;
         viewMenu.btnVerTransacciones.addActionListener(this);
         iniciarTabla2();
-        
+
         setearNullCampos();
 
         formVerT.cbbBuscarCategoria.addActionListener(this);
@@ -440,9 +440,8 @@ public class VerTransaccionesController implements ActionListener {
                 editVista.txtNombre.setEditable(false);
                 editVista.txtCuit.setEditable(false);
                 editVista.txtOperacion.setEditable(false);
-            }
-            else{
-                JOptionPane.showMessageDialog(null,"Para Modificar Transacciones debe seleccionar la fila en la tabla.\n"
+            } else {
+                JOptionPane.showMessageDialog(null, "Para Modificar Transacciones debe seleccionar la fila en la tabla.\n"
                         + "Haciendo click una sola vez.");
             }
         }
@@ -487,7 +486,7 @@ public class VerTransaccionesController implements ActionListener {
                 t.setEntrada((float) f.parse(verificarBlanco(editVista.txtEntradas.getText())).doubleValue());
                 queryVerT.modificarTransaccion(t, Integer.parseInt(editVista.labelNumT.getText()));
                 JOptionPane.showMessageDialog(null, "Transacción N° " + editVista.labelNumT.getText() + " modificada");
-              
+
                 iniciarTabla2();
             } else {
                 JOptionPane.showMessageDialog(null, "Error al modificar transaccion, debe ingresar una fecha en el campo.\n"
@@ -507,12 +506,11 @@ public class VerTransaccionesController implements ActionListener {
 
     public void accionEditarCVI(ActionEvent e) throws ParseException {
         if (e.getSource() == editVista.btnModificarCVI) {
-            if(editVista.txtFecha.getDate() != null){
-            queryVerT.modificarCVI(createObjetCVI(), (Integer.parseInt(editVista.labelNumT.getText())));
-            JOptionPane.showMessageDialog(null, "Modificación realizada con Éxito.");
-            iniciarTabla2();
-            }
-            else{
+            if (editVista.txtFecha.getDate() != null) {
+                queryVerT.modificarCVI(createObjetCVI(), (Integer.parseInt(editVista.labelNumT.getText())));
+                JOptionPane.showMessageDialog(null, "Modificación realizada con Éxito.");
+                iniciarTabla2();
+            } else {
                 JOptionPane.showMessageDialog(null, "Error al modificar datos.\n"
                         + "El campo fecha del apartado CompraVentaIva no debe estar vacio.");
 
