@@ -28,13 +28,13 @@ public class EditView extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        txtFechaT = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
-        txtSalidas = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtEntradas = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         btnModificarT = new javax.swing.JButton();
+        txtEntradas = new javax.swing.JFormattedTextField();
+        txtSalidas = new javax.swing.JFormattedTextField();
         jLabel2 = new javax.swing.JLabel();
         labelNumT = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -91,7 +91,8 @@ public class EditView extends javax.swing.JFrame {
         txtCuit = new javax.swing.JTextField();
         jLabel31 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Editar Transacciones y CompraVenta IVA");
 
         jLabel1.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/formulario-de-llenado.png"))); // NOI18N
@@ -99,19 +100,15 @@ public class EditView extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
+        txtFechaT.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+
         jLabel3.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Fecha Transacción");
 
-        txtSalidas.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        txtSalidas.setForeground(new java.awt.Color(0, 0, 0));
-
         jLabel4.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Entradas");
-
-        txtEntradas.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        txtEntradas.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel5.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
@@ -121,27 +118,49 @@ public class EditView extends javax.swing.JFrame {
         btnModificarT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/formulario-de-llenado.png"))); // NOI18N
         btnModificarT.setText("Modificar");
 
+        txtEntradas.setForeground(new java.awt.Color(0, 0, 0));
+        txtEntradas.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
+        txtEntradas.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtEntradas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEntradasKeyTyped(evt);
+            }
+        });
+
+        txtSalidas.setForeground(new java.awt.Color(0, 0, 0));
+        txtSalidas.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
+        txtSalidas.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtSalidas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSalidasKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtFechaT, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
-                        .addComponent(jLabel5)
-                        .addGap(12, 12, 12))
-                    .addComponent(txtSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtEntradas, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(27, 27, 27)
-                .addComponent(btnModificarT)
+                        .addGap(68, 68, 68)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(txtSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(txtEntradas, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(btnModificarT))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(jLabel4)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -150,17 +169,21 @@ public class EditView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtFechaT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel4)))
-                .addGap(4, 4, 4)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEntradas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnModificarT))
-                .addContainerGap(17, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEntradas, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(59, Short.MAX_VALUE)
+                .addComponent(btnModificarT)
+                .addGap(18, 18, 18))
         );
 
         jLabel2.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
@@ -172,12 +195,12 @@ public class EditView extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
 
-        jLabel8.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Operación");
 
-        jLabel6.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Fecha");
 
         txtFecha.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
@@ -191,84 +214,84 @@ public class EditView extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Tipo Comprobante");
 
         txtNumComprobante.setFont(new java.awt.Font("Arial Narrow", 0, 20)); // NOI18N
         txtNumComprobante.setForeground(new java.awt.Color(0, 0, 0));
         txtNumComprobante.setPreferredSize(new java.awt.Dimension(14, 28));
 
-        jLabel9.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("N° Comprobante");
 
-        jLabel10.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Imp. Neto Grav.");
 
-        jLabel11.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("C-U-I-T");
 
-        jLabel12.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("IVA Facturado");
 
-        jLabel13.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("Nombre");
 
-        jLabel14.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setText("Imp. Interno");
 
-        jLabel15.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
         jLabel15.setText("Concepto No Grav.");
 
-        jLabel16.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
         jLabel16.setText("Percepción IVA");
 
-        jLabel17.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(0, 0, 0));
         jLabel17.setText("Ret. Ganancias");
 
-        jLabel18.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(0, 0, 0));
         jLabel18.setText("Perc.IIBB Compra");
 
-        jLabel19.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(0, 0, 0));
         jLabel19.setText("Imp. Total Fact.");
 
-        jLabel20.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(0, 0, 0));
         jLabel20.setText("Ite. IVA Dere. Reg.");
 
-        jLabel21.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(0, 0, 0));
         jLabel21.setText("C. no Grav. Sellos");
 
-        jLabel22.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(0, 0, 0));
         jLabel22.setText("Ret.II BB Venta");
 
-        jLabel23.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel23.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(0, 0, 0));
         jLabel23.setText("IVA RG 212");
 
-        jLabel24.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel24.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(0, 0, 0));
         jLabel24.setText("Grav. Ley 25413");
 
-        jLabel25.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(0, 0, 0));
         jLabel25.setText("Otros");
 
-        jLabel26.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel26.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(0, 0, 0));
         jLabel26.setText("Int. Numerales");
 
         txtImpNetoGrav.setForeground(new java.awt.Color(0, 0, 0));
@@ -420,8 +443,8 @@ public class EditView extends javax.swing.JFrame {
             }
         });
 
-        jLabel27.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel27.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(0, 0, 0));
         jLabel27.setText("Operaciones Exentas");
 
         txtIngBrutos.setForeground(new java.awt.Color(0, 0, 0));
@@ -433,8 +456,8 @@ public class EditView extends javax.swing.JFrame {
             }
         });
 
-        jLabel28.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel28.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(0, 0, 0));
         jLabel28.setText("Ing. Brutos");
 
         txtRetIva.setForeground(new java.awt.Color(0, 0, 0));
@@ -446,8 +469,8 @@ public class EditView extends javax.swing.JFrame {
             }
         });
 
-        jLabel29.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        jLabel29.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel29.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(0, 0, 0));
         jLabel29.setText("Retencion IVA");
 
         txtImpRIngBrutos.setForeground(new java.awt.Color(0, 0, 0));
@@ -459,8 +482,8 @@ public class EditView extends javax.swing.JFrame {
             }
         });
 
-        jLabel30.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        jLabel30.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel30.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        jLabel30.setForeground(new java.awt.Color(0, 0, 0));
         jLabel30.setText("Imp. R. Ing. Brutos");
 
         btnModificarCVI.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
@@ -752,10 +775,10 @@ public class EditView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelNumT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelNumT, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
-                        .addComponent(jLabel2)))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
@@ -856,6 +879,14 @@ public class EditView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtOperacionActionPerformed
 
+    private void txtEntradasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEntradasKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEntradasKeyTyped
+
+    private void txtSalidasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSalidasKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSalidasKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -894,7 +925,6 @@ public class EditView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnModificarCVI;
     public javax.swing.JButton btnModificarT;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -932,8 +962,9 @@ public class EditView extends javax.swing.JFrame {
     public javax.swing.JFormattedTextField txtCNoGravSellos;
     public javax.swing.JFormattedTextField txtConceptoNoGrav;
     public javax.swing.JTextField txtCuit;
-    private javax.swing.JTextField txtEntradas;
+    public javax.swing.JFormattedTextField txtEntradas;
     public com.toedter.calendar.JDateChooser txtFecha;
+    public com.toedter.calendar.JDateChooser txtFechaT;
     public javax.swing.JFormattedTextField txtGravLey25413;
     public javax.swing.JFormattedTextField txtImpInterno;
     public javax.swing.JFormattedTextField txtImpNetoGrav;
@@ -954,7 +985,7 @@ public class EditView extends javax.swing.JFrame {
     public javax.swing.JFormattedTextField txtRetGanan;
     public javax.swing.JFormattedTextField txtRetIiBbV;
     public javax.swing.JFormattedTextField txtRetIva;
-    private javax.swing.JTextField txtSalidas;
+    public javax.swing.JFormattedTextField txtSalidas;
     public javax.swing.JTextField txtTipoComprobante;
     // End of variables declaration//GEN-END:variables
 }

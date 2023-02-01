@@ -652,7 +652,7 @@
               <Font name="Arial Narrow" size="18" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagenes/buscar.png"/>
+              <Image iconType="3" name="/Imagenes/binoculars.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Buscar Transacci&#xf3;n"/>
           </Properties>
@@ -680,6 +680,9 @@
               <Font name="Arial Narrow" size="18" style="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNumKeyTyped"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
