@@ -128,7 +128,7 @@ public class EditView extends javax.swing.JFrame {
         });
 
         txtSalidas.setForeground(new java.awt.Color(0, 0, 0));
-        txtSalidas.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
+        txtSalidas.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.00"))));
         txtSalidas.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         txtSalidas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {

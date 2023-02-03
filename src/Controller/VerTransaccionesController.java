@@ -14,6 +14,7 @@ import View.MenuPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import static java.lang.Float.parseFloat;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -53,6 +54,8 @@ public class VerTransaccionesController implements ActionListener {
 
         editVista.btnModificarT.addActionListener(this);
         editVista.btnModificarCVI.addActionListener(this);
+        
+        formVerT.btnEliminar.addActionListener(this);
     }
 
     @Override
@@ -64,7 +67,7 @@ public class VerTransaccionesController implements ActionListener {
         accionBuscarPorEmpresa(e);
         accionLimpiar(e);
         accionBuscar(e);
-
+        borrarTransaccionAndCVI(e);
         try {
             accionEditarCVI(e);
             accionEditTransaccion(e);
@@ -91,7 +94,8 @@ public class VerTransaccionesController implements ActionListener {
                 }
             }
         };
-
+        modelo.addColumn("Número");
+        modelo.addColumn("Codigo");
         modelo.addColumn("Fecha");
         modelo.addColumn("Descripción");
         modelo.addColumn("Cantidad");
@@ -99,19 +103,22 @@ public class VerTransaccionesController implements ActionListener {
         modelo.addColumn("Entradas");
         modelo.addColumn("A Impuesto ?");
         modelo.addColumn(" A IVA ?");
-        modelo.addColumn("Empresa / Orden");
+        //modelo.addColumn("Empresa / Orden");
 
         formVerT.tablaVerTransacciones.setRowHeight(25);
         formVerT.tablaVerTransacciones.setModel(modelo);
         for (Transaccion t : listT) {
-            String[] dato = new String[9];
-            dato[0] = t.getFecha().toString();
-            dato[1] = t.getDescripcion();
-            dato[2] = String.valueOf(t.getCantidad());
-            dato[3] = "$" + String.valueOf((float) t.getSalida());
-            dato[4] = "$" + String.valueOf(t.getEntrada());
-            dato[5] = cambiarFormatoIVA(t.isA_impuesto());
-            dato[6] = cambiarFormatoIVA(t.isA_iva());
+            String[] dato = new String[10];
+            int id = t.getIdTransaccion();
+            dato[0] = String.valueOf(id);
+            dato[1] = t.getCodigo().toString();
+            dato[2] = t.getFecha().toString();
+            dato[3] = t.getDescripcion();
+            dato[4] = String.valueOf(t.getCantidad());
+            dato[5] = "$" + String.valueOf((float) t.getSalida());
+            dato[6] = "$" + String.valueOf(t.getEntrada());
+            dato[7] = cambiarFormatoIVA(t.isA_impuesto());
+            dato[8] = cambiarFormatoIVA(t.isA_iva());
             String empresa = queryVerT.obtenerEmpresa(t.getIdOrdenEmp());
             dato[7] = empresa;
             modelo.addRow(dato);
@@ -224,7 +231,7 @@ public class VerTransaccionesController implements ActionListener {
         float entradas = (float) 0.0;
         for (int i = 0; i < formVerT.tablaVerTransacciones.getRowCount(); i++) {
 
-            String entradaSin$ = (formVerT.tablaVerTransacciones.getValueAt(i, 4)).toString().substring(1);
+            String entradaSin$ = (formVerT.tablaVerTransacciones.getValueAt(i, 6)).toString().substring(1);
             entradas += parseFloat(entradaSin$);
         }
         entradasString = "$" + String.valueOf(entradas);
@@ -236,7 +243,7 @@ public class VerTransaccionesController implements ActionListener {
         float salidas = (float) 0.0;
         for (int i = 0; i < formVerT.tablaVerTransacciones.getRowCount(); i++) {
 
-            String salidaSin$ = (formVerT.tablaVerTransacciones.getValueAt(i, 3)).toString().substring(1);
+            String salidaSin$ = (formVerT.tablaVerTransacciones.getValueAt(i, 5)).toString().substring(1);
             salidas += parseFloat(salidaSin$);
         }
         salidasString = "$" + String.valueOf(salidas);
@@ -423,16 +430,24 @@ public class VerTransaccionesController implements ActionListener {
                 t.setIdTransaccion(Integer.parseInt((String) formVerT.tablaVerTransacciones.getValueAt(fila, 0)));
                 String fecha = (String) formVerT.tablaVerTransacciones.getValueAt(fila, 2);
                 t.setFecha(java.sql.Date.valueOf(fecha));
+                
+                
                 String salida = formVerT.tablaVerTransacciones.getValueAt(fila, 5).toString();
+                
                 t.setSalida(Float.parseFloat(salida.substring(1)));
-                String entrada = formVerT.tablaVerTransacciones.getValueAt(fila, 6).toString().substring(1);
+                
+                String entrada = formVerT.tablaVerTransacciones.getValueAt(fila, 6).toString();
                 t.setEntrada(Float.parseFloat(entrada.substring(1)));
-                cvi = queryVerT.obtenerCompraVenta(Integer.parseInt((String) formVerT.tablaVerTransacciones.getValueAt(fila, 0)));
-
+   
+                
+              
                 editVista.labelNumT.setText(String.valueOf(t.getIdTransaccion()));
                 editVista.txtFechaT.setDate(t.getFecha());
                 editVista.txtSalidas.setText(String.valueOf(t.getSalida()));
                 editVista.txtEntradas.setText(String.valueOf(t.getEntrada()));
+                cvi = queryVerT.obtenerCompraVenta(Integer.parseInt((String) formVerT.tablaVerTransacciones.getValueAt(fila, 0)));
+
+                
 
                 setearVistaCVI(cvi);
                 editVista.setVisible(true);
@@ -481,9 +496,10 @@ public class VerTransaccionesController implements ActionListener {
                 Transaccion t = new Transaccion();
                 java.sql.Date sqlDate = new java.sql.Date(editVista.txtFechaT.getDate().getTime());
                 t.setFecha(sqlDate);
-                NumberFormat f = NumberFormat.getInstance();
-                t.setSalida((float) f.parse(verificarBlanco(editVista.txtSalidas.getText())).doubleValue());
-                t.setEntrada((float) f.parse(verificarBlanco(editVista.txtEntradas.getText())).doubleValue());
+                NumberFormat f1 = NumberFormat.getInstance();
+                NumberFormat f2 = NumberFormat.getInstance();
+                t.setSalida((float) f1.parse(verificarBlanco(editVista.txtSalidas.getText())).floatValue());
+                t.setEntrada((float) f2.parse(verificarBlanco(editVista.txtEntradas.getText())).floatValue());
                 queryVerT.modificarTransaccion(t, Integer.parseInt(editVista.labelNumT.getText()));
                 JOptionPane.showMessageDialog(null, "Transacción N° " + editVista.labelNumT.getText() + " modificada");
 
@@ -577,5 +593,31 @@ public class VerTransaccionesController implements ActionListener {
         cvi.setImp_r_ing_brutos((float) f.parse(verificarBlanco(editVista.txtImpRIngBrutos.getText())).doubleValue());
 
         return cvi;
+    }
+    
+    public void borrarTransaccionAndCVI(ActionEvent e) {
+
+        if (e.getSource() == formVerT.btnEliminar) {
+            
+            String botones[] = {"Aceptar", "Cancelar"};
+            int fila = formVerT.tablaVerTransacciones.getSelectedRow();
+
+            if (fila >= 0) {
+                int eleccion = JOptionPane.showOptionDialog(formVerT, "<html><p style = \"font:15px\">¿Desea eliminar la transaccion con número : " + formVerT.tablaVerTransacciones.getValueAt(fila, 0).toString() + " ? </p></html>", "Eliminar Transacción", 0, 0, null, botones, this);
+                if (eleccion == JOptionPane.YES_OPTION) {
+                    String idtransaccion = formVerT.tablaVerTransacciones.getValueAt(fila, 0).toString();
+                    queryVerT.eliminarCvi(idtransaccion);
+                    queryVerT.eliminarTransaccion(idtransaccion);
+                    JOptionPane.showMessageDialog(null,"<html><p style = \"font:15px\">La Transacción: "+formVerT.tablaVerTransacciones.getValueAt(fila, 0).toString() + " se ha eliminado");
+                    iniciarTabla2();
+                    
+                } else if (eleccion == JOptionPane.NO_OPTION) {
+                    JOptionPane.showMessageDialog(null, "<html><p style = \"font:15px\">Se ha cancelado operación</p></html>","Se canceló operación",1);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "<html><p style = \"font:15px\">Por favor, seleccione transacción a eliminar en la tabla</p></html>");
+            }
+
+        }
     }
 }

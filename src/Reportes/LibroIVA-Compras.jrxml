@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LibroIVA-Ventas" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1c348f58-a0c0-4502-981a-36c38d95f59d">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SistemaInformacion2"/>
 	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="308"/>
 	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="678"/>
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="548"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="fecha_desde" class="java.sql.Date"/>
 	<parameter name="fecha_hasta" class="java.sql.Date"/>
 	<parameter name="totalImp_Neto_Grav" class="java.lang.Double"/>
@@ -15,7 +17,7 @@
 	<parameter name="total_concep_no_grav" class="java.lang.Double"/>
 	<parameter name="total_imp_interno" class="java.lang.Double"/>
 	<parameter name="total_perc_iibb_compra" class="java.lang.Double"/>
-	<queryString language="SQL">
+	<queryString>
 		<![CDATA[SELECT sistemainformacion.compra_ventas_iva.fecha,
 	sistemainformacion.compra_ventas_iva.tipo_comprobante,
 	sistemainformacion.compra_ventas_iva.nro_comprobante,
@@ -232,7 +234,7 @@ WHERE
 				<text><![CDATA[C.U.I.T]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="300" y="10" width="60" height="30" uuid="08a26d1d-1505-4a3e-af19-75cafff8e672">
+				<reportElement x="300" y="10" width="70" height="30" uuid="08a26d1d-1505-4a3e-af19-75cafff8e672">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d97e95f9-0a82-4f92-bb04-fa7273e14924"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
@@ -363,12 +365,12 @@ WHERE
 				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="305" y="7" width="60" height="26" uuid="c94bee17-8d05-4a62-b005-d9df7bca422d">
+				<reportElement x="302" y="7" width="68" height="26" uuid="c94bee17-8d05-4a62-b005-d9df7bca422d">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d97e95f9-0a82-4f92-bb04-fa7273e14924"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Top"/>
+				<textElement textAlignment="Center" verticalAlignment="Top"/>
 				<textFieldExpression><![CDATA[$F{imp_neto_grav}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -405,29 +407,29 @@ WHERE
 				<textFieldExpression><![CDATA[$F{nro_comprobante}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="375" y="7" width="60" height="26" uuid="c11ef3b9-70c9-4ebf-88ed-0c05fe8de7a8">
+				<reportElement x="372" y="7" width="63" height="26" uuid="c11ef3b9-70c9-4ebf-88ed-0c05fe8de7a8">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe338b77-7043-4419-8cce-488e292f2aca"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Top"/>
+				<textElement textAlignment="Center" verticalAlignment="Top"/>
 				<textFieldExpression><![CDATA[$F{iva_facturado}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="675" y="7" width="60" height="26" uuid="dffb4d17-d71d-46f5-9b46-c0a6a144c36e">
+				<reportElement x="671" y="7" width="64" height="26" uuid="dffb4d17-d71d-46f5-9b46-c0a6a144c36e">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9dcb5747-f55a-4762-9dbd-9471d7e2bd48"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Top"/>
+				<textElement textAlignment="Center" verticalAlignment="Top"/>
 				<textFieldExpression><![CDATA[$F{ret_ganancias}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="735" y="7" width="69" height="26" uuid="c4d49f58-7cf7-4307-b7ec-af215e6a78eb">
+				<reportElement x="732" y="7" width="72" height="26" uuid="c4d49f58-7cf7-4307-b7ec-af215e6a78eb">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ee467a05-628b-463f-90a7-8728ae4db147"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Top"/>
+				<textElement textAlignment="Center" verticalAlignment="Top"/>
 				<textFieldExpression><![CDATA[$F{imp_total_fac}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -442,11 +444,11 @@ WHERE
 				<reportElement x="730" y="0" width="1" height="37" uuid="7f3cc048-3a8f-4e55-bb97-c939663b1796"/>
 			</line>
 			<textField>
-				<reportElement x="625" y="7" width="50" height="26" uuid="e84e06e5-d17d-44f8-9093-3bb60a1b7a27">
+				<reportElement x="621" y="7" width="54" height="26" uuid="e84e06e5-d17d-44f8-9093-3bb60a1b7a27">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Top"/>
+				<textElement textAlignment="Center" verticalAlignment="Top"/>
 				<textFieldExpression><![CDATA[$F{percepcion_iva}]]></textFieldExpression>
 			</textField>
 			<line>
@@ -551,23 +553,26 @@ WHERE
 				</reportElement>
 			</line>
 			<textField>
-				<reportElement x="438" y="7" width="62" height="30" uuid="436e78d5-51b1-4687-b56b-d3ef8dd67a9f">
+				<reportElement x="433" y="7" width="67" height="30" uuid="436e78d5-51b1-4687-b56b-d3ef8dd67a9f">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8e1ba7ad-7f85-469c-bf44-5b2291052f40"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{imp_interno}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="504" y="7" width="55" height="30" uuid="c9aa1175-b404-4d33-8a0a-fb511f7206e0">
+				<reportElement x="500" y="7" width="59" height="30" uuid="c9aa1175-b404-4d33-8a0a-fb511f7206e0">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4e81d04e-6e00-49b7-8e94-a80daa2c7e5b"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{concepto_no_grav}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="560" y="7" width="61" height="30" uuid="5cb8ef56-be05-4c56-a41e-3979514aec7d">
+				<reportElement x="557" y="7" width="64" height="30" uuid="5cb8ef56-be05-4c56-a41e-3979514aec7d">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f1b3933b-6fc1-4dc6-a79d-0b79aa38472f"/>
 				</reportElement>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{perc_iibb_compra}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -576,7 +581,7 @@ WHERE
 		<band height="44" splitType="Stretch">
 			<textField>
 				<reportElement x="300" y="0" width="70" height="30" uuid="b8c71560-2882-468b-95bf-0041f47f4d86"/>
-				<textElement verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{totalImp_Neto_Grav}]]></textFieldExpression>
@@ -590,35 +595,35 @@ WHERE
 			</staticText>
 			<textField>
 				<reportElement x="370" y="0" width="63" height="30" uuid="b4823cf1-46e1-4a68-a25a-83b0336e8d96"/>
-				<textElement verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{total_ivaFact}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="620" y="0" width="50" height="30" uuid="a96b09a7-5291-4875-97aa-616bd738a53d"/>
-				<textElement verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{total_ret_iva}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="670" y="0" width="61" height="30" uuid="f1780121-c40b-448e-bfd0-8bc33e078649"/>
-				<textElement verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{total_ret_ganancias}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="731" y="0" width="71" height="30" uuid="aca8b42a-240a-457b-95b4-4b7054b97f73"/>
-				<textElement verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{total_imp_total_fac}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="556" y="0" width="64" height="30" uuid="f2c23601-536e-4a4b-8321-7d6e3cbbea18"/>
-				<textElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{total_perc_iibb_compra}]]></textFieldExpression>
@@ -664,14 +669,14 @@ WHERE
 			</line>
 			<textField>
 				<reportElement x="498" y="0" width="58" height="30" uuid="e5d65c24-c97a-49a4-a632-3c30aa715da2"/>
-				<textElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{total_concep_no_grav}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="433" y="0" width="64" height="30" uuid="f93d2f45-f0d7-48b6-92ec-5000a3fdd015"/>
-				<textElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{total_imp_interno}]]></textFieldExpression>

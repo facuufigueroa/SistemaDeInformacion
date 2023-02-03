@@ -556,6 +556,6 @@ public class MenuController implements ActionListener {
     public void obtenerAño(){
         Calendar fecha = new GregorianCalendar();
         int año = fecha.get(Calendar.YEAR);  
-        menuPrincipal.labelAño.setText("AÑO ACTUAL: "+String.valueOf(año));
+        menuPrincipal.labelAño.setText("  AÑO: "+String.valueOf(año));
     }
 }

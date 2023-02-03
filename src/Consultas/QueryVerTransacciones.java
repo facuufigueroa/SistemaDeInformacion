@@ -51,6 +51,8 @@ public class QueryVerTransacciones {
             ResultSet rs = ps.executeQuery(sql);
             while (rs.next()) {
                 Transaccion t = new Transaccion();
+                t.setIdTransaccion(rs.getInt("idtransacciones"));
+                t.setCodigo(rs.getString("codigo"));
                 t.setFecha(rs.getDate("fecha"));
                 t.setDescripcion(rs.getString("descripcion"));
                 t.setCantidad(rs.getInt("cantidad"));
@@ -82,6 +84,8 @@ public class QueryVerTransacciones {
             ResultSet rs = ps.executeQuery(sql);
             while (rs.next()) {
                 Transaccion t = new Transaccion();
+                t.setIdTransaccion(rs.getInt("idtransacciones"));
+                t.setCodigo(rs.getString("codigo"));
                 t.setFecha(rs.getDate("fecha"));
                 t.setDescripcion(rs.getString("descripcion"));
                 t.setCantidad(rs.getInt("cantidad"));
@@ -113,6 +117,8 @@ public class QueryVerTransacciones {
             ResultSet rs = ps.executeQuery(sql);
             while (rs.next()) {
                 Transaccion t = new Transaccion();
+                t.setIdTransaccion(rs.getInt("idtransacciones"));
+                t.setCodigo(rs.getString("codigo"));
                 t.setFecha(rs.getDate("fecha"));
                 t.setDescripcion(rs.getString("descripcion"));
                 t.setCantidad(rs.getInt("cantidad"));
@@ -144,6 +150,8 @@ public class QueryVerTransacciones {
             ResultSet rs = ps.executeQuery(sql);
             while (rs.next()) {
                 Transaccion t = new Transaccion();
+                t.setIdTransaccion(rs.getInt("idtransacciones"));
+                t.setCodigo(rs.getString("codigo"));
                 t.setFecha(rs.getDate("fecha"));
                 t.setDescripcion(rs.getString("descripcion"));
                 t.setCantidad(rs.getInt("cantidad"));
@@ -352,6 +360,50 @@ public class QueryVerTransacciones {
             } catch (SQLException e) {
                 System.out.println(e);
             }
+        }
+    }
+    
+    public void eliminarTransaccion(String idtransaccion){
+        PreparedStatement ps = null;
+        Connection conn = getConnection();
+
+        String sql = "DELETE FROM transacciones AS t WHERE t.idtransacciones = '"+idtransaccion+"'";
+
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.err.println(e);
+       
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+
+        }
+    }
+    
+    public void eliminarCvi(String idtransaccion){
+        PreparedStatement ps = null;
+        Connection conn = getConnection();
+
+        String sql = "DELETE FROM compra_ventas_iva AS cvi WHERE cvi.id_transaccion = '"+idtransaccion+"'";
+
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.err.println(e);
+       
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+
         }
     }
 }
