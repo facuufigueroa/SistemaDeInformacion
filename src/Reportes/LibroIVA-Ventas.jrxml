@@ -3,7 +3,7 @@
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SistemaInformacion2"/>
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="394"/>
+	<property name="ireport.x" value="309"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="fecha_desde" class="java.sql.Date"/>
 	<parameter name="fecha_hasta" class="java.sql.Date"/>
@@ -15,7 +15,7 @@
 	<parameter name="total_ret_ganancias" class="java.lang.Double"/>
 	<parameter name="total_ret_iva" class="java.lang.Double"/>
 	<parameter name="total_imp_total_fac" class="java.lang.Double"/>
-	<queryString language="SQL">
+	<queryString>
 		<![CDATA[SELECT sistemainformacion.compra_ventas_iva.fecha,
 	sistemainformacion.compra_ventas_iva.tipo_comprobante,
 	sistemainformacion.compra_ventas_iva.nro_comprobante,

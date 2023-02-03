@@ -14,7 +14,6 @@ import View.MenuPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import static java.lang.Float.parseFloat;
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -34,8 +33,10 @@ public class VerTransaccionesController implements ActionListener {
     QueryEmpresaOrden queryEO = new QueryEmpresaOrden();
     QueryVerTransacciones queryVerT = new QueryVerTransacciones();
     EditView editVista = new EditView();
+    ArrayList<Transaccion> listT = queryVerT.listarTransacciones();
 
     public VerTransaccionesController(MenuPrincipal menu) {
+        updateTabla(listT);
         formVerT.setLocationRelativeTo(null);
         this.viewMenu = menu;
         viewMenu.btnVerTransacciones.addActionListener(this);
@@ -56,6 +57,8 @@ public class VerTransaccionesController implements ActionListener {
         editVista.btnModificarCVI.addActionListener(this);
         
         formVerT.btnEliminar.addActionListener(this);
+        
+        formVerT.btnActualizar.addActionListener(this);
     }
 
     @Override
@@ -68,6 +71,7 @@ public class VerTransaccionesController implements ActionListener {
         accionLimpiar(e);
         accionBuscar(e);
         borrarTransaccionAndCVI(e);
+        accionActualizar(e);
         try {
             accionEditarCVI(e);
             accionEditTransaccion(e);
@@ -618,6 +622,53 @@ public class VerTransaccionesController implements ActionListener {
                 JOptionPane.showMessageDialog(null, "<html><p style = \"font:15px\">Por favor, seleccione transacción a eliminar en la tabla</p></html>");
             }
 
+        }
+    }
+    
+    public void updateTabla(ArrayList<Transaccion> l) {
+        ArrayList<Transaccion> listT = l;
+        modelo = new DefaultTableModel() {
+            public boolean isCellEditable(int fila, int columna) {
+                if (columna == 1 && columna == 2 && columna == 3) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        };
+
+        modelo.addColumn("N° Transacc.");
+        modelo.addColumn("Codigo Transacc.");
+        modelo.addColumn("Fecha");
+        modelo.addColumn("Descripción");
+        modelo.addColumn("Cantidad");
+        modelo.addColumn("Salidas");
+        modelo.addColumn("Entradas");
+        modelo.addColumn("A Impuesto ?");
+        modelo.addColumn(" A IVA ?");
+
+        formVerT.tablaVerTransacciones.setRowHeight(25);
+        formVerT.tablaVerTransacciones.setModel(modelo);
+        for (Transaccion t : listT) {
+            String[] dato = new String[10];
+            dato[0] = String.valueOf(t.getIdTransaccion());
+            dato[1] = t.getCodigo();
+            dato[2] = t.getFecha().toString();
+            dato[3] = t.getDescripcion();
+            dato[4] = String.valueOf(t.getCantidad());
+            dato[5] = "$" + String.valueOf((float) t.getSalida());
+            dato[6] = "$" + String.valueOf(t.getEntrada());
+            dato[7] = cambiarFormatoIVA(t.isA_impuesto());
+            dato[8] = cambiarFormatoIVA(t.isA_iva());
+
+            modelo.addRow(dato);
+        }
+
+    }
+    
+    public void accionActualizar(ActionEvent e){
+        if(e.getSource() == formVerT.btnActualizar){
+            iniciarTabla2();
         }
     }
 }
