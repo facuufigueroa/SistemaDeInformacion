@@ -16,7 +16,8 @@ public class Transaccion {
     
     /*Attributes*/
     
-    private String numChequeFact;
+    private String numCheque;
+    private String numFactura;
     private Date fecha;
     private String descripcion;
     private int cantidad;
@@ -27,14 +28,14 @@ public class Transaccion {
     private boolean a_iva;
     private boolean a_impuesto;
 
-    public Transaccion(String codigo,int idTransaccion, int idCuenta, int idOrdenEmp, int idCat, int idSubCat, String numChequeFact, Date fecha, String descripcion, int cantidad, float salida, float entrada, float retenciones_g, float ret_ing_brutos, boolean a_iva, boolean a_impuesto) {
+    public Transaccion(String codigo,int idTransaccion, int idCuenta, int idOrdenEmp, int idCat, int idSubCat, String numChequeFact, Date fecha, String descripcion, int cantidad, float salida, float entrada, float retenciones_g, float ret_ing_brutos, boolean a_iva, boolean a_impuesto,String numFactura) {
         this.codigo=codigo;
         this.idTransaccion = idTransaccion;
         this.idCuenta = idCuenta;
         this.idOrdenEmp = idOrdenEmp;
         this.idCat = idCat;
         this.idSubCat = idSubCat;
-        this.numChequeFact = numChequeFact;
+        this.numCheque = numChequeFact;
         this.fecha = fecha;
         this.descripcion = descripcion;
         this.cantidad = cantidad;
@@ -44,6 +45,7 @@ public class Transaccion {
         this.ret_ing_brutos = ret_ing_brutos;
         this.a_iva = a_iva;
         this.a_impuesto = a_impuesto;
+        this.numFactura=numFactura;
     }
 
     public Transaccion(int idCuenta, int idOrdenEmp, int idCat, int idSubCat, String numChequeFact, Date fecha, String descripcion, int cantidad,float salida, float entrada, float retenciones_g, float ret_ing_brutos, boolean a_iva, boolean a_impuesto) {
@@ -51,7 +53,7 @@ public class Transaccion {
         this.idOrdenEmp = idOrdenEmp;
         this.idCat = idCat;
         this.idSubCat = idSubCat;
-        this.numChequeFact = numChequeFact;
+        this.numCheque = numChequeFact;
         this.fecha = fecha;
         this.descripcion = descripcion;
         this.cantidad = cantidad;
@@ -107,11 +109,11 @@ public class Transaccion {
     }
 
     public String getNumChequeFact() {
-        return numChequeFact;
+        return numCheque;
     }
 
     public void setNumChequeFact(String numChequeFact) {
-        this.numChequeFact = numChequeFact;
+        this.numCheque = numChequeFact;
     }
 
     public Date getFecha() {
@@ -194,6 +196,22 @@ public class Transaccion {
         this.codigo = codigo;
     }
 
+    public String getNumCheque() {
+        return numCheque;
+    }
+
+    public void setNumCheque(String numCheque) {
+        this.numCheque = numCheque;
+    }
+
+    public String getNumFactura() {
+        return numFactura;
+    }
+
+    public void setNumFactura(String numFactura) {
+        this.numFactura = numFactura;
+    }
+    
    
     
 }

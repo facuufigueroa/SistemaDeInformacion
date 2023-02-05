@@ -430,35 +430,36 @@ public class VerTransaccionesController implements ActionListener {
             Transaccion t = new Transaccion();
             int fila = formVerT.tablaVerTransacciones.getSelectedRow();
             if (fila >= 0) {
+                
+                    t.setIdTransaccion(Integer.parseInt((String) formVerT.tablaVerTransacciones.getValueAt(fila, 0)));
+                    String fecha = (String) formVerT.tablaVerTransacciones.getValueAt(fila, 2);
+                    t.setFecha(java.sql.Date.valueOf(fecha));
 
-                t.setIdTransaccion(Integer.parseInt((String) formVerT.tablaVerTransacciones.getValueAt(fila, 0)));
-                String fecha = (String) formVerT.tablaVerTransacciones.getValueAt(fila, 2);
-                t.setFecha(java.sql.Date.valueOf(fecha));
-                
-                
-                String salida = formVerT.tablaVerTransacciones.getValueAt(fila, 5).toString();
-                
-                t.setSalida(Float.parseFloat(salida.substring(1)));
-                
-                String entrada = formVerT.tablaVerTransacciones.getValueAt(fila, 6).toString();
-                t.setEntrada(Float.parseFloat(entrada.substring(1)));
-   
-                
-              
-                editVista.labelNumT.setText(String.valueOf(t.getIdTransaccion()));
-                editVista.txtFechaT.setDate(t.getFecha());
-                editVista.txtSalidas.setText(String.valueOf(t.getSalida()));
-                editVista.txtEntradas.setText(String.valueOf(t.getEntrada()));
-                cvi = queryVerT.obtenerCompraVenta(Integer.parseInt((String) formVerT.tablaVerTransacciones.getValueAt(fila, 0)));
 
-                
+                    String salida = formVerT.tablaVerTransacciones.getValueAt(fila, 5).toString();
 
-                setearVistaCVI(cvi);
-                editVista.setVisible(true);
-                editVista.setLocationRelativeTo(null);
-                editVista.txtNombre.setEditable(false);
-                editVista.txtCuit.setEditable(false);
-                editVista.txtOperacion.setEditable(false);
+                    t.setSalida(Float.parseFloat(salida.substring(1)));
+
+                    String entrada = formVerT.tablaVerTransacciones.getValueAt(fila, 6).toString();
+                    t.setEntrada(Float.parseFloat(entrada.substring(1)));
+
+                    mensajeVerificacion(t.getIdTransaccion());    
+
+                    editVista.labelNumT.setText(String.valueOf(t.getIdTransaccion()));
+                    editVista.txtFechaT.setDate(t.getFecha());
+                    editVista.txtSalidas.setText(String.valueOf(t.getSalida()));
+                    editVista.txtEntradas.setText(String.valueOf(t.getEntrada()));
+
+
+                    cvi = queryVerT.obtenerCompraVenta(Integer.parseInt((String) formVerT.tablaVerTransacciones.getValueAt(fila, 0)));
+
+                    setearVistaCVI(cvi);
+                    editVista.setVisible(true);
+                    editVista.setLocationRelativeTo(null);
+                    editVista.txtNombre.setEditable(false);
+                    editVista.txtCuit.setEditable(false);
+                    editVista.txtOperacion.setEditable(false);
+                
             } else {
                 JOptionPane.showMessageDialog(null, "Para Modificar Transacciones debe seleccionar la fila en la tabla.\n"
                         + "Haciendo click una sola vez.");
@@ -673,5 +674,19 @@ public class VerTransaccionesController implements ActionListener {
         if(e.getSource() == formVerT.btnActualizar){
             iniciarTabla2();
         }
+    }
+    
+    
+    /*Método para aquellas transacciones que no se le discriminó el IVA, entonces muestra un texto*/
+    public void mensajeVerificacion(int idTransaccion){
+          if(!queryVerT.existeIdTransaccioncvi(idTransaccion)){
+              editVista.labelVerificacion.setText("No se discriminó COMPRA_VENTA_IVA para esta Transacción.");
+              editVista.btnModificarCVI.setEnabled(false);
+          }   
+          else{
+              editVista.labelVerificacion.setText("");
+              editVista.btnModificarCVI.setEnabled(true);
+          }
+      
     }
 }

@@ -18,22 +18,23 @@ public class QueryTransaccion {
      public void addTransaccion(Transaccion t){
         PreparedStatement ps;
         Connection conn = getConnection();
-        String sql = "INSERT INTO transacciones(codigo,id_cuenta,cheque_fact,fecha,descripcion,id_orden_empresa,cantidad,id_categoria,id_subcategoria,salidas,entradas,a_impuestos_iva,a_iva) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+        String sql = "INSERT INTO transacciones(codigo,id_cuenta,cheque,num_fact,fecha,descripcion,id_orden_empresa,cantidad,id_categoria,id_subcategoria,salidas,entradas,a_impuestos_iva,a_iva) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
         try {
             ps = conn.prepareStatement(sql);
             ps.setString(1, t.getCodigo());
             ps.setInt(2, t.getIdCuenta());
-            ps.setString(3, t.getNumChequeFact());
-            ps.setDate(4, (Date) t.getFecha());
-            ps.setString(5, t.getDescripcion());
-            ps.setInt(6, t.getIdOrdenEmp());
-            ps.setInt(7,t.getCantidad());
-            ps.setInt(8, t.getIdCat());
-            ps.setInt(9, t.getIdSubCat());
-            ps.setFloat(10, t.getSalida());
-            ps.setFloat(11, t.getEntrada());
-            ps.setBoolean(12, t.isA_impuesto());
-            ps.setBoolean(13, t.isA_iva());
+            ps.setString(3, t.getNumCheque());
+            ps.setString(4, t.getNumFactura());
+            ps.setDate(5, (Date) t.getFecha());
+            ps.setString(6, t.getDescripcion());
+            ps.setInt(7, t.getIdOrdenEmp());
+            ps.setInt(8,t.getCantidad());
+            ps.setInt(9, t.getIdCat());
+            ps.setInt(10, t.getIdSubCat());
+            ps.setFloat(11, t.getSalida());
+            ps.setFloat(12, t.getEntrada());
+            ps.setBoolean(13, t.isA_impuesto());
+            ps.setBoolean(14, t.isA_iva());
             ps.execute();
         } catch (SQLException e) {
             System.err.println(e);

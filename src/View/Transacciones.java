@@ -50,12 +50,10 @@ public class Transacciones extends javax.swing.JFrame {
         tablaTransacciones = new javax.swing.JTable();
         btnCompraVentasIVA = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
         txtNumFact = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         txtTipoFact = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
-        cbbEleccionCheqFact = new javax.swing.JComboBox<>();
         jLabel21 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -236,10 +234,6 @@ public class Transacciones extends javax.swing.JFrame {
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("TRANSACCIONES REGISTRADAS");
 
-        jLabel18.setFont(new java.awt.Font("Arial Narrow", 3, 18)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setText("Seleccione");
-
         txtNumFact.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
 
         jLabel19.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
@@ -251,10 +245,6 @@ public class Transacciones extends javax.swing.JFrame {
         jLabel20.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("N° Factura");
-
-        cbbEleccionCheqFact.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        cbbEleccionCheqFact.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Factura", "Cheque", " " }));
-        cbbEleccionCheqFact.setSelectedIndex(2);
 
         jLabel21.setFont(new java.awt.Font("Arial Narrow", 3, 18)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
@@ -274,7 +264,6 @@ public class Transacciones extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel7)
-                                    .addComponent(jLabel18)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel4))
@@ -301,8 +290,7 @@ public class Transacciones extends javax.swing.JFrame {
                                         .addComponent(cbbEmpresa, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(cbbTipoCuenta, javax.swing.GroupLayout.Alignment.LEADING, 0, 273, Short.MAX_VALUE))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(cbbEleccionCheqFact, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(64, 64, 64)
+                                        .addGap(177, 177, 177)
                                         .addComponent(jLabel21)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -415,10 +403,7 @@ public class Transacciones extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(cbbEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbbEleccionCheqFact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel18)
-                            .addComponent(jLabel21))
+                        .addComponent(jLabel21)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -530,7 +515,6 @@ public class Transacciones extends javax.swing.JFrame {
     public javax.swing.JButton btnCompraVentasIVA;
     public javax.swing.JComboBox<String> cbbCategorias;
     public javax.swing.JComboBox<String> cbbCuentas;
-    public javax.swing.JComboBox<String> cbbEleccionCheqFact;
     public javax.swing.JComboBox<String> cbbEmpresa;
     public javax.swing.JComboBox<String> cbbImp;
     public javax.swing.JComboBox<String> cbbSubCategoria;
@@ -544,7 +528,6 @@ public class Transacciones extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;

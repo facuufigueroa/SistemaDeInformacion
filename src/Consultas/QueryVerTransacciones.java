@@ -408,4 +408,23 @@ public class QueryVerTransacciones {
 
         }
     }
+    
+    public boolean existeIdTransaccioncvi(int id) {
+
+        PreparedStatement ps = null;
+        Connection conn = conexion.getConnection();
+        try {
+            String sql = "SELECT * FROM compra_ventas_iva as cvi WHERE cvi.id_transaccion =" + id;
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                return true;
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return false;
+    }
 }

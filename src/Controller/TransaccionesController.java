@@ -10,7 +10,6 @@ import Consultas.QueryTipoCuenta;
 import Consultas.QueryTransaccion;
 import Model.Categoria;
 import Model.CompraVentaIva;
-import Model.Cuentas;
 import Model.EmpresaOrden;
 import Model.PromptComboBoxRenderer;
 import Model.SubCategoria;
@@ -60,10 +59,7 @@ public class TransaccionesController implements ActionListener {
         this.transacciones.btnCompraVentasIVA.addActionListener(this);
         this.transacciones.cbbCategorias.addActionListener(this);
 
-        this.transacciones.cbbEleccionCheqFact.addActionListener(this);
-        this.transacciones.txtNumFact.setEnabled(false);
-        this.transacciones.txtNumCheque.setEnabled(false);
-        this.transacciones.txtTipoFact.setEnabled(false);
+      
 
         /*TODO CVI*/
         setearCamosEnCeroCVI();
@@ -91,7 +87,6 @@ public class TransaccionesController implements ActionListener {
             Logger.getLogger(TransaccionesController.class.getName()).log(Level.SEVERE, null, ex);
         }
         accionTipoCategoria(e);
-        accionSelecionCheqFact(e);
     }
 
     public void loadNewTransaccion() {
@@ -117,31 +112,7 @@ public class TransaccionesController implements ActionListener {
         }
     }
 
-    public void accionSelecionCheqFact(ActionEvent e) {
-        if (e.getSource() == transacciones.cbbEleccionCheqFact) {
-            if (transacciones.cbbEleccionCheqFact.getSelectedItem().equals("")) {
-                transacciones.txtNumCheque.setEnabled(false);
-                transacciones.txtNumFact.setEnabled(false);
-                transacciones.txtTipoFact.setEnabled(false);
-                transacciones.txtTipoFact.setText("");
-                transacciones.txtNumFact.setText("");
-                transacciones.txtNumCheque.setText("");
-            } else {
-                if (transacciones.cbbEleccionCheqFact.getSelectedItem().equals("Cheque")) {
-                    transacciones.txtNumCheque.setEnabled(true);
-                    transacciones.txtNumFact.setEnabled(false);
-                    transacciones.txtTipoFact.setEnabled(false);
-                    transacciones.txtTipoFact.setText("");
-                    transacciones.txtNumFact.setText("");
-                } else if (transacciones.cbbEleccionCheqFact.getSelectedItem().equals("Factura")) {
-                    transacciones.txtNumFact.setEnabled(true);
-                    transacciones.txtTipoFact.setEnabled(true);
-                    transacciones.txtNumCheque.setEnabled(false);
-                    transacciones.txtNumCheque.setText("");
-                }
-            }
-        }
-    }
+    
 
     public void iniciarComboBoxCuentas() {
         transacciones.cbbCuentas.removeAllItems();
@@ -314,13 +285,12 @@ public class TransaccionesController implements ActionListener {
 
         t.setIdCuenta(queryCuentas.obtenerIdCuentaPorNombre((String) transacciones.cbbCuentas.getSelectedItem()));
 
-        if ("".equals(transacciones.txtNumCheque.getText())) {
-            t.setNumChequeFact(transacciones.txtTipoFact.getText().toUpperCase() + "-" + transacciones.txtNumFact.getText());
-        }
+       
+        t.setNumFactura(transacciones.txtTipoFact.getText().toUpperCase() + "-" + transacciones.txtNumFact.getText());
+        
 
-        if ("".equals(transacciones.txtNumFact.getText())) {
-            t.setNumChequeFact(transacciones.txtNumCheque.getText()); //Puede ser numCheque o
-        }
+        t.setNumCheque(transacciones.txtNumCheque.getText()); //Puede ser numCheque o
+      
 
         java.sql.Date sqlDate = new java.sql.Date(transacciones.txtFecha.getDate().getTime());
         t.setFecha(sqlDate);
