@@ -14,6 +14,7 @@ public class CompraVentaIva {
     private String numComprobante;
     private String cuit;
 
+    /*Ell atributo iva_facturado es del 10.5*/
     private float imp_neto_grav;
     private float iva_facturado;
     private float imp_interno;
@@ -33,13 +34,14 @@ public class CompraVentaIva {
     private float ing_brutos;
     private float ret_iva;
     private float imp_r_ing_brutos;
+    private float iva_facturado_21;
 
     private String empresa;
 
     public CompraVentaIva() {
     }
 
-    public CompraVentaIva(int idTransaccion, String operacion, Date fecha, String tipo_comprobante, String numComprobante, String cuit, float imp_neto_grav, float iva_facturado, float imp_interno, float concep_no_grav, float percepcion_iva, float ret_ganancias, float perc_iibb_compra, float imp_total_fact, float ite_iva_dere_reg, float c_no_grav_sellos, float ret_iibb_venta, float iva_rg_212, float grav_ley_25413, float int_numerales, float otros, float operaciones_exentas, float ing_brutos, float ret_iva, float imp_r_ing_brutos, String empresa) {
+    public CompraVentaIva(int idTransaccion, String operacion, Date fecha, String tipo_comprobante, String numComprobante, String cuit, float imp_neto_grav, float iva_facturado, float imp_interno, float concep_no_grav, float percepcion_iva, float ret_ganancias, float perc_iibb_compra, float imp_total_fact, float ite_iva_dere_reg, float c_no_grav_sellos, float ret_iibb_venta, float iva_rg_212, float grav_ley_25413, float int_numerales, float otros, float operaciones_exentas, float ing_brutos, float ret_iva, float imp_r_ing_brutos, String empresa,float iva_facturado_21) {
         this.idTransaccion = idTransaccion;
         this.operacion = operacion;
         this.fecha = fecha;
@@ -66,6 +68,7 @@ public class CompraVentaIva {
         this.ret_iva = ret_iva;
         this.imp_r_ing_brutos = imp_r_ing_brutos;
         this.empresa = empresa;
+        this.iva_facturado_21=iva_facturado_21;
     }
 
     public int getIdTransaccion() {
@@ -276,4 +279,13 @@ public class CompraVentaIva {
         this.imp_r_ing_brutos = imp_r_ing_brutos;
     }
 
+    public float getIva_facturado_21() {
+        return iva_facturado_21;
+    }
+
+    public void setIva_facturado_21(float iva_facturado_21) {
+        this.iva_facturado_21 = iva_facturado_21;
+    }
+    
+    
 }

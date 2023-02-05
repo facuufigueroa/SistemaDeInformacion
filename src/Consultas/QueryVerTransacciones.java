@@ -249,9 +249,9 @@ public class QueryVerTransacciones {
         Connection conn = conexion.getConnection();
         CompraVentaIva cvi = new CompraVentaIva();
         try {
-            String sql = "SELECT c.operacion,c.fecha,c.tipo_comprobante,c.nro_comprobante,c.cuit,c.imp_neto_grav,c.iva_facturado,c.imp_interno,c.percepcion_iva,\n"
+            String sql = "SELECT c.operacion,c.fecha,c.tipo_comprobante,c.nro_comprobante,c.cuit,c.imp_neto_grav,c.iva_facturado_10,c.imp_interno,c.percepcion_iva,\n"
                     + "c.ret_ganancias,c.perc_iibb_compra,c.imp_total_fac,c.ite_iva_dere_reg,c.c_no_grav_sellos,c.ret_ii_bb_venta,c.iva_rg_212, c.grav_ley_25413,\n"
-                    + "c.int_numerales,c.otros,c.nombre,c.operaciones_exentas,c.ing_brutos,c.ret_iva,c.imp_r_ing_brutos\n"
+                    + "c.int_numerales,c.otros,c.nombre,c.operaciones_exentas,c.ing_brutos,c.ret_iva,c.imp_r_ing_brutos,c.iva_facturado_21\n"
                     + "FROM compra_ventas_iva as c \n"
                     + "WHERE c.id_transaccion =" + idtransaccion;
             ps = conn.prepareStatement(sql);
@@ -264,7 +264,7 @@ public class QueryVerTransacciones {
                 cvi.setCuit(rs.getString("cuit"));
                 cvi.setEmpresa(rs.getString("nombre"));
                 cvi.setImp_neto_grav(rs.getFloat("imp_neto_grav"));
-                cvi.setIva_facturado(rs.getFloat("iva_facturado"));
+                cvi.setIva_facturado(rs.getFloat("iva_facturado_10"));
                 cvi.setImp_interno(rs.getFloat("imp_interno"));
                 cvi.setPercepcion_iva(rs.getFloat("percepcion_iva"));
                 cvi.setRet_ganancias(rs.getFloat("ret_ganancias"));
@@ -281,6 +281,7 @@ public class QueryVerTransacciones {
                 cvi.setIng_brutos(rs.getFloat("ing_brutos"));
                 cvi.setRet_iva(rs.getFloat("ret_iva"));
                 cvi.setImp_r_ing_brutos(rs.getFloat("imp_r_ing_brutos"));
+                cvi.setIva_facturado_21(rs.getFloat("iva_facturado_21"));
             }
 
         } catch (Exception e) {
@@ -320,10 +321,10 @@ public class QueryVerTransacciones {
         Connection con = getConnection();
 
         String sql = "UPDATE compra_ventas_iva AS c\n"
-                + "set c.fecha = ? , c.tipo_comprobante=?, c.nro_comprobante = ?, c.imp_neto_grav = ?, c.iva_facturado=?,\n"
+                + "set c.fecha = ? , c.tipo_comprobante=?, c.nro_comprobante = ?, c.imp_neto_grav = ?, c.iva_facturado_10=?,\n"
                 + "c.imp_interno = ?, c.concepto_no_grav =?, c.percepcion_iva = ?, c.ret_ganancias =?,c.perc_iibb_compra = ?,c.imp_total_fac =?, c.ite_iva_dere_reg =?,\n"
                 + "c.c_no_grav_sellos = ?,c.ret_ii_bb_venta=?,c.iva_rg_212=?,c.grav_ley_25413 =?, c.int_numerales=?, c.otros =?,c.operaciones_exentas =?,\n"
-                + "c.ing_brutos = ?, c.ret_iva =?,c.imp_r_ing_brutos = ? WHERE c.id_transaccion =  " + id;
+                + "c.ing_brutos = ?, c.ret_iva =?,c.imp_r_ing_brutos = ?,c.iva_facturado_21=? WHERE c.id_transaccion =  " + id;
 
         try {
             ps = con.prepareStatement(sql);
@@ -349,6 +350,7 @@ public class QueryVerTransacciones {
             ps.setFloat(20, cvi.getIng_brutos());
             ps.setFloat(21, cvi.getRet_iva());
             ps.setFloat(22, cvi.getImp_r_ing_brutos());
+            ps.setFloat(23, cvi.getIva_facturado_21());
             ps.executeUpdate();
 
         } catch (SQLException e) {

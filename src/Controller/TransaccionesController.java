@@ -12,6 +12,7 @@ import Model.Categoria;
 import Model.CompraVentaIva;
 import Model.Cuentas;
 import Model.EmpresaOrden;
+import Model.PromptComboBoxRenderer;
 import Model.SubCategoria;
 import Model.TipoCategoria;
 import Model.TipoCuenta;
@@ -144,13 +145,13 @@ public class TransaccionesController implements ActionListener {
 
     public void iniciarComboBoxCuentas() {
         transacciones.cbbCuentas.removeAllItems();
+        
         ArrayList<String> nombreCuentas = queryCuentas.listarPorNombre();
-        Cuentas ct = new Cuentas();
-        ct.setNombre("");
-        nombreCuentas.add(0, ct.getNombre());
         for (String c : nombreCuentas) {
             transacciones.cbbCuentas.addItem(c);
         }
+        transacciones.cbbCuentas.setRenderer(new PromptComboBoxRenderer("Pago Con..."));
+        transacciones.cbbCuentas.setSelectedIndex(-1);
     }
 
     public void iniciarComboBoxTipoCategoria() {
@@ -167,12 +168,11 @@ public class TransaccionesController implements ActionListener {
     public void iniciarComboBoxCategoria() {
         transacciones.cbbCategorias.removeAllItems();
         ArrayList<String> listCategoria = queryCategoria.listarPorNombre();
-        Categoria ca = new Categoria();
-        ca.setNombre("");
-        listCategoria.add(0, ca.getNombre());
         for (String cat : listCategoria) {
             transacciones.cbbCategorias.addItem(cat);
         }
+        transacciones.cbbCategorias.setRenderer(new PromptComboBoxRenderer("Categoria:"));
+        transacciones.cbbCategorias.setSelectedIndex(-1);
     }
 
     public void iniciarcomboBoxSubcategoria() {
@@ -189,12 +189,12 @@ public class TransaccionesController implements ActionListener {
     public void iniciarComboBoxEmpresa() {
         transacciones.cbbEmpresa.removeAllItems();
         ArrayList<String> listEmpresas = queryEO.listarPorNombre();
-        EmpresaOrden e = new EmpresaOrden();
-        e.setNombre("");
-        listEmpresas.add(0, e.getNombre());
+      
         for (String emp : listEmpresas) {
             transacciones.cbbEmpresa.addItem(emp);
         }
+        transacciones.cbbEmpresa.setRenderer(new PromptComboBoxRenderer("Empresa/Orden:"));
+        transacciones.cbbEmpresa.setSelectedIndex(-1);
     }
 
     public void iniciarTabla() {
@@ -362,12 +362,12 @@ public class TransaccionesController implements ActionListener {
     }
 
     public boolean verificarVacios() {
-        if (transacciones.cbbCuentas.getSelectedItem().equals("")
+        if (transacciones.cbbCuentas.getRenderer().equals("Pago Con...")
                 || transacciones.cbbTipoCategoria.getSelectedItem().equals("")
                 || transacciones.cbbTipoCuenta.getSelectedItem().equals("")
                 || transacciones.txtFecha.getDate() == null
-                || transacciones.cbbEmpresa.getSelectedItem().equals("")
-                || transacciones.cbbCategorias.getSelectedItem().equals("")
+                || transacciones.cbbEmpresa.getRenderer().equals("Empresa/Orden:")
+                || transacciones.cbbCategorias.getRenderer().equals("Categoria:")
                 || transacciones.cbbSubCategoria.getSelectedItem().equals("")
                 || transacciones.txtDescripcion.getText().equals("")
                 || transacciones.txtNumCheque.getText().equals("")
@@ -548,6 +548,9 @@ public class TransaccionesController implements ActionListener {
 
         cvi.setImp_r_ing_brutos((float) f.parse(verificarBlanco(formCVI.txtImpRIngBrutos.getText())).doubleValue());
 
+        cvi.setIva_facturado_21((float) f.parse(verificarBlanco(formCVI.txtIvaFact21.getText())).doubleValue());
+
+        
         return cvi;
     }
 
@@ -580,6 +583,8 @@ public class TransaccionesController implements ActionListener {
         formCVI.txtIngBrutos.setText("0.0");
         formCVI.txtRetIva.setText("0.0");
         formCVI.txtImpRIngBrutos.setText("0.0");
+        formCVI.txtIvaFact21.setText("0.0");
+        
     }
 
     public boolean verificarBlancos() {
