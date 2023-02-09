@@ -44,7 +44,9 @@ public class TransaccionesController implements ActionListener {
     QueryTransaccion queryTransaccion = new QueryTransaccion();
 
     private static TransaccionesController tSingleton;
-
+    
+    int id_new_transaccion = queryTransaccion.obtenerMaxId()+1;
+    
     /* todo cvi*/
     FormComprasVentasIVA formCVI = new FormComprasVentasIVA();
     QueryTransaccion queryT = new QueryTransaccion();
@@ -70,7 +72,8 @@ public class TransaccionesController implements ActionListener {
 
         this.formCVI.btnFinalizar.addActionListener(this);
         this.transacciones.btnSaveSinIva.addActionListener(this);
-
+        
+        transacciones.labelNumT.setText(String.valueOf(id_new_transaccion));
     }
 
     @Override
@@ -234,6 +237,7 @@ public class TransaccionesController implements ActionListener {
                     iniciarTabla();
                     loadComVentaIva();
                     setearCamosEnCeroCVI();
+                    transacciones.labelNumT.setText(String.valueOf(queryTransaccion.obtenerMaxId()+1));
                 } else {
                     JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\"> Error al continuar con la Transacción - Ya existe codigo</p/</html>");
                 }
@@ -263,6 +267,7 @@ public class TransaccionesController implements ActionListener {
                     JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\">Transacción registrada correctamente</p/</html>");
                     iniciarTabla();
                     setearCamposEnCero();
+                    transacciones.labelNumT.setText(String.valueOf(queryTransaccion.obtenerMaxId()+1));
                 } else {
                     JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\"> Error al continuar con la Transacción - Ya existe codigo</p/</html>");
                 }
