@@ -2,8 +2,8 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubReporteElRocio" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="4872a3c4-819b-48c1-b625-86e3d626882c">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SistemaInformacion2"/>
-	<property name="ireport.zoom" value="3.0"/>
-	<property name="ireport.x" value="993"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="idcategoria" class="java.lang.Integer"/>
 	<parameter name="idtipo_categoria" class="java.lang.Integer"/>
@@ -241,7 +241,7 @@ ORDER BY t.fecha]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="270" y="0" width="70" height="30" uuid="74eca49e-b4cc-4dba-b3fc-0227d72bcf5a">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c4470527-9cc8-4903-b9d4-eea87cd8f4a0"/>
 				</reportElement>
@@ -250,7 +250,7 @@ ORDER BY t.fecha]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{entradas}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="340" y="0" width="70" height="30" uuid="ac579671-c970-4260-bf07-fe35d3c8e0f6">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7d45f787-434a-4ee8-bf18-1cc4d0a94071"/>
 				</reportElement>
@@ -321,20 +321,20 @@ ORDER BY t.fecha]]>
 				</textElement>
 				<text><![CDATA[Totales]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="280" y="0" width="64" height="30" uuid="ddadfe72-1cd5-4129-bc79-1adab0b1bf03">
+			<textField pattern="#,##0.00">
+				<reportElement x="272" y="0" width="72" height="30" uuid="ddadfe72-1cd5-4129-bc79-1adab0b1bf03">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
-				<textElement verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{suma_entradas}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="350" y="0" width="64" height="30" uuid="370ab256-e354-4904-bcef-0b1d3c78c981">
+			<textField pattern="#,##0.00">
+				<reportElement x="341" y="0" width="73" height="30" uuid="370ab256-e354-4904-bcef-0b1d3c78c981">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
-				<textElement verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{suma_salidas}]]></textFieldExpression>

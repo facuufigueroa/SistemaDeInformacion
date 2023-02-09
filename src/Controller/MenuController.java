@@ -147,7 +147,7 @@ public class MenuController implements ActionListener {
     public void reporteLibroVentas(ActionEvent e) {
         if (e.getSource() == menuPrincipal.btnLibroVentas) {
             formFechaVentas.setVisible(true);
-
+            formFechaVentas.setLocationRelativeTo(null);    
         }
     }
 
@@ -198,6 +198,7 @@ public class MenuController implements ActionListener {
     public void reporteLibroCompras(ActionEvent e) {
         if (e.getSource() == menuPrincipal.btnLibroIvaCompras) {
             formFechaCompras.setVisible(true);
+            formFechaCompras.setLocationRelativeTo(null);
         }
     }
 

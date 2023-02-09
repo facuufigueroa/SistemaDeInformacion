@@ -233,7 +233,7 @@ ORDER BY tc.nombre, t.fecha]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="280" y="0" width="74" height="30" uuid="2733c209-81ab-4eac-a5fd-903b33912c4c">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="844a9247-0d2b-4d26-ba48-60b890b98d95"/>
 				</reportElement>
@@ -242,7 +242,7 @@ ORDER BY tc.nombre, t.fecha]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{entradas}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="360" y="0" width="80" height="30" uuid="aed94e3b-7b76-47ec-8502-f471ca043e69">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d6899bcc-e401-4d39-888b-96942f0ba6fb"/>
 				</reportElement>
@@ -307,7 +307,7 @@ ORDER BY tc.nombre, t.fecha]]>
 				</textElement>
 				<text><![CDATA[Totales]]></text>
 			</staticText>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="280" y="1" width="70" height="30" uuid="1424326e-c781-4b86-9bab-53ca3f8393dd">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
@@ -353,7 +353,7 @@ ORDER BY tc.nombre, t.fecha]]>
 				</textElement>
 				<text><![CDATA[$]]></text>
 			</staticText>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="361" y="1" width="78" height="30" uuid="a826afa9-4a36-4c96-be94-e80858323ec4"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>

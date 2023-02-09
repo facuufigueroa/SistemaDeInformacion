@@ -150,7 +150,7 @@ ORDER BY tc.nombre]]>
 	</detail>
 	<summary>
 		<band height="85" splitType="Stretch">
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="180" y="50" width="90" height="30" uuid="eced6293-1856-419c-9619-249c9480961c"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
@@ -164,7 +164,7 @@ ORDER BY tc.nombre]]>
 				</textElement>
 				<text><![CDATA[Resumen sumas totales:]]></text>
 			</staticText>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="280" y="50" width="80" height="30" uuid="96893dd3-155d-4272-bde2-9009b60493a9"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>

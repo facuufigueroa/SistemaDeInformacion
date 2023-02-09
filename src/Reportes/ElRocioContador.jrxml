@@ -4,7 +4,7 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SistemaInformacion2"/>
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="100"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="fecha_desde" class="java.sql.Date"/>
 	<parameter name="fecha_hasta" class="java.sql.Date"/>
 	<queryString>
@@ -157,7 +157,7 @@ ORDER BY tc.nombre,c.nombre,t.fecha]]>
 				<line>
 					<reportElement x="1" y="12" width="1" height="27" uuid="f28abb01-ff8a-41ae-a3cc-52b2ae4ad45f"/>
 				</line>
-				<textField>
+				<textField pattern="#,##0.00">
 					<reportElement x="273" y="13" width="106" height="26" uuid="e4c0c772-b3f8-421e-bbd0-d7a3ac618b2a"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="14" isBold="true"/>
@@ -178,7 +178,7 @@ ORDER BY tc.nombre,c.nombre,t.fecha]]>
 					</textElement>
 					<text><![CDATA[$]]></text>
 				</staticText>
-				<textField>
+				<textField pattern="#,##0.00">
 					<reportElement x="381" y="12" width="100" height="28" uuid="4ffba75d-7c90-4b3c-81ad-b51c248c8584"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="14" isBold="true"/>
@@ -217,7 +217,7 @@ ORDER BY tc.nombre,c.nombre,t.fecha]]>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_cant_cat}]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField pattern="#,##0.00">
 					<reportElement x="273" y="12" width="108" height="28" uuid="e49ad428-2031-4112-84b0-de194eb50025"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="14" isBold="true"/>
@@ -231,7 +231,7 @@ ORDER BY tc.nombre,c.nombre,t.fecha]]>
 					</textElement>
 					<text><![CDATA[$]]></text>
 				</staticText>
-				<textField>
+				<textField pattern="#,##0.00">
 					<reportElement x="382" y="13" width="98" height="28" uuid="745fb6f7-58d3-40e7-8312-554eb5fbc769"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="14" isBold="true"/>
@@ -417,7 +417,7 @@ Informe Contador]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="273" y="0" width="108" height="30" uuid="aca239e4-0153-4551-b36e-0012c6cb319b">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4745fad2-1b3f-468e-8042-09548a1117fb"/>
 				</reportElement>
@@ -426,7 +426,7 @@ Informe Contador]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{entradas}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="383" y="0" width="96" height="30" uuid="23067f1f-6257-4182-86bf-5cf91acdadc1">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eae9da65-8848-4188-9d47-ab74dd3d32a9"/>
 				</reportElement>
@@ -565,14 +565,14 @@ Informe Contador]]></text>
 				</textElement>
 				<text><![CDATA[$]]></text>
 			</staticText>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="253" y="41" width="148" height="19" uuid="71ac0083-cb41-4971-99ea-a6e1b10da936"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{sum_entradas}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="401" y="41" width="143" height="18" uuid="aa2d844e-558c-461a-abbf-8ff9e17f7a3f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>

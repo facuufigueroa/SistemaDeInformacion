@@ -2,15 +2,15 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubReportElRocioContador" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="4745aead-5ee0-475e-895e-1ac2afabc6ee">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SistemaInformacion2"/>
-	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="326"/>
-	<property name="ireport.y" value="240"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="fecha_desde" class="java.sql.Date"/>
 	<parameter name="fecha_hasta" class="java.sql.Date"/>
 	<queryString>
 		<![CDATA[SELECT t.idtransacciones,
  t.fecha,
- cvi.iva_facturado,
+ cvi.iva_facturado_10,
  cvi.iva_rg_212,
  cvi.grav_ley_25413,
  cvi.int_numerales,
@@ -34,9 +34,7 @@ ORDER BY c.nombre,t.fecha;]]>
 		<property name="com.jaspersoft.studio.field.tree.path" value="transacciones"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="iva_facturado" class="java.lang.Double">
-		<property name="com.jaspersoft.studio.field.label" value="iva_facturado"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="compra_ventas_iva"/>
+	<field name="iva_facturado_10" class="java.lang.Double">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="iva_rg_212" class="java.lang.Double">
@@ -72,10 +70,6 @@ ORDER BY c.nombre,t.fecha;]]>
 		<property name="com.jaspersoft.studio.field.tree.path" value="cuentas"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<variable name="sum_iva_fact" class="java.lang.Float" resetType="Group" resetGroup="Group1" calculation="Sum">
-		<variableExpression><![CDATA[$F{iva_facturado}]]></variableExpression>
-		<initialValueExpression><![CDATA[0]]></initialValueExpression>
-	</variable>
 	<variable name="sum_iva_rg" class="java.lang.Float" resetType="Group" resetGroup="Group1" calculation="Sum">
 		<variableExpression><![CDATA[$F{iva_rg_212}]]></variableExpression>
 	</variable>
@@ -84,9 +78,6 @@ ORDER BY c.nombre,t.fecha;]]>
 	</variable>
 	<variable name="sum_otros" class="java.lang.Float" resetType="Group" resetGroup="Group1" calculation="Sum">
 		<variableExpression><![CDATA[$F{otros}]]></variableExpression>
-	</variable>
-	<variable name="total_iva_fact" class="java.lang.Float" incrementType="Group" incrementGroup="Group1" calculation="Sum">
-		<variableExpression><![CDATA[$V{sum_iva_fact}]]></variableExpression>
 	</variable>
 	<variable name="total_iva_rg" class="java.lang.Float" incrementType="Group" incrementGroup="Group1" calculation="Sum">
 		<variableExpression><![CDATA[$V{sum_iva_rg}]]></variableExpression>
@@ -99,6 +90,15 @@ ORDER BY c.nombre,t.fecha;]]>
 	</variable>
 	<variable name="sum_ing_brutos" class="java.lang.Float" resetType="Group" resetGroup="Group1" calculation="Sum">
 		<variableExpression><![CDATA[$F{ing_brutos}]]></variableExpression>
+	</variable>
+	<variable name="sum_iva_fact_10" class="java.lang.Float" resetType="Group" resetGroup="Group1" calculation="Sum">
+		<variableExpression><![CDATA[$F{iva_facturado_10}]]></variableExpression>
+	</variable>
+	<variable name="total_ing_brutos" class="java.lang.Float" incrementType="Group" incrementGroup="Group1" calculation="Sum">
+		<variableExpression><![CDATA[$V{sum_ing_brutos}]]></variableExpression>
+	</variable>
+	<variable name="total_iva_fact" class="java.lang.Float" incrementType="Group" incrementGroup="Group1" calculation="Sum">
+		<variableExpression><![CDATA[$V{sum_iva_fact_10}]]></variableExpression>
 	</variable>
 	<group name="Group1">
 		<groupExpression><![CDATA[$F{nombre}]]></groupExpression>
@@ -183,37 +183,32 @@ ORDER BY c.nombre,t.fecha;]]>
 					</textElement>
 					<text><![CDATA[$]]></text>
 				</staticText>
-				<textField>
-					<reportElement x="52" y="30" width="100" height="26" uuid="9b9b2b48-8ed8-48c6-96f3-69c48d0012a6"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$V{sum_iva_fact}]]></textFieldExpression>
-				</textField>
-				<textField>
+				<textField pattern="#,##0.00">
 					<reportElement x="152" y="31" width="100" height="24" uuid="77ff10b6-fd17-475e-9aba-676b4d2fcd4e"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="12"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_iva_rg}]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField pattern="#,##0.00">
 					<reportElement x="254" y="31" width="100" height="26" uuid="dd6bf634-69ec-41b8-9a2a-4dea6a58d750"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="12"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_int_numerales}]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField pattern="#,##0.00">
 					<reportElement x="356" y="31" width="84" height="26" uuid="2ff5880c-b8f4-454e-83f0-8c7abd29e7c8"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="12"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_otros}]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField pattern="#,##0.00">
 					<reportElement x="441" y="30" width="100" height="26" uuid="06d3dfff-0256-430c-a129-2e101bfcfc03"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12"/>
+					</textElement>
 					<textFieldExpression><![CDATA[$V{sum_ing_brutos}]]></textFieldExpression>
 				</textField>
 				<staticText>
@@ -226,6 +221,13 @@ ORDER BY c.nombre,t.fecha;]]>
 				<line>
 					<reportElement x="541" y="29" width="1" height="27" uuid="c41e3557-205b-4ab6-95a4-355861fd87b4"/>
 				</line>
+				<textField pattern="#,##0.00">
+					<reportElement x="53" y="31" width="100" height="26" uuid="48d950b0-44f7-4a85-99f9-c62d85f4c2c1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sum_iva_fact_10}]]></textFieldExpression>
+				</textField>
 			</band>
 		</groupFooter>
 	</group>
@@ -360,10 +362,6 @@ Contador]]></text>
 			<line>
 				<reportElement x="545" y="40" width="1" height="31" uuid="9132d855-7f25-4452-9b53-7af2160488dd"/>
 			</line>
-			<staticText>
-				<reportElement x="471" y="2" width="100" height="20" uuid="c8184817-f9a3-49ba-a232-da3a3fd987f3"/>
-				<text><![CDATA[ing_brutos]]></text>
-			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -415,21 +413,12 @@ Contador]]></text>
 			<line>
 				<reportElement x="0" y="0" width="545" height="1" uuid="92b80201-eab7-498e-9ef4-1a9dd101b00a"/>
 			</line>
-			<textField>
-				<reportElement x="52" y="0" width="100" height="30" uuid="c2794d6b-c7ea-43dc-8a23-c7c6660b1b9f">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d5e32db4-4955-4226-90ff-e2ad35408198"/>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{iva_facturado}]]></textFieldExpression>
-			</textField>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="152" y="1" width="100" height="30" uuid="d74fd9c5-5655-48dd-8c5f-4eb576357b8c">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="21d9d13c-7592-4ea4-91cd-af32ca2ded42"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12"/>
+					<font size="12" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{iva_rg_212}]]></textFieldExpression>
 			</textField>
@@ -447,7 +436,7 @@ Contador]]></text>
 				</textElement>
 				<text><![CDATA[$]]></text>
 			</staticText>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="254" y="1" width="100" height="30" uuid="96d55620-b52f-436d-b22d-54cb90305686">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4b46adab-d38f-4f08-a312-82ede3b1d2ef"/>
 				</reportElement>
@@ -456,7 +445,7 @@ Contador]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{int_numerales}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="356" y="0" width="84" height="30" uuid="07f358b2-f0d6-448b-b59f-92b370986428">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ae2d55c2-4049-4499-bc9a-0ebd40f57889"/>
 				</reportElement>
@@ -468,9 +457,11 @@ Contador]]></text>
 			<line>
 				<reportElement x="545" y="2" width="1" height="27" uuid="52d8fe42-792e-4d02-b202-ece6df83f5d2"/>
 			</line>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="441" y="1" width="103" height="29" uuid="09ac7cb6-14b3-4ebc-984d-c9f2e78b8e6e"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{ing_brutos}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -480,6 +471,13 @@ Contador]]></text>
 				</textElement>
 				<text><![CDATA[$]]></text>
 			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="50" y="1" width="100" height="29" uuid="79bdba56-255a-4d96-b41c-d14da6b96d1f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{iva_facturado_10}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<summary>
@@ -495,112 +493,105 @@ Contador]]></text>
 				<text><![CDATA[Reporte Final - Suma Total]]></text>
 			</staticText>
 			<line>
-				<reportElement x="0" y="31" width="1" height="45" uuid="59e1c8bc-cda7-4816-9b08-52674e791ec3"/>
+				<reportElement x="-1" y="33" width="1" height="58" uuid="59e1c8bc-cda7-4816-9b08-52674e791ec3"/>
 			</line>
 			<staticText>
-				<reportElement x="1" y="30" width="125" height="25" forecolor="#070E30" uuid="d93f269c-d32f-4e48-a6b3-07b2d459d3c9"/>
+				<reportElement x="0" y="33" width="89" height="33" forecolor="#070E30" uuid="d93f269c-d32f-4e48-a6b3-07b2d459d3c9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="14" isBold="true"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total IVA Fact.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="126" y="31" width="148" height="24" forecolor="#070E30" uuid="0dfed042-ba5b-46c2-8741-a78b4611b0da"/>
+				<reportElement x="90" y="33" width="99" height="32" forecolor="#070E30" uuid="0dfed042-ba5b-46c2-8741-a78b4611b0da"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="14" isBold="true"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total IVA RG 212]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="274" y="30" width="145" height="25" forecolor="#070E30" uuid="d30242ba-a99a-49b7-a7e5-d08c811ccf89"/>
+				<reportElement x="189" y="33" width="95" height="32" forecolor="#070E30" uuid="d30242ba-a99a-49b7-a7e5-d08c811ccf89"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="14" isBold="true"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total Numerales]]></text>
 			</staticText>
 			<line>
-				<reportElement x="126" y="32" width="1" height="45" uuid="e75c249d-a4cb-4223-bf75-172673b9db00"/>
+				<reportElement x="89" y="33" width="1" height="59" uuid="e75c249d-a4cb-4223-bf75-172673b9db00"/>
 			</line>
 			<line>
-				<reportElement x="0" y="76" width="545" height="1" uuid="b217b475-1059-4c3a-a285-dda3335f9540"/>
+				<reportElement x="0" y="92" width="501" height="1" uuid="b217b475-1059-4c3a-a285-dda3335f9540"/>
 			</line>
 			<line>
-				<reportElement x="274" y="30" width="1" height="47" uuid="9f649d23-2841-4805-b733-67c5adc1924f"/>
+				<reportElement x="189" y="33" width="1" height="59" uuid="9f649d23-2841-4805-b733-67c5adc1924f"/>
 			</line>
 			<line>
-				<reportElement x="0" y="32" width="545" height="1" uuid="ebd9d568-6675-4446-aa7b-0b1794d916aa">
+				<reportElement x="0" y="33" width="501" height="1" uuid="ebd9d568-6675-4446-aa7b-0b1794d916aa">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 			</line>
 			<staticText>
-				<reportElement x="127" y="54" width="10" height="18" uuid="4342cfec-25b2-4b12-bdab-a518ba9c87f3"/>
+				<reportElement x="89" y="69" width="10" height="18" uuid="4342cfec-25b2-4b12-bdab-a518ba9c87f3"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14"/>
 				</textElement>
 				<text><![CDATA[$]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="275" y="54" width="10" height="18" uuid="e8b186c8-93e4-40b9-aa24-281027407a37"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="14"/>
-				</textElement>
-				<text><![CDATA[$]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="1" y="51" width="124" height="24" uuid="2a7566bd-e2da-4ab8-b01f-d38c0fd958d9"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{total_iva_fact}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="0" y="54" width="10" height="18" uuid="ef2c2e5c-7e98-40d8-9e67-aef592d0ecf9"/>
+				<reportElement x="189" y="69" width="10" height="18" uuid="e8b186c8-93e4-40b9-aa24-281027407a37"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14"/>
 				</textElement>
 				<text><![CDATA[$]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="419" y="30" width="125" height="25" forecolor="#070E30" uuid="57bd1ac4-8e36-474d-944e-0dbb032d6fbd"/>
+				<reportElement x="-1" y="69" width="10" height="18" uuid="ef2c2e5c-7e98-40d8-9e67-aef592d0ecf9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="14" isBold="true"/>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[$]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="285" y="34" width="107" height="31" forecolor="#070E30" uuid="57bd1ac4-8e36-474d-944e-0dbb032d6fbd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total Otros]]></text>
 			</staticText>
 			<line>
-				<reportElement x="419" y="30" width="1" height="47" uuid="f4ac2b89-6cae-435b-8399-8fd868954cf4"/>
+				<reportElement x="284" y="33" width="1" height="58" uuid="f4ac2b89-6cae-435b-8399-8fd868954cf4"/>
 			</line>
 			<line>
-				<reportElement x="544" y="32" width="1" height="45" uuid="6593ef0c-1abf-4a32-862d-de7ce038abdf"/>
+				<reportElement x="392" y="33" width="1" height="58" uuid="6593ef0c-1abf-4a32-862d-de7ce038abdf"/>
 			</line>
 			<staticText>
-				<reportElement x="419" y="54" width="10" height="18" uuid="29444fb2-f1c9-4b3b-8546-73007f8c4fb8"/>
+				<reportElement x="285" y="69" width="10" height="18" uuid="29444fb2-f1c9-4b3b-8546-73007f8c4fb8"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14"/>
 				</textElement>
 				<text><![CDATA[$]]></text>
 			</staticText>
 			<line>
-				<reportElement x="2" y="50" width="543" height="1" uuid="2ef5713e-48fe-47c3-8267-d63c7ece0ad3">
+				<reportElement x="0" y="65" width="501" height="1" uuid="2ef5713e-48fe-47c3-8267-d63c7ece0ad3">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 			</line>
-			<textField>
-				<reportElement x="128" y="52" width="148" height="23" uuid="6e4914c4-719c-4c01-9a38-3f354fdfb5a0"/>
+			<textField pattern="#,##0.00">
+				<reportElement x="90" y="67" width="99" height="25" uuid="6e4914c4-719c-4c01-9a38-3f354fdfb5a0"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{total_iva_rg}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="276" y="52" width="142" height="24" uuid="f72792b5-fe0d-413f-9b78-2960671d9749"/>
+			<textField pattern="#,##0.00">
+				<reportElement x="190" y="65" width="94" height="26" uuid="f72792b5-fe0d-413f-9b78-2960671d9749"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{total_numerales}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="418" y="52" width="126" height="24" uuid="6f9ffe15-294a-46ca-9662-9133f597a90a"/>
+			<textField pattern="#,##0.00">
+				<reportElement x="285" y="66" width="107" height="26" uuid="6f9ffe15-294a-46ca-9662-9133f597a90a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
@@ -609,6 +600,37 @@ Contador]]></text>
 			<line>
 				<reportElement x="0" y="0" width="555" height="1" uuid="ee26d4f9-3723-49a1-a6c7-d2b2f8101f5b"/>
 			</line>
+			<staticText>
+				<reportElement x="393" y="34" width="107" height="31" forecolor="#070E30" uuid="7b0c8ba9-ed68-403c-bc27-ab6f61aaa782"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Ing. Brutos]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="392" y="67" width="108" height="24" uuid="29b5d597-e704-41f7-b8cf-490311dd16b5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total_ing_brutos}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="393" y="69" width="10" height="18" uuid="d5a376b9-4fbb-479d-afe1-08977650f24b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[$]]></text>
+			</staticText>
+			<line>
+				<reportElement x="500" y="33" width="1" height="60" uuid="8f7439f3-ad31-4c8f-bc6d-6ba1d3546c1d"/>
+			</line>
+			<textField>
+				<reportElement x="-1" y="66" width="90" height="25" uuid="bec2115a-00a7-48eb-8bea-e78f00d1b408"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total_iva_fact}]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>

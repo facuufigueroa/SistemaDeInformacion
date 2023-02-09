@@ -133,14 +133,14 @@ AND t.fecha BETWEEN $P{fecha_desde}  AND  $P{fecha_hasta}]]>
 				</textElement>
 				<text><![CDATA[Total Salidas:]]></text>
 			</staticText>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="410" y="10" width="134" height="30" uuid="b3a55796-2dbe-4f62-83e7-114cc500c0a0"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{total_entradas}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="410" y="40" width="134" height="30" uuid="f3cdf32a-4738-4ca5-af8d-f831f6e335ad"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="14" isBold="true"/>

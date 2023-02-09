@@ -18,11 +18,8 @@ import static java.lang.Float.parseFloat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.function.UnaryOperator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.control.TextFormatter;
-import javafx.util.converter.DoubleStringConverter;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -63,6 +60,9 @@ public class VerTransaccionesController implements ActionListener {
         formVerT.btnEliminar.addActionListener(this);
         
         formVerT.btnActualizar.addActionListener(this);
+        
+        formVerT.txtEntradas.setText(obtenerSumaEntradas());
+        formVerT.txtSalidas.setText(obtenerSumaSalidas());
     }
 
     @Override
@@ -298,6 +298,8 @@ public class VerTransaccionesController implements ActionListener {
         if (e.getSource() == formVerT.btnLimpiar) {
             setearNullCampos();
             iniciarTabla2();
+            formVerT.txtEntradas.setText(obtenerSumaEntradas());
+            formVerT.txtSalidas.setText(obtenerSumaSalidas());
         }
     }
 
@@ -512,8 +514,9 @@ public class VerTransaccionesController implements ActionListener {
                 t.setEntrada(Float.parseFloat(verificarBlanco(editVista.txtEntradas.getText())));
                 queryVerT.modificarTransaccion(t, Integer.parseInt(editVista.labelNumT.getText()));
                 JOptionPane.showMessageDialog(null, "Transacción N° " + editVista.labelNumT.getText() + " modificada");
-
                 iniciarTabla2();
+                formVerT.txtEntradas.setText(obtenerSumaEntradas());
+                formVerT.txtSalidas.setText(obtenerSumaSalidas());
             } else {
                 JOptionPane.showMessageDialog(null, "Error al modificar transaccion, debe ingresar una fecha en el campo.\n"
                         + "No debe quedar el campo sin vacio");
@@ -536,6 +539,8 @@ public class VerTransaccionesController implements ActionListener {
                 queryVerT.modificarCVI(createObjetCVI(), (Integer.parseInt(editVista.labelNumT.getText())));
                 JOptionPane.showMessageDialog(null, "Modificación realizada con Éxito.");
                 iniciarTabla2();
+                formVerT.txtEntradas.setText(obtenerSumaEntradas());
+                formVerT.txtSalidas.setText(obtenerSumaSalidas());
             } else {
                 JOptionPane.showMessageDialog(null, "Error al modificar datos.\n"
                         + "El campo fecha del apartado CompraVentaIva no debe estar vacio.");
@@ -623,7 +628,8 @@ public class VerTransaccionesController implements ActionListener {
                     queryVerT.eliminarTransaccion(idtransaccion);
                     JOptionPane.showMessageDialog(null,"<html><p style = \"font:15px\">La Transacción: "+formVerT.tablaVerTransacciones.getValueAt(fila, 0).toString() + " se ha eliminado");
                     iniciarTabla2();
-                    
+                    formVerT.txtEntradas.setText(obtenerSumaEntradas());
+                    formVerT.txtSalidas.setText(obtenerSumaSalidas());
                 } else if (eleccion == JOptionPane.NO_OPTION) {
                     JOptionPane.showMessageDialog(null, "<html><p style = \"font:15px\">Se ha cancelado operación</p></html>","Se canceló operación",1);
                 }
@@ -678,6 +684,8 @@ public class VerTransaccionesController implements ActionListener {
     public void accionActualizar(ActionEvent e){
         if(e.getSource() == formVerT.btnActualizar){
             iniciarTabla2();
+            formVerT.txtEntradas.setText(obtenerSumaEntradas());
+            formVerT.txtSalidas.setText(obtenerSumaSalidas());
         }
     }
     

@@ -4,7 +4,7 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SistemaInformacion2"/>
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="9"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="fecha_desde" class="java.sql.Date"/>
 	<parameter name="fecha_hasta" class="java.sql.Date"/>
 	<queryString language="SQL">
@@ -163,14 +163,14 @@ AND t.fecha BETWEEN $P{fecha_desde} AND  $P{fecha_hasta}]]>
 				</textElement>
 				<text><![CDATA[$]]></text>
 			</staticText>
-			<textField evaluationTime="Auto">
+			<textField evaluationTime="Auto" pattern="#,##0.00">
 				<reportElement x="405" y="43" width="140" height="30" uuid="b87fe719-c949-4e38-be2d-3bb1242f0183"/>
 				<textElement verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{total_salidas}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="405" y="10" width="140" height="30" uuid="861e1aaa-37ee-4797-b02d-973e4ade216f"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
