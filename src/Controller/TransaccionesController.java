@@ -136,11 +136,13 @@ public class TransaccionesController implements ActionListener {
     public void iniciarComboBoxCategoria() {
         transacciones.cbbCategorias.removeAllItems();
         ArrayList<String> listCategoria = queryCategoria.listarPorNombre();
+        Categoria c = new Categoria();
+        c.setNombre("");
+        listCategoria.add(0, c.getNombre());
         for (String cat : listCategoria) {
             transacciones.cbbCategorias.addItem(cat);
         }
-        transacciones.cbbCategorias.setRenderer(new PromptComboBoxRenderer("Categoria:"));
-        transacciones.cbbCategorias.setSelectedIndex(-1);
+        
     }
 
     public void iniciarcomboBoxSubcategoria() {
@@ -157,12 +159,13 @@ public class TransaccionesController implements ActionListener {
     public void iniciarComboBoxEmpresa() {
         transacciones.cbbEmpresa.removeAllItems();
         ArrayList<String> listEmpresas = queryEO.listarPorNombre();
-
+        EmpresaOrden e = new EmpresaOrden();
+        e.setNombre("");
+        listEmpresas.add(0, e.getNombre());
         for (String emp : listEmpresas) {
             transacciones.cbbEmpresa.addItem(emp);
         }
-        transacciones.cbbEmpresa.setRenderer(new PromptComboBoxRenderer("Empresa/Orden:"));
-        transacciones.cbbEmpresa.setSelectedIndex(-1);
+        
     }
 
     public void iniciarTabla() {
@@ -359,8 +362,8 @@ public class TransaccionesController implements ActionListener {
                 || transacciones.cbbTipoCategoria.getSelectedItem().equals("")
                 || transacciones.cbbTipoCuenta.getSelectedItem().equals("")
                 || transacciones.txtFecha.getDate() == null
-                || transacciones.cbbEmpresa.getRenderer().equals("Empresa/Orden:")
-                || transacciones.cbbCategorias.getRenderer().equals("Categoria:")
+                || transacciones.cbbEmpresa.getSelectedItem().equals("")
+                || transacciones.cbbCategorias.getSelectedItem().equals("")
                 || transacciones.cbbSubCategoria.getSelectedItem().equals("")
                 || transacciones.txtDescripcion.getText().equals("")
                 || transacciones.txtNumCheque.getText().equals("")
