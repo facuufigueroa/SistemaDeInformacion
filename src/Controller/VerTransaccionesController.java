@@ -11,14 +11,18 @@ import Model.Transaccion;
 import View.EditView;
 import View.FormVerTransacciones;
 import View.MenuPrincipal;
+import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import static java.lang.Float.parseFloat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.function.UnaryOperator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.TextFormatter;
+import javafx.util.converter.DoubleStringConverter;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -415,7 +419,7 @@ public class VerTransaccionesController implements ActionListener {
         dato[2] = t.getFecha().toString();
         dato[3] = t.getDescripcion();
         dato[4] = String.valueOf(t.getCantidad());
-        dato[5] = "$" + String.valueOf((float) t.getSalida());
+        dato[5] = "$" + String.valueOf(t.getSalida());
         dato[6] = "$" + String.valueOf(t.getEntrada());
         dato[7] = cambiarFormatoIVA(t.isA_impuesto());
         dato[8] = cambiarFormatoIVA(t.isA_iva());
@@ -504,8 +508,8 @@ public class VerTransaccionesController implements ActionListener {
                 t.setFecha(sqlDate);
                 NumberFormat f1 = NumberFormat.getInstance();
                 NumberFormat f2 = NumberFormat.getInstance();
-                t.setSalida((float) f1.parse(verificarBlanco(editVista.txtSalidas.getText())).floatValue());
-                t.setEntrada((float) f2.parse(verificarBlanco(editVista.txtEntradas.getText())).floatValue());
+                t.setSalida(Float.parseFloat(verificarBlanco(editVista.txtSalidas.getText())));
+                t.setEntrada(Float.parseFloat(verificarBlanco(editVista.txtEntradas.getText())));
                 queryVerT.modificarTransaccion(t, Integer.parseInt(editVista.labelNumT.getText()));
                 JOptionPane.showMessageDialog(null, "Transacción N° " + editVista.labelNumT.getText() + " modificada");
 
@@ -558,46 +562,47 @@ public class VerTransaccionesController implements ActionListener {
 
         NumberFormat f = NumberFormat.getInstance();
 
-        cvi.setImp_neto_grav((float) f.parse(verificarBlanco(editVista.txtImpNetoGrav.getText())).doubleValue());
+        cvi.setImp_neto_grav(Float.parseFloat(verificarBlanco(editVista.txtImpNetoGrav.getText())));
 
-        cvi.setIva_facturado((float) f.parse(verificarBlanco(editVista.txtIvaFact.getText())).doubleValue());
+       
+        cvi.setIva_facturado(Float.parseFloat(verificarBlanco(editVista.txtIvaFact.getText())));
+        
+        cvi.setImp_interno(Float.parseFloat(verificarBlanco(editVista.txtImpInterno.getText())));
+            
+        cvi.setConcep_no_grav( Float.parseFloat(verificarBlanco(editVista.txtConceptoNoGrav.getText())));
 
-        cvi.setImp_interno((float) f.parse(verificarBlanco(editVista.txtImpInterno.getText())).doubleValue());
+        cvi.setPercepcion_iva(Float.parseFloat(verificarBlanco(editVista.txtPercepcionIVA.getText())));
 
-        cvi.setConcep_no_grav((float) f.parse(verificarBlanco(editVista.txtConceptoNoGrav.getText())).doubleValue());
+        cvi.setRet_ganancias(Float.parseFloat(verificarBlanco(editVista.txtRetGanan.getText())));
 
-        cvi.setPercepcion_iva((float) f.parse(verificarBlanco(editVista.txtPercepcionIVA.getText())).doubleValue());
+        cvi.setPerc_iibb_compra(Float.parseFloat(verificarBlanco(editVista.txtPercIvaC.getText())));
 
-        cvi.setRet_ganancias((float) f.parse(verificarBlanco(editVista.txtRetGanan.getText())).doubleValue());
+        cvi.setImp_total_fact(Float.parseFloat(verificarBlanco(editVista.txtImpTotalFact.getText())));
 
-        cvi.setPerc_iibb_compra((float) f.parse(verificarBlanco(editVista.txtPercIvaC.getText())).doubleValue());
+        cvi.setIte_iva_dere_reg(Float.parseFloat(verificarBlanco(editVista.txtIvaDereReg.getText())));
 
-        cvi.setImp_total_fact((float) f.parse(verificarBlanco(editVista.txtImpTotalFact.getText())).doubleValue());
+        cvi.setC_no_grav_sellos(Float.parseFloat(verificarBlanco(editVista.txtCNoGravSellos.getText())));
 
-        cvi.setIte_iva_dere_reg((float) f.parse(verificarBlanco(editVista.txtIvaDereReg.getText())).doubleValue());
+        cvi.setRet_iibb_venta(Float.parseFloat(verificarBlanco(editVista.txtRetIiBbV.getText())));
 
-        cvi.setC_no_grav_sellos((float) f.parse(verificarBlanco(editVista.txtCNoGravSellos.getText())).doubleValue());
+        cvi.setIva_rg_212(Float.parseFloat(verificarBlanco(editVista.txtIvaRg212.getText())));
 
-        cvi.setRet_iibb_venta((float) f.parse(verificarBlanco(editVista.txtRetIiBbV.getText())).doubleValue());
+        cvi.setGrav_ley_25413(Float.parseFloat(verificarBlanco(editVista.txtGravLey25413.getText())));
 
-        cvi.setIva_rg_212((float) f.parse(verificarBlanco(editVista.txtIvaRg212.getText())).doubleValue());
+        cvi.setInt_numerales(Float.parseFloat(verificarBlanco(editVista.txtIntNumerales.getText())));
 
-        cvi.setGrav_ley_25413((float) f.parse(verificarBlanco(editVista.txtGravLey25413.getText())).doubleValue());
-
-        cvi.setInt_numerales((float) f.parse(verificarBlanco(editVista.txtIntNumerales.getText())).doubleValue());
-
-        cvi.setOtros((float) f.parse(verificarBlanco(editVista.txtOtros.getText())).doubleValue());
+        cvi.setOtros(Float.parseFloat(verificarBlanco(editVista.txtOtros.getText())));
 
         cvi.setIdTransaccion(Integer.parseInt(editVista.labelNumT.getText()));
 
-        cvi.setOperaciones_exentas((float) f.parse(verificarBlanco(editVista.txtOpExentas.getText())).doubleValue());
+        cvi.setOperaciones_exentas(Float.parseFloat(verificarBlanco(editVista.txtOpExentas.getText())));
 
-        cvi.setIng_brutos((float) f.parse(verificarBlanco(editVista.txtIngBrutos.getText())).doubleValue());
+        cvi.setIng_brutos(Float.parseFloat(verificarBlanco(editVista.txtIngBrutos.getText())));
 
-        cvi.setRet_iva((float) f.parse(verificarBlanco(editVista.txtRetIva.getText())).doubleValue());
+        cvi.setRet_iva(Float.parseFloat(verificarBlanco(editVista.txtRetIva.getText())));
 
-        cvi.setImp_r_ing_brutos((float) f.parse(verificarBlanco(editVista.txtImpRIngBrutos.getText())).doubleValue());
-        cvi.setIva_facturado_21((float) f.parse(verificarBlanco(editVista.txtIvaFact21.getText())).doubleValue());
+        cvi.setImp_r_ing_brutos((Float.parseFloat(verificarBlanco(editVista.txtImpRIngBrutos.getText()))));
+        cvi.setIva_facturado_21(Float.parseFloat(verificarBlanco(editVista.txtIvaFact21.getText())));
 
         
         return cvi;
@@ -689,4 +694,6 @@ public class VerTransaccionesController implements ActionListener {
           }
       
     }
+    
+    
 }

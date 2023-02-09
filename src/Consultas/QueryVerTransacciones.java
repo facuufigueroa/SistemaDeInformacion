@@ -249,7 +249,7 @@ public class QueryVerTransacciones {
         Connection conn = conexion.getConnection();
         CompraVentaIva cvi = new CompraVentaIva();
         try {
-            String sql = "SELECT c.operacion,c.fecha,c.tipo_comprobante,c.nro_comprobante,c.cuit,c.imp_neto_grav,c.iva_facturado_10,c.imp_interno,c.percepcion_iva,\n"
+            String sql = "SELECT c.operacion,c.fecha,c.tipo_comprobante,c.nro_comprobante,c.cuit,c.imp_neto_grav,c.iva_facturado_10,c.concepto_no_grav,c.imp_interno,c.percepcion_iva,\n"
                     + "c.ret_ganancias,c.perc_iibb_compra,c.imp_total_fac,c.ite_iva_dere_reg,c.c_no_grav_sellos,c.ret_ii_bb_venta,c.iva_rg_212, c.grav_ley_25413,\n"
                     + "c.int_numerales,c.otros,c.nombre,c.operaciones_exentas,c.ing_brutos,c.ret_iva,c.imp_r_ing_brutos,c.iva_facturado_21\n"
                     + "FROM compra_ventas_iva as c \n"
@@ -266,6 +266,7 @@ public class QueryVerTransacciones {
                 cvi.setImp_neto_grav(rs.getFloat("imp_neto_grav"));
                 cvi.setIva_facturado(rs.getFloat("iva_facturado_10"));
                 cvi.setImp_interno(rs.getFloat("imp_interno"));
+                cvi.setConcep_no_grav(rs.getFloat("concepto_no_grav"));
                 cvi.setPercepcion_iva(rs.getFloat("percepcion_iva"));
                 cvi.setRet_ganancias(rs.getFloat("ret_ganancias"));
                 cvi.setPerc_iibb_compra(rs.getFloat("perc_iibb_compra"));

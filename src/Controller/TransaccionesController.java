@@ -59,8 +59,6 @@ public class TransaccionesController implements ActionListener {
         this.transacciones.btnCompraVentasIVA.addActionListener(this);
         this.transacciones.cbbCategorias.addActionListener(this);
 
-      
-
         /*TODO CVI*/
         setearCamosEnCeroCVI();
         iniciarComboBoxEmpresaCVI();
@@ -71,22 +69,23 @@ public class TransaccionesController implements ActionListener {
         formCVI.labelIdTransaccion.setText(String.valueOf(queryT.obtenerMaxId()));
 
         this.formCVI.btnFinalizar.addActionListener(this);
-        
-        
+        this.transacciones.btnSaveSinIva.addActionListener(this);
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        accionTipoCuenta(e);
-        accionEmpresa(e);
         try {
+            accionTipoCuenta(e);
+            accionEmpresa(e);
             loadComprasVentas(e);
             accionCompraVenta(e);
-
+            guardarSinIva(e);
+            accionTipoCategoria(e);
         } catch (ParseException ex) {
             Logger.getLogger(TransaccionesController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        accionTipoCategoria(e);
+
     }
 
     public void loadNewTransaccion() {
@@ -112,11 +111,9 @@ public class TransaccionesController implements ActionListener {
         }
     }
 
-    
-
     public void iniciarComboBoxCuentas() {
         transacciones.cbbCuentas.removeAllItems();
-        
+
         ArrayList<String> nombreCuentas = queryCuentas.listarPorNombre();
         for (String c : nombreCuentas) {
             transacciones.cbbCuentas.addItem(c);
@@ -160,7 +157,7 @@ public class TransaccionesController implements ActionListener {
     public void iniciarComboBoxEmpresa() {
         transacciones.cbbEmpresa.removeAllItems();
         ArrayList<String> listEmpresas = queryEO.listarPorNombre();
-      
+
         for (String emp : listEmpresas) {
             transacciones.cbbEmpresa.addItem(emp);
         }
@@ -233,8 +230,8 @@ public class TransaccionesController implements ActionListener {
                     queryTransaccion.addTransaccion(obtenerTransaccion());
                     iniciarTabla();
                     loadComVentaIva();
-                }
-                else{
+                    setearCamosEnCeroCVI();
+                } else {
                     JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\"> Error al continuar con la Transacción - Ya existe codigo</p/</html>");
                 }
             } else {
@@ -252,6 +249,36 @@ public class TransaccionesController implements ActionListener {
                 );
             }
         }
+    }
+
+    /*Para guardar transaccion sin IVA*/
+    public void guardarSinIva(ActionEvent e) throws ParseException {
+        if (e.getSource() == transacciones.btnSaveSinIva) {
+            if (!verificarVacios()) {
+                if (!queryTransaccion.verificarCodigoT(obtenerTransaccion().getCodigo())) {
+                    queryTransaccion.addTransaccion(obtenerTransaccion());
+                    JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\">Transacción registrada correctamente</p/</html>");
+                    iniciarTabla();
+                    setearCamposEnCero();
+                } else {
+                    JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\"> Error al continuar con la Transacción - Ya existe codigo</p/</html>");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\"> Error al continuar con la Transacción - Campos incompletos.</p/</html> \n"
+                        + "<html><p style = \"font:12px\"> Verifique algunas de las siguientes opciones: </p/</html> \n"
+                        + "<html><p style = \"font:12px\">1) Haya seleccionado una cuenta.</p/</html> \n"
+                        + "<html><p style = \"font:12px\">2) Haya seleccionado un tipo de categoria.</p/</html> \n"
+                        + "<html><p style = \"font:12px\">3) Haya seleccionado un tipo de cuenta.</p/</html> \n"
+                        + "<html><p style = \"font:12px\">4) Haya seleccionado una fecha.</p/</html> \n"
+                        + "<html><p style = \"font:12px\">5) Haya seleccionado una empresa/orden.</p/</html> \n"
+                        + "<html><p style = \"font:12px\">6) Haya seleccionado una categoria.</p/</html> \n"
+                        + "<html><p style = \"font:12px\">7) Haya seleccionado una sub-categoria.</p/</html> \n"
+                        + "<html><p style = \"font:12px\">8) Haya escrito una descripción.</p/</html>\n"
+                        + "<html><p style = \"font:12px\">9) Haya escrito un numero de cheque o numero de factura. </p/</html>", "ERROR, VERIFIQUE CAMPOS", 0
+                );
+            }
+        }
+
     }
 
     public void updateComboBoxCategoria(ArrayList<Categoria> listCat) {
@@ -285,12 +312,9 @@ public class TransaccionesController implements ActionListener {
 
         t.setIdCuenta(queryCuentas.obtenerIdCuentaPorNombre((String) transacciones.cbbCuentas.getSelectedItem()));
 
-       
         t.setNumFactura(transacciones.txtTipoFact.getText().toUpperCase() + "-" + transacciones.txtNumFact.getText());
-        
 
         t.setNumCheque(transacciones.txtNumCheque.getText()); //Puede ser numCheque o
-      
 
         java.sql.Date sqlDate = new java.sql.Date(transacciones.txtFecha.getDate().getTime());
         t.setFecha(sqlDate);
@@ -305,10 +329,9 @@ public class TransaccionesController implements ActionListener {
 
         t.setIdSubCat(querySubCat.obtenerIdSubCatPorNombre((String) transacciones.cbbSubCategoria.getSelectedItem()));
 
-        NumberFormat f = NumberFormat.getInstance();
-        t.setSalida((float) f.parse(transacciones.txtSalida.getText()).doubleValue());
+        t.setSalida(Float.parseFloat(transacciones.txtSalida.getText()));
 
-        t.setEntrada((float) f.parse(transacciones.txtEntrada.getText()).doubleValue());
+        t.setEntrada(Float.parseFloat(transacciones.txtEntrada.getText()));
 
         t.setA_impuesto(obtenerSetImpuesto());
 
@@ -396,6 +419,7 @@ public class TransaccionesController implements ActionListener {
     }
 
     public void iniciarComboBoxEmpresaCVI() {
+
         ArrayList<String> listEmpresas = queryEO.listarPorNombre();
         EmpresaOrden e = new EmpresaOrden();
         e.setNombre("");
@@ -406,6 +430,7 @@ public class TransaccionesController implements ActionListener {
     }
 
     public void iniciarComboBoxOperacion() {
+        formCVI.cbbOperacion.removeAllItems();
         formCVI.cbbOperacion.addItem("");
         formCVI.cbbOperacion.addItem("Venta");
         formCVI.cbbOperacion.addItem("Compra");
@@ -415,6 +440,7 @@ public class TransaccionesController implements ActionListener {
 
     /*Muestra el cuit y el nombre de la empresa juntos*/
     public void iniciarComboBoxCuit() {
+        formCVI.cbbCuitEmpresa.removeAllItems();
         ArrayList<EmpresaOrden> listEmpresas = queryEO.listarEmpresaOrden();
         EmpresaOrden e = new EmpresaOrden();
         e.setNombre("");
@@ -478,49 +504,48 @@ public class TransaccionesController implements ActionListener {
 
         NumberFormat f = NumberFormat.getInstance();
 
-        cvi.setImp_neto_grav((float) f.parse(verificarBlanco(formCVI.txtImpNetoGrav.getText())).doubleValue());
+        cvi.setImp_neto_grav(Float.parseFloat(verificarBlanco(formCVI.txtImpNetoGrav.getText())));
 
-        cvi.setIva_facturado((float) f.parse(verificarBlanco(formCVI.txtIvaFact.getText())).doubleValue());
+        cvi.setIva_facturado(Float.parseFloat(verificarBlanco(formCVI.txtIvaFact.getText())));
 
-        cvi.setImp_interno((float) f.parse(verificarBlanco(formCVI.txtImpInterno.getText())).doubleValue());
+        cvi.setImp_interno(Float.parseFloat(verificarBlanco(formCVI.txtImpInterno.getText())));
 
-        cvi.setConcep_no_grav((float) f.parse(verificarBlanco(formCVI.txtConceptoNoGrav.getText())).doubleValue());
+        cvi.setConcep_no_grav(Float.parseFloat(verificarBlanco(formCVI.txtConceptoNoGrav.getText())));
 
-        cvi.setPercepcion_iva((float) f.parse(verificarBlanco(formCVI.txtPercepcionIVA.getText())).doubleValue());
+        cvi.setPercepcion_iva(Float.parseFloat(verificarBlanco(formCVI.txtPercepcionIVA.getText())));
 
-        cvi.setRet_ganancias((float) f.parse(verificarBlanco(formCVI.txtRetGanan.getText())).doubleValue());
+        cvi.setRet_ganancias(Float.parseFloat(verificarBlanco(formCVI.txtRetGanan.getText())));
 
-        cvi.setPerc_iibb_compra((float) f.parse(verificarBlanco(formCVI.txtPercIvaC.getText())).doubleValue());
+        cvi.setPerc_iibb_compra(Float.parseFloat(verificarBlanco(formCVI.txtPercIvaC.getText())));
 
-        cvi.setImp_total_fact((float) f.parse(verificarBlanco(formCVI.txtImpTotalFact.getText())).doubleValue());
+        cvi.setImp_total_fact(Float.parseFloat(verificarBlanco(formCVI.txtImpTotalFact.getText())));
 
-        cvi.setIte_iva_dere_reg((float) f.parse(verificarBlanco(formCVI.txtIvaDereReg.getText())).doubleValue());
+        cvi.setIte_iva_dere_reg(Float.parseFloat(verificarBlanco(formCVI.txtIvaDereReg.getText())));
 
-        cvi.setC_no_grav_sellos((float) f.parse(verificarBlanco(formCVI.txtCNoGravSellos.getText())).doubleValue());
+        cvi.setC_no_grav_sellos(Float.parseFloat(verificarBlanco(formCVI.txtCNoGravSellos.getText())));
 
-        cvi.setRet_iibb_venta((float) f.parse(verificarBlanco(formCVI.txtRetIiBbV.getText())).doubleValue());
+        cvi.setRet_iibb_venta(Float.parseFloat(verificarBlanco(formCVI.txtRetIiBbV.getText())));
 
-        cvi.setIva_rg_212((float) f.parse(verificarBlanco(formCVI.txtIvaRg212.getText())).doubleValue());
+        cvi.setIva_rg_212(Float.parseFloat(verificarBlanco(formCVI.txtIvaRg212.getText())));
 
-        cvi.setGrav_ley_25413((float) f.parse(verificarBlanco(formCVI.txtGravLey25413.getText())).doubleValue());
+        cvi.setGrav_ley_25413(Float.parseFloat(verificarBlanco(formCVI.txtGravLey25413.getText())));
 
-        cvi.setInt_numerales((float) f.parse(verificarBlanco(formCVI.txtIntNumerales.getText())).doubleValue());
+        cvi.setInt_numerales(Float.parseFloat(verificarBlanco(formCVI.txtIntNumerales.getText())));
 
-        cvi.setOtros((float) f.parse(verificarBlanco(formCVI.txtOtros.getText())).doubleValue());
+        cvi.setOtros(Float.parseFloat(verificarBlanco(formCVI.txtOtros.getText())));
 
         cvi.setIdTransaccion(queryT.obtenerMaxId());
 
-        cvi.setOperaciones_exentas((float) f.parse(verificarBlanco(formCVI.txtOpExentas.getText())).doubleValue());
+        cvi.setOperaciones_exentas(Float.parseFloat(verificarBlanco(formCVI.txtOpExentas.getText())));
 
-        cvi.setIng_brutos((float) f.parse(verificarBlanco(formCVI.txtIngBrutos.getText())).doubleValue());
+        cvi.setIng_brutos(Float.parseFloat(verificarBlanco(formCVI.txtIngBrutos.getText())));
 
-        cvi.setRet_iva((float) f.parse(verificarBlanco(formCVI.txtRetIva.getText())).doubleValue());
+        cvi.setRet_iva(Float.parseFloat(verificarBlanco(formCVI.txtRetIva.getText())));
 
-        cvi.setImp_r_ing_brutos((float) f.parse(verificarBlanco(formCVI.txtImpRIngBrutos.getText())).doubleValue());
+        cvi.setImp_r_ing_brutos(Float.parseFloat(verificarBlanco(formCVI.txtImpRIngBrutos.getText())));
 
-        cvi.setIva_facturado_21((float) f.parse(verificarBlanco(formCVI.txtIvaFact21.getText())).doubleValue());
+        cvi.setIva_facturado_21(Float.parseFloat(verificarBlanco(formCVI.txtIvaFact21.getText())));
 
-        
         return cvi;
     }
 
@@ -533,6 +558,11 @@ public class TransaccionesController implements ActionListener {
     }
 
     public void setearCamosEnCeroCVI() {
+        iniciarComboBoxCuit();
+        iniciarComboBoxEmpresaCVI();
+        iniciarComboBoxOperacion();
+        formCVI.txtFecha.setDate(null);
+        formCVI.txtTipoComprobante.setText("");
         formCVI.txtNumComprobante.setText("0");
         formCVI.txtImpNetoGrav.setText("0.0");
         formCVI.txtIvaFact.setText("0.0");
@@ -554,7 +584,7 @@ public class TransaccionesController implements ActionListener {
         formCVI.txtRetIva.setText("0.0");
         formCVI.txtImpRIngBrutos.setText("0.0");
         formCVI.txtIvaFact21.setText("0.0");
-        
+
     }
 
     public boolean verificarBlancos() {

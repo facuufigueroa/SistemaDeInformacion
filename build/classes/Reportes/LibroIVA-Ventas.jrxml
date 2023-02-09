@@ -3,7 +3,7 @@
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SistemaInformacion2"/>
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="309"/>
+	<property name="ireport.x" value="286"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="fecha_desde" class="java.sql.Date"/>
 	<parameter name="fecha_hasta" class="java.sql.Date"/>
@@ -21,7 +21,7 @@
 	sistemainformacion.compra_ventas_iva.nro_comprobante,
 	sistemainformacion.compra_ventas_iva.cuit,
 	TRUNCATE( sistemainformacion.compra_ventas_iva.imp_neto_grav,2) AS imp_neto_grav,
-	TRUNCATE( sistemainformacion.compra_ventas_iva.iva_facturado,2) AS iva_facturado,
+	TRUNCATE( sistemainformacion.compra_ventas_iva.iva_facturado_10,2) AS iva_facturado,
 	TRUNCATE( sistemainformacion.compra_ventas_iva.imp_interno,2) AS imp_interno,
 	TRUNCATE( sistemainformacion.compra_ventas_iva.concepto_no_grav,2) AS concepto_no_grav,
 	TRUNCATE( sistemainformacion.compra_ventas_iva.ret_ganancias,2) AS ret_ganancias,
@@ -39,18 +39,22 @@ WHERE
 	<field name="fecha" class="java.sql.Date">
 		<property name="com.jaspersoft.studio.field.label" value="fecha"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="compra_ventas_iva"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="tipo_comprobante" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="tipo_comprobante"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="compra_ventas_iva"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="nro_comprobante" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="nro_comprobante"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="compra_ventas_iva"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="cuit" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="cuit"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="compra_ventas_iva"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="imp_neto_grav" class="java.lang.Double">
 		<property name="com.jaspersoft.studio.field.label" value="imp_neto_grav"/>
@@ -90,11 +94,15 @@ WHERE
 	<field name="nombre" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="compra_ventas_iva"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="percepcion_iva" class="java.lang.Double">
 		<property name="com.jaspersoft.studio.field.label" value="percepcion_iva"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="compra_ventas_iva"/>
 	</field>
+	<variable name="total_iva_fact" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{iva_facturado}]]></variableExpression>
+	</variable>
 	<group name="fecha">
 		<groupExpression><![CDATA[$F{fecha}]]></groupExpression>
 	</group>
@@ -611,13 +619,6 @@ WHERE
 				<text><![CDATA[Totales]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="371" y="0" width="62" height="30" uuid="b4823cf1-46e1-4a68-a25a-83b0336e8d96"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{total_ivaFact}]]></textFieldExpression>
-			</textField>
-			<textField>
 				<reportElement x="433" y="0" width="64" height="30" uuid="0bf1b9a4-1d3f-47a3-ae41-23a632d2daa5"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
@@ -695,6 +696,13 @@ WHERE
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 			</line>
+			<textField>
+				<reportElement x="371" y="0" width="64" height="30" uuid="825402b3-bb97-45f7-a826-7c61925e50e4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total_iva_fact}]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>
