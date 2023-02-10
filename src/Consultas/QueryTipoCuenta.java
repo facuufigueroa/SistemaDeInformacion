@@ -2,9 +2,12 @@
 package Consultas;
 
 import DataBase.Conexion;
+import static DataBase.Conexion.getConnection;
+import Model.TipoCategoria;
 import Model.TipoCuenta;
 import static java.lang.Integer.parseInt;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -33,8 +36,24 @@ public class QueryTipoCuenta {
        return tipoCuentas;
     }
     
-    
-    
+   public void agregarTipoCuenta(TipoCuenta tipoCuenta){
+        PreparedStatement ps = null;
+        Connection conn = getConnection();
+        String sql = "INSERT INTO tipo_cuenta (tipo_cuenta) VALUES(?) ";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, tipoCuenta.getNombre());
+            ps.execute();
+        } catch (SQLException e) {
+            System.err.println(e);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+        }
+    }
     
     
 }

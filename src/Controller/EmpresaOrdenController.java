@@ -3,29 +3,33 @@ package Controller;
 
 import Consultas.QueryEmpresaOrden;
 import Model.EmpresaOrden;
-import View.FormEmpresaOrden;
+import View.MenuPrincipal;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-public class EmpresaOrdenController {
+public class EmpresaOrdenController implements ActionListener{
         
     QueryEmpresaOrden queryEO = new QueryEmpresaOrden();
-    FormEmpresaOrden formEO = new FormEmpresaOrden();
     DefaultTableModel modelo = new DefaultTableModel();
+    MenuPrincipal empresaOrdenView = new MenuPrincipal();
+    private DefaultTableModel dtm_datos = new DefaultTableModel();
     
-    public void loadEmpresa(){
-        formEO.setVisible(true);
-        formEO.setLocationRelativeTo(null);
-    }
     
-    public EmpresaOrdenController() {
+    public EmpresaOrdenController(MenuPrincipal menu) {
+        empresaOrdenView = menu;
+        
         iniciarTabla();
-        centrarContenidoTabla();
+        centrarContenidoTabla(menu);
+        
+        menu.btnGuardarEmpresa.addActionListener(this);
     }
     
-    
+   
     
     public void iniciarTabla (){
         ArrayList<EmpresaOrden> empresaOrdenList = queryEO.listarEmpresaOrden();
@@ -40,9 +44,9 @@ public class EmpresaOrdenController {
             }
         };
         modelo.addColumn("NOMBRE");
-        modelo.addColumn("C-U-I-T");
-        formEO.tablaEmpresa.setRowHeight(25);
-        formEO.tablaEmpresa.setModel(modelo);
+        modelo.addColumn("C.U.I.T");
+        empresaOrdenView.tablaEmpresa.setRowHeight(25);
+        empresaOrdenView.tablaEmpresa.setModel(modelo);
         for(EmpresaOrden eo : empresaOrdenList){
             String[] dato = new String[2];
             dato[0] = eo.getNombre().toUpperCase();
@@ -51,11 +55,49 @@ public class EmpresaOrdenController {
         }
     }
     
-    public void centrarContenidoTabla(){
+    public void centrarContenidoTabla(MenuPrincipal menu){
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
-        formEO.tablaEmpresa.getColumnModel().getColumn(0).setCellRenderer(tcr);
+        menu.tablaEmpresa.getColumnModel().getColumn(0).setCellRenderer(tcr);
   
     }
     
+    
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        insertarEmpresa(e);
+    }
+    
+    public void insertarEmpresa(ActionEvent e){
+        if(e.getSource() == empresaOrdenView.btnGuardarEmpresa){
+            if(!verificarBlancos()){
+                EmpresaOrden empresa = new EmpresaOrden();
+                empresa.setNombre(empresaOrdenView.txtNombreEmpresa.getText());
+                empresa.setCuit(empresaOrdenView.txtCuitEmpresa.getText());
+                queryEO.agregarEmpresa(empresa);
+                JOptionPane.showMessageDialog(null,"Empresa/Orden "+empresaOrdenView.txtNombreEmpresa.getText().toUpperCase() + " guardada con éxito" );
+                iniciarTabla();
+                empresaOrdenView.txtNombreEmpresa.setText("");
+                empresaOrdenView.txtCuitEmpresa.setText("");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Error al guardar. \n"
+                        + "Hay campos sin completar, complete los campos. \n"
+                        + "1) Verifique que el campo NOMBRE no esté vacio. \n"
+                        + "2) Verifique que el campo CUIT no esté vacio","Error - Verifique",0);
+            }
+        }  
+    }
+    
+    public boolean verificarBlancos(){
+        if(empresaOrdenView.txtNombreEmpresa.getText().isEmpty() ||
+                empresaOrdenView.txtCuitEmpresa.getText().isEmpty() ){
+            return true;
+            }
+        return false;
+    }
+
+    
+
 }

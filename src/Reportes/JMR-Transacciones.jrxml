@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="JMR-Transacciones" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7414aa28-7a3b-4fcd-a12e-aa724fe12450">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SistemaInformacion2"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fecha_desde" class="java.sql.Date"/>
+	<parameter name="fecha_hasta" class="java.sql.Date"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT DISTINCT c.idcategorias, tc.idtipo_categoria, c.nombre as categoria,tc.nombre as tipo_categoria,
+t.id_categoria
+FROM categorias as c
+INNER JOIN tipo_categoria as tc ON c.id_tipo_categoria = tc.idtipo_categoria
+INNER JOIN transacciones as t ON t.id_categoria = c.idcategorias
+WHERE tc.idtipo_categoria=40
+Or tc.idtipo_categoria=32 
+Or tc.idtipo_categoria=33
+Or tc.idtipo_categoria=35
+Or tc.idtipo_categoria=37
+Or tc.idtipo_categoria=38
+And c.idcategorias<>121 
+And c.idcategorias<>138
+AND t.fecha BETWEEN $P{fecha_desde} AND  $P{fecha_hasta}]]>
+	</queryString>
+	<field name="idcategorias" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="idcategorias"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="categorias"/>
+	</field>
+	<field name="idtipo_categoria" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="idtipo_categoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tipo_categoria"/>
+	</field>
+	<field name="categoria" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="categoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="categorias"/>
+	</field>
+	<field name="tipo_categoria" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="tipo_categoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tipo_categoria"/>
+	</field>
+	<field name="id_categoria" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="id_categoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="transacciones"/>
+	</field>
+	<variable name="total_salidas" class="java.lang.Float" calculation="Sum"/>
+	<variable name="total_entradas" class="java.lang.Float" calculation="Sum"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="121" splitType="Stretch">
+			<staticText>
+				<reportElement x="160" y="0" width="259" height="44" forecolor="#07245E" uuid="3e99e5bd-1f79-4596-8bd2-f2c543eadfc8"/>
+				<textElement textAlignment="Center">
+					<font size="26" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[José María Roqués]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="35" width="259" height="35" forecolor="#07245E" uuid="f3fc4d30-8eca-4918-b3df-0611e3896237"/>
+				<textElement textAlignment="Center">
+					<font size="22" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Transacciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="82" width="110" height="30" uuid="a4a98f21-f842-4c8c-a676-64c391fca034"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Con fecha desde:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="82" width="39" height="30" uuid="b8f15151-f6df-431c-998f-6132dbae4ea2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[hasta:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="82" width="120" height="30" uuid="a625a0a9-dfc8-4ab3-beb5-3fc164ec5320"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fecha_desde}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="269" y="82" width="110" height="30" uuid="58d64640-347b-4daa-87ef-be919be91221"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fecha_hasta}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="162" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="110" height="30" uuid="029bcdf4-6999-4d2f-9f31-21fd608abbaa"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo Categoria :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="0" width="250" height="30" uuid="09e85efe-9c6c-42d2-afbe-8d26b32585ab">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5ae1fd12-08a2-4b25-90f2-21424568b159"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipo_categoria}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="-10" y="30" width="555" height="130" uuid="1edf9ea7-72ba-4200-948b-2ef83f7b3893"/>
+				<subreportParameter name="idcategoria">
+					<subreportParameterExpression><![CDATA[$F{id_categoria}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idtipo_categoria">
+					<subreportParameterExpression><![CDATA[$F{idtipo_categoria}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fecha_desde">
+					<subreportParameterExpression><![CDATA[$P{fecha_desde}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fecha_hasta">
+					<subreportParameterExpression><![CDATA[$P{fecha_hasta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="total_entradas" toVariable="total_entradas" calculation="Sum"/>
+				<returnValue subreportVariable="total_salidas" toVariable="total_salidas" calculation="Sum"/>
+				<subreportExpression><![CDATA[".\\Reportes\\SubReporteJMR.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band height="75" splitType="Stretch">
+			<staticText>
+				<reportElement x="255" y="10" width="140" height="30" uuid="7efa82ac-7d4f-49b3-8dcf-372bb655eab7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Suma Total Entradas: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="255" y="43" width="140" height="30" uuid="b65f7c2a-3e6a-4f11-8d50-5dc2b8c69136"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Suma Total Salidas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="394" y="44" width="10" height="28" uuid="d270d2ec-0ca5-45af-9999-061d73cdf8a8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[$]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="10" width="10" height="28" uuid="17d0a2df-1ecd-479f-8729-6baa25017335"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[$]]></text>
+			</staticText>
+			<textField evaluationTime="Auto" pattern="#,##0.00">
+				<reportElement x="405" y="43" width="140" height="30" uuid="b87fe719-c949-4e38-be2d-3bb1242f0183"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total_salidas}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="405" y="10" width="140" height="30" uuid="861e1aaa-37ee-4797-b02d-973e4ade216f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total_entradas}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="10" width="554" height="1" uuid="4edd3e87-2d31-4d0f-a471-914bd61c6eaa">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

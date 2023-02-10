@@ -4,29 +4,30 @@ package Controller;
 
 import Consultas.QueryTipoCategoria;
 import Model.TipoCategoria;
-import Model.TipoCuenta;
-import View.FormTipoCategoria;
+import View.MenuPrincipal;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 
-public class TipoCategoriaController {
+public class TipoCategoriaController implements ActionListener{
     
-    FormTipoCategoria formTipoCat = new FormTipoCategoria();
+    
     QueryTipoCategoria queryTC = new QueryTipoCategoria();
     DefaultTableModel modelo = new DefaultTableModel();
+    MenuPrincipal tipoCatView = new MenuPrincipal();
 
-    public void loadTipoCategoria(){
-       formTipoCat.setVisible(true);
-       formTipoCat.setLocationRelativeTo(null);
-    }
     
-   
-    public TipoCategoriaController() {
+    public TipoCategoriaController(MenuPrincipal menu) {
+        this.tipoCatView=menu;
         iniciarTabla();
-        centrarContenidoTabla();
+        centrarContenidoTabla(menu);
+        tipoCatView.btnSaveTipoCat.addActionListener(this);
+        
     }
     
     public void iniciarTabla (){
@@ -42,8 +43,8 @@ public class TipoCategoriaController {
             }
         };
         modelo.addColumn("TIPO CATEGORIAS");
-        formTipoCat.tablaTipoCategorias.setRowHeight(25);
-        formTipoCat.tablaTipoCategorias.setModel(modelo);
+        tipoCatView.tablaTipoCategorias.setRowHeight(25);
+        tipoCatView.tablaTipoCategorias.setModel(modelo);
         for(TipoCategoria tipoC : tipoCategoria){
             String[] dato = new String[1];
             dato[0] = tipoC.getNombre().toUpperCase();
@@ -52,10 +53,39 @@ public class TipoCategoriaController {
        
     }
     
-    public void centrarContenidoTabla(){
+    public void centrarContenidoTabla(MenuPrincipal menu){
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
-        formTipoCat.tablaTipoCategorias.getColumnModel().getColumn(0).setCellRenderer(tcr);
+        menu.tablaTipoCategorias.getColumnModel().getColumn(0).setCellRenderer(tcr);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        agregarTipoCat(e);
     }
     
+    public void agregarTipoCat(ActionEvent e){
+        if(e.getSource() == tipoCatView.btnSaveTipoCat){
+            if(!verificarBlancos()){
+                TipoCategoria tipoCat = new TipoCategoria();
+                tipoCat.setNombre(tipoCatView.txtNomTipoCat.getText());
+                queryTC.agregarTipoCat(tipoCat);
+                JOptionPane.showMessageDialog(null, "Tipo Categoria "+tipoCatView.txtNomTipoCat.getText().toUpperCase()+" guardada con éxito");
+                tipoCatView.txtNomTipoCat.setText("");
+                iniciarTabla();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Error al guardar. \n"
+                        + "Verifique que el campo nombre del Tipo De Categoria \n"
+                        + "no esté vacio.","Error - Verifique",0);
+            }
+        }
+    }
+    
+    public boolean verificarBlancos(){
+        if(tipoCatView.txtNomTipoCat.getText().isEmpty()){
+            return true;
+        }
+        return false;
+    }
 }
