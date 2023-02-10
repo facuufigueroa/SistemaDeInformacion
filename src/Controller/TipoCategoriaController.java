@@ -4,7 +4,6 @@ package Controller;
 
 import Consultas.QueryTipoCategoria;
 import Model.TipoCategoria;
-import View.FormTipoCategoria;
 import View.MenuPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class TipoCategoriaController implements ActionListener{
     
-    FormTipoCategoria formTipoCat = new FormTipoCategoria();
+    
     QueryTipoCategoria queryTC = new QueryTipoCategoria();
     DefaultTableModel modelo = new DefaultTableModel();
     MenuPrincipal tipoCatView = new MenuPrincipal();

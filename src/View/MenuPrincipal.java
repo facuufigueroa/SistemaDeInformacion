@@ -12,7 +12,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
    
     public MenuPrincipal() {
         initComponents();
-        Image icon = Toolkit.getDefaultToolkit().getImage("src\\Imagenes\\contabilidad.png");  
+        Image icon = Toolkit.getDefaultToolkit().getImage("src\\Imagenes\\contabilidad32.png");  
         this.setIconImage(icon);
     }
 

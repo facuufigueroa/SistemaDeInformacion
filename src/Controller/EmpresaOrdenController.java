@@ -3,7 +3,6 @@ package Controller;
 
 import Consultas.QueryEmpresaOrden;
 import Model.EmpresaOrden;
-import View.FormEmpresaOrden;
 import View.MenuPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,7 +15,6 @@ import javax.swing.table.DefaultTableModel;
 public class EmpresaOrdenController implements ActionListener{
         
     QueryEmpresaOrden queryEO = new QueryEmpresaOrden();
-    FormEmpresaOrden formEO = new FormEmpresaOrden();
     DefaultTableModel modelo = new DefaultTableModel();
     MenuPrincipal empresaOrdenView = new MenuPrincipal();
     private DefaultTableModel dtm_datos = new DefaultTableModel();
