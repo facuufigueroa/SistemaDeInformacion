@@ -202,7 +202,7 @@ public class QueryVerTransacciones {
         Connection conn = Conexion.getConnection();
         Statement st;
         try {
-            String sql = "SELECT * FROM transacciones AS t ORDER BY t.fecha DESC";
+            String sql = "SELECT * FROM transacciones AS t ORDER BY t.idtransacciones DESC";
             st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
 

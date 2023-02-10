@@ -7,7 +7,8 @@ public class SistemaDeInformacion {
     
     public static void main(String[] args) {
         MenuController menuController = new MenuController();
-        menuController.loadMenuPrincipal();
+        //menuController.loadMenuPrincipal();
+        menuController.main(args);
     }
     
 }

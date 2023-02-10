@@ -24,10 +24,11 @@ import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 public class MenuController implements ActionListener {
 
-    MenuPrincipal menuPrincipal = new MenuPrincipal();
+    static MenuPrincipal menuPrincipal = new MenuPrincipal();
     TransaccionesController transaccionController = new TransaccionesController();
     FormFechas formFechaVentas = new FormFechas();
     FormFechas formFechaCompras = new FormFechas();
@@ -128,6 +129,24 @@ public class MenuController implements ActionListener {
         menuPrincipal.setVisible(true);
         menuPrincipal.setLocationRelativeTo(null);
 
+    }
+    
+    public static void main(String args[]) {
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                UIManager.setLookAndFeel(info.getClassName());
+                break;
+            }
+        }
+        } catch (Exception e) {
+        }
+        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                menuPrincipal.setVisible(true);
+            }
+        });
     }
 
     /*Metodo que abre la vista para generar nuevas transacciones*/
