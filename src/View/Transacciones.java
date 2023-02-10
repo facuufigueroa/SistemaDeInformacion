@@ -2,6 +2,8 @@
 package View;
 
 import com.sun.glass.events.KeyEvent;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 
 
@@ -10,6 +12,8 @@ public class Transacciones extends javax.swing.JFrame {
     
     public Transacciones() {
         initComponents();
+        Image icon = Toolkit.getDefaultToolkit().getImage("src\\Imagenes\\contabilidad.png");  
+        this.setIconImage(icon);
     }
 
     
@@ -62,6 +66,7 @@ public class Transacciones extends javax.swing.JFrame {
         labelNumT = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Registrar Transacciones");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 51));

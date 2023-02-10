@@ -2,6 +2,8 @@
 package View;
 
 import com.sun.glass.events.KeyEvent;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 
 public class FormComprasVentasIVA extends javax.swing.JFrame {
@@ -9,6 +11,8 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
    
     public FormComprasVentasIVA() {
         initComponents();
+        Image icon = Toolkit.getDefaultToolkit().getImage("src\\Imagenes\\contabilidad.png");  
+        this.setIconImage(icon);
     }
 
     

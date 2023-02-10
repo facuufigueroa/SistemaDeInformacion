@@ -4,6 +4,7 @@ import DataBase.Conexion;
 import static DataBase.Conexion.getConnection;
 import Model.CompraVentaIva;
 import Model.Transaccion;
+import Model.TransaccionEditable;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -201,7 +202,7 @@ public class QueryVerTransacciones {
         Connection conn = Conexion.getConnection();
         Statement st;
         try {
-            String sql = "SELECT * FROM transacciones AS t ORDER BY t.fecha ASC";
+            String sql = "SELECT * FROM transacciones AS t ORDER BY t.fecha DESC";
             st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
 
@@ -365,19 +366,19 @@ public class QueryVerTransacciones {
             }
         }
     }
-    
-    public void eliminarTransaccion(String idtransaccion){
+
+    public void eliminarTransaccion(String idtransaccion) {
         PreparedStatement ps = null;
         Connection conn = getConnection();
 
-        String sql = "DELETE FROM transacciones AS t WHERE t.idtransacciones = '"+idtransaccion+"'";
+        String sql = "DELETE FROM transacciones AS t WHERE t.idtransacciones = '" + idtransaccion + "'";
 
         try {
             ps = conn.prepareStatement(sql);
             ps.executeUpdate();
         } catch (Exception e) {
             System.err.println(e);
-       
+
         } finally {
             try {
                 conn.close();
@@ -387,19 +388,19 @@ public class QueryVerTransacciones {
 
         }
     }
-    
-    public void eliminarCvi(String idtransaccion){
+
+    public void eliminarCvi(String idtransaccion) {
         PreparedStatement ps = null;
         Connection conn = getConnection();
 
-        String sql = "DELETE FROM compra_ventas_iva AS cvi WHERE cvi.id_transaccion = '"+idtransaccion+"'";
+        String sql = "DELETE FROM compra_ventas_iva AS cvi WHERE cvi.id_transaccion = '" + idtransaccion + "'";
 
         try {
             ps = conn.prepareStatement(sql);
             ps.executeUpdate();
         } catch (Exception e) {
             System.err.println(e);
-       
+
         } finally {
             try {
                 conn.close();
@@ -409,7 +410,7 @@ public class QueryVerTransacciones {
 
         }
     }
-    
+
     public boolean existeIdTransaccioncvi(int id) {
 
         PreparedStatement ps = null;
@@ -427,5 +428,33 @@ public class QueryVerTransacciones {
         }
 
         return false;
+    }
+
+    /*Método para obtener otros datos de la transaccion (cuenta,categoria,empresa,numeroCheque,numeroEmpresa)*/
+    public TransaccionEditable obtenerDatosT(int idTransaccion) {
+        PreparedStatement ps = null;
+        Connection conn = conexion.getConnection();
+        TransaccionEditable t = new TransaccionEditable();
+        try {
+            String sql = "SELECT cat.nombre AS categoria,e.empresa AS empresa,c.nombre AS cuenta,t.cheque AS cheque,t.num_fact AS factura\n"
+                    + "FROM transacciones AS t\n"
+                    + "INNER JOIN categorias AS cat ON t.id_categoria = cat.idcategorias\n"
+                    + "INNER JOIN empresa_orden AS e ON t.id_orden_empresa = e.idempresa_orden\n"
+                    + "INNER JOIN cuentas as c ON t.id_cuenta = c.idcuenta\n"
+                    + "WHERE t.idtransacciones = " +idTransaccion;
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                t.setCategoria(rs.getString("categoria"));
+                t.setEmpresa(rs.getString("empresa"));
+                t.setCuenta(rs.getString("cuenta"));
+                t.setNumeroCheque(rs.getString("cheque"));
+                t.setNumeroFactura(rs.getString("factura"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return t;
     }
 }

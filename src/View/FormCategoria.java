@@ -1,12 +1,17 @@
 
 package View;
 
+import java.awt.Image;
+import java.awt.Toolkit;
+
 
 public class FormCategoria extends javax.swing.JFrame {
 
     
     public FormCategoria() {
         initComponents();
+        Image icon = Toolkit.getDefaultToolkit().getImage("src\\Imagenes\\contabilidad.png");  
+        this.setIconImage(icon);
     }
 
     @SuppressWarnings("unchecked")

@@ -8,6 +8,7 @@ import Consultas.QueryVerTransacciones;
 import Model.CompraVentaIva;
 import Model.SubCategoria;
 import Model.Transaccion;
+import Model.TransaccionEditable;
 import View.EditView;
 import View.FormVerTransacciones;
 import View.MenuPrincipal;
@@ -434,16 +435,24 @@ public class VerTransaccionesController implements ActionListener {
         if (e.getSource() == formVerT.btnEditar) {
             CompraVentaIva cvi = new CompraVentaIva();
             Transaccion t = new Transaccion();
+            TransaccionEditable tEdit = new TransaccionEditable();
             int fila = formVerT.tablaVerTransacciones.getSelectedRow();
             if (fila >= 0) {
                 
                     t.setIdTransaccion(Integer.parseInt((String) formVerT.tablaVerTransacciones.getValueAt(fila, 0)));
+                    
+                    tEdit = obtenerDatosT(Integer.parseInt((String) formVerT.tablaVerTransacciones.getValueAt(fila, 0)));
+                    editVista.labelCategoria.setText(tEdit.getCategoria());
+                    editVista.labelCheque.setText(tEdit.getNumeroCheque());
+                    editVista.labelFactura.setText(tEdit.getNumeroFactura());
+                    editVista.labelCuenta.setText(tEdit.getCuenta());
+                    editVista.labelEmpresa.setText(tEdit.getEmpresa());
+                    
                     String fecha = (String) formVerT.tablaVerTransacciones.getValueAt(fila, 2);
                     t.setFecha(java.sql.Date.valueOf(fecha));
 
 
                     String salida = formVerT.tablaVerTransacciones.getValueAt(fila, 5).toString();
-
                     t.setSalida(Float.parseFloat(salida.substring(1)));
 
                     String entrada = formVerT.tablaVerTransacciones.getValueAt(fila, 6).toString();
@@ -703,5 +712,8 @@ public class VerTransaccionesController implements ActionListener {
       
     }
     
+    public TransaccionEditable obtenerDatosT(int idTransaccion){
+        return queryVerT.obtenerDatosT(idTransaccion);
+    }
     
 }

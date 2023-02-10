@@ -1,20 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
 
-/**
- *
- * @author Facundo
- */
+import java.awt.Image;
+import java.awt.Toolkit;
+
+
 public class FormSubCategoria extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FormSubCategoria
-     */
+    
     public FormSubCategoria() {
         initComponents();
+        Image icon = Toolkit.getDefaultToolkit().getImage("src\\Imagenes\\contabilidad.png");  
+        this.setIconImage(icon);
     }
 
     /**

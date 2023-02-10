@@ -1,11 +1,16 @@
 
 package View;
 
+import java.awt.Image;
+import java.awt.Toolkit;
+
 public class FormVerTransacciones extends javax.swing.JFrame {
 
    
     public FormVerTransacciones() {
         initComponents();
+        Image icon = Toolkit.getDefaultToolkit().getImage("src\\Imagenes\\contabilidad.png");  
+        this.setIconImage(icon);
     }
 
    
@@ -50,6 +55,7 @@ public class FormVerTransacciones extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Ver Transacciones");
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 51));
 

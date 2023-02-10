@@ -1,13 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
 
-/**
- *
- * @author Facundo
- */
+import java.awt.Image;
+import java.awt.Toolkit;
+
+
 public class FormFechas extends javax.swing.JFrame {
 
     /**
@@ -15,6 +12,8 @@ public class FormFechas extends javax.swing.JFrame {
      */
     public FormFechas() {
         initComponents();
+        Image icon = Toolkit.getDefaultToolkit().getImage("src\\Imagenes\\contabilidad.png");  
+        this.setIconImage(icon);
     }
 
     /**

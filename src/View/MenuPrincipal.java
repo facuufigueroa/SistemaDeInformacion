@@ -1,23 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package View;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
-/**
- *
- * @author Facundo
- */
+
 public class MenuPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Main
-     */
+   
     public MenuPrincipal() {
         initComponents();
+        Image icon = Toolkit.getDefaultToolkit().getImage("src\\Imagenes\\contabilidad.png");  
+        this.setIconImage(icon);
     }
 
     /**
