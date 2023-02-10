@@ -112,7 +112,7 @@ ORDER BY c.nombre,t.fecha;]]>
 					<text><![CDATA[Cuenta:]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="62" y="0" width="162" height="20" uuid="c22645f8-31e8-48b0-9de0-7cf4f2b25f80"/>
+					<reportElement x="62" y="0" width="378" height="20" uuid="c22645f8-31e8-48b0-9de0-7cf4f2b25f80"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font size="14" isBold="true" isItalic="true"/>
 					</textElement>
