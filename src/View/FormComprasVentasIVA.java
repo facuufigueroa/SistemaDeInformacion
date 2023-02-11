@@ -11,8 +11,14 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
    
     public FormComprasVentasIVA() {
         initComponents();
-        Image icon = Toolkit.getDefaultToolkit().getImage("src\\Imagenes\\contabilidad.png");  
-        this.setIconImage(icon);
+    }
+    
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+        getImage(ClassLoader.getSystemResource("Imagenes/contabilidad32.png"));
+  
+        return retValue;
     }
 
     
@@ -82,6 +88,7 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CompraVentasIVA");
         setBackground(new java.awt.Color(51, 51, 51));
+        setIconImage(getIconImage());
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 51));

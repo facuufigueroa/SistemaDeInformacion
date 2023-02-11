@@ -11,8 +11,14 @@ public class EditView extends javax.swing.JFrame {
     
     public EditView() {
         initComponents();
-        Image icon = Toolkit.getDefaultToolkit().getImage("src\\Imagenes\\contabilidad.png");  
-        this.setIconImage(icon);
+    }
+    
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+        getImage(ClassLoader.getSystemResource("Imagenes/contabilidad32.png"));
+  
+        return retValue;
     }
 
     
@@ -100,6 +106,7 @@ public class EditView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editar Transacciones y CompraVenta IVA");
+        setIconImage(getIconImage());
 
         jLabel1.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/formulario-de-llenado.png"))); // NOI18N

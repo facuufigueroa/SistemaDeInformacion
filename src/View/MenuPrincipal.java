@@ -12,8 +12,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
    
     public MenuPrincipal() {
         initComponents();
-        Image icon = Toolkit.getDefaultToolkit().getImage("src\\Imagenes\\contabilidad32.png");  
-        this.setIconImage(icon);
+        
+    }
+    
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+        getImage(ClassLoader.getSystemResource("Imagenes/contabilidad32.png"));
+  
+        return retValue;
     }
 
     /**
@@ -133,6 +140,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SISTEMA DE INFORMACIÓN");
+        setIconImage(getIconImage());
 
         jTabbedPane1.setBackground(new java.awt.Color(204, 204, 204));
         jTabbedPane1.setForeground(new java.awt.Color(51, 51, 51));

@@ -15,6 +15,8 @@ import Reportes.ReporteLibroVentasIVA;
 import View.FormFechas;
 import View.MenuPrincipal;
 import com.toedter.calendar.JDateChooser;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -132,6 +134,7 @@ public class MenuController implements ActionListener {
     }
     
     public static void main(String args[]) {
+        
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
             if ("Nimbus".equals(info.getName())) {
