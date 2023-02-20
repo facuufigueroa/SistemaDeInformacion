@@ -3,6 +3,7 @@ package Consultas;
 import DataBase.Conexion;
 import static DataBase.Conexion.getConnection;
 import Model.CompraVentaIva;
+import Model.EmpresaOrden;
 import Model.Transaccion;
 import Model.TransaccionEditable;
 import java.sql.Connection;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 public class QueryVerTransacciones {
 
     private Conexion conexion = new Conexion();
+    private QueryEmpresaOrden queryEO= new QueryEmpresaOrden();
 
     public String obtenerEmpresa(int idEmpresa) {
         String nombre = "";
@@ -297,13 +299,18 @@ public class QueryVerTransacciones {
         PreparedStatement ps = null;
         Connection con = getConnection();
 
-        String sql = "UPDATE transacciones AS t SET t.fecha = ? , t.salidas = ?, t.entradas = ? WHERE t.idtransacciones = " + id;
+        String sql = "UPDATE transacciones AS t SET t.fecha = ? , t.salidas = ?, t.entradas = ?,t.descripcion= ?,t.id_categoria= ?,t.id_orden_empresa=?,t.id_cuenta=?,t.cantidad=? WHERE t.idtransacciones = " + id;
 
         try {
             ps = con.prepareStatement(sql);
             ps.setDate(1, (Date) t.getFecha());
             ps.setFloat(2, t.getSalida());
             ps.setFloat(3, t.getEntrada());
+            ps.setString(4, t.getDescripcion());
+            ps.setInt(5, t.getIdCat());
+            ps.setInt(6, t.getIdOrdenEmp());
+            ps.setInt(7,t.getIdCuenta());
+            ps.setInt(8, t.getCantidad());
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -436,7 +443,7 @@ public class QueryVerTransacciones {
         Connection conn = conexion.getConnection();
         TransaccionEditable t = new TransaccionEditable();
         try {
-            String sql = "SELECT cat.nombre AS categoria,e.empresa AS empresa,c.nombre AS cuenta,t.cheque AS cheque,t.num_fact AS factura\n"
+            String sql = "SELECT cat.nombre AS categoria,e.empresa AS empresa,c.nombre AS cuenta,t.cheque AS cheque,t.num_fact AS factura,t.descripcion AS descripcion,t.cantidad AS cantidad\n"
                     + "FROM transacciones AS t\n"
                     + "INNER JOIN categorias AS cat ON t.id_categoria = cat.idcategorias\n"
                     + "INNER JOIN empresa_orden AS e ON t.id_orden_empresa = e.idempresa_orden\n"
@@ -450,6 +457,8 @@ public class QueryVerTransacciones {
                 t.setCuenta(rs.getString("cuenta"));
                 t.setNumeroCheque(rs.getString("cheque"));
                 t.setNumeroFactura(rs.getString("factura"));
+                t.setDescripcion(rs.getString("descripcion"));
+                t.setCantidad(rs.getInt("cantidad"));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -457,4 +466,5 @@ public class QueryVerTransacciones {
 
         return t;
     }
+    
 }

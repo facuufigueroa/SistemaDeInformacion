@@ -28,6 +28,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 public class TransaccionesController implements ActionListener {
 
@@ -115,6 +116,7 @@ public class TransaccionesController implements ActionListener {
     }
 
     public void iniciarComboBoxCuentas() {
+        
         transacciones.cbbCuentas.removeAllItems();
 
         ArrayList<String> nombreCuentas = queryCuentas.listarPorNombre();
@@ -123,6 +125,8 @@ public class TransaccionesController implements ActionListener {
         }
         transacciones.cbbCuentas.setRenderer(new PromptComboBoxRenderer("Pago Con..."));
         transacciones.cbbCuentas.setSelectedIndex(-1);
+        AutoCompleteDecorator.decorate(transacciones.cbbCuentas);
+        
     }
 
     public void iniciarComboBoxTipoCategoria() {
@@ -145,6 +149,7 @@ public class TransaccionesController implements ActionListener {
         for (String cat : listCategoria) {
             transacciones.cbbCategorias.addItem(cat);
         }
+        AutoCompleteDecorator.decorate(transacciones.cbbCategorias);
         
     }
 
@@ -168,6 +173,7 @@ public class TransaccionesController implements ActionListener {
         for (String emp : listEmpresas) {
             transacciones.cbbEmpresa.addItem(emp);
         }
+        AutoCompleteDecorator.decorate(transacciones.cbbEmpresa);
         
     }
 
@@ -237,7 +243,7 @@ public class TransaccionesController implements ActionListener {
                     iniciarTabla();
                     loadComVentaIva();
                     setearCamosEnCeroCVI();
-                    transacciones.labelNumT.setText(String.valueOf(queryTransaccion.obtenerMaxId()+1));
+                    formCVI.labelIdTransaccion.setText(String.valueOf(id_new_transaccion));
                 } else {
                     JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\"> Error al continuar con la Transacción - Ya existe codigo</p/</html>");
                 }
@@ -319,8 +325,10 @@ public class TransaccionesController implements ActionListener {
         t.setCodigo("T-" + queryT.obtenerMaxId());
 
         t.setIdCuenta(queryCuentas.obtenerIdCuentaPorNombre((String) transacciones.cbbCuentas.getSelectedItem()));
-
-        t.setNumFactura(transacciones.txtTipoFact.getText().toUpperCase() + "-" + transacciones.txtNumFact.getText());
+        
+    
+        t.setNumFactura(evaluarNumFact(transacciones.txtTipoFact.getText(),transacciones.txtNumFact.getText()));
+   
 
         t.setNumCheque(transacciones.txtNumCheque.getText()); //Puede ser numCheque o
 
@@ -476,7 +484,7 @@ public class TransaccionesController implements ActionListener {
                 setearCamosEnCeroCVI();
                 formCVI.setVisible(false);
                 setearCamposEnCero();
-
+                transacciones.labelNumT.setText(String.valueOf(queryTransaccion.obtenerMaxId()+1));
             } else {
                 JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\"> Error - Campos incompletos.</p/</html> \n"
                         + "<html><p style = \"font:12px\">Verifique que: </p/</html>\n"
@@ -610,6 +618,17 @@ public class TransaccionesController implements ActionListener {
             return "0";
         } else {
             return numero;
+        }
+    }
+    
+    /* Método para evitar guión cuando no pone numero de factura*/
+    public String evaluarNumFact(String tipo,String numFact){
+        if("".equals(numFact)){
+            return "";
+        }
+        else{
+            numFact=tipo.toUpperCase() + "-" + numFact;
+            return numFact;
         }
     }
 }

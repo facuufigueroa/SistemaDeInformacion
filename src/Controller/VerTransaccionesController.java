@@ -5,7 +5,10 @@ import Consultas.QueryCuentas;
 import Consultas.QueryEmpresaOrden;
 import Consultas.QuerySubCategoria;
 import Consultas.QueryVerTransacciones;
+import Model.Categoria;
 import Model.CompraVentaIva;
+import Model.EmpresaOrden;
+import Model.PromptComboBoxRenderer;
 import Model.SubCategoria;
 import Model.Transaccion;
 import Model.TransaccionEditable;
@@ -23,6 +26,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 public class VerTransaccionesController implements ActionListener {
 
@@ -57,13 +61,18 @@ public class VerTransaccionesController implements ActionListener {
 
         editVista.btnModificarT.addActionListener(this);
         editVista.btnModificarCVI.addActionListener(this);
-        
+
         formVerT.btnEliminar.addActionListener(this);
-        
+
         formVerT.btnActualizar.addActionListener(this);
-        
+
         formVerT.txtEntradas.setText(obtenerSumaEntradas());
         formVerT.txtSalidas.setText(obtenerSumaSalidas());
+
+        iniciarComboBox();
+        this.editVista.cbbCategoria.addActionListener(this);
+        this.editVista.cbbCuenta.addActionListener(this);
+        this.editVista.cbbEmpresa.addActionListener(this);
     }
 
     @Override
@@ -81,6 +90,8 @@ public class VerTransaccionesController implements ActionListener {
             accionEditarCVI(e);
             accionEditTransaccion(e);
             accionEditarTransaccion(e);
+            accionCbbCuenta(e);
+            accionCbbCategoria(e);
         } catch (ParseException ex) {
             Logger.getLogger(VerTransaccionesController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -438,43 +449,45 @@ public class VerTransaccionesController implements ActionListener {
             TransaccionEditable tEdit = new TransaccionEditable();
             int fila = formVerT.tablaVerTransacciones.getSelectedRow();
             if (fila >= 0) {
-                
-                    t.setIdTransaccion(Integer.parseInt((String) formVerT.tablaVerTransacciones.getValueAt(fila, 0)));
-                    
-                    tEdit = obtenerDatosT(Integer.parseInt((String) formVerT.tablaVerTransacciones.getValueAt(fila, 0)));
-                    editVista.labelCategoria.setText(tEdit.getCategoria());
-                    editVista.labelCheque.setText(tEdit.getNumeroCheque());
-                    editVista.labelFactura.setText(tEdit.getNumeroFactura());
-                    editVista.labelCuenta.setText(tEdit.getCuenta());
-                    editVista.labelEmpresa.setText(tEdit.getEmpresa());
-                    
-                    String fecha = (String) formVerT.tablaVerTransacciones.getValueAt(fila, 2);
-                    t.setFecha(java.sql.Date.valueOf(fecha));
 
+                t.setIdTransaccion(Integer.parseInt((String) formVerT.tablaVerTransacciones.getValueAt(fila, 0)));
+                tEdit = obtenerDatosT(Integer.parseInt((String) formVerT.tablaVerTransacciones.getValueAt(fila, 0)));
 
-                    String salida = formVerT.tablaVerTransacciones.getValueAt(fila, 5).toString();
-                    t.setSalida(Float.parseFloat(salida.substring(1)));
+                editVista.cbbCategoria.setSelectedItem(tEdit.getCategoria());
+                editVista.txtCantidad.setText(String.valueOf(tEdit.getCantidad()));
+                editVista.txtNumCheque.setText(tEdit.getNumeroCheque());
+                editVista.txtNumeroFactura.setText(tEdit.getNumeroFactura());
 
-                    String entrada = formVerT.tablaVerTransacciones.getValueAt(fila, 6).toString();
-                    t.setEntrada(Float.parseFloat(entrada.substring(1)));
+                editVista.cbbCuenta.setSelectedItem(tEdit.getCuenta());
+                editVista.cbbEmpresa.setSelectedItem(tEdit.getEmpresa());
 
-                    mensajeVerificacion(t.getIdTransaccion());    
+                editVista.txtDescripcion.setText(tEdit.getDescripcion());
 
-                    editVista.labelNumT.setText(String.valueOf(t.getIdTransaccion()));
-                    editVista.txtFechaT.setDate(t.getFecha());
-                    editVista.txtSalidas.setText(String.valueOf(t.getSalida()));
-                    editVista.txtEntradas.setText(String.valueOf(t.getEntrada()));
+                String fecha = (String) formVerT.tablaVerTransacciones.getValueAt(fila, 2);
+                t.setFecha(java.sql.Date.valueOf(fecha));
 
+                String salida = formVerT.tablaVerTransacciones.getValueAt(fila, 5).toString();
+                t.setSalida(Float.parseFloat(salida.substring(1)));
 
-                    cvi = queryVerT.obtenerCompraVenta(Integer.parseInt((String) formVerT.tablaVerTransacciones.getValueAt(fila, 0)));
+                String entrada = formVerT.tablaVerTransacciones.getValueAt(fila, 6).toString();
+                t.setEntrada(Float.parseFloat(entrada.substring(1)));
 
-                    setearVistaCVI(cvi);
-                    editVista.setVisible(true);
-                    editVista.setLocationRelativeTo(null);
-                    editVista.txtNombre.setEditable(false);
-                    editVista.txtCuit.setEditable(false);
-                    editVista.txtOperacion.setEditable(false);
-                
+                mensajeVerificacion(t.getIdTransaccion());
+
+                editVista.labelNumT.setText(String.valueOf(t.getIdTransaccion()));
+                editVista.txtFechaT.setDate(t.getFecha());
+                editVista.txtSalidas.setText(String.valueOf(t.getSalida()));
+                editVista.txtEntradas.setText(String.valueOf(t.getEntrada()));
+
+                cvi = queryVerT.obtenerCompraVenta(Integer.parseInt((String) formVerT.tablaVerTransacciones.getValueAt(fila, 0)));
+
+                setearVistaCVI(cvi);
+                editVista.setVisible(true);
+                editVista.setLocationRelativeTo(null);
+                editVista.txtNombre.setEditable(false);
+                editVista.txtCuit.setEditable(false);
+                editVista.txtOperacion.setEditable(false);
+
             } else {
                 JOptionPane.showMessageDialog(null, "Para Modificar Transacciones debe seleccionar la fila en la tabla.\n"
                         + "Haciendo click una sola vez.");
@@ -514,6 +527,7 @@ public class VerTransaccionesController implements ActionListener {
     public void accionEditTransaccion(ActionEvent e) throws ParseException {
         if (e.getSource() == editVista.btnModificarT) {
             if (editVista.txtFechaT.getDate() != null) {
+
                 Transaccion t = new Transaccion();
                 java.sql.Date sqlDate = new java.sql.Date(editVista.txtFechaT.getDate().getTime());
                 t.setFecha(sqlDate);
@@ -521,11 +535,17 @@ public class VerTransaccionesController implements ActionListener {
                 NumberFormat f2 = NumberFormat.getInstance();
                 t.setSalida(Float.parseFloat(verificarBlanco(editVista.txtSalidas.getText())));
                 t.setEntrada(Float.parseFloat(verificarBlanco(editVista.txtEntradas.getText())));
+                t.setDescripcion(editVista.txtDescripcion.getText());
+                t.setIdOrdenEmp(queryEO.obtenerIdEmpresaPorNombre(editVista.cbbEmpresa.getSelectedItem().toString()));
+                t.setIdCuenta(queryCuentas.obtenerIdCuentaPorNombre(editVista.cbbCuenta.getSelectedItem().toString()));
+                t.setIdCat(queryCategoria.obtenerIdCatePorNombre(editVista.cbbCategoria.getSelectedItem().toString()));
+                t.setCantidad(Integer.parseInt(editVista.txtCantidad.getText()));
                 queryVerT.modificarTransaccion(t, Integer.parseInt(editVista.labelNumT.getText()));
                 JOptionPane.showMessageDialog(null, "Transacción N° " + editVista.labelNumT.getText() + " modificada");
                 iniciarTabla2();
                 formVerT.txtEntradas.setText(obtenerSumaEntradas());
                 formVerT.txtSalidas.setText(obtenerSumaSalidas());
+
             } else {
                 JOptionPane.showMessageDialog(null, "Error al modificar transaccion, debe ingresar una fecha en el campo.\n"
                         + "No debe quedar el campo sin vacio");
@@ -578,12 +598,11 @@ public class VerTransaccionesController implements ActionListener {
 
         cvi.setImp_neto_grav(Float.parseFloat(verificarBlanco(editVista.txtImpNetoGrav.getText())));
 
-       
         cvi.setIva_facturado(Float.parseFloat(verificarBlanco(editVista.txtIvaFact.getText())));
-        
+
         cvi.setImp_interno(Float.parseFloat(verificarBlanco(editVista.txtImpInterno.getText())));
-            
-        cvi.setConcep_no_grav( Float.parseFloat(verificarBlanco(editVista.txtConceptoNoGrav.getText())));
+
+        cvi.setConcep_no_grav(Float.parseFloat(verificarBlanco(editVista.txtConceptoNoGrav.getText())));
 
         cvi.setPercepcion_iva(Float.parseFloat(verificarBlanco(editVista.txtPercepcionIVA.getText())));
 
@@ -618,14 +637,13 @@ public class VerTransaccionesController implements ActionListener {
         cvi.setImp_r_ing_brutos((Float.parseFloat(verificarBlanco(editVista.txtImpRIngBrutos.getText()))));
         cvi.setIva_facturado_21(Float.parseFloat(verificarBlanco(editVista.txtIvaFact21.getText())));
 
-        
         return cvi;
     }
-    
+
     public void borrarTransaccionAndCVI(ActionEvent e) {
 
         if (e.getSource() == formVerT.btnEliminar) {
-            
+
             String botones[] = {"Aceptar", "Cancelar"};
             int fila = formVerT.tablaVerTransacciones.getSelectedRow();
 
@@ -635,12 +653,12 @@ public class VerTransaccionesController implements ActionListener {
                     String idtransaccion = formVerT.tablaVerTransacciones.getValueAt(fila, 0).toString();
                     queryVerT.eliminarCvi(idtransaccion);
                     queryVerT.eliminarTransaccion(idtransaccion);
-                    JOptionPane.showMessageDialog(null,"<html><p style = \"font:15px\">La Transacción: "+formVerT.tablaVerTransacciones.getValueAt(fila, 0).toString() + " se ha eliminado");
+                    JOptionPane.showMessageDialog(null, "<html><p style = \"font:15px\">La Transacción: " + formVerT.tablaVerTransacciones.getValueAt(fila, 0).toString() + " se ha eliminado");
                     iniciarTabla2();
                     formVerT.txtEntradas.setText(obtenerSumaEntradas());
                     formVerT.txtSalidas.setText(obtenerSumaSalidas());
                 } else if (eleccion == JOptionPane.NO_OPTION) {
-                    JOptionPane.showMessageDialog(null, "<html><p style = \"font:15px\">Se ha cancelado operación</p></html>","Se canceló operación",1);
+                    JOptionPane.showMessageDialog(null, "<html><p style = \"font:15px\">Se ha cancelado operación</p></html>", "Se canceló operación", 1);
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "<html><p style = \"font:15px\">Por favor, seleccione transacción a eliminar en la tabla</p></html>");
@@ -648,7 +666,7 @@ public class VerTransaccionesController implements ActionListener {
 
         }
     }
-    
+
     public void updateTabla(ArrayList<Transaccion> l) {
         ArrayList<Transaccion> listT = l;
         modelo = new DefaultTableModel() {
@@ -689,31 +707,83 @@ public class VerTransaccionesController implements ActionListener {
         }
 
     }
-    
-    public void accionActualizar(ActionEvent e){
-        if(e.getSource() == formVerT.btnActualizar){
+
+    public void accionActualizar(ActionEvent e) {
+        if (e.getSource() == formVerT.btnActualizar) {
             iniciarTabla2();
             formVerT.txtEntradas.setText(obtenerSumaEntradas());
             formVerT.txtSalidas.setText(obtenerSumaSalidas());
         }
     }
-    
-    
+
     /*Método para aquellas transacciones que no se le discriminó el IVA, entonces muestra un texto*/
-    public void mensajeVerificacion(int idTransaccion){
-          if(!queryVerT.existeIdTransaccioncvi(idTransaccion)){
-              editVista.labelVerificacion.setText("No se discriminó COMPRA_VENTA_IVA para esta Transacción.");
-              editVista.btnModificarCVI.setEnabled(false);
-          }   
-          else{
-              editVista.labelVerificacion.setText("");
-              editVista.btnModificarCVI.setEnabled(true);
-          }
-      
+    public void mensajeVerificacion(int idTransaccion) {
+        if (!queryVerT.existeIdTransaccioncvi(idTransaccion)) {
+            editVista.labelVerificacion.setText("No se discriminó COMPRA_VENTA_IVA para esta Transacción.");
+            editVista.btnModificarCVI.setEnabled(false);
+        } else {
+            editVista.labelVerificacion.setText("");
+            editVista.btnModificarCVI.setEnabled(true);
+        }
+
     }
-    
-    public TransaccionEditable obtenerDatosT(int idTransaccion){
+
+    public TransaccionEditable obtenerDatosT(int idTransaccion) {
         return queryVerT.obtenerDatosT(idTransaccion);
     }
-    
+
+    /* Parte que se agrego para editar campos faltantes de transacciones */
+    public void iniciarComboBox() {
+        iniciarComboBoxEmpresa();
+        iniciarComboBoxCuentas();
+        iniciarComboBoxCategoria();
+    }
+
+    public void iniciarComboBoxEmpresa() {
+        ArrayList<String> listEmpresas = queryEO.listarPorNombre();
+        EmpresaOrden e = new EmpresaOrden();
+        e.setNombre("");
+        listEmpresas.add(0, e.getNombre());
+        for (String emp : listEmpresas) {
+            editVista.cbbEmpresa.addItem(emp);
+        }
+    }
+
+    public void iniciarComboBoxCuentas() {
+        editVista.cbbCuenta.removeAllItems();
+        ArrayList<String> nombreCuentas = queryCuentas.listarPorNombre();
+        for (String c : nombreCuentas) {
+            editVista.cbbCuenta.addItem(c);
+        }
+        editVista.cbbCuenta.setRenderer(new PromptComboBoxRenderer("Pago Con..."));
+        editVista.cbbCuenta.setSelectedIndex(-1);
+        AutoCompleteDecorator.decorate(editVista.cbbCuenta);
+    }
+
+    public void iniciarComboBoxCategoria() {
+        editVista.cbbCategoria.removeAllItems();
+        ArrayList<String> listCategoria = queryCategoria.listarPorNombre();
+        Categoria c = new Categoria();
+        c.setNombre("");
+        listCategoria.add(0, c.getNombre());
+        for (String cat : listCategoria) {
+            editVista.cbbCategoria.addItem(cat);
+        }
+        AutoCompleteDecorator.decorate(editVista.cbbCategoria);
+    }
+
+    public void accionCbbCuenta(ActionEvent e) {
+        if (e.getSource() == editVista.cbbCuenta) {
+            String nombre = queryCuentas.obtenerTipoCuenta(editVista.cbbCuenta.getSelectedItem().toString());
+            editVista.labelTipoCuenta.setText(nombre);
+        }
+    }
+
+    public void accionCbbCategoria(ActionEvent e) {
+        if (e.getSource() == editVista.cbbCategoria) {
+            String nombre = queryCategoria.obtenerNombreTC(editVista.cbbCategoria.getSelectedItem().toString());
+            editVista.labelTipoCategoria.setText(nombre);
+        }
+    }
+
 }

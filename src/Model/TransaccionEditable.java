@@ -8,17 +8,34 @@ public class TransaccionEditable {
     
     private String numeroCheque;
     private String numeroFactura;
+    private String tipoFactura;
     private String categoria;
     private String cuenta;
     private String empresa;
+    private String descripcion;
+    private int cantidad;
 
-    public TransaccionEditable(String numeroCheque, String numeroFactura, String categoria, String cuenta, String empresa) {
+    public TransaccionEditable(String numeroCheque, String numeroFactura, String categoria, String cuenta, String empresa,String descripcion,String tipoFactura,int cantidad) {
         this.numeroCheque = numeroCheque;
         this.numeroFactura = numeroFactura;
         this.categoria = categoria;
         this.cuenta = cuenta;
         this.empresa = empresa;
+        this.descripcion=descripcion;
+        this.tipoFactura=tipoFactura;
+        this.cantidad = cantidad;
     }
+
+    public TransaccionEditable(String numeroCheque, String numeroFactura, String categoria, String cuenta, String empresa, String descripcion) {
+        this.numeroCheque = numeroCheque;
+        this.numeroFactura = numeroFactura;
+        this.categoria = categoria;
+        this.cuenta = cuenta;
+        this.empresa = empresa;
+        this.descripcion = descripcion;
+    }
+    
+    
 
     public TransaccionEditable() {
     }
@@ -63,6 +80,31 @@ public class TransaccionEditable {
     public void setEmpresa(String empresa) {
         this.empresa = empresa;
     }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getTipoFactura() {
+        return tipoFactura;
+    }
+
+    public void setTipoFactura(String tipoFactura) {
+        this.tipoFactura = tipoFactura;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+    
     
     
 }
