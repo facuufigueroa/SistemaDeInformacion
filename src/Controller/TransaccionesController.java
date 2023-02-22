@@ -239,8 +239,8 @@ public class TransaccionesController implements ActionListener {
         if (e.getSource() == transacciones.btnCompraVentasIVA) {
             if (!verificarVacios()) {
                 if (!queryTransaccion.verificarCodigoT(obtenerTransaccion().getCodigo())) {
-                    queryTransaccion.addTransaccion(obtenerTransaccion());
-                    iniciarTabla();
+                    /*queryTransaccion.addTransaccion(obtenerTransaccion());*/
+                    
                     loadComVentaIva();
                     setearCamosEnCeroCVI();
                     formCVI.labelIdTransaccion.setText(String.valueOf(id_new_transaccion));
@@ -412,6 +412,7 @@ public class TransaccionesController implements ActionListener {
         iniciarComboBoxEmpresa();
         transacciones.txtFecha.setDate(null);
         transacciones.txtDescripcion.setText("");
+        transacciones.checkAIva.setSelected(false);
     }
 
     public void iniciarTablaMain() {
@@ -478,7 +479,8 @@ public class TransaccionesController implements ActionListener {
     public void accionCompraVenta(ActionEvent e) throws ParseException {
         if (e.getSource() == formCVI.btnFinalizar) {
             if (!verificarBlancos()) {
-
+                queryTransaccion.addTransaccion(obtenerTransaccion());
+                iniciarTabla();
                 queryCVI.agregarCompraVenta(newCompraVenta());
                 JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\"> El registro se efectuó correctamente </p/</html> \n", "Operación Finalizada", 1);
                 setearCamosEnCeroCVI();
@@ -561,7 +563,9 @@ public class TransaccionesController implements ActionListener {
         cvi.setImp_r_ing_brutos(Float.parseFloat(verificarBlanco(formCVI.txtImpRIngBrutos.getText())));
 
         cvi.setIva_facturado_21(Float.parseFloat(verificarBlanco(formCVI.txtIvaFact21.getText())));
-
+        
+        cvi.setIva_facturado_27(Float.parseFloat(verificarBlanco(formCVI.txtIvaFact27.getText())));
+        
         return cvi;
     }
 
@@ -600,7 +604,7 @@ public class TransaccionesController implements ActionListener {
         formCVI.txtRetIva.setText("0.0");
         formCVI.txtImpRIngBrutos.setText("0.0");
         formCVI.txtIvaFact21.setText("0.0");
-
+        formCVI.txtIvaFact27.setText("0.0");
     }
 
     public boolean verificarBlancos() {

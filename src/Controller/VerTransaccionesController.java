@@ -522,6 +522,7 @@ public class VerTransaccionesController implements ActionListener {
         editVista.txtImpRIngBrutos.setText(String.valueOf(cvi.getImp_r_ing_brutos()));
         editVista.txtOtros.setText(String.valueOf(cvi.getOtros()));
         editVista.txtIvaFact21.setText(String.valueOf(cvi.getIva_facturado_21()));
+        editVista.txtIvaFac27.setText(String.valueOf(cvi.getIva_facturado_27()));
     }
 
     public void accionEditTransaccion(ActionEvent e) throws ParseException {
@@ -636,7 +637,7 @@ public class VerTransaccionesController implements ActionListener {
 
         cvi.setImp_r_ing_brutos((Float.parseFloat(verificarBlanco(editVista.txtImpRIngBrutos.getText()))));
         cvi.setIva_facturado_21(Float.parseFloat(verificarBlanco(editVista.txtIvaFact21.getText())));
-
+        cvi.setIva_facturado_27(Float.parseFloat(verificarBlanco(editVista.txtIvaFac27.getText())));
         return cvi;
     }
 

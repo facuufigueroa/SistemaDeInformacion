@@ -35,13 +35,14 @@ public class CompraVentaIva {
     private float ret_iva;
     private float imp_r_ing_brutos;
     private float iva_facturado_21;
+    private float iva_facturado_27;
 
     private String empresa;
 
     public CompraVentaIva() {
     }
 
-    public CompraVentaIva(int idTransaccion, String operacion, Date fecha, String tipo_comprobante, String numComprobante, String cuit, float imp_neto_grav, float iva_facturado, float imp_interno, float concep_no_grav, float percepcion_iva, float ret_ganancias, float perc_iibb_compra, float imp_total_fact, float ite_iva_dere_reg, float c_no_grav_sellos, float ret_iibb_venta, float iva_rg_212, float grav_ley_25413, float int_numerales, float otros, float operaciones_exentas, float ing_brutos, float ret_iva, float imp_r_ing_brutos, String empresa,float iva_facturado_21) {
+    public CompraVentaIva(int idTransaccion, String operacion, Date fecha, String tipo_comprobante, String numComprobante, String cuit, float imp_neto_grav, float iva_facturado, float imp_interno, float concep_no_grav, float percepcion_iva, float ret_ganancias, float perc_iibb_compra, float imp_total_fact, float ite_iva_dere_reg, float c_no_grav_sellos, float ret_iibb_venta, float iva_rg_212, float grav_ley_25413, float int_numerales, float otros, float operaciones_exentas, float ing_brutos, float ret_iva, float imp_r_ing_brutos, String empresa,float iva_facturado_21,float iva_facturado_27) {
         this.idTransaccion = idTransaccion;
         this.operacion = operacion;
         this.fecha = fecha;
@@ -69,6 +70,7 @@ public class CompraVentaIva {
         this.imp_r_ing_brutos = imp_r_ing_brutos;
         this.empresa = empresa;
         this.iva_facturado_21=iva_facturado_21;
+        this.iva_facturado_27=iva_facturado_27;
     }
 
     public int getIdTransaccion() {
@@ -285,6 +287,14 @@ public class CompraVentaIva {
 
     public void setIva_facturado_21(float iva_facturado_21) {
         this.iva_facturado_21 = iva_facturado_21;
+    }
+
+    public float getIva_facturado_27() {
+        return iva_facturado_27;
+    }
+
+    public void setIva_facturado_27(float iva_facturado_27) {
+        this.iva_facturado_27 = iva_facturado_27;
     }
     
     
