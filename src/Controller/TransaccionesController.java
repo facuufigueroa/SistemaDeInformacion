@@ -45,9 +45,9 @@ public class TransaccionesController implements ActionListener {
     QueryTransaccion queryTransaccion = new QueryTransaccion();
 
     private static TransaccionesController tSingleton;
-    
-    int id_new_transaccion = queryTransaccion.obtenerMaxId()+1;
-    
+
+    int id_new_transaccion = queryTransaccion.obtenerMaxId() + 1;
+
     /* todo cvi*/
     FormComprasVentasIVA formCVI = new FormComprasVentasIVA();
     QueryTransaccion queryT = new QueryTransaccion();
@@ -73,7 +73,7 @@ public class TransaccionesController implements ActionListener {
 
         this.formCVI.btnFinalizar.addActionListener(this);
         this.transacciones.btnSaveSinIva.addActionListener(this);
-        
+
         transacciones.labelNumT.setText(String.valueOf(id_new_transaccion));
     }
 
@@ -116,7 +116,7 @@ public class TransaccionesController implements ActionListener {
     }
 
     public void iniciarComboBoxCuentas() {
-        
+
         transacciones.cbbCuentas.removeAllItems();
 
         ArrayList<String> nombreCuentas = queryCuentas.listarPorNombre();
@@ -126,7 +126,7 @@ public class TransaccionesController implements ActionListener {
         transacciones.cbbCuentas.setRenderer(new PromptComboBoxRenderer("Pago Con..."));
         transacciones.cbbCuentas.setSelectedIndex(-1);
         AutoCompleteDecorator.decorate(transacciones.cbbCuentas);
-        
+
     }
 
     public void iniciarComboBoxTipoCategoria() {
@@ -150,7 +150,7 @@ public class TransaccionesController implements ActionListener {
             transacciones.cbbCategorias.addItem(cat);
         }
         AutoCompleteDecorator.decorate(transacciones.cbbCategorias);
-        
+
     }
 
     public void iniciarcomboBoxSubcategoria() {
@@ -174,7 +174,7 @@ public class TransaccionesController implements ActionListener {
             transacciones.cbbEmpresa.addItem(emp);
         }
         AutoCompleteDecorator.decorate(transacciones.cbbEmpresa);
-        
+
     }
 
     public void iniciarTabla() {
@@ -239,11 +239,15 @@ public class TransaccionesController implements ActionListener {
         if (e.getSource() == transacciones.btnCompraVentasIVA) {
             if (!verificarVacios()) {
                 if (!queryTransaccion.verificarCodigoT(obtenerTransaccion().getCodigo())) {
-                    /*queryTransaccion.addTransaccion(obtenerTransaccion());*/
-                    
-                    loadComVentaIva();
-                    setearCamosEnCeroCVI();
-                    formCVI.labelIdTransaccion.setText(String.valueOf(id_new_transaccion));
+                    if (!queryTransaccion.verificarNumFactura(obtenerTransaccion().getNumFactura()) || !queryTransaccion.verificarNumCheque(obtenerTransaccion().getNumCheque())) {
+                        loadComVentaIva();
+                        setearCamosEnCeroCVI();
+                        formCVI.labelIdTransaccion.setText(String.valueOf(id_new_transaccion));
+                    } else {
+                        JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\"> El N° de Factura o el N° de Cheque ingresado</p/</html>\n"
+                                + "<html><p style = \"font:14px\"> ya se escuentra en el sistema.</p/</html>\n"
+                                + "<html><p style = \"font:14px\">Verifique nuevamente.</p/</html>", "Error al guardar transacción", 0);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\"> Error al continuar con la Transacción - Ya existe codigo</p/</html>");
                 }
@@ -269,11 +273,17 @@ public class TransaccionesController implements ActionListener {
         if (e.getSource() == transacciones.btnSaveSinIva) {
             if (!verificarVacios()) {
                 if (!queryTransaccion.verificarCodigoT(obtenerTransaccion().getCodigo())) {
-                    queryTransaccion.addTransaccion(obtenerTransaccion());
-                    JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\">Transacción registrada correctamente</p/</html>");
-                    iniciarTabla();
-                    setearCamposEnCero();
-                    transacciones.labelNumT.setText(String.valueOf(queryTransaccion.obtenerMaxId()+1));
+                    if (!queryTransaccion.verificarNumFactura(obtenerTransaccion().getNumFactura()) || !queryTransaccion.verificarNumCheque(obtenerTransaccion().getNumCheque())) {
+                        queryTransaccion.addTransaccion(obtenerTransaccion());
+                        JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\">Transacción registrada correctamente</p/</html>");
+                        iniciarTabla();
+                        setearCamposEnCero();
+                        transacciones.labelNumT.setText(String.valueOf(queryTransaccion.obtenerMaxId() + 1));
+                    } else {
+                        JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\"> El N° de Factura o el N° de Cheque ingresado</p/</html>\n"
+                                + "<html><p style = \"font:14px\"> ya se escuentra en el sistema.</p/</html>\n"
+                                + "<html><p style = \"font:14px\">Verifique nuevamente.</p/</html>", "Error al guardar transacción", 0);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\"> Error al continuar con la Transacción - Ya existe codigo</p/</html>");
                 }
@@ -325,10 +335,8 @@ public class TransaccionesController implements ActionListener {
         t.setCodigo("T-" + queryT.obtenerMaxId());
 
         t.setIdCuenta(queryCuentas.obtenerIdCuentaPorNombre((String) transacciones.cbbCuentas.getSelectedItem()));
-        
-    
-        t.setNumFactura(evaluarNumFact(transacciones.txtTipoFact.getText(),transacciones.txtNumFact.getText()));
-   
+
+        t.setNumFactura(evaluarNumFact(transacciones.txtTipoFact.getText(), transacciones.txtNumFact.getText()));
 
         t.setNumCheque(transacciones.txtNumCheque.getText()); //Puede ser numCheque o
 
@@ -380,8 +388,8 @@ public class TransaccionesController implements ActionListener {
                 || transacciones.cbbSubCategoria.getSelectedItem().equals("")
                 || transacciones.txtDescripcion.getText().equals("")
                 || transacciones.txtNumCheque.getText().equals("")
-                && transacciones.txtNumFact.getText().equals("")
-                && transacciones.txtTipoFact.getText().equals("")) {
+                && (transacciones.txtNumFact.getText().equals("")
+                || transacciones.txtTipoFact.getText().equals(""))) {
             return true;
         }
         return false;
@@ -486,7 +494,7 @@ public class TransaccionesController implements ActionListener {
                 setearCamosEnCeroCVI();
                 formCVI.setVisible(false);
                 setearCamposEnCero();
-                transacciones.labelNumT.setText(String.valueOf(queryTransaccion.obtenerMaxId()+1));
+                transacciones.labelNumT.setText(String.valueOf(queryTransaccion.obtenerMaxId() + 1));
             } else {
                 JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\"> Error - Campos incompletos.</p/</html> \n"
                         + "<html><p style = \"font:12px\">Verifique que: </p/</html>\n"
@@ -563,9 +571,9 @@ public class TransaccionesController implements ActionListener {
         cvi.setImp_r_ing_brutos(Float.parseFloat(verificarBlanco(formCVI.txtImpRIngBrutos.getText())));
 
         cvi.setIva_facturado_21(Float.parseFloat(verificarBlanco(formCVI.txtIvaFact21.getText())));
-        
+
         cvi.setIva_facturado_27(Float.parseFloat(verificarBlanco(formCVI.txtIvaFact27.getText())));
-        
+
         return cvi;
     }
 
@@ -624,14 +632,13 @@ public class TransaccionesController implements ActionListener {
             return numero;
         }
     }
-    
+
     /* Método para evitar guión cuando no pone numero de factura*/
-    public String evaluarNumFact(String tipo,String numFact){
-        if("".equals(numFact)){
+    public String evaluarNumFact(String tipo, String numFact) {
+        if ("".equals(numFact)) {
             return "";
-        }
-        else{
-            numFact=tipo.toUpperCase() + "-" + numFact;
+        } else {
+            numFact = tipo.toUpperCase() + "-" + numFact;
             return numFact;
         }
     }

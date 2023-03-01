@@ -163,7 +163,43 @@ public class QueryTransaccion {
         Connection conn = Conexion.getConnection();
         try {
             String sql = "SELECT *" +
-                            "FROM transacciones AS t WHERE t.codigo = '"+codigo+"'";
+                            "FROM transacciones AS t WHERE t.codigo = '"+codigo.toUpperCase()+"'";
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return false;
+    }
+    
+    public boolean verificarNumFactura(String numFact){
+        PreparedStatement ps = null;
+        Connection conn = Conexion.getConnection();
+        try {
+            String sql = "SELECT *" +
+                            "FROM transacciones AS t WHERE t.num_fact = '"+numFact+"'";
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return false;
+    }
+    
+    public boolean verificarNumCheque(String numCheque){
+        PreparedStatement ps = null;
+        Connection conn = Conexion.getConnection();
+        try {
+            String sql = "SELECT *" +
+                            "FROM transacciones AS t WHERE t.cheque = '"+numCheque+"'";
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery(sql);
             if (rs.next()) {
