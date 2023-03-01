@@ -143,6 +143,28 @@ public class QueryEmpresaOrden {
         return cuit;
     }
     
+    public EmpresaOrden obtenerEmpresaPorId(int idE){
+        /*String empresa = "";*/
+        EmpresaOrden empresa = new EmpresaOrden();
+        PreparedStatement ps = null;
+        Connection conn = Conexion.getConnection();
+        try {
+            String sql = "SELECT * \n" +
+                            "FROM empresa_orden as e\n" +
+                            "WHERE e.idempresa_orden = "+idE;
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                empresa.setNombre(rs.getString("empresa"));
+                empresa.setCuit(rs.getString("cuit"));
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return empresa;
+    }
 
 
 }

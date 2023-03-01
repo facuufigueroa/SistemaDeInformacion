@@ -65,7 +65,7 @@ public class TransaccionesController implements ActionListener {
         /*TODO CVI*/
         setearCamosEnCeroCVI();
         iniciarComboBoxEmpresaCVI();
-        iniciarComboBoxCuit();
+        //iniciarComboBoxCuit();
         iniciarComboBoxOperacion();
 
         this.formCVI.cbbEmpresa.addActionListener(this);
@@ -240,7 +240,7 @@ public class TransaccionesController implements ActionListener {
             if (!verificarVacios()) {
                 if (!queryTransaccion.verificarCodigoT(obtenerTransaccion().getCodigo())) {
                     if (!queryTransaccion.verificarNumFactura(obtenerTransaccion().getNumFactura()) || !queryTransaccion.verificarNumCheque(obtenerTransaccion().getNumCheque())) {
-                        loadComVentaIva();
+                        loadComVentaIva(obtenerTransaccion().getIdOrdenEmp());
                         setearCamosEnCeroCVI();
                         formCVI.labelIdTransaccion.setText(String.valueOf(id_new_transaccion));
                     } else {
@@ -438,11 +438,18 @@ public class TransaccionesController implements ActionListener {
     }
 
     /* Todo compra venta IVA*/
-    public void loadComVentaIva() {
+    public void loadComVentaIva(int IdEmpresa) {
         formCVI.setVisible(true);
         formCVI.setLocationRelativeTo(null);
+        formCVI.cbbEmpresa.setSelectedItem(obtenerEmpresa(IdEmpresa).getNombre());
+               
+        iniciarComboBoxCuit(obtenerEmpresa(IdEmpresa).getCuit());
     }
-
+    
+    public EmpresaOrden obtenerEmpresa(int idEmpresa){
+        return queryEO.obtenerEmpresaPorId(idEmpresa);   
+    }
+    
     public void iniciarComboBoxEmpresaCVI() {
 
         ArrayList<String> listEmpresas = queryEO.listarPorNombre();
@@ -464,7 +471,7 @@ public class TransaccionesController implements ActionListener {
     }
 
     /*Muestra el cuit y el nombre de la empresa juntos*/
-    public void iniciarComboBoxCuit() {
+    public void iniciarComboBoxCuit(String cuit) {
         formCVI.cbbCuitEmpresa.removeAllItems();
         ArrayList<EmpresaOrden> listEmpresas = queryEO.listarEmpresaOrden();
         EmpresaOrden e = new EmpresaOrden();
@@ -474,13 +481,13 @@ public class TransaccionesController implements ActionListener {
         for (EmpresaOrden emp : listEmpresas) {
             formCVI.cbbCuitEmpresa.addItem(emp.getCuit());
         }
+        formCVI.cbbCuitEmpresa.setSelectedItem(cuit);
     }
 
     public void accionEmpresa(ActionEvent e) {
         if (e.getSource() == formCVI.cbbEmpresa) {
             String cuit = queryEO.obtenerCuitPorNombre(formCVI.cbbEmpresa.getSelectedItem().toString());
             formCVI.cbbCuitEmpresa.setSelectedItem(cuit);
-
         }
     }
 
@@ -586,7 +593,7 @@ public class TransaccionesController implements ActionListener {
     }
 
     public void setearCamosEnCeroCVI() {
-        iniciarComboBoxCuit();
+        //iniciarComboBoxCuit();
         iniciarComboBoxEmpresaCVI();
         iniciarComboBoxOperacion();
         formCVI.txtFecha.setDate(null);
