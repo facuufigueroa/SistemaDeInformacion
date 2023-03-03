@@ -145,7 +145,7 @@ public class VerTransaccionesController implements ActionListener {
         }
 
     }
-
+    
     public void accionBuscarPorCat(ActionEvent e) {
         ArrayList<Transaccion> listTransacciones = new ArrayList<>();
         if (e.getSource() == formVerT.cbbBuscarCategoria) {
@@ -383,7 +383,7 @@ public class VerTransaccionesController implements ActionListener {
         }
 
     }
-
+     
     public void accionBuscar(ActionEvent e) {
         if (e.getSource() == formVerT.btnBuscarT) {
             if (!"".equals(formVerT.txtNum.getText())) {
@@ -471,7 +471,7 @@ public class VerTransaccionesController implements ActionListener {
 
                 String entrada = formVerT.tablaVerTransacciones.getValueAt(fila, 6).toString();
                 t.setEntrada(Float.parseFloat(entrada.substring(1)));
-
+                
                 mensajeVerificacion(t.getIdTransaccion());
 
                 editVista.labelNumT.setText(String.valueOf(t.getIdTransaccion()));

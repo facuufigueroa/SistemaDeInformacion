@@ -1,19 +1,24 @@
 
 package View;
 
+
+import Paginacion.Paginacion;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.table.DefaultTableModel;
 
 
 public class MenuPrincipal extends javax.swing.JFrame {
-
-   
+    
+    private Paginacion paginacion = new Paginacion();
+    
     public MenuPrincipal() {
         initComponents();
-        
     }
+    
+   
     
     @Override
     public Image getIconImage() {
@@ -130,6 +135,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaEmpresa = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
+        internalFrame = new javax.swing.JInternalFrame();
+        jPanel15 = new javax.swing.JPanel();
+        jLabel32 = new javax.swing.JLabel();
+        labelDetalle = new javax.swing.JLabel();
+        panelTabla = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        tablaTH = new javax.swing.JTable();
+        panelPaginacion = new javax.swing.JPanel();
+        btnAnterior = new javax.swing.JButton();
+        txtPaginacion = new javax.swing.JTextField();
+        btnSiguiente = new javax.swing.JButton();
         jInternalFrame7 = new javax.swing.JInternalFrame();
         jPanel12 = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
@@ -1287,6 +1303,144 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Empresa / Orden", new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cliente.png")), jInternalFrame4); // NOI18N
 
+        internalFrame.setVisible(true);
+
+        jPanel15.setBackground(new java.awt.Color(0, 0, 51));
+        jPanel15.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel32.setFont(new java.awt.Font("Arial Narrow", 1, 28)); // NOI18N
+        jLabel32.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/simbolo.png"))); // NOI18N
+        jLabel32.setText("Transacciones Registradas ");
+
+        labelDetalle.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        labelDetalle.setForeground(new java.awt.Color(255, 255, 255));
+        labelDetalle.setText("Se detallan todas las transacciones registradas desde el año 2023, hasta la fecha actual.");
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel32)
+                    .addComponent(labelDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(601, Short.MAX_VALUE))
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelDetalle)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        panelTabla.setBackground(new java.awt.Color(0, 0, 51));
+
+        tablaTH.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        tablaTH.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane7.setViewportView(tablaTH);
+
+        panelPaginacion.setBackground(new java.awt.Color(204, 204, 204));
+
+        btnAnterior.setFont(new java.awt.Font("Arial Narrow", 1, 14)); // NOI18N
+        btnAnterior.setForeground(new java.awt.Color(0, 0, 0));
+        btnAnterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/anterior.png"))); // NOI18N
+        btnAnterior.setText("Anterior");
+
+        txtPaginacion.setEditable(false);
+        txtPaginacion.setBackground(new java.awt.Color(255, 255, 255));
+        txtPaginacion.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtPaginacion.setForeground(new java.awt.Color(0, 0, 0));
+
+        btnSiguiente.setFont(new java.awt.Font("Arial Narrow", 1, 14)); // NOI18N
+        btnSiguiente.setForeground(new java.awt.Color(0, 0, 0));
+        btnSiguiente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/siguiente.png"))); // NOI18N
+        btnSiguiente.setText("Siguiente");
+
+        javax.swing.GroupLayout panelPaginacionLayout = new javax.swing.GroupLayout(panelPaginacion);
+        panelPaginacion.setLayout(panelPaginacionLayout);
+        panelPaginacionLayout.setHorizontalGroup(
+            panelPaginacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPaginacionLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(btnAnterior)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtPaginacion, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSiguiente)
+                .addContainerGap(42, Short.MAX_VALUE))
+        );
+        panelPaginacionLayout.setVerticalGroup(
+            panelPaginacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPaginacionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelPaginacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPaginacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAnterior))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout panelTablaLayout = new javax.swing.GroupLayout(panelTabla);
+        panelTabla.setLayout(panelTablaLayout);
+        panelTablaLayout.setHorizontalGroup(
+            panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTablaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 1228, Short.MAX_VALUE)
+                    .addGroup(panelTablaLayout.createSequentialGroup()
+                        .addComponent(panelPaginacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        panelTablaLayout.setVerticalGroup(
+            panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTablaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelPaginacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(129, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout internalFrameLayout = new javax.swing.GroupLayout(internalFrame.getContentPane());
+        internalFrame.getContentPane().setLayout(internalFrameLayout);
+        internalFrameLayout.setHorizontalGroup(
+            internalFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(internalFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(internalFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelTabla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        internalFrameLayout.setVerticalGroup(
+            internalFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(internalFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelTabla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("Historico Transacciones", new javax.swing.ImageIcon(getClass().getResource("/Imagenes/historico.png")), internalFrame); // NOI18N
+
         jInternalFrame7.setVisible(true);
 
         jPanel12.setBackground(new java.awt.Color(0, 0, 51));
@@ -1496,6 +1650,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnAnterior;
     public javax.swing.JButton btnByT;
     public javax.swing.JButton btnCuentasAPagar;
     public javax.swing.JButton btnElRocioT;
@@ -1519,9 +1674,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public javax.swing.JButton btnRocioContador;
     public javax.swing.JButton btnSaveCat;
     public javax.swing.JButton btnSaveTipoCat;
+    public javax.swing.JButton btnSiguiente;
     public javax.swing.JButton btnVerTransacciones;
     public javax.swing.JComboBox<String> cbbTipoCat;
     public javax.swing.JComboBox<String> cbbTipoCuenta;
+    public javax.swing.JInternalFrame internalFrame;
     private javax.swing.JButton jButton5;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JInternalFrame jInternalFrame2;
@@ -1555,6 +1712,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1567,6 +1725,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1581,16 +1740,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
     public javax.swing.JLabel labelAño;
     private javax.swing.JLabel labelBienvenido;
     private javax.swing.JLabel labelBienvenido1;
     private javax.swing.JLabel labelBienvenido2;
     private javax.swing.JLabel labelBienvenido3;
+    public javax.swing.JLabel labelDetalle;
+    public javax.swing.JPanel panelPaginacion;
+    public javax.swing.JPanel panelTabla;
     public javax.swing.JTable tablaCategoria;
     public javax.swing.JTable tablaCuentas;
     public javax.swing.JTable tablaEmpresa;
     public javax.swing.JTable tablaSubCategoria;
+    public javax.swing.JTable tablaTH;
     public javax.swing.JTable tablaTipoCategorias;
     public javax.swing.JTable tablaTipoCuenta;
     public javax.swing.JTextField txtBuscarPorNombre;
@@ -1600,6 +1764,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public javax.swing.JTextField txtNomSubCat;
     public javax.swing.JTextField txtNomTipoCat;
     public javax.swing.JTextField txtNombreEmpresa;
+    public javax.swing.JTextField txtPaginacion;
     public javax.swing.JTextField txtTipoCuenta;
     // End of variables declaration//GEN-END:variables
 }

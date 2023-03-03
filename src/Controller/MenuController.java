@@ -15,8 +15,6 @@ import Reportes.ReporteLibroVentasIVA;
 import View.FormFechas;
 import View.MenuPrincipal;
 import com.toedter.calendar.JDateChooser;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -91,6 +89,8 @@ public class MenuController implements ActionListener {
     
         this.menuPrincipal.btnByT.addActionListener(this);
         this.formFechaReportByT.btnBuscar.addActionListener(this);
+        
+        HistoricoTransaccionController htController = new  HistoricoTransaccionController(menuPrincipal);
     }
 
     @Override

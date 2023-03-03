@@ -13,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class QueryVerTransacciones {
 
@@ -201,10 +203,14 @@ public class QueryVerTransacciones {
 
     public ArrayList<Transaccion> listarTransacciones() {
         ArrayList<Transaccion> tList = new ArrayList<>();
+        Calendar fecha = new GregorianCalendar();
+        String añoActual = String.valueOf(fecha.get(Calendar.YEAR));
         Connection conn = Conexion.getConnection();
         Statement st;
         try {
-            String sql = "SELECT * FROM transacciones AS t ORDER BY t.idtransacciones DESC";
+            String sql = "SELECT * FROM transacciones AS t \n" +
+                        "WHERE YEAR(t.fecha)="+añoActual+"\n"+
+                        "ORDER BY t.idtransacciones DESC";
             st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
 
