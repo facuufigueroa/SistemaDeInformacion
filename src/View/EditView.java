@@ -532,6 +532,7 @@ public class EditView extends javax.swing.JFrame {
         jLabel32.setText("IVA Facturado 21%");
 
         txtImpNetoGrav.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtImpNetoGrav.setForeground(new java.awt.Color(0, 0, 0));
         txtImpNetoGrav.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtImpNetoGravKeyTyped(evt);
@@ -539,6 +540,7 @@ public class EditView extends javax.swing.JFrame {
         });
 
         txtIvaFact.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtIvaFact.setForeground(new java.awt.Color(0, 0, 0));
         txtIvaFact.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtIvaFactKeyTyped(evt);
@@ -546,6 +548,7 @@ public class EditView extends javax.swing.JFrame {
         });
 
         txtImpInterno.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtImpInterno.setForeground(new java.awt.Color(0, 0, 0));
         txtImpInterno.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtImpInternoKeyTyped(evt);
@@ -553,6 +556,7 @@ public class EditView extends javax.swing.JFrame {
         });
 
         txtIvaFact21.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtIvaFact21.setForeground(new java.awt.Color(0, 0, 0));
         txtIvaFact21.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtIvaFact21KeyTyped(evt);
@@ -560,6 +564,7 @@ public class EditView extends javax.swing.JFrame {
         });
 
         txtPercepcionIVA.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtPercepcionIVA.setForeground(new java.awt.Color(0, 0, 0));
         txtPercepcionIVA.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtPercepcionIVAKeyTyped(evt);
@@ -567,6 +572,7 @@ public class EditView extends javax.swing.JFrame {
         });
 
         txtRetGanan.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtRetGanan.setForeground(new java.awt.Color(0, 0, 0));
         txtRetGanan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtRetGananKeyTyped(evt);
@@ -574,6 +580,7 @@ public class EditView extends javax.swing.JFrame {
         });
 
         txtPercIvaC.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtPercIvaC.setForeground(new java.awt.Color(0, 0, 0));
         txtPercIvaC.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtPercIvaCKeyTyped(evt);
@@ -581,6 +588,7 @@ public class EditView extends javax.swing.JFrame {
         });
 
         txtImpTotalFact.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtImpTotalFact.setForeground(new java.awt.Color(0, 0, 0));
         txtImpTotalFact.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtImpTotalFactKeyTyped(evt);
@@ -588,6 +596,7 @@ public class EditView extends javax.swing.JFrame {
         });
 
         txtIvaDereReg.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtIvaDereReg.setForeground(new java.awt.Color(0, 0, 0));
         txtIvaDereReg.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtIvaDereRegKeyTyped(evt);
@@ -595,6 +604,7 @@ public class EditView extends javax.swing.JFrame {
         });
 
         txtCNoGravSellos.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtCNoGravSellos.setForeground(new java.awt.Color(0, 0, 0));
         txtCNoGravSellos.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCNoGravSellosKeyTyped(evt);
@@ -602,6 +612,7 @@ public class EditView extends javax.swing.JFrame {
         });
 
         txtRetIiBbV.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtRetIiBbV.setForeground(new java.awt.Color(0, 0, 0));
         txtRetIiBbV.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtRetIiBbVKeyTyped(evt);
@@ -609,6 +620,7 @@ public class EditView extends javax.swing.JFrame {
         });
 
         txtIvaRg212.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtIvaRg212.setForeground(new java.awt.Color(0, 0, 0));
         txtIvaRg212.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtIvaRg212KeyTyped(evt);
@@ -616,6 +628,7 @@ public class EditView extends javax.swing.JFrame {
         });
 
         txtGravLey25413.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtGravLey25413.setForeground(new java.awt.Color(0, 0, 0));
         txtGravLey25413.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtGravLey25413KeyTyped(evt);
@@ -623,6 +636,7 @@ public class EditView extends javax.swing.JFrame {
         });
 
         txtIntNumerales.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtIntNumerales.setForeground(new java.awt.Color(0, 0, 0));
         txtIntNumerales.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtIntNumeralesKeyTyped(evt);
@@ -630,6 +644,7 @@ public class EditView extends javax.swing.JFrame {
         });
 
         txtOpExentas.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtOpExentas.setForeground(new java.awt.Color(0, 0, 0));
         txtOpExentas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtOpExentasKeyTyped(evt);
@@ -637,6 +652,7 @@ public class EditView extends javax.swing.JFrame {
         });
 
         txtIngBrutos.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtIngBrutos.setForeground(new java.awt.Color(0, 0, 0));
         txtIngBrutos.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtIngBrutosKeyTyped(evt);
@@ -644,6 +660,7 @@ public class EditView extends javax.swing.JFrame {
         });
 
         txtRetIva.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtRetIva.setForeground(new java.awt.Color(0, 0, 0));
         txtRetIva.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtRetIvaKeyTyped(evt);
@@ -651,6 +668,7 @@ public class EditView extends javax.swing.JFrame {
         });
 
         txtImpRIngBrutos.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtImpRIngBrutos.setForeground(new java.awt.Color(0, 0, 0));
         txtImpRIngBrutos.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtImpRIngBrutosKeyTyped(evt);
@@ -658,6 +676,7 @@ public class EditView extends javax.swing.JFrame {
         });
 
         txtOtros.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtOtros.setForeground(new java.awt.Color(0, 0, 0));
         txtOtros.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtOtrosKeyTyped(evt);
@@ -665,6 +684,7 @@ public class EditView extends javax.swing.JFrame {
         });
 
         txtConceptoNoGrav.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtConceptoNoGrav.setForeground(new java.awt.Color(0, 0, 0));
         txtConceptoNoGrav.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtConceptoNoGravKeyTyped(evt);
@@ -676,6 +696,7 @@ public class EditView extends javax.swing.JFrame {
         jLabel42.setText("IVA Facturado 27%");
 
         txtIvaFac27.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtIvaFac27.setForeground(new java.awt.Color(0, 0, 0));
         txtIvaFac27.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtIvaFac27KeyTyped(evt);

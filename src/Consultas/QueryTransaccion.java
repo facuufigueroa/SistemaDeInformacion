@@ -31,8 +31,8 @@ public class QueryTransaccion {
             ps.setInt(8, t.getCantidad());
             ps.setInt(9, t.getIdCat());
             ps.setInt(10, t.getIdSubCat());
-            ps.setFloat(11, t.getSalida());
-            //ps.setFloat(12, t.getEntrada());
+            ps.setDouble(11, t.getSalida());
+            ps.setDouble(12, t.getEntrada());
             
             ps.setBoolean(13, t.isA_impuesto());
             ps.setBoolean(14, t.isA_iva());
@@ -123,8 +123,8 @@ public class QueryTransaccion {
         try {
             ps = con.prepareStatement(sql);
             ps.setDate(1, (Date) t.getFecha());
-            ps.setFloat(2,t.getSalida());
-            ps.setFloat(2,t.getEntrada());
+            ps.setDouble(2,t.getSalida());
+            ps.setDouble(2,t.getEntrada());
             ps.setInt(4, t.getIdTransaccion());
             ps.executeUpdate();
 

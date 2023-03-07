@@ -221,8 +221,8 @@ public class QueryVerTransacciones {
                 t.setFecha(rs.getDate("fecha"));
                 t.setCantidad(rs.getInt("cantidad"));
                 t.setDescripcion(rs.getString("descripcion"));
-                t.setSalida(rs.getFloat("salidas"));
-                t.setEntrada(rs.getFloat("entradas"));
+                t.setSalida(rs.getDouble("salidas"));
+                t.setEntrada(rs.getDouble("entradas"));
                 t.setA_impuesto(rs.getBoolean("a_impuestos_iva"));
                 t.setA_iva(rs.getBoolean("a_iva"));
                 tList.add(t);
@@ -311,8 +311,8 @@ public class QueryVerTransacciones {
         try {
             ps = con.prepareStatement(sql);
             ps.setDate(1, (Date) t.getFecha());
-            ps.setFloat(2, t.getSalida());
-            ps.setFloat(3, t.getEntrada());
+            ps.setDouble(2, t.getSalida());
+            ps.setDouble(3, t.getEntrada());
             ps.setString(4, t.getDescripcion());
             ps.setInt(5, t.getIdCat());
             ps.setInt(6, t.getIdOrdenEmp());

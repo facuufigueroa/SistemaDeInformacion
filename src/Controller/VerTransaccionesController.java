@@ -15,10 +15,9 @@ import Model.TransaccionEditable;
 import View.EditView;
 import View.FormVerTransacciones;
 import View.MenuPrincipal;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import static java.lang.Float.parseFloat;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -248,25 +247,32 @@ public class VerTransaccionesController implements ActionListener {
 
     public String obtenerSumaEntradas() {
         String entradasString = "";
-        float entradas = (float) 0.0;
+        double entradas = 0.0;
         for (int i = 0; i < formVerT.tablaVerTransacciones.getRowCount(); i++) {
 
             String entradaSin$ = (formVerT.tablaVerTransacciones.getValueAt(i, 6)).toString().substring(1);
-            entradas += parseFloat(entradaSin$);
+            double entradasTotales = converFormatNumToDouble(entradaSin$);
+            entradas += entradasTotales;
         }
-        entradasString = "$" + String.valueOf(entradas);
+        DecimalFormat formato = new DecimalFormat("#,###.00");
+        String entradasFormateado = formato.format(entradas);
+        entradasString = "$" + String.valueOf(entradasFormateado);
         return entradasString;
     }
 
     public String obtenerSumaSalidas() {
         String salidasString = "";
-        float salidas = (float) 0.0;
+        double salidas = 0.0;
         for (int i = 0; i < formVerT.tablaVerTransacciones.getRowCount(); i++) {
 
             String salidaSin$ = (formVerT.tablaVerTransacciones.getValueAt(i, 5)).toString().substring(1);
-            salidas += parseFloat(salidaSin$);
+            double salidasTotales = converFormatNumToDouble(salidaSin$);
+            salidas += salidasTotales;
         }
-        salidasString = "$" + String.valueOf(salidas);
+        DecimalFormat formato = new DecimalFormat("#,###.00");
+        String SalidasFormateado = formato.format(salidas);
+        
+        salidasString = "$" + String.valueOf(SalidasFormateado);
         return salidasString;
     }
 
@@ -374,14 +380,56 @@ public class VerTransaccionesController implements ActionListener {
             dato[2] = t.getFecha().toString();
             dato[3] = t.getDescripcion();
             dato[4] = String.valueOf(t.getCantidad());
-            dato[5] = "$" + String.valueOf((float) t.getSalida());
-            dato[6] = "$" + String.valueOf(t.getEntrada());
+            dato[5] = "$" + evaluarNum(t.getSalida());
+            dato[6] = "$" + evaluarNum(t.getEntrada());
             dato[7] = cambiarFormatoIVA(t.isA_impuesto());
             dato[8] = cambiarFormatoIVA(t.isA_iva());
 
             modelo.addRow(dato);
         }
 
+    }
+    public String evaluarNum(double n){
+        String numero = "0";
+        if(n > 10000){
+            numero = formatNumberMenosUno(n);
+        }
+        else{
+            if(n < 10000){
+                numero = formatNumber(n);
+            }
+        }
+        return numero;
+    }
+    
+    public String formatNumber(double numero){
+       NumberFormat formatoNumero = NumberFormat.getNumberInstance();
+       String num = formatoNumero.format(numero);
+       double b = converFormatNumToDouble(num);
+    
+       return num.substring(0,num.length());
+    }
+    public String formatNumberMenosUno(double numero){
+       NumberFormat formatoNumero = NumberFormat.getNumberInstance();
+       String num = formatoNumero.format(numero);
+       double b = converFormatNumToDouble(num);
+       
+    
+       DecimalFormat formato = new DecimalFormat("#,###.00");
+       String valorFormateado = formato.format(b);
+       
+       return valorFormateado;
+    }
+    
+    public String formatP(double numero){
+        NumberFormat formatoNumero = NumberFormat.getNumberInstance();
+        String y = formatoNumero.format(numero);
+        String yReemplaza = y.replaceAll("\\.","");
+        String flotanteNum = yReemplaza.replaceAll("\\,",".");      
+        DecimalFormat formato = new DecimalFormat("#.##"); 
+        double dou = Double.parseDouble((flotanteNum));
+        String dd  = (formato.format(dou).replaceAll("\\,","."));
+        return dd;
     }
      
     public void accionBuscar(ActionEvent e) {
@@ -467,17 +515,15 @@ public class VerTransaccionesController implements ActionListener {
                 t.setFecha(java.sql.Date.valueOf(fecha));
 
                 String salida = formVerT.tablaVerTransacciones.getValueAt(fila, 5).toString();
-                t.setSalida(Float.parseFloat(salida.substring(1)));
 
                 String entrada = formVerT.tablaVerTransacciones.getValueAt(fila, 6).toString();
-                t.setEntrada(Float.parseFloat(entrada.substring(1)));
                 
                 mensajeVerificacion(t.getIdTransaccion());
 
                 editVista.labelNumT.setText(String.valueOf(t.getIdTransaccion()));
                 editVista.txtFechaT.setDate(t.getFecha());
-                editVista.txtSalidas.setText(String.valueOf(t.getSalida()));
-                editVista.txtEntradas.setText(String.valueOf(t.getEntrada()));
+                editVista.txtSalidas.setText(changeFormatDiner(salida.substring(1)));
+                editVista.txtEntradas.setText(changeFormatDiner(entrada.substring(1)));
 
                 cvi = queryVerT.obtenerCompraVenta(Integer.parseInt((String) formVerT.tablaVerTransacciones.getValueAt(fila, 0)));
 
@@ -534,8 +580,8 @@ public class VerTransaccionesController implements ActionListener {
                 t.setFecha(sqlDate);
                 NumberFormat f1 = NumberFormat.getInstance();
                 NumberFormat f2 = NumberFormat.getInstance();
-                t.setSalida(Float.parseFloat(verificarBlanco(editVista.txtSalidas.getText())));
-                t.setEntrada(Float.parseFloat(verificarBlanco(editVista.txtEntradas.getText())));
+                t.setSalida(Double.parseDouble(verificarBlanco(editVista.txtSalidas.getText())));
+                t.setEntrada(Double.parseDouble(verificarBlanco(editVista.txtEntradas.getText())));
                 t.setDescripcion(editVista.txtDescripcion.getText());
                 t.setIdOrdenEmp(queryEO.obtenerIdEmpresaPorNombre(editVista.cbbEmpresa.getSelectedItem().toString()));
                 t.setIdCuenta(queryCuentas.obtenerIdCuentaPorNombre(editVista.cbbCuenta.getSelectedItem().toString()));
@@ -787,4 +833,23 @@ public class VerTransaccionesController implements ActionListener {
         }
     }
 
+    /*Método para conversión de formato dinero a formato String para el uso como doble*/
+    public String changeFormatDiner(String numero){
+        String yReemplaza = numero.replaceAll("\\.","");
+        String flotanteNum = yReemplaza.replaceAll("\\,",".");
+        DecimalFormat formato = new DecimalFormat("#.##"); 
+        double dou = Double.parseDouble((flotanteNum));
+        String dd  = (formato.format(dou).replaceAll("\\,","."));
+        return dd;
+    }
+    
+    /*Método para convertir formNum a Double*/
+    public double converFormatNumToDouble(String s){
+        String yReemplaza = s.replaceAll("\\.","");
+        String flotanteNum = yReemplaza.replaceAll("\\,",".");
+        DecimalFormat formato = new DecimalFormat("#.##"); 
+        double dou = Double.parseDouble((flotanteNum));
+        return dou;
+    
+    }
 }

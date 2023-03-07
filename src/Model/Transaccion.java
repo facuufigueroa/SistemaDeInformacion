@@ -1,7 +1,7 @@
 
 package Model;
 
-import java.math.BigDecimal;
+
 import java.util.Date;
 
 
@@ -22,14 +22,14 @@ public class Transaccion {
     private Date fecha;
     private String descripcion;
     private int cantidad;
-    private float salida;
-    private float entrada;
+    private double salida;
+    private double entrada;
     private float retenciones_g;
     private float ret_ing_brutos;
     private boolean a_iva;
     private boolean a_impuesto;
 
-    public Transaccion(String codigo,int idTransaccion, int idCuenta, int idOrdenEmp, int idCat, int idSubCat, String numChequeFact, Date fecha, String descripcion, int cantidad, float salida, float entrada, float retenciones_g, float ret_ing_brutos, boolean a_iva, boolean a_impuesto,String numFactura) {
+    public Transaccion(String codigo,int idTransaccion, int idCuenta, int idOrdenEmp, int idCat, int idSubCat, String numChequeFact, Date fecha, String descripcion, int cantidad,double salida,double entrada, float retenciones_g, float ret_ing_brutos, boolean a_iva, boolean a_impuesto,String numFactura) {
         this.codigo=codigo;
         this.idTransaccion = idTransaccion;
         this.idCuenta = idCuenta;
@@ -49,7 +49,7 @@ public class Transaccion {
         this.numFactura=numFactura;
     }
 
-    public Transaccion(int idCuenta, int idOrdenEmp, int idCat, int idSubCat, String numChequeFact, Date fecha, String descripcion, int cantidad,float salida, float entrada, float retenciones_g, float ret_ing_brutos, boolean a_iva, boolean a_impuesto) {
+    public Transaccion(int idCuenta, int idOrdenEmp, int idCat, int idSubCat, String numChequeFact, Date fecha, String descripcion, int cantidad,double salida, double entrada, float retenciones_g, float ret_ing_brutos, boolean a_iva, boolean a_impuesto) {
         this.idCuenta = idCuenta;
         this.idOrdenEmp = idOrdenEmp;
         this.idCat = idCat;
@@ -141,21 +141,25 @@ public class Transaccion {
         this.cantidad = cantidad;
     }
 
-    public float getSalida() {
+    public double getSalida() {
         return salida;
     }
 
-    public void setSalida(float salida) {
+    public void setSalida(double salida) {
         this.salida = salida;
     }
 
-    public float getEntrada() {
+    public double getEntrada() {
         return entrada;
     }
 
-    public void setEntrada(float entrada) {
+    public void setEntrada(double entrada) {
         this.entrada = entrada;
     }
+
+   
+
+    
 
     public float getRetenciones_g() {
         return retenciones_g;
