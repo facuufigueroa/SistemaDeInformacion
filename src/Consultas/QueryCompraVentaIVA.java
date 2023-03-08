@@ -21,37 +21,37 @@ public class QueryCompraVentaIVA {
             ps.setString(3,cvi.getTipo_comprobante());
             ps.setString(4, cvi.getNumComprobante());
             ps.setString(5, cvi.getCuit());
-            ps.setFloat(6,cvi.getImp_neto_grav());
-            ps.setFloat(7, cvi.getIva_facturado()); /*IVA FACTURADO DEL 10.5*/
-            ps.setFloat(8, cvi.getImp_interno());
-            ps.setFloat(9, cvi.getConcep_no_grav());
-            ps.setFloat(10, cvi.getPercepcion_iva());
-            ps.setFloat(11, cvi.getRet_ganancias());
-            ps.setFloat(12, cvi.getPerc_iibb_compra());
-            ps.setFloat(13, cvi.getImp_total_fact());
-            ps.setFloat(14, cvi.getIte_iva_dere_reg());
-            ps.setFloat(15, cvi.getC_no_grav_sellos());
-            ps.setFloat(16, cvi.getRet_iibb_venta());
-            ps.setFloat(17, cvi.getIva_rg_212());
-            ps.setFloat(18, cvi.getGrav_ley_25413());
-            ps.setFloat(19, cvi.getInt_numerales());
-            ps.setFloat(20, cvi.getOtros());
+            ps.setDouble(6,cvi.getImp_neto_grav());
+            ps.setDouble(7, cvi.getIva_facturado()); /*IVA FACTURADO DEL 10.5*/
+            ps.setDouble(8, cvi.getImp_interno());
+            ps.setDouble(9, cvi.getConcep_no_grav());
+            ps.setDouble(10, cvi.getPercepcion_iva());
+            ps.setDouble(11, cvi.getRet_ganancias());
+            ps.setDouble(12, cvi.getPerc_iibb_compra());
+            ps.setDouble(13, cvi.getImp_total_fact());
+            ps.setDouble(14, cvi.getIte_iva_dere_reg());
+            ps.setDouble(15, cvi.getC_no_grav_sellos());
+            ps.setDouble(16, cvi.getRet_iibb_venta());
+            ps.setDouble(17, cvi.getIva_rg_212());
+            ps.setDouble(18, cvi.getGrav_ley_25413());
+            ps.setDouble(19, cvi.getInt_numerales());
+            ps.setDouble(20, cvi.getOtros());
             
             ps.setInt(21, cvi.getIdTransaccion());
             
             ps.setString(22, cvi.getEmpresa());
             
-            ps.setFloat(23, cvi.getOperaciones_exentas());
+            ps.setDouble(23, cvi.getOperaciones_exentas());
             
-            ps.setFloat(24, cvi.getIng_brutos());
+            ps.setDouble(24, cvi.getIng_brutos());
             
-            ps.setFloat(25, cvi.getRet_iva());
+            ps.setDouble(25, cvi.getRet_iva());
             
-            ps.setFloat(26, cvi.getImp_r_ing_brutos());
+            ps.setDouble(26, cvi.getImp_r_ing_brutos());
             
-            ps.setFloat(27, cvi.getIva_facturado_21());
+            ps.setDouble(27, cvi.getIva_facturado_21());
             
-            ps.setFloat(28, cvi.getIva_facturado_27());
+            ps.setDouble(28, cvi.getIva_facturado_27());
            
             ps.execute();
         } catch (SQLException e) {

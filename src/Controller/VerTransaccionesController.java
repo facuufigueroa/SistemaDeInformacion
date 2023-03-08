@@ -17,6 +17,7 @@ import View.FormVerTransacciones;
 import View.MenuPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -39,6 +40,7 @@ public class VerTransaccionesController implements ActionListener {
     QueryVerTransacciones queryVerT = new QueryVerTransacciones();
     EditView editVista = new EditView();
     ArrayList<Transaccion> listT = queryVerT.listarTransacciones();
+    DecimalFormat formato = new DecimalFormat("#,###.00");
 
     public VerTransaccionesController(MenuPrincipal menu) {
         updateTabla(listT);
@@ -548,27 +550,36 @@ public class VerTransaccionesController implements ActionListener {
         editVista.txtOperacion.setText(cvi.getOperacion());
         editVista.txtNombre.setText(cvi.getEmpresa());
         editVista.txtCuit.setText(cvi.getCuit());
-        editVista.txtImpNetoGrav.setText(String.valueOf(cvi.getImp_neto_grav()));
-        editVista.txtIvaFact.setText(String.valueOf(cvi.getIva_facturado()));
-        editVista.txtImpInterno.setText(String.valueOf(cvi.getImp_interno()));
-        editVista.txtConceptoNoGrav.setText(String.valueOf(cvi.getConcep_no_grav()));
-        editVista.txtPercepcionIVA.setText(String.valueOf(cvi.getPercepcion_iva()));
-        editVista.txtRetGanan.setText(String.valueOf(cvi.getRet_ganancias()));
-        editVista.txtPercIvaC.setText(String.valueOf(cvi.getPerc_iibb_compra()));
-        editVista.txtImpTotalFact.setText(String.valueOf(cvi.getImp_total_fact()));
-        editVista.txtIvaDereReg.setText(String.valueOf(cvi.getIte_iva_dere_reg()));
-        editVista.txtCNoGravSellos.setText(String.valueOf(cvi.getC_no_grav_sellos()));
-        editVista.txtRetIiBbV.setText(String.valueOf(cvi.getRet_iibb_venta()));
-        editVista.txtIvaRg212.setText(String.valueOf(cvi.getIva_rg_212()));
-        editVista.txtGravLey25413.setText(String.valueOf(cvi.getGrav_ley_25413()));
-        editVista.txtIntNumerales.setText(String.valueOf(cvi.getInt_numerales()));
-        editVista.txtOpExentas.setText(String.valueOf(cvi.getOperaciones_exentas()));
-        editVista.txtIngBrutos.setText(String.valueOf(cvi.getIng_brutos()));
-        editVista.txtRetIva.setText(String.valueOf(cvi.getRet_iva()));
-        editVista.txtImpRIngBrutos.setText(String.valueOf(cvi.getImp_r_ing_brutos()));
-        editVista.txtOtros.setText(String.valueOf(cvi.getOtros()));
-        editVista.txtIvaFact21.setText(String.valueOf(cvi.getIva_facturado_21()));
-        editVista.txtIvaFac27.setText(String.valueOf(cvi.getIva_facturado_27()));
+        editVista.txtImpNetoGrav.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getImp_neto_grav()))));
+        editVista.txtIvaFact.setText(String.valueOf((converFormatNumToDouble(formato.format(cvi.getIva_facturado())))));
+        editVista.txtImpInterno.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getImp_interno()))));
+        editVista.txtConceptoNoGrav.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getConcep_no_grav()))));
+        editVista.txtPercepcionIVA.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getPercepcion_iva()))));
+        editVista.txtRetGanan.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getRet_ganancias()))));
+        editVista.txtPercIvaC.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getPerc_iibb_compra()))));
+        
+        
+        editVista.txtImpTotalFact.setText(String.valueOf(converFormatNumToDouble((formato.format(cvi.getImp_total_fact())))));
+        
+        editVista.txtIvaDereReg.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getIte_iva_dere_reg()))));
+        editVista.txtCNoGravSellos.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getC_no_grav_sellos()))));
+        editVista.txtRetIiBbV.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getRet_iibb_venta()))));
+        editVista.txtIvaRg212.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getIva_rg_212()))));
+        editVista.txtGravLey25413.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getGrav_ley_25413()))));
+        editVista.txtIntNumerales.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getInt_numerales()))));
+        editVista.txtOpExentas.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getOperaciones_exentas()))));
+        editVista.txtIngBrutos.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getIng_brutos()))));
+        editVista.txtRetIva.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getRet_iva()))));
+        editVista.txtImpRIngBrutos.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getImp_r_ing_brutos()))));
+        editVista.txtOtros.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getOtros()))));
+        editVista.txtIvaFact21.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getIva_facturado_21()))));
+        editVista.txtIvaFac27.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getIva_facturado_27()))));
+    }
+    
+    public double cambiarFormato(double numero){
+        DecimalFormat formato = new DecimalFormat("#.##");
+        double num = Double.parseDouble(formato.format(String.valueOf(numero)));
+        return num;
     }
 
     public void accionEditTransaccion(ActionEvent e) throws ParseException {
@@ -643,47 +654,47 @@ public class VerTransaccionesController implements ActionListener {
 
         NumberFormat f = NumberFormat.getInstance();
 
-        cvi.setImp_neto_grav(Float.parseFloat(verificarBlanco(editVista.txtImpNetoGrav.getText())));
+        cvi.setImp_neto_grav(Double.parseDouble(verificarBlanco(editVista.txtImpNetoGrav.getText())));
 
-        cvi.setIva_facturado(Float.parseFloat(verificarBlanco(editVista.txtIvaFact.getText())));
+        cvi.setIva_facturado(Double.parseDouble(verificarBlanco(editVista.txtIvaFact.getText())));
 
-        cvi.setImp_interno(Float.parseFloat(verificarBlanco(editVista.txtImpInterno.getText())));
+        cvi.setImp_interno(Double.parseDouble(verificarBlanco(editVista.txtImpInterno.getText())));
 
-        cvi.setConcep_no_grav(Float.parseFloat(verificarBlanco(editVista.txtConceptoNoGrav.getText())));
+        cvi.setConcep_no_grav(Double.parseDouble(verificarBlanco(editVista.txtConceptoNoGrav.getText())));
 
-        cvi.setPercepcion_iva(Float.parseFloat(verificarBlanco(editVista.txtPercepcionIVA.getText())));
+        cvi.setPercepcion_iva(Double.parseDouble(verificarBlanco(editVista.txtPercepcionIVA.getText())));
 
-        cvi.setRet_ganancias(Float.parseFloat(verificarBlanco(editVista.txtRetGanan.getText())));
+        cvi.setRet_ganancias(Double.parseDouble(verificarBlanco(editVista.txtRetGanan.getText())));
 
-        cvi.setPerc_iibb_compra(Float.parseFloat(verificarBlanco(editVista.txtPercIvaC.getText())));
+        cvi.setPerc_iibb_compra(Double.parseDouble(verificarBlanco(editVista.txtPercIvaC.getText())));
 
-        cvi.setImp_total_fact(Float.parseFloat(verificarBlanco(editVista.txtImpTotalFact.getText())));
+        cvi.setImp_total_fact(Double.parseDouble(verificarBlanco(editVista.txtImpTotalFact.getText())));
 
-        cvi.setIte_iva_dere_reg(Float.parseFloat(verificarBlanco(editVista.txtIvaDereReg.getText())));
+        cvi.setIte_iva_dere_reg(Double.parseDouble(verificarBlanco(editVista.txtIvaDereReg.getText())));
 
-        cvi.setC_no_grav_sellos(Float.parseFloat(verificarBlanco(editVista.txtCNoGravSellos.getText())));
+        cvi.setC_no_grav_sellos(Double.parseDouble(verificarBlanco(editVista.txtCNoGravSellos.getText())));
 
-        cvi.setRet_iibb_venta(Float.parseFloat(verificarBlanco(editVista.txtRetIiBbV.getText())));
+        cvi.setRet_iibb_venta(Double.parseDouble(verificarBlanco(editVista.txtRetIiBbV.getText())));
 
-        cvi.setIva_rg_212(Float.parseFloat(verificarBlanco(editVista.txtIvaRg212.getText())));
+        cvi.setIva_rg_212(Double.parseDouble(verificarBlanco(editVista.txtIvaRg212.getText())));
 
-        cvi.setGrav_ley_25413(Float.parseFloat(verificarBlanco(editVista.txtGravLey25413.getText())));
+        cvi.setGrav_ley_25413(Double.parseDouble(verificarBlanco(editVista.txtGravLey25413.getText())));
 
-        cvi.setInt_numerales(Float.parseFloat(verificarBlanco(editVista.txtIntNumerales.getText())));
+        cvi.setInt_numerales(Double.parseDouble(verificarBlanco(editVista.txtIntNumerales.getText())));
 
-        cvi.setOtros(Float.parseFloat(verificarBlanco(editVista.txtOtros.getText())));
+        cvi.setOtros(Double.parseDouble(verificarBlanco(editVista.txtOtros.getText())));
 
         cvi.setIdTransaccion(Integer.parseInt(editVista.labelNumT.getText()));
 
-        cvi.setOperaciones_exentas(Float.parseFloat(verificarBlanco(editVista.txtOpExentas.getText())));
+        cvi.setOperaciones_exentas(Double.parseDouble(verificarBlanco(editVista.txtOpExentas.getText())));
 
-        cvi.setIng_brutos(Float.parseFloat(verificarBlanco(editVista.txtIngBrutos.getText())));
+        cvi.setIng_brutos(Double.parseDouble(verificarBlanco(editVista.txtIngBrutos.getText())));
 
-        cvi.setRet_iva(Float.parseFloat(verificarBlanco(editVista.txtRetIva.getText())));
+        cvi.setRet_iva(Double.parseDouble(verificarBlanco(editVista.txtRetIva.getText())));
 
-        cvi.setImp_r_ing_brutos((Float.parseFloat(verificarBlanco(editVista.txtImpRIngBrutos.getText()))));
-        cvi.setIva_facturado_21(Float.parseFloat(verificarBlanco(editVista.txtIvaFact21.getText())));
-        cvi.setIva_facturado_27(Float.parseFloat(verificarBlanco(editVista.txtIvaFac27.getText())));
+        cvi.setImp_r_ing_brutos((Double.parseDouble(verificarBlanco(editVista.txtImpRIngBrutos.getText()))));
+        cvi.setIva_facturado_21(Double.parseDouble(verificarBlanco(editVista.txtIvaFact21.getText())));
+        cvi.setIva_facturado_27(Double.parseDouble(verificarBlanco(editVista.txtIvaFac27.getText())));
         return cvi;
     }
 

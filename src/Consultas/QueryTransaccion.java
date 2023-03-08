@@ -61,8 +61,8 @@ public class QueryTransaccion {
                 Transaccion t = new Transaccion();
                 t.setFecha(rs.getDate("fecha"));
                 t.setDescripcion(rs.getString("descripcion"));
-                t.setSalida(rs.getFloat("salidas"));
-                t.setEntrada(rs.getFloat("entradas"));
+                t.setSalida(rs.getDouble("salidas"));
+                t.setEntrada(rs.getDouble("entradas"));
                 t.setA_impuesto(rs.getBoolean("a_impuestos_iva"));
                 t.setA_iva(rs.getBoolean("a_iva"));
                 tList.add(t);
@@ -235,8 +235,8 @@ public class QueryTransaccion {
                 t.setNumeroCheque(rs.getString("cheque"));
                 t.setDescripcion(rs.getString("descripcion"));
                 t.setCantidad(rs.getInt("cantidad"));
-                t.setSalidas(rs.getFloat("salidas"));
-                t.setEntradas(rs.getFloat("entradas"));
+                t.setSalidas(rs.getDouble("salidas"));
+                t.setEntradas(rs.getDouble("entradas"));
                 t.setCategoria(rs.getString("categoria"));
                 t.setSubCategoria(rs.getString("subcategoria"));
                 t.setEmpresa(rs.getString("empresa"));

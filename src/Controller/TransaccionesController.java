@@ -21,6 +21,7 @@ import View.Transacciones;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import static java.lang.Integer.parseInt;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -204,13 +205,45 @@ public class TransaccionesController implements ActionListener {
             String[] dato = new String[7];
             dato[0] = t.getFecha().toString();
             dato[1] = t.getDescripcion();
-            dato[2] = "$" + String.valueOf(t.getSalida());
-            dato[3] = "$" + String.valueOf(t.getEntrada());
+            dato[2] = "$" + evaluarNum(t.getSalida());
+            dato[3] = "$" + evaluarNum(t.getEntrada());
             dato[4] = convertAImpues(String.valueOf(t.isA_impuesto()));
             dato[5] = convertAIVA(String.valueOf(t.isA_iva()));
             modelo.addRow(dato);
         }
 
+    }
+    
+    public String evaluarNum(double n){
+        String numero = "0";
+        if(n > 10000){
+            numero = formatNumberMenosUno(n);
+        }
+        else{
+            if(n < 10000){
+                numero = formatNumber(n);
+            }
+        }
+        return numero;
+    }
+    
+    public String formatNumber(double numero){
+       NumberFormat formatoNumero = NumberFormat.getNumberInstance();
+       String num = formatoNumero.format(numero);
+       double b = converFormatNumToDouble(num);
+    
+       return num.substring(0,num.length());
+    }
+    public String formatNumberMenosUno(double numero){
+       NumberFormat formatoNumero = NumberFormat.getNumberInstance();
+       String num = formatoNumero.format(numero);
+       double b = converFormatNumToDouble(num);
+       
+    
+       DecimalFormat formato = new DecimalFormat("#,###.00");
+       String valorFormateado = formato.format(b);
+       
+       return valorFormateado;
     }
 
     public String convertAImpues(String a_imp) {
@@ -648,5 +681,14 @@ public class TransaccionesController implements ActionListener {
             numFact = tipo.toUpperCase() + "-" + numFact;
             return numFact;
         }
+    }
+    
+    public double converFormatNumToDouble(String s){
+        String yReemplaza = s.replaceAll("\\.","");
+        String flotanteNum = yReemplaza.replaceAll("\\,",".");
+        DecimalFormat formato = new DecimalFormat("#.##"); 
+        double dou = Double.parseDouble((flotanteNum));
+        return dou;
+    
     }
 }
