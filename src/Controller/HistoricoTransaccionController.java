@@ -54,6 +54,9 @@ public class HistoricoTransaccionController implements ActionListener {
         iniciarComboBox();
         this.infoView.cbbCuenta.addActionListener(this);
         this.infoView.cbbCategoria.addActionListener(this);
+        this.menu.btnBuscarPorFechaH.addActionListener(this);
+        this.menu.btnUpdateTablaH.addActionListener(this);
+        this.menu.btnEliminarH.addActionListener(this);
     }
     
     @Override
@@ -66,6 +69,9 @@ public class HistoricoTransaccionController implements ActionListener {
             accionVerTransaccion(e);
             accionEditTransaccion(e);
             accionEditarCVI(e);
+            accionBuscarPorFecha(e);
+            updateTabla(e);
+            borrarTransaccionAndCVI(e);
         } catch (ParseException ex) {
             Logger.getLogger(HistoricoTransaccionController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -369,6 +375,65 @@ public class HistoricoTransaccionController implements ActionListener {
             infoView.btnEditCvi.setEnabled(true);
         }
         
+    }
+    
+    public void accionBuscarPorFecha(ActionEvent e) {
+        if (e.getSource() == menu.btnBuscarPorFechaH) {
+            ArrayList<Transaccion> listTransacciones = new ArrayList<>();
+            if (menu.txtFechaDesdeH.getDate() != null
+                    && menu.txtFechaHastaH.getDate() != null) {
+                
+                java.sql.Date sqlFechaDesde = new java.sql.Date(menu.txtFechaDesdeH.getDate().getTime());
+                String fecha_desde = sqlFechaDesde.toString();
+
+                java.sql.Date sqlFechaHasta = new java.sql.Date(menu.txtFechaHastaH.getDate().getTime());
+                String fecha_hasta = sqlFechaHasta.toString();
+
+                DefaultTableModel datos = new DefaultTableModel(paginacion.getPagina2(1, 80,fecha_desde, fecha_hasta), paginacion.ColumNames());
+                this.menu.tablaTH.setModel(datos);
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al buscar transacción. \n"
+                        + "Verifique que haya seleccionado las fechas en los campos \n"
+                        + "Fecha Desde y Fecha Hasta");
+            }
+        }
+    }
+    
+    public void updateTabla(ActionEvent e){
+        if(e.getSource() == menu.btnUpdateTablaH){
+            menu.txtFechaDesdeH.setDate(null);
+            menu.txtFechaHastaH.setDate(null);
+            DefaultTableModel datos = new DefaultTableModel(paginacion.getPagina(1, 80), paginacion.ColumNames());
+            this.menu.tablaTH.setModel(datos);
+        }
+    }
+    
+    public void borrarTransaccionAndCVI(ActionEvent e) {
+
+        if (e.getSource() == menu.btnEliminarH) {
+
+            String botones[] = {"Aceptar", "Cancelar"};
+            int fila = menu.tablaTH.getSelectedRow();
+
+            if (fila >= 0) {
+                int eleccion = JOptionPane.showOptionDialog(menu, "<html><p style = \"font:15px\">¿Desea eliminar la transaccion con número : " + menu.tablaTH.getValueAt(fila, 0).toString() + " ? </p></html>", "Eliminar Transacción", 0, 0, null, botones, this);
+                if (eleccion == JOptionPane.YES_OPTION) {
+                    String idtransaccion = menu.tablaTH.getValueAt(fila, 0).toString();
+                    queryVerT.eliminarCvi(idtransaccion);
+                    queryVerT.eliminarTransaccion(idtransaccion);
+                    JOptionPane.showMessageDialog(null, "<html><p style = \"font:15px\">La Transacción: " + menu.tablaTH.getValueAt(fila, 0).toString() + " se ha eliminado");
+                    DefaultTableModel datos = new DefaultTableModel(paginacion.getPagina(1, 80), paginacion.ColumNames());
+                    this.menu.tablaTH.setModel(datos);
+                   
+                } else if (eleccion == JOptionPane.NO_OPTION) {
+                    JOptionPane.showMessageDialog(null, "<html><p style = \"font:15px\">Se ha cancelado operación</p></html>", "Se canceló operación", 1);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "<html><p style = \"font:15px\">Por favor, seleccione transacción a eliminar en la tabla</p></html>");
+            }
+
+        }
     }
     
 }

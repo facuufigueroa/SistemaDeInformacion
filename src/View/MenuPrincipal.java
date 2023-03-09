@@ -147,6 +147,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnAnterior = new javax.swing.JButton();
         txtPaginacion = new javax.swing.JTextField();
         btnSiguiente = new javax.swing.JButton();
+        jLabel33 = new javax.swing.JLabel();
+        txtFechaDesdeH = new com.toedter.calendar.JDateChooser();
+        jLabel34 = new javax.swing.JLabel();
+        txtFechaHastaH = new com.toedter.calendar.JDateChooser();
+        btnBuscarPorFechaH = new javax.swing.JButton();
+        btnEliminarH = new javax.swing.JButton();
+        btnUpdateTablaH = new javax.swing.JButton();
         jInternalFrame7 = new javax.swing.JInternalFrame();
         jPanel12 = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
@@ -256,7 +263,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(btnNewTransaccion, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addComponent(btnVerTransacciones, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -588,7 +595,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addComponent(btnRocioContador)
                         .addGap(10, 10, 10)
                         .addComponent(btnMARContador)
-                        .addContainerGap(16, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -806,7 +813,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(labelBienvenido2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1266,7 +1273,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(txtBuscarPorNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5))
                 .addGap(20, 20, 20)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1404,6 +1411,30 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel33.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel33.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel33.setText("Fecha Desde");
+
+        txtFechaDesdeH.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+
+        jLabel34.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel34.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel34.setText("Fecha Hasta");
+
+        txtFechaHastaH.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+
+        btnBuscarPorFechaH.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
+        btnBuscarPorFechaH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscarPorFecha.png"))); // NOI18N
+        btnBuscarPorFechaH.setText("Buscar Por Fecha");
+
+        btnEliminarH.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        btnEliminarH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/delete.png"))); // NOI18N
+        btnEliminarH.setText("Eliminar");
+
+        btnUpdateTablaH.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        btnUpdateTablaH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/refresh.png"))); // NOI18N
+        btnUpdateTablaH.setText("Actualizar Tabla");
+
         javax.swing.GroupLayout panelTablaLayout = new javax.swing.GroupLayout(panelTabla);
         panelTabla.setLayout(panelTablaLayout);
         panelTablaLayout.setHorizontalGroup(
@@ -1414,17 +1445,51 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 1228, Short.MAX_VALUE)
                     .addGroup(panelTablaLayout.createSequentialGroup()
                         .addComponent(panelPaginacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnUpdateTablaH)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(panelTablaLayout.createSequentialGroup()
+                        .addComponent(jLabel33)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFechaDesdeH, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel34)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFechaHastaH, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscarPorFechaH, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEliminarH)))
                 .addContainerGap())
         );
         panelTablaLayout.setVerticalGroup(
             panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTablaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panelPaginacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addGap(10, 10, 10)
+                .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelTablaLayout.createSequentialGroup()
+                        .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelTablaLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel33, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtFechaDesdeH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(panelTablaLayout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtFechaHastaH, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(4, 4, 4))
+                    .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnBuscarPorFechaH)
+                        .addComponent(btnEliminarH)))
+                .addGap(7, 7, 7)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelPaginacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnUpdateTablaH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout internalFrameLayout = new javax.swing.GroupLayout(internalFrame.getContentPane());
@@ -1515,7 +1580,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(392, Short.MAX_VALUE))
+                .addContainerGap(378, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jInternalFrame7Layout = new javax.swing.GroupLayout(jInternalFrame7.getContentPane());
@@ -1539,7 +1604,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 677, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 663, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -1660,10 +1725,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAnterior;
+    public javax.swing.JButton btnBuscarPorFechaH;
     public javax.swing.JButton btnByT;
     public javax.swing.JButton btnCuentasAPagar;
     public javax.swing.JButton btnElRocioT;
     public javax.swing.JButton btnEliminar;
+    public javax.swing.JButton btnEliminarH;
     public javax.swing.JButton btnGuardarCuenta;
     public javax.swing.JButton btnGuardarEmpresa;
     public javax.swing.JButton btnGuardarSubCat;
@@ -1684,6 +1751,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public javax.swing.JButton btnSaveCat;
     public javax.swing.JButton btnSaveTipoCat;
     public javax.swing.JButton btnSiguiente;
+    public javax.swing.JButton btnUpdateTablaH;
     public javax.swing.JButton btnVerInfo;
     public javax.swing.JButton btnVerTransacciones;
     public javax.swing.JComboBox<String> cbbTipoCat;
@@ -1723,6 +1791,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1769,6 +1839,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public javax.swing.JTable tablaTipoCuenta;
     public javax.swing.JTextField txtBuscarPorNombre;
     public javax.swing.JTextField txtCuitEmpresa;
+    public com.toedter.calendar.JDateChooser txtFechaDesdeH;
+    public com.toedter.calendar.JDateChooser txtFechaHastaH;
     public javax.swing.JTextField txtNomCat;
     public javax.swing.JTextField txtNomCuenta;
     public javax.swing.JTextField txtNomSubCat;

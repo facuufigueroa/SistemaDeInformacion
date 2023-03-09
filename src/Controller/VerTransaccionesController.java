@@ -884,9 +884,7 @@ public class VerTransaccionesController implements ActionListener {
                 java.sql.Date sqlFechaHasta = new java.sql.Date(formVerT.txtFechaHasta.getDate().getTime());
                 String fecha_hasta = sqlFechaHasta.toString();
 
-                String empresa = (String) formVerT.cbbEmpresa.getSelectedItem();
                 listTransacciones = queryVerT.obtenerTransaccionesPorFecha(fecha_desde, fecha_hasta);
-                formVerT.txtBusqueda.setText(empresa);
                 iniciarTabla(listTransacciones);
                 formVerT.txtEntradas.setText(obtenerSumaEntradas());
                 formVerT.txtSalidas.setText(obtenerSumaSalidas());
