@@ -148,6 +148,7 @@ public class MenuController implements ActionListener {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 menuPrincipal.setVisible(true);
+                menuPrincipal.setLocationRelativeTo(null);
             }
         });
     }

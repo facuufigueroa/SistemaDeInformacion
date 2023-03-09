@@ -18,7 +18,7 @@ import java.util.GregorianCalendar;
 public class QueryVerTransacciones {
 
     private Conexion conexion = new Conexion();
-    private QueryEmpresaOrden queryEO= new QueryEmpresaOrden();
+    private QueryEmpresaOrden queryEO = new QueryEmpresaOrden();
 
     public String obtenerEmpresa(int idEmpresa) {
         String nombre = "";
@@ -207,9 +207,9 @@ public class QueryVerTransacciones {
         Connection conn = Conexion.getConnection();
         Statement st;
         try {
-            String sql = "SELECT * FROM transacciones AS t \n" +
-                        "WHERE YEAR(t.fecha)="+añoActual+"\n"+
-                        "ORDER BY t.idtransacciones DESC";
+            String sql = "SELECT * FROM transacciones AS t \n"
+                    + "WHERE YEAR(t.fecha)=" + añoActual + "\n"
+                    + "ORDER BY t.idtransacciones DESC";
             st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
 
@@ -305,7 +305,7 @@ public class QueryVerTransacciones {
         PreparedStatement ps = null;
         Connection con = getConnection();
 
-        String sql = "UPDATE transacciones AS t SET t.fecha = ? , t.salidas = ?, t.entradas = ?,t.descripcion= ?,t.id_categoria= ?,t.id_orden_empresa=?,t.id_cuenta=?,t.cantidad=? WHERE t.idtransacciones = " + id;
+        String sql = "UPDATE transacciones AS t SET t.fecha = ? , t.salidas = ?, t.entradas = ?,t.descripcion= ?,t.id_categoria= ?,t.id_orden_empresa=?,t.id_cuenta=?,t.cantidad=?,t.id_subcategoria=? WHERE t.idtransacciones = " + id;
 
         try {
             ps = con.prepareStatement(sql);
@@ -315,8 +315,9 @@ public class QueryVerTransacciones {
             ps.setString(4, t.getDescripcion());
             ps.setInt(5, t.getIdCat());
             ps.setInt(6, t.getIdOrdenEmp());
-            ps.setInt(7,t.getIdCuenta());
+            ps.setInt(7, t.getIdCuenta());
             ps.setInt(8, t.getCantidad());
+            ps.setInt(9, t.getIdSubCat());
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -450,18 +451,52 @@ public class QueryVerTransacciones {
         Connection conn = conexion.getConnection();
         TransaccionEditable t = new TransaccionEditable();
         try {
-            String sql = "SELECT cat.nombre AS categoria,e.empresa AS empresa,c.nombre AS cuenta,t.cheque AS cheque,t.num_fact AS factura,t.descripcion AS descripcion,t.cantidad AS cantidad\n"
+            String sql = "SELECT cat.nombre AS categoria,e.empresa AS empresa,c.nombre AS cuenta,t.cheque AS cheque,\n"
+                    + "t.num_fact AS factura,t.descripcion AS descripcion,t.cantidad AS cantidad,sub.nombre AS subcategoria\n"
                     + "FROM transacciones AS t\n"
                     + "INNER JOIN categorias AS cat ON t.id_categoria = cat.idcategorias\n"
                     + "INNER JOIN empresa_orden AS e ON t.id_orden_empresa = e.idempresa_orden\n"
                     + "INNER JOIN cuentas as c ON t.id_cuenta = c.idcuenta\n"
-                    + "WHERE t.idtransacciones = " +idTransaccion;
+                    + "INNER JOIN subcategorias as sub ON t.id_subcategoria = sub.idsubcategorias\n"
+                    + "WHERE t.idtransacciones = " + idTransaccion;
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery(sql);
             if (rs.next()) {
                 t.setCategoria(rs.getString("categoria"));
                 t.setEmpresa(rs.getString("empresa"));
                 t.setCuenta(rs.getString("cuenta"));
+                t.setNumeroCheque(rs.getString("cheque"));
+                t.setNumeroFactura(rs.getString("factura"));
+                t.setDescripcion(rs.getString("descripcion"));
+                t.setCantidad(rs.getInt("cantidad"));
+                t.setSubCategoria(rs.getString("subcategoria"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return t;
+    }
+
+    public TransaccionEditable obtenerDatosT2(int idTransaccion) {
+        PreparedStatement ps = null;
+        Connection conn = conexion.getConnection();
+        TransaccionEditable t = new TransaccionEditable();
+        try {
+            String sql = "SELECT cat.nombre AS categoria,t.salidas,t.entradas,e.empresa AS empresa,c.nombre AS cuenta,t.cheque AS cheque,t.num_fact AS factura,t.descripcion AS descripcion,t.cantidad AS cantidad\n"
+                    + "FROM transacciones AS t\n"
+                    + "INNER JOIN categorias AS cat ON t.id_categoria = cat.idcategorias\n"
+                    + "INNER JOIN empresa_orden AS e ON t.id_orden_empresa = e.idempresa_orden\n"
+                    + "INNER JOIN cuentas as c ON t.id_cuenta = c.idcuenta\n"
+                    + "WHERE t.idtransacciones = " + idTransaccion;
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                t.setCategoria(rs.getString("categoria"));
+                t.setEmpresa(rs.getString("empresa"));
+                t.setCuenta(rs.getString("cuenta"));
+                t.setSalidas(rs.getDouble("salidas"));
+                t.setEntradas(rs.getDouble("entradas"));
                 t.setNumeroCheque(rs.getString("cheque"));
                 t.setNumeroFactura(rs.getString("factura"));
                 t.setDescripcion(rs.getString("descripcion"));
@@ -474,4 +509,35 @@ public class QueryVerTransacciones {
         return t;
     }
     
+    public ArrayList<Transaccion> obtenerTransaccionesPorFecha(String fecha_desde, String fecha_hasta) {
+
+        PreparedStatement ps = null;
+        Connection conn = conexion.getConnection();
+        ArrayList<Transaccion> transaccionesList = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM \n"
+                    + "transacciones as t\n"
+                    + "WHERE t.fecha BETWEEN '" + fecha_desde + "'" + " AND '" + fecha_hasta + " ' ORDER BY t.fecha ASC";
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            while (rs.next()) {
+                Transaccion t = new Transaccion();
+                t.setIdTransaccion(rs.getInt("idtransacciones"));
+                t.setCodigo(rs.getString("codigo"));
+                t.setFecha(rs.getDate("fecha"));
+                t.setDescripcion(rs.getString("descripcion"));
+                t.setCantidad(rs.getInt("cantidad"));
+                t.setSalida(rs.getFloat("salidas"));
+                t.setEntrada(rs.getFloat("entradas"));
+                t.setA_impuesto(rs.getBoolean("a_impuestos_iva"));
+                t.setA_iva(rs.getBoolean("a_iva"));
+                t.setIdOrdenEmp(rs.getInt("id_orden_empresa"));
+                transaccionesList.add(t);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return transaccionesList;
+    }
 }

@@ -3,7 +3,6 @@ package Consultas;
 
 import DataBase.Conexion;
 import static DataBase.Conexion.getConnection;
-import Model.EmpresaOrden;
 import Model.SubCategoria;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

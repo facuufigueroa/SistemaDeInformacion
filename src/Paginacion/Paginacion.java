@@ -3,17 +3,19 @@ package Paginacion;
 
 import Consultas.QueryTransaccion;
 import DataBase.Conexion;
+import Model.Transaccion;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
+import java.util.ArrayList;
+
 
 
 public class Paginacion {
      /* Variables para paginacion */     
     private int numPage=0;
     private int numPages=0;
-    private String[] columnames =  {"N° Transacción","Fecha","Entradas","Salidas","Descripción",
-   "N° Cheque","N° Factura","SubCategoria","Categoria","Empresa","Cuenta"};
+    private String[] columnames =  {"N° Transacción","Codigo","Fecha","Descripción"};
     private Object[][] data;
     QueryTransaccion queryT = new QueryTransaccion();
    /**
@@ -23,18 +25,17 @@ public class Paginacion {
  * @return Matriz nxm con los registros que corresponde a Numero de Pagina dado por numPage
  */ 
    public Object[][]  getPagina( int numPage, int numRegPagina )
-   {        
+   {   
+       ArrayList<Transaccion> tList = new ArrayList<>();
+       Transaccion t = new Transaccion();
        //Numero de pagina 
        this.numPage = ( numPage<=1 )? 1 : numPage;        
 
        //Consulta SQL para obtener todos los registros
-       String q  = "SELECT t.idtransacciones,t.fecha AS Fecha,t.entradas,t.salidas,t.descripcion,t.cheque AS cheque,t.num_fact AS factura,sub.nombre AS subcategoria,cat.nombre AS categoria,e.empresa AS empresa,c.nombre AS cuenta\n" +
-                    "FROM transacciones AS t\n" +
-                    "INNER JOIN categorias AS cat ON t.id_categoria = cat.idcategorias\n" +
-                    "INNER JOIN empresa_orden AS e ON t.id_orden_empresa = e.idempresa_orden\n" +
-                    "INNER JOIN cuentas AS c ON t.id_cuenta = c.idcuenta\n" +
-                    "INNER JOIN subcategorias AS sub ON idsubcategorias = t.id_subcategoria "  ;
-
+       String q  = "SELECT t.idtransacciones,t.codigo,t.fecha,\n" +
+            "t.descripcion\n" +
+            "FROM transacciones AS t ORDER BY t.fecha DESC"  ;
+            
        Statement st;
        ResultSet rs;
 
@@ -75,6 +76,7 @@ public class Paginacion {
                     for (int i = 1; i <= numeroColumnas; i++ ) 
                     {                        
                         data[f][i-1] = rs.getString( i );
+                        
                     }                    
                     f++; cont++;
                 }
