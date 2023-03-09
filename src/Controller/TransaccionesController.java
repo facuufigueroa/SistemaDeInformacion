@@ -388,7 +388,7 @@ public class TransaccionesController implements ActionListener {
 
         t.setSalida(Float.parseFloat(transacciones.txtSalida.getText()));
 
-        //t.setEntrada(Float.parseFloat(transacciones.txtEntrada.getText()));
+        t.setEntrada(Float.parseFloat(transacciones.txtEntrada.getText()));
 
         t.setA_impuesto(obtenerSetImpuesto());
 

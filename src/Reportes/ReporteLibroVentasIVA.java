@@ -17,11 +17,7 @@ import net.sf.jasperreports.view.JasperViewer;
 public class ReporteLibroVentasIVA {
     
     
-    public void conexionReporte(Date fecha_desde,Date fecha_hasta,
-                                double totalImp_Neto_Grav, double total_ivaFact,
-                                double total_ite_iva_dere_reg, double total_concepto_no_grav,
-                                double total_ret_ii_bb_vent, double total_ret_ganancias,
-                                double total_ret_iva, double total_imp_total_fac){
+    public void conexionReporte(Date fecha_desde,Date fecha_hasta){
                            
         try {
             Conexion conexion = new Conexion();
@@ -29,18 +25,8 @@ public class ReporteLibroVentasIVA {
             
             HashMap parametro = new HashMap();
             
-            
             parametro.put("fecha_desde", fecha_desde);
             parametro.put("fecha_hasta", fecha_hasta);
-            parametro.put("totalImp_Neto_Grav", totalImp_Neto_Grav);
-            parametro.put("total_ivaFact", total_ivaFact);
-            parametro.put("total_ite_iva_dere_reg",total_ite_iva_dere_reg);
-            parametro.put("total_concepto_no_grav", total_concepto_no_grav);
-            parametro.put("total_ret_ii_bb_vent", total_ret_ii_bb_vent);
-            parametro.put("total_ret_ganancias", total_ret_ganancias);
-            parametro.put("total_ret_iva", total_ret_iva);
-            parametro.put("total_imp_total_fac", total_imp_total_fac);
-            
             
             JasperReport jasperMasterReport;
             jasperMasterReport = (JasperReport) JRLoader.loadObject(getClass().getResource("/Reportes/LibroIVA-Ventas.jasper"));

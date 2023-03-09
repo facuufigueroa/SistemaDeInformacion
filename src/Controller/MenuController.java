@@ -184,25 +184,9 @@ public class MenuController implements ActionListener {
 
                 if ((fecha_desde.compareTo(fecha_hasta) < 0) || (fecha_hasta.compareTo(fecha_desde) > 0)) {
 
-                    /*Total Imp_Neto_Grav*/
-                    double t1 = queryReport.totalImp_Neto_Grav();
-                    /*Total total_ivaFact*/
-                    double t2 = queryReport.total_ivaFact();
-                    /* Total total_ite_iva_dere_reg*/
-                    double t3 = queryReport.total_ite_iva_dere_reg();
-                    /* Total total_concepto_no_grav*/
-                    double t4 = queryReport.total_concepto_no_grav_sellos();
-                    /* Total total_ret_ii_bb_vent*/
-                    double t5 = queryReport.total_ret_ii_bb_vent();
-                    /* Total total_ret_ganancias */
-                    double t6 = queryReport.total_ret_ganancias();
-                    /* Total total_ret_iva() */
-                    double t7 = queryReport.total_ret_iva();
-                    /* Total total_imp_total_fac() */
-                    double t8 = queryReport.total_imp_total_fac();
 
                     ReporteLibroVentasIVA reportLVI = new ReporteLibroVentasIVA();
-                    reportLVI.conexionReporte(fecha_desde, fecha_hasta, t1, t2, t3, t4, t5, t6, t7, t8);
+                    reportLVI.conexionReporte(fecha_desde, fecha_hasta);
                     nullFechas(formFechaVentas);
                     formFechaVentas.setVisible(false);
                 } else {

@@ -3,8 +3,8 @@
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SistemaInformacion2"/>
 	<property name="ireport.zoom" value="3.0"/>
-	<property name="ireport.x" value="244"/>
-	<property name="ireport.y" value="240"/>
+	<property name="ireport.x" value="1301"/>
+	<property name="ireport.y" value="192"/>
 	<parameter name="fecha_desde" class="java.sql.Date"/>
 	<parameter name="fecha_hasta" class="java.sql.Date"/>
 	<parameter name="totalImp_Neto_Grav" class="java.lang.Double"/>
@@ -30,7 +30,7 @@
 	TRUNCATE( sistemainformacion.compra_ventas_iva.c_no_grav_sellos,2) AS c_no_grav_sellos,
 	TRUNCATE( sistemainformacion.compra_ventas_iva.ret_ii_bb_venta,2) AS ret_ii_bb_venta,
 	sistemainformacion.compra_ventas_iva.nombre,
-	TRUNCATE( sistemainformacion.compra_ventas_iva.percepcion_iva,2) AS percepcion_iva
+	TRUNCATE( sistemainformacion.compra_ventas_iva.ret_iva,2) AS ret_iva
 FROM sistemainformacion.compra_ventas_iva
 WHERE 
 	 sistemainformacion.compra_ventas_iva.operacion = 'venta' 
@@ -93,12 +93,30 @@ WHERE
 		<property name="com.jaspersoft.studio.field.tree.path" value="compra_ventas_iva"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="percepcion_iva" class="java.lang.Double">
-		<property name="com.jaspersoft.studio.field.label" value="percepcion_iva"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="compra_ventas_iva"/>
-	</field>
-	<variable name="total_iva_fact" class="java.lang.Float" calculation="Sum">
+	<field name="ret_iva" class="java.lang.Double"/>
+	<variable name="total_imp_neto_grav" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{imp_neto_grav}]]></variableExpression>
+	</variable>
+	<variable name="total_iva_21" class="java.lang.Float" calculation="Sum">
 		<variableExpression><![CDATA[$F{iva_facturado_21}]]></variableExpression>
+	</variable>
+	<variable name="total_ite_iva_dere" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{ite_iva_dere_reg}]]></variableExpression>
+	</variable>
+	<variable name="total_ret_ibb" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{ret_ii_bb_venta}]]></variableExpression>
+	</variable>
+	<variable name="total_ret_iva" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{ret_iva}]]></variableExpression>
+	</variable>
+	<variable name="total_ret_ganancias" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{ret_ganancias}]]></variableExpression>
+	</variable>
+	<variable name="total_imp_total" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{imp_total_fac}]]></variableExpression>
+	</variable>
+	<variable name="total_c_no_grav_sellos" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{c_no_grav_sellos}]]></variableExpression>
 	</variable>
 	<group name="fecha">
 		<groupExpression><![CDATA[$F{fecha}]]></groupExpression>
@@ -138,9 +156,6 @@ WHERE
 	</group>
 	<group name="nombre">
 		<groupExpression><![CDATA[$F{nombre}]]></groupExpression>
-	</group>
-	<group name="percepcion_iva">
-		<groupExpression><![CDATA[$F{percepcion_iva}]]></groupExpression>
 	</group>
 	<title>
 		<band height="62" splitType="Stretch">
@@ -468,14 +483,6 @@ WHERE
 			<line>
 				<reportElement x="685" y="0" width="1" height="37" uuid="7f3cc048-3a8f-4e55-bb97-c939663b1796"/>
 			</line>
-			<textField pattern="#,##0.00">
-				<reportElement x="570" y="6" width="53" height="27" uuid="e84e06e5-d17d-44f8-9093-3bb60a1b7a27">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{percepcion_iva}]]></textFieldExpression>
-			</textField>
 			<line>
 				<reportElement x="624" y="0" width="1" height="37" uuid="79d6614e-facc-45c0-ad56-16ffba823af6"/>
 			</line>
@@ -597,6 +604,11 @@ WHERE
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{iva_facturado_21}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="570" y="7" width="55" height="25" uuid="fdba4aec-b920-4c8e-ba02-c9e8fe23a065"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ret_iva}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<summary>
@@ -608,41 +620,6 @@ WHERE
 				</textElement>
 				<text><![CDATA[Totales]]></text>
 			</staticText>
-			<textField pattern="#,##0.00">
-				<reportElement x="444" y="1" width="61" height="30" uuid="b5e877c6-b8c9-4558-bc2c-aa11ed044086"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{total_concepto_no_grav}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00">
-				<reportElement x="506" y="0" width="63" height="30" uuid="4159a2e0-33fe-4ae7-b277-5a508adfa4fc"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{total_ret_ii_bb_vent}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00">
-				<reportElement x="570" y="0" width="54" height="30" uuid="a96b09a7-5291-4875-97aa-616bd738a53d"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{total_ret_iva}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00">
-				<reportElement x="625" y="1" width="60" height="30" uuid="f1780121-c40b-448e-bfd0-8bc33e078649"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{total_ret_ganancias}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00">
-				<reportElement x="687" y="1" width="67" height="30" uuid="aca8b42a-240a-457b-95b4-4b7054b97f73"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{total_imp_total_fac}]]></textFieldExpression>
-			</textField>
 			<line>
 				<reportElement x="249" y="0" width="1" height="30" uuid="f7a96202-d421-4c30-9438-915b5c828cb1"/>
 			</line>
@@ -680,25 +657,58 @@ WHERE
 				</reportElement>
 			</line>
 			<textField pattern="#,##0.00">
-				<reportElement x="321" y="0" width="58" height="30" uuid="825402b3-bb97-45f7-a826-7c61925e50e4"/>
+				<reportElement x="250" y="0" width="70" height="30" uuid="c4b6d995-0915-496f-8ee8-442b77033b41"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{total_iva_fact}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{total_imp_neto_grav}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="380" y="0" width="63" height="30" uuid="0bf1b9a4-1d3f-47a3-ae41-23a632d2daa5"/>
+				<reportElement x="321" y="0" width="59" height="30" uuid="108f65ab-6e1e-48ea-ad23-8ca408cbcdb1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{total_ite_iva_dere_reg}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{total_iva_21}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="250" y="1" width="69" height="29" uuid="b8c71560-2882-468b-95bf-0041f47f4d86"/>
+				<reportElement x="380" y="0" width="63" height="30" uuid="6e2cec4b-653d-4a5b-ac12-701404ee6960"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{totalImp_Neto_Grav}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{total_ite_iva_dere}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="506" y="0" width="64" height="30" uuid="c710c79c-350d-49a0-b105-5aa6813efddc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total_ret_ibb}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="570" y="0" width="55" height="30" uuid="278fe6ac-41af-4c41-828f-c08dcf859fa2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total_ret_iva}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="625" y="0" width="60" height="30" uuid="8a65323f-443c-453b-8384-ac6b71a82484"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total_ret_ganancias}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="685" y="0" width="70" height="30" uuid="99186fb0-c09e-4624-a4e4-a1380e1005dc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total_imp_total}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="443" y="0" width="62" height="30" uuid="ffe72256-8223-49c5-8d3e-d46479b16c88"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{total_c_no_grav_sellos}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
