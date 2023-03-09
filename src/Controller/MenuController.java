@@ -263,10 +263,11 @@ public class MenuController implements ActionListener {
 
     public void loadReporteCuentasACobrar(ActionEvent e) throws ParseException {
         if (e.getSource() == formFechaReportCAC.btnBuscar) {
-            java.sql.Date fecha_desde = new java.sql.Date(formFechaReportCAC.txtFechaDesde.getDate().getTime());
-            java.sql.Date fecha_hasta = new java.sql.Date(formFechaReportCAC.txtFechaHasta.getDate().getTime());
-
+            
             if (!verificacionFechas(formFechaReportCAC.txtFechaDesde, formFechaReportCAC.txtFechaHasta)) {
+                java.sql.Date fecha_desde = new java.sql.Date(formFechaReportCAC.txtFechaDesde.getDate().getTime());
+                java.sql.Date fecha_hasta = new java.sql.Date(formFechaReportCAC.txtFechaHasta.getDate().getTime());
+
                 if ((fecha_desde.compareTo(fecha_hasta) < 0) || (fecha_hasta.compareTo(fecha_desde) > 0)) {
 
                     ArrayList<Double> array = queryReport.totales(fecha_desde, fecha_hasta);
@@ -331,10 +332,11 @@ public class MenuController implements ActionListener {
 
     public void loadReporteJMRT(ActionEvent e) throws ParseException {
         if (e.getSource() == formFechaReportJMR.btnBuscar) {
-            java.sql.Date fecha_desde = new java.sql.Date(formFechaReportJMR.txtFechaDesde.getDate().getTime());
-            java.sql.Date fecha_hasta = new java.sql.Date(formFechaReportJMR.txtFechaHasta.getDate().getTime());
-
+            
             if (!verificacionFechas(formFechaReportJMR.txtFechaDesde, formFechaReportJMR.txtFechaHasta)) {
+                java.sql.Date fecha_desde = new java.sql.Date(formFechaReportJMR.txtFechaDesde.getDate().getTime());
+                java.sql.Date fecha_hasta = new java.sql.Date(formFechaReportJMR.txtFechaHasta.getDate().getTime());
+
                 if ((fecha_desde.compareTo(fecha_hasta) < 0) || (fecha_hasta.compareTo(fecha_desde) > 0)) {
 
                     formFechaReportJMR.setVisible(false);
@@ -367,9 +369,10 @@ public class MenuController implements ActionListener {
 
     public void loadReporteElRocio(ActionEvent e) throws ParseException {
         if (e.getSource() == formFechaReportElRocio.btnBuscar) {
-            java.sql.Date fecha_desde = new java.sql.Date(formFechaReportElRocio.txtFechaDesde.getDate().getTime());
-            java.sql.Date fecha_hasta = new java.sql.Date(formFechaReportElRocio.txtFechaHasta.getDate().getTime());
             if (!verificacionFechas(formFechaReportElRocio.txtFechaDesde, formFechaReportElRocio.txtFechaHasta)) {
+                java.sql.Date fecha_desde = new java.sql.Date(formFechaReportElRocio.txtFechaDesde.getDate().getTime());
+                java.sql.Date fecha_hasta = new java.sql.Date(formFechaReportElRocio.txtFechaHasta.getDate().getTime());
+            
                 if ((fecha_desde.compareTo(fecha_hasta) < 0) || (fecha_hasta.compareTo(fecha_desde) > 0)) {
 
                     formFechaReportElRocio.setVisible(false);
