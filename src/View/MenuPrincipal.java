@@ -653,6 +653,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel2.setText("NUEVA CUENTA");
 
         tablaCuentas.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        tablaCuentas.setForeground(new java.awt.Color(0, 0, 0));
         tablaCuentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -717,6 +718,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel7.setText("NUEVO TIPO DE CUENTA");
 
         tablaTipoCuenta.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        tablaTipoCuenta.setForeground(new java.awt.Color(0, 0, 0));
         tablaTipoCuenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
@@ -853,6 +855,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel10.setBackground(new java.awt.Color(14, 18, 66));
 
         tablaCategoria.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        tablaCategoria.setForeground(new java.awt.Color(0, 0, 0));
         tablaCategoria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -941,6 +944,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel11.setBackground(new java.awt.Color(14, 18, 66));
 
         tablaTipoCategorias.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        tablaTipoCategorias.setForeground(new java.awt.Color(0, 0, 0));
         tablaTipoCategorias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -1041,6 +1045,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         txtNomSubCat.setFont(new java.awt.Font("Malgun Gothic", 0, 14)); // NOI18N
 
         tablaSubCategoria.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        tablaSubCategoria.setForeground(new java.awt.Color(0, 0, 0));
         tablaSubCategoria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
@@ -1205,6 +1210,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
 
         tablaEmpresa.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        tablaEmpresa.setForeground(new java.awt.Color(0, 0, 0));
         tablaEmpresa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
