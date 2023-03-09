@@ -3,7 +3,7 @@
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SistemaInformacion2"/>
 	<property name="ireport.zoom" value="3.0"/>
-	<property name="ireport.x" value="1301"/>
+	<property name="ireport.x" value="471"/>
 	<property name="ireport.y" value="192"/>
 	<parameter name="fecha_desde" class="java.sql.Date"/>
 	<parameter name="fecha_hasta" class="java.sql.Date"/>
@@ -466,20 +466,10 @@ WHERE
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10" isBold="false"/>
+					<font size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{imp_total_fac}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="685" y="5" width="8" height="25" uuid="c02ae398-d7f2-45f4-8c6f-58a0e42a9ae0">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10"/>
-				</textElement>
-				<text><![CDATA[$]]></text>
-			</staticText>
 			<line>
 				<reportElement x="685" y="0" width="1" height="37" uuid="7f3cc048-3a8f-4e55-bb97-c939663b1796"/>
 			</line>
@@ -492,72 +482,15 @@ WHERE
 			<line>
 				<reportElement x="505" y="0" width="1" height="37" uuid="69470fc0-5cb2-4823-935c-088770c0749b"/>
 			</line>
-			<staticText>
-				<reportElement x="625" y="7" width="8" height="25" uuid="b12b56df-cd96-4ad5-9a5f-11d0ed5bdc24">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle"/>
-				<text><![CDATA[$]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="568" y="7" width="8" height="25" uuid="f01c7e8a-ded7-4d5c-aa4c-ed05ac5882ac">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle"/>
-				<text><![CDATA[$]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="506" y="7" width="8" height="25" uuid="e231cf5e-f7d2-4bbb-9ed5-1f7544752c0a">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle"/>
-				<text><![CDATA[$]]></text>
-			</staticText>
 			<line>
 				<reportElement x="443" y="0" width="1" height="37" uuid="aa6d7031-85dc-4bec-94ed-28489b579949"/>
 			</line>
-			<staticText>
-				<reportElement x="443" y="7" width="8" height="25" uuid="44cbe74c-a5b9-4e3f-a574-bd54bc661f1e">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle"/>
-				<text><![CDATA[$]]></text>
-			</staticText>
 			<line>
 				<reportElement x="379" y="0" width="1" height="37" uuid="dfe63694-8bd9-4fab-a4f9-6c016f0edc49"/>
 			</line>
-			<staticText>
-				<reportElement x="379" y="6" width="8" height="26" uuid="3868aae0-9b95-4280-9425-e832ef7a93ad">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle"/>
-				<text><![CDATA[$]]></text>
-			</staticText>
 			<line>
 				<reportElement x="320" y="0" width="1" height="37" uuid="cb9e75ce-165f-4d5b-a675-ad9d015592a1"/>
 			</line>
-			<staticText>
-				<reportElement x="320" y="7" width="8" height="26" uuid="82dd4f87-97b6-4f16-b182-2fb56f93e97b">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle"/>
-				<text><![CDATA[$]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="249" y="5" width="8" height="27" uuid="5cd5036e-6a04-4bf8-8faa-247b6c0f2f4c">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[$]]></text>
-			</staticText>
 			<line>
 				<reportElement x="249" y="0" width="1" height="37" uuid="bbcab442-7302-4627-b9cd-a229778d9532"/>
 			</line>
@@ -600,7 +533,7 @@ WHERE
 				<textFieldExpression><![CDATA[$F{cuit}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="320" y="6" width="59" height="26" uuid="797077a5-ff97-4b69-8263-7645cf5b5a53"/>
+				<reportElement x="321" y="6" width="58" height="26" uuid="797077a5-ff97-4b69-8263-7645cf5b5a53"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{iva_facturado_21}]]></textFieldExpression>
 			</textField>
