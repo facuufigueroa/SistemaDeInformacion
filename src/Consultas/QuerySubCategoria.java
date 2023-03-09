@@ -3,7 +3,6 @@ package Consultas;
 
 import DataBase.Conexion;
 import static DataBase.Conexion.getConnection;
-import Model.EmpresaOrden;
 import Model.SubCategoria;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -73,5 +72,26 @@ public class QuerySubCategoria {
         }
 
         return id_subCat;
+    }
+    
+    public String obtenerSubCatPorId(int idSubCat){
+        String nombre = "";
+        PreparedStatement ps = null;
+        Connection conn = Conexion.getConnection();
+        try {
+            String sql = "SELECT s.nombre \n" +
+                            "FROM subcategorias AS s\n" +
+                            "WHERE s.idsubcategorias = " +idSubCat;
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                nombre = rs.getString("nombre");
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return nombre;
     }
 }

@@ -21,6 +21,7 @@ import View.Transacciones;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import static java.lang.Integer.parseInt;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 public class TransaccionesController implements ActionListener {
 
@@ -44,9 +46,9 @@ public class TransaccionesController implements ActionListener {
     QueryTransaccion queryTransaccion = new QueryTransaccion();
 
     private static TransaccionesController tSingleton;
-    
-    int id_new_transaccion = queryTransaccion.obtenerMaxId()+1;
-    
+
+    int id_new_transaccion = queryTransaccion.obtenerMaxId() + 1;
+
     /* todo cvi*/
     FormComprasVentasIVA formCVI = new FormComprasVentasIVA();
     QueryTransaccion queryT = new QueryTransaccion();
@@ -64,7 +66,7 @@ public class TransaccionesController implements ActionListener {
         /*TODO CVI*/
         setearCamosEnCeroCVI();
         iniciarComboBoxEmpresaCVI();
-        iniciarComboBoxCuit();
+        //iniciarComboBoxCuit();
         iniciarComboBoxOperacion();
 
         this.formCVI.cbbEmpresa.addActionListener(this);
@@ -72,7 +74,7 @@ public class TransaccionesController implements ActionListener {
 
         this.formCVI.btnFinalizar.addActionListener(this);
         this.transacciones.btnSaveSinIva.addActionListener(this);
-        
+
         transacciones.labelNumT.setText(String.valueOf(id_new_transaccion));
     }
 
@@ -115,6 +117,7 @@ public class TransaccionesController implements ActionListener {
     }
 
     public void iniciarComboBoxCuentas() {
+
         transacciones.cbbCuentas.removeAllItems();
 
         ArrayList<String> nombreCuentas = queryCuentas.listarPorNombre();
@@ -123,6 +126,8 @@ public class TransaccionesController implements ActionListener {
         }
         transacciones.cbbCuentas.setRenderer(new PromptComboBoxRenderer("Pago Con..."));
         transacciones.cbbCuentas.setSelectedIndex(-1);
+        AutoCompleteDecorator.decorate(transacciones.cbbCuentas);
+
     }
 
     public void iniciarComboBoxTipoCategoria() {
@@ -145,7 +150,8 @@ public class TransaccionesController implements ActionListener {
         for (String cat : listCategoria) {
             transacciones.cbbCategorias.addItem(cat);
         }
-        
+        AutoCompleteDecorator.decorate(transacciones.cbbCategorias);
+
     }
 
     public void iniciarcomboBoxSubcategoria() {
@@ -168,7 +174,8 @@ public class TransaccionesController implements ActionListener {
         for (String emp : listEmpresas) {
             transacciones.cbbEmpresa.addItem(emp);
         }
-        
+        AutoCompleteDecorator.decorate(transacciones.cbbEmpresa);
+
     }
 
     public void iniciarTabla() {
@@ -198,13 +205,45 @@ public class TransaccionesController implements ActionListener {
             String[] dato = new String[7];
             dato[0] = t.getFecha().toString();
             dato[1] = t.getDescripcion();
-            dato[2] = "$" + String.valueOf(t.getSalida());
-            dato[3] = "$" + String.valueOf(t.getEntrada());
+            dato[2] = "$" + evaluarNum(t.getSalida());
+            dato[3] = "$" + evaluarNum(t.getEntrada());
             dato[4] = convertAImpues(String.valueOf(t.isA_impuesto()));
             dato[5] = convertAIVA(String.valueOf(t.isA_iva()));
             modelo.addRow(dato);
         }
 
+    }
+    
+    public String evaluarNum(double n){
+        String numero = "0";
+        if(n > 10000){
+            numero = formatNumberMenosUno(n);
+        }
+        else{
+            if(n < 10000){
+                numero = formatNumber(n);
+            }
+        }
+        return numero;
+    }
+    
+    public String formatNumber(double numero){
+       NumberFormat formatoNumero = NumberFormat.getNumberInstance();
+       String num = formatoNumero.format(numero);
+       double b = converFormatNumToDouble(num);
+    
+       return num.substring(0,num.length());
+    }
+    public String formatNumberMenosUno(double numero){
+       NumberFormat formatoNumero = NumberFormat.getNumberInstance();
+       String num = formatoNumero.format(numero);
+       double b = converFormatNumToDouble(num);
+       
+    
+       DecimalFormat formato = new DecimalFormat("#,###.00");
+       String valorFormateado = formato.format(b);
+       
+       return valorFormateado;
     }
 
     public String convertAImpues(String a_imp) {
@@ -233,11 +272,15 @@ public class TransaccionesController implements ActionListener {
         if (e.getSource() == transacciones.btnCompraVentasIVA) {
             if (!verificarVacios()) {
                 if (!queryTransaccion.verificarCodigoT(obtenerTransaccion().getCodigo())) {
-                    queryTransaccion.addTransaccion(obtenerTransaccion());
-                    iniciarTabla();
-                    loadComVentaIva();
-                    setearCamosEnCeroCVI();
-                    transacciones.labelNumT.setText(String.valueOf(queryTransaccion.obtenerMaxId()+1));
+                    if (!queryTransaccion.verificarNumFactura(obtenerTransaccion().getNumFactura()) || !queryTransaccion.verificarNumCheque(obtenerTransaccion().getNumCheque())) {
+                        loadComVentaIva(obtenerTransaccion().getIdOrdenEmp());
+                        setearCamosEnCeroCVI();
+                        formCVI.labelIdTransaccion.setText(String.valueOf(id_new_transaccion));
+                    } else {
+                        JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\"> El N° de Factura o el N° de Cheque ingresado</p/</html>\n"
+                                + "<html><p style = \"font:14px\"> ya se escuentra en el sistema.</p/</html>\n"
+                                + "<html><p style = \"font:14px\">Verifique nuevamente.</p/</html>", "Error al guardar transacción", 0);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\"> Error al continuar con la Transacción - Ya existe codigo</p/</html>");
                 }
@@ -263,11 +306,17 @@ public class TransaccionesController implements ActionListener {
         if (e.getSource() == transacciones.btnSaveSinIva) {
             if (!verificarVacios()) {
                 if (!queryTransaccion.verificarCodigoT(obtenerTransaccion().getCodigo())) {
-                    queryTransaccion.addTransaccion(obtenerTransaccion());
-                    JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\">Transacción registrada correctamente</p/</html>");
-                    iniciarTabla();
-                    setearCamposEnCero();
-                    transacciones.labelNumT.setText(String.valueOf(queryTransaccion.obtenerMaxId()+1));
+                    if (!queryTransaccion.verificarNumFactura(obtenerTransaccion().getNumFactura()) || !queryTransaccion.verificarNumCheque(obtenerTransaccion().getNumCheque())) {
+                        queryTransaccion.addTransaccion(obtenerTransaccion());
+                        JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\">Transacción registrada correctamente</p/</html>");
+                        iniciarTabla();
+                        setearCamposEnCero();
+                        transacciones.labelNumT.setText(String.valueOf(queryTransaccion.obtenerMaxId() + 1));
+                    } else {
+                        JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\"> El N° de Factura o el N° de Cheque ingresado</p/</html>\n"
+                                + "<html><p style = \"font:14px\"> ya se escuentra en el sistema.</p/</html>\n"
+                                + "<html><p style = \"font:14px\">Verifique nuevamente.</p/</html>", "Error al guardar transacción", 0);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\"> Error al continuar con la Transacción - Ya existe codigo</p/</html>");
                 }
@@ -320,7 +369,7 @@ public class TransaccionesController implements ActionListener {
 
         t.setIdCuenta(queryCuentas.obtenerIdCuentaPorNombre((String) transacciones.cbbCuentas.getSelectedItem()));
 
-        t.setNumFactura(transacciones.txtTipoFact.getText().toUpperCase() + "-" + transacciones.txtNumFact.getText());
+        t.setNumFactura(evaluarNumFact(transacciones.txtTipoFact.getText(), transacciones.txtNumFact.getText()));
 
         t.setNumCheque(transacciones.txtNumCheque.getText()); //Puede ser numCheque o
 
@@ -372,8 +421,8 @@ public class TransaccionesController implements ActionListener {
                 || transacciones.cbbSubCategoria.getSelectedItem().equals("")
                 || transacciones.txtDescripcion.getText().equals("")
                 || transacciones.txtNumCheque.getText().equals("")
-                && transacciones.txtNumFact.getText().equals("")
-                && transacciones.txtTipoFact.getText().equals("")) {
+                && (transacciones.txtNumFact.getText().equals("")
+                || transacciones.txtTipoFact.getText().equals(""))) {
             return true;
         }
         return false;
@@ -404,6 +453,7 @@ public class TransaccionesController implements ActionListener {
         iniciarComboBoxEmpresa();
         transacciones.txtFecha.setDate(null);
         transacciones.txtDescripcion.setText("");
+        transacciones.checkAIva.setSelected(false);
     }
 
     public void iniciarTablaMain() {
@@ -421,11 +471,18 @@ public class TransaccionesController implements ActionListener {
     }
 
     /* Todo compra venta IVA*/
-    public void loadComVentaIva() {
+    public void loadComVentaIva(int IdEmpresa) {
         formCVI.setVisible(true);
         formCVI.setLocationRelativeTo(null);
+        formCVI.cbbEmpresa.setSelectedItem(obtenerEmpresa(IdEmpresa).getNombre());
+               
+        iniciarComboBoxCuit(obtenerEmpresa(IdEmpresa).getCuit());
     }
-
+    
+    public EmpresaOrden obtenerEmpresa(int idEmpresa){
+        return queryEO.obtenerEmpresaPorId(idEmpresa);   
+    }
+    
     public void iniciarComboBoxEmpresaCVI() {
 
         ArrayList<String> listEmpresas = queryEO.listarPorNombre();
@@ -447,7 +504,7 @@ public class TransaccionesController implements ActionListener {
     }
 
     /*Muestra el cuit y el nombre de la empresa juntos*/
-    public void iniciarComboBoxCuit() {
+    public void iniciarComboBoxCuit(String cuit) {
         formCVI.cbbCuitEmpresa.removeAllItems();
         ArrayList<EmpresaOrden> listEmpresas = queryEO.listarEmpresaOrden();
         EmpresaOrden e = new EmpresaOrden();
@@ -457,26 +514,27 @@ public class TransaccionesController implements ActionListener {
         for (EmpresaOrden emp : listEmpresas) {
             formCVI.cbbCuitEmpresa.addItem(emp.getCuit());
         }
+        formCVI.cbbCuitEmpresa.setSelectedItem(cuit);
     }
 
     public void accionEmpresa(ActionEvent e) {
         if (e.getSource() == formCVI.cbbEmpresa) {
             String cuit = queryEO.obtenerCuitPorNombre(formCVI.cbbEmpresa.getSelectedItem().toString());
             formCVI.cbbCuitEmpresa.setSelectedItem(cuit);
-
         }
     }
 
     public void accionCompraVenta(ActionEvent e) throws ParseException {
         if (e.getSource() == formCVI.btnFinalizar) {
             if (!verificarBlancos()) {
-
+                queryTransaccion.addTransaccion(obtenerTransaccion());
+                iniciarTabla();
                 queryCVI.agregarCompraVenta(newCompraVenta());
                 JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\"> El registro se efectuó correctamente </p/</html> \n", "Operación Finalizada", 1);
                 setearCamosEnCeroCVI();
                 formCVI.setVisible(false);
                 setearCamposEnCero();
-
+                transacciones.labelNumT.setText(String.valueOf(queryTransaccion.obtenerMaxId() + 1));
             } else {
                 JOptionPane.showMessageDialog(null, "<html><p style = \"font:14px\"> Error - Campos incompletos.</p/</html> \n"
                         + "<html><p style = \"font:12px\">Verifique que: </p/</html>\n"
@@ -554,6 +612,8 @@ public class TransaccionesController implements ActionListener {
 
         cvi.setIva_facturado_21(Float.parseFloat(verificarBlanco(formCVI.txtIvaFact21.getText())));
 
+        cvi.setIva_facturado_27(Float.parseFloat(verificarBlanco(formCVI.txtIvaFact27.getText())));
+
         return cvi;
     }
 
@@ -566,7 +626,7 @@ public class TransaccionesController implements ActionListener {
     }
 
     public void setearCamosEnCeroCVI() {
-        iniciarComboBoxCuit();
+        //iniciarComboBoxCuit();
         iniciarComboBoxEmpresaCVI();
         iniciarComboBoxOperacion();
         formCVI.txtFecha.setDate(null);
@@ -592,7 +652,7 @@ public class TransaccionesController implements ActionListener {
         formCVI.txtRetIva.setText("0.0");
         formCVI.txtImpRIngBrutos.setText("0.0");
         formCVI.txtIvaFact21.setText("0.0");
-
+        formCVI.txtIvaFact27.setText("0.0");
     }
 
     public boolean verificarBlancos() {
@@ -611,5 +671,24 @@ public class TransaccionesController implements ActionListener {
         } else {
             return numero;
         }
+    }
+
+    /* Método para evitar guión cuando no pone numero de factura*/
+    public String evaluarNumFact(String tipo, String numFact) {
+        if ("".equals(numFact)) {
+            return "";
+        } else {
+            numFact = tipo.toUpperCase() + "-" + numFact;
+            return numFact;
+        }
+    }
+    
+    public double converFormatNumToDouble(String s){
+        String yReemplaza = s.replaceAll("\\.","");
+        String flotanteNum = yReemplaza.replaceAll("\\,",".");
+        DecimalFormat formato = new DecimalFormat("#.##"); 
+        double dou = Double.parseDouble((flotanteNum));
+        return dou;
+    
     }
 }

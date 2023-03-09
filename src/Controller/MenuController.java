@@ -24,10 +24,11 @@ import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 public class MenuController implements ActionListener {
 
-    MenuPrincipal menuPrincipal = new MenuPrincipal();
+    static MenuPrincipal menuPrincipal = new MenuPrincipal();
     TransaccionesController transaccionController = new TransaccionesController();
     FormFechas formFechaVentas = new FormFechas();
     FormFechas formFechaCompras = new FormFechas();
@@ -88,6 +89,8 @@ public class MenuController implements ActionListener {
     
         this.menuPrincipal.btnByT.addActionListener(this);
         this.formFechaReportByT.btnBuscar.addActionListener(this);
+        
+        HistoricoTransaccionController htController = new  HistoricoTransaccionController(menuPrincipal);
     }
 
     @Override
@@ -129,6 +132,26 @@ public class MenuController implements ActionListener {
         menuPrincipal.setLocationRelativeTo(null);
 
     }
+    
+    public static void main(String args[]) {
+        
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                UIManager.setLookAndFeel(info.getClassName());
+                break;
+            }
+        }
+        } catch (Exception e) {
+        }
+        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                menuPrincipal.setVisible(true);
+                menuPrincipal.setLocationRelativeTo(null);
+            }
+        });
+    }
 
     /*Metodo que abre la vista para generar nuevas transacciones*/
     public void newTransaccion(ActionEvent e) {
@@ -161,25 +184,9 @@ public class MenuController implements ActionListener {
 
                 if ((fecha_desde.compareTo(fecha_hasta) < 0) || (fecha_hasta.compareTo(fecha_desde) > 0)) {
 
-                    /*Total Imp_Neto_Grav*/
-                    double t1 = queryReport.totalImp_Neto_Grav();
-                    /*Total total_ivaFact*/
-                    double t2 = queryReport.total_ivaFact();
-                    /* Total total_ite_iva_dere_reg*/
-                    double t3 = queryReport.total_ite_iva_dere_reg();
-                    /* Total total_concepto_no_grav*/
-                    double t4 = queryReport.total_concepto_no_grav_sellos();
-                    /* Total total_ret_ii_bb_vent*/
-                    double t5 = queryReport.total_ret_ii_bb_vent();
-                    /* Total total_ret_ganancias */
-                    double t6 = queryReport.total_ret_ganancias();
-                    /* Total total_ret_iva() */
-                    double t7 = queryReport.total_ret_iva();
-                    /* Total total_imp_total_fac() */
-                    double t8 = queryReport.total_imp_total_fac();
 
                     ReporteLibroVentasIVA reportLVI = new ReporteLibroVentasIVA();
-                    reportLVI.conexionReporte(fecha_desde, fecha_hasta, t1, t2, t3, t4, t5, t6, t7, t8);
+                    reportLVI.conexionReporte(fecha_desde, fecha_hasta);
                     nullFechas(formFechaVentas);
                     formFechaVentas.setVisible(false);
                 } else {
@@ -240,10 +247,11 @@ public class MenuController implements ActionListener {
 
     public void loadReporteCuentasACobrar(ActionEvent e) throws ParseException {
         if (e.getSource() == formFechaReportCAC.btnBuscar) {
-            java.sql.Date fecha_desde = new java.sql.Date(formFechaReportCAC.txtFechaDesde.getDate().getTime());
-            java.sql.Date fecha_hasta = new java.sql.Date(formFechaReportCAC.txtFechaHasta.getDate().getTime());
-
+            
             if (!verificacionFechas(formFechaReportCAC.txtFechaDesde, formFechaReportCAC.txtFechaHasta)) {
+                java.sql.Date fecha_desde = new java.sql.Date(formFechaReportCAC.txtFechaDesde.getDate().getTime());
+                java.sql.Date fecha_hasta = new java.sql.Date(formFechaReportCAC.txtFechaHasta.getDate().getTime());
+
                 if ((fecha_desde.compareTo(fecha_hasta) < 0) || (fecha_hasta.compareTo(fecha_desde) > 0)) {
 
                     ArrayList<Double> array = queryReport.totales(fecha_desde, fecha_hasta);
@@ -308,10 +316,11 @@ public class MenuController implements ActionListener {
 
     public void loadReporteJMRT(ActionEvent e) throws ParseException {
         if (e.getSource() == formFechaReportJMR.btnBuscar) {
-            java.sql.Date fecha_desde = new java.sql.Date(formFechaReportJMR.txtFechaDesde.getDate().getTime());
-            java.sql.Date fecha_hasta = new java.sql.Date(formFechaReportJMR.txtFechaHasta.getDate().getTime());
-
+            
             if (!verificacionFechas(formFechaReportJMR.txtFechaDesde, formFechaReportJMR.txtFechaHasta)) {
+                java.sql.Date fecha_desde = new java.sql.Date(formFechaReportJMR.txtFechaDesde.getDate().getTime());
+                java.sql.Date fecha_hasta = new java.sql.Date(formFechaReportJMR.txtFechaHasta.getDate().getTime());
+
                 if ((fecha_desde.compareTo(fecha_hasta) < 0) || (fecha_hasta.compareTo(fecha_desde) > 0)) {
 
                     formFechaReportJMR.setVisible(false);
@@ -344,9 +353,10 @@ public class MenuController implements ActionListener {
 
     public void loadReporteElRocio(ActionEvent e) throws ParseException {
         if (e.getSource() == formFechaReportElRocio.btnBuscar) {
-            java.sql.Date fecha_desde = new java.sql.Date(formFechaReportElRocio.txtFechaDesde.getDate().getTime());
-            java.sql.Date fecha_hasta = new java.sql.Date(formFechaReportElRocio.txtFechaHasta.getDate().getTime());
             if (!verificacionFechas(formFechaReportElRocio.txtFechaDesde, formFechaReportElRocio.txtFechaHasta)) {
+                java.sql.Date fecha_desde = new java.sql.Date(formFechaReportElRocio.txtFechaDesde.getDate().getTime());
+                java.sql.Date fecha_hasta = new java.sql.Date(formFechaReportElRocio.txtFechaHasta.getDate().getTime());
+            
                 if ((fecha_desde.compareTo(fecha_hasta) < 0) || (fecha_hasta.compareTo(fecha_desde) > 0)) {
 
                     formFechaReportElRocio.setVisible(false);

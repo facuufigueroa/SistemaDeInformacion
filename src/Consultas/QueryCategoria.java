@@ -1,4 +1,3 @@
-
 package Consultas;
 
 import DataBase.Conexion;
@@ -11,11 +10,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-
-
 public class QueryCategoria {
-    
-    public String obtenerTipoCategoria(int idTipoCat){
+
+    public String obtenerTipoCategoria(int idTipoCat) {
         String nombreTipoCat = "";
         PreparedStatement ps = null;
         Connection conn = Conexion.getConnection();
@@ -32,16 +29,16 @@ public class QueryCategoria {
 
         return nombreTipoCat;
     }
-    
+
     /* Obtener el id del tipo de categori por nombre de categoria*/
-    public int obtenerIdTipoCatPorNombre(String nombre){
-        int id_tipo_categoria=0;
+    public int obtenerIdTipoCatPorNombre(String nombre) {
+        int id_tipo_categoria = 0;
         PreparedStatement ps = null;
         Connection conn = Conexion.getConnection();
         try {
-            String sql = "SELECT idtipo_categoria\n" +
-                        "FROM tipo_categoria AS tc\n" +
-                        "WHERE tc.nombre = '" + nombre + "'";
+            String sql = "SELECT idtipo_categoria\n"
+                    + "FROM tipo_categoria AS tc\n"
+                    + "WHERE tc.nombre = '" + nombre + "'";
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery(sql);
             if (rs.next()) {
@@ -54,19 +51,19 @@ public class QueryCategoria {
 
         return id_tipo_categoria;
     }
-    
-    public ArrayList<Categoria> listarCategorias(){
+
+    public ArrayList<Categoria> listarCategorias() {
         ArrayList<Categoria> categoriaList = new ArrayList<>();
         Connection conn = Conexion.getConnection();
         Statement st;
         try {
-            String sql = "SELECT c.nombre as 'nom_categoria', t.nombre as 'nombre_tipo_cat'\n" +
-                            "FROM categorias as c\n" +
-                            "INNER JOIN tipo_categoria as t\n" +
-                            "ON t.idtipo_categoria = c.id_tipo_categoria";
+            String sql = "SELECT c.nombre as 'nom_categoria', t.nombre as 'nombre_tipo_cat'\n"
+                    + "FROM categorias as c\n"
+                    + "INNER JOIN tipo_categoria as t\n"
+                    + "ON t.idtipo_categoria = c.id_tipo_categoria";
             st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
-            
+
             while (rs.next()) {
                 Categoria categoria = new Categoria();
                 categoria.setNombre(rs.getString("nom_categoria"));
@@ -76,10 +73,10 @@ public class QueryCategoria {
         } catch (NumberFormatException | SQLException e) {
             System.out.println(e);
         }
-       return categoriaList;
+        return categoriaList;
     }
-    
-    public ArrayList<String> listarPorNombre(){
+
+    public ArrayList<String> listarPorNombre() {
         ArrayList<String> categoriaList = new ArrayList<>();
         Connection conn = Conexion.getConnection();
         Statement st;
@@ -93,10 +90,10 @@ public class QueryCategoria {
         } catch (NumberFormatException | SQLException e) {
             System.out.println(e);
         }
-       return categoriaList;
+        return categoriaList;
     }
-    
-    public void agregarCat(Categoria cat){
+
+    public void agregarCat(Categoria cat) {
         PreparedStatement ps;
         Connection conn = getConnection();
         String sql = "INSERT INTO categorias(nombre,id_tipo_categoria) VALUES(?,?) ";
@@ -115,10 +112,8 @@ public class QueryCategoria {
             }
         }
     }
-    
-    
-    
-    public ArrayList<Categoria> listarCategorias2(String nombreTipo){
+
+    public ArrayList<Categoria> listarCategorias2(String nombreTipo) {
         ArrayList<Categoria> categoriaList = new ArrayList<>();
         Connection conn = Conexion.getConnection();
         Statement st;
@@ -128,28 +123,28 @@ public class QueryCategoria {
             ResultSet rs = st.executeQuery(sql);
             Categoria categoria = new Categoria();
             while (rs.next()) {
-                
+
                 categoria.setNombre(rs.getString("nombre"));
-                
+
                 categoria.setTipoCategoria((obtenerIdTipoCatPorNombre(nombreTipo)));
-                
+
                 categoriaList.add(categoria);
             }
         } catch (NumberFormatException | SQLException e) {
             System.out.println(e);
         }
-       return categoriaList;
+        return categoriaList;
     }
-    
+
     /* Traer la id  tipo categoria con el nombre de la categoria*/
-    public int obtenerIdTipoCat(String nombre){
-        int id_categoria=0;
+    public int obtenerIdTipoCat(String nombre) {
+        int id_categoria = 0;
         PreparedStatement ps = null;
         Connection conn = Conexion.getConnection();
         try {
-            String sql = "SELECT DISTINCT c.id_tipo_categoria \n" +
-                            "FROM categorias as c \n" +
-                            "WHERE c.nombre = '" + nombre + "'";
+            String sql = "SELECT DISTINCT c.id_tipo_categoria \n"
+                    + "FROM categorias as c \n"
+                    + "WHERE c.nombre = '" + nombre + "'";
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery(sql);
             if (rs.next()) {
@@ -162,15 +157,15 @@ public class QueryCategoria {
 
         return id_categoria;
     }
-    
-     public String obtenerNombreTipoCat(int idCat){
+
+    public String obtenerNombreTipoCat(int idCat) {
         String nombreTipoCat = "";
         PreparedStatement ps = null;
         Connection conn = Conexion.getConnection();
         try {
-            String sql = "SELECT t.nombre \n" +
-                            "FROM tipo_categoria AS t \n" +
-                            "WHERE t.idtipo_categoria = " + idCat;
+            String sql = "SELECT t.nombre \n"
+                    + "FROM tipo_categoria AS t \n"
+                    + "WHERE t.idtipo_categoria = " + idCat;
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery(sql);
             if (rs.next()) {
@@ -182,15 +177,15 @@ public class QueryCategoria {
 
         return nombreTipoCat;
     }
-    
-     public int obtenerIdCatePorNombre(String nombre){
-        int id_cat=0;
+
+    public int obtenerIdCatePorNombre(String nombre) {
+        int id_cat = 0;
         PreparedStatement ps = null;
         Connection conn = Conexion.getConnection();
         try {
-            String sql = "SELECT c.idcategorias \n" +
-                            "FROM categorias AS c\n" +
-                            "WHERE c.nombre = '" + nombre + "'";
+            String sql = "SELECT c.idcategorias \n"
+                    + "FROM categorias AS c\n"
+                    + "WHERE c.nombre = '" + nombre + "'";
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery(sql);
             if (rs.next()) {
@@ -202,5 +197,28 @@ public class QueryCategoria {
         }
 
         return id_cat;
+    }
+
+    /* Obtiene el nombre del tipo de categoria , se utiliza en la vista de EditView*/
+    public String obtenerNombreTC(String nombreCat) {
+        String nombreTipoCat = "";
+        PreparedStatement ps = null;
+        Connection conn = Conexion.getConnection();
+        try {
+            String sql = "SELECT tc.nombre AS nombre_tc\n"
+                    + "FROM tipo_categoria AS tc\n"
+                    + "INNER JOIN categorias AS c\n"
+                    + "ON c.id_tipo_categoria = tc.idtipo_categoria\n"
+                    + "WHERE c.nombre = '" + nombreCat+"'";
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                nombreTipoCat = rs.getString("nombre_tc");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return nombreTipoCat;
     }
 }
