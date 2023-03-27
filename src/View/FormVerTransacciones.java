@@ -60,6 +60,7 @@ public class FormVerTransacciones extends javax.swing.JFrame {
         btnActualizar = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         btnBuscarPorFecha = new javax.swing.JButton();
+        btnSetState = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ver Transacciones");
@@ -225,6 +226,8 @@ public class FormVerTransacciones extends javax.swing.JFrame {
 
             }
         ));
+        tablaVerTransacciones.setCellSelectionEnabled(true);
+        tablaVerTransacciones.setEditingColumn(9);
         jScrollPane1.setViewportView(tablaVerTransacciones);
 
         jPanel4.setBackground(new java.awt.Color(14, 18, 66));
@@ -325,6 +328,10 @@ public class FormVerTransacciones extends javax.swing.JFrame {
         btnBuscarPorFecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscarPorFecha.png"))); // NOI18N
         btnBuscarPorFecha.setText("Buscar Por Fecha");
 
+        btnSetState.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        btnSetState.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/hecho.png"))); // NOI18N
+        btnSetState.setText("Guardar Cambios");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -338,9 +345,11 @@ public class FormVerTransacciones extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(79, 79, 79)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnSetState)
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(7, 7, 7)
                         .addComponent(jLabel10)
@@ -352,9 +361,9 @@ public class FormVerTransacciones extends javax.swing.JFrame {
                         .addComponent(txtNum, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addComponent(btnBuscarT)
-                        .addGap(34, 34, 34)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addGap(28, 28, 28))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -416,7 +425,7 @@ public class FormVerTransacciones extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -429,10 +438,13 @@ public class FormVerTransacciones extends javax.swing.JFrame {
                         .addComponent(btnEditar)
                         .addComponent(jLabel9)
                         .addComponent(txtNum, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEliminar)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnSetState)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEliminar)))
                 .addGap(30, 30, 30))
         );
 
@@ -500,6 +512,7 @@ public class FormVerTransacciones extends javax.swing.JFrame {
     public javax.swing.JButton btnEditar;
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnLimpiar;
+    public javax.swing.JButton btnSetState;
     public javax.swing.JComboBox<String> cbbBuscarCategoria;
     public javax.swing.JComboBox<String> cbbBuscarCuenta;
     public javax.swing.JComboBox<String> cbbEmpresa;

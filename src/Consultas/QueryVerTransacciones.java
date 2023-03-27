@@ -224,6 +224,7 @@ public class QueryVerTransacciones {
                 t.setEntrada(rs.getDouble("entradas"));
                 t.setA_impuesto(rs.getBoolean("a_impuestos_iva"));
                 t.setA_iva(rs.getBoolean("a_iva"));
+                t.setVerificada(rs.getBoolean("verificada"));
                 tList.add(t);
             }
         } catch (NumberFormatException | SQLException e) {
@@ -508,7 +509,7 @@ public class QueryVerTransacciones {
 
         return t;
     }
-    
+
     public ArrayList<Transaccion> obtenerTransaccionesPorFecha(String fecha_desde, String fecha_hasta) {
 
         PreparedStatement ps = null;
@@ -539,5 +540,19 @@ public class QueryVerTransacciones {
         }
 
         return transaccionesList;
+    }
+
+    public void setStateTransaccion(boolean estado, int id) {
+        PreparedStatement ps = null;
+        Connection con = getConnection();
+
+        String sql = "UPDATE transacciones AS t SET t.verificada = ? WHERE t.idtransacciones = "+id;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setBoolean(1, estado);
+            ps.execute();
+        } catch (SQLException e) {
+            System.err.println(e);
+        } 
     }
 }
