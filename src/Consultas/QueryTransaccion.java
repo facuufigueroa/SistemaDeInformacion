@@ -18,7 +18,7 @@ public class QueryTransaccion {
     public void addTransaccion(Transaccion t) {
         PreparedStatement ps;
         Connection conn = getConnection();
-        String sql = "INSERT INTO transacciones(codigo,id_cuenta,cheque,num_fact,fecha,descripcion,id_orden_empresa,cantidad,id_categoria,id_subcategoria,salidas,entradas,a_impuestos_iva,a_iva) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+        String sql = "INSERT INTO transacciones(codigo,id_cuenta,cheque,num_fact,fecha,descripcion,id_orden_empresa,cantidad,id_categoria,id_subcategoria,salidas,entradas,a_impuestos_iva,a_iva,verificada) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
         try {
             ps = conn.prepareStatement(sql);
             ps.setString(1, t.getCodigo());
@@ -36,6 +36,7 @@ public class QueryTransaccion {
             
             ps.setBoolean(13, t.isA_impuesto());
             ps.setBoolean(14, t.isA_iva());
+            ps.setBoolean(15, t.isVerificada());
             ps.execute();
         } catch (SQLException e) {
             System.err.println(e);

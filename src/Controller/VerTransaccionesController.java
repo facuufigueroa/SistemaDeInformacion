@@ -21,7 +21,6 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -932,35 +931,32 @@ public class VerTransaccionesController implements ActionListener {
     }
     
     /*Método para ir cambiando el estado de una transacción, lo que nos permite saber si se chequeo*/
-    public void verificarTransaccion(ActionEvent e){
-        if(e.getSource() == formVerT.btnSetState){
-          
-            for(int i = 0;i < formVerT.tablaVerTransacciones.getRowCount();i++){
-                if(isSelected(i,9,formVerT.tablaVerTransacciones)){
+    public void verificarTransaccion(ActionEvent e) {
+        if (e.getSource() == formVerT.btnSetState) {
+
+            for (int i = 0; i < formVerT.tablaVerTransacciones.getRowCount(); i++) {
+                if (isSelected(i, 9, formVerT.tablaVerTransacciones)) {
                     queryVerT.setStateTransaccion(true, Integer.parseInt(formVerT.tablaVerTransacciones.getValueAt(i, 0).toString()));
-                    
-                }
-                else{
-                    if(!isSelected(i,9,formVerT.tablaVerTransacciones)){
+
+                } else {
+                    if (!isSelected(i, 9, formVerT.tablaVerTransacciones)) {
                         queryVerT.setStateTransaccion(false, Integer.parseInt(formVerT.tablaVerTransacciones.getValueAt(i, 0).toString()));
                     }
                 }
-                
-            
+
             }
             JOptionPane.showMessageDialog(null, "Cambios Guardados Correctamente");
         }
     }
-    
-    public boolean isSelected(int row, int column,JTable table){
+
+    public boolean isSelected(int row, int column, JTable table) {
         Boolean s = Boolean.parseBoolean(String.valueOf(table.getValueAt(row, column)));
-		if(s == true) {
-			return true;
-		}else {
-			return false;
-		}
-    
-	}
-    
-    
+        if (s == true) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
 }

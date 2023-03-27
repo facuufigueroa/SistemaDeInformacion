@@ -85,7 +85,7 @@ public class Transaccion {
         this.ret_ing_brutos = ret_ing_brutos;
         this.a_iva = a_iva;
         this.a_impuesto = a_impuesto;
-        this.verificada = verificada;
+        this.verificada = false;
     }
     
     

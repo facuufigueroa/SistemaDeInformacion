@@ -393,7 +393,7 @@ public class TransaccionesController implements ActionListener {
         t.setA_impuesto(obtenerSetImpuesto());
 
         t.setA_iva(a_iva());
-
+     
         return t;
     }
 
