@@ -21,6 +21,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -249,10 +250,10 @@ public class VerTransaccionesController implements ActionListener {
         String entradasString = "";
         double entradas = 0.0;
         for (int i = 0; i < formVerT.tablaVerTransacciones.getRowCount(); i++) {
-
-            String entradaSin$ = (formVerT.tablaVerTransacciones.getValueAt(i, 6)).toString().substring(1);
+                
+            /*String entradaSin$ = (formVerT.tablaVerTransacciones.getValueAt(i, 6)).toString().substring(1);
             double entradasTotales = converFormatNumToDouble(entradaSin$);
-            entradas += entradasTotales;
+            entradas += entradasTotales;*/
         }
         DecimalFormat formato = new DecimalFormat("#,###.00");
         String entradasFormateado = formato.format(entradas);
@@ -265,9 +266,9 @@ public class VerTransaccionesController implements ActionListener {
         double salidas = 0.0;
         for (int i = 0; i < formVerT.tablaVerTransacciones.getRowCount(); i++) {
 
-            String salidaSin$ = (formVerT.tablaVerTransacciones.getValueAt(i, 5)).toString().substring(1);
+            /*String salidaSin$ = (formVerT.tablaVerTransacciones.getValueAt(i, 5)).toString().substring(1);
             double salidasTotales = converFormatNumToDouble(salidaSin$);
-            salidas += salidasTotales;
+            salidas += salidasTotales;*/
         }
         DecimalFormat formato = new DecimalFormat("#,###.00");
         String SalidasFormateado = formato.format(salidas);
@@ -360,7 +361,7 @@ public class VerTransaccionesController implements ActionListener {
                 }
             }
         };
-
+         
         modelo.addColumn("N° Transacc.");
         modelo.addColumn("Codigo Transacc.");
         modelo.addColumn("Fecha");
@@ -373,7 +374,7 @@ public class VerTransaccionesController implements ActionListener {
 
         formVerT.tablaVerTransacciones.setRowHeight(25);
         formVerT.tablaVerTransacciones.setModel(modelo);
-        for (Transaccion t : listT) {
+        for (Transaccion t : listT) { /*puede ser q no haya datos en la bdd y me tire excepcion*/
             String[] dato = new String[10];
             dato[0] = String.valueOf(t.getIdTransaccion());
             dato[1] = t.getCodigo();
@@ -550,7 +551,11 @@ public class VerTransaccionesController implements ActionListener {
         editVista.txtCuit.setText(cvi.getCuit());
         editVista.txtImpNetoGrav.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getImp_neto_grav()))));
         editVista.txtIvaFact.setText(String.valueOf((converFormatNumToDouble(formato.format(cvi.getIva_facturado())))));
-        editVista.txtImpInterno.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getImp_interno()))));
+        
+        System.out.print(formato.format(cvi.getImp_interno()));
+        System.out.print("formato doble:" +converFormatNumToDouble2(formato.format(cvi.getImp_interno())));
+
+        editVista.txtImpInterno.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getImp_interno()))));
         editVista.txtConceptoNoGrav.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getConcep_no_grav()))));
         editVista.txtPercepcionIVA.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getPercepcion_iva()))));
         editVista.txtRetGanan.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getRet_ganancias()))));
@@ -869,6 +874,13 @@ public class VerTransaccionesController implements ActionListener {
         DecimalFormat formato = new DecimalFormat("#.##");
         double dou = Double.parseDouble((flotanteNum));
         return dou;
+
+    }
+    
+    public String converFormatNumToDouble2(String s) {
+        String yReemplaza = s.replaceAll("\\.", "");
+        String flotanteNum = yReemplaza.replaceAll("\\,", ".");
+        return flotanteNum;
 
     }
 
