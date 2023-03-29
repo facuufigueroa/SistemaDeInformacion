@@ -17,6 +17,10 @@ import View.FormVerTransacciones;
 import View.MenuPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -29,7 +33,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
-public class VerTransaccionesController implements ActionListener {
+public class VerTransaccionesController implements ActionListener, ItemListener,KeyListener {
 
     FormVerTransacciones formVerT = new FormVerTransacciones();
     MenuPrincipal viewMenu = new MenuPrincipal();
@@ -45,6 +49,7 @@ public class VerTransaccionesController implements ActionListener {
 
     public VerTransaccionesController(MenuPrincipal menu) {
         updateTabla(listT);
+        deshabilitarCamposIva();
         formVerT.setLocationRelativeTo(null);
         this.viewMenu = menu;
         viewMenu.btnVerTransacciones.addActionListener(this);
@@ -77,6 +82,13 @@ public class VerTransaccionesController implements ActionListener {
         this.editVista.cbbEmpresa.addActionListener(this);
         this.formVerT.btnBuscarPorFecha.addActionListener(this);
         this.formVerT.btnSetState.addActionListener(this);
+
+        editVista.checkBoxIVA10.addItemListener(this);
+        editVista.checkBoxIVA21.addItemListener(this);
+        editVista.checkBoxIVA27.addItemListener(this);
+        
+        //keyListenerCampos();
+        
     }
 
     @Override
@@ -172,14 +184,15 @@ public class VerTransaccionesController implements ActionListener {
 
                 String categoria = (String) formVerT.cbbBuscarCategoria.getSelectedItem();
                 listTransacciones = queryVerT.obtenerTransaccionesPorCategorias(categoria, fecha_desde, fecha_hasta);
-                if(!listTransacciones.isEmpty()){
+                if (!listTransacciones.isEmpty()) {
                     formVerT.txtBusqueda.setText(categoria);
                     iniciarTabla(listTransacciones);
                     formVerT.txtEntradas.setText(obtenerSumaEntradas());
                     formVerT.txtSalidas.setText(obtenerSumaSalidas());
-                }
-                else{
-                    JOptionPane.showMessageDialog(null, "No se encontraron transacciones registradas para esta búsqueda");
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se encontraron transacciones registradas \n"
+                            + "para la búsqueda filtrada por la Categoria: " + categoria + "\n"
+                            + "entre las fechas " + fecha_desde + " - " + fecha_hasta);
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Error al buscar transacción. \n"
@@ -202,10 +215,16 @@ public class VerTransaccionesController implements ActionListener {
 
                 String subcategoria = (String) formVerT.cbbSubCategoria.getSelectedItem();
                 listTransacciones = queryVerT.obtenerTransaccionesPorSubCategoria(subcategoria, fecha_desde, fecha_hasta);
-                formVerT.txtBusqueda.setText(subcategoria);
-                iniciarTabla(listTransacciones);
-                formVerT.txtEntradas.setText(obtenerSumaEntradas());
-                formVerT.txtSalidas.setText(obtenerSumaSalidas());
+                if (!listTransacciones.isEmpty()) {
+                    formVerT.txtBusqueda.setText(subcategoria);
+                    iniciarTabla(listTransacciones);
+                    formVerT.txtEntradas.setText(obtenerSumaEntradas());
+                    formVerT.txtSalidas.setText(obtenerSumaSalidas());
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se encontraron transacciones registradas \n"
+                            + "para la búsqueda filtrada por la SubCategoria: " + subcategoria + "\n"
+                            + "entre las fechas " + fecha_desde + " - " + fecha_hasta);
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Error al buscar transacción. \n"
                         + "Verifique que haya seleccionado las fechas en los campos \n"
@@ -227,10 +246,16 @@ public class VerTransaccionesController implements ActionListener {
 
                 String cuenta = (String) formVerT.cbbBuscarCuenta.getSelectedItem();
                 listTransacciones = queryVerT.obtenerTransaccionesPorCuenta(cuenta, fecha_desde, fecha_hasta);
-                formVerT.txtBusqueda.setText(cuenta);
-                iniciarTabla(listTransacciones);
-                formVerT.txtEntradas.setText(obtenerSumaEntradas());
-                formVerT.txtSalidas.setText(obtenerSumaSalidas());
+                if (!listTransacciones.isEmpty()) {
+                    formVerT.txtBusqueda.setText(cuenta);
+                    iniciarTabla(listTransacciones);
+                    formVerT.txtEntradas.setText(obtenerSumaEntradas());
+                    formVerT.txtSalidas.setText(obtenerSumaSalidas());
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se encontraron transacciones registradas \n"
+                            + "para la búsqueda filtrada por la cuenta: " + cuenta + "\n"
+                            + "entre las fechas " + fecha_desde + " - " + fecha_hasta);
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Error al buscar transacción. \n"
                         + "Verifique que haya seleccionado las fechas en los campos \n"
@@ -252,18 +277,17 @@ public class VerTransaccionesController implements ActionListener {
 
                 String empresa = (String) formVerT.cbbEmpresa.getSelectedItem();
                 listTransacciones = queryVerT.obtenerTransaccionesPorEmpresa(empresa, fecha_desde, fecha_hasta);
-                if(!listTransacciones.isEmpty()){
+                if (!listTransacciones.isEmpty()) {
                     formVerT.txtBusqueda.setText(empresa);
                     iniciarTabla(listTransacciones);
                     formVerT.txtEntradas.setText(obtenerSumaEntradas());
                     formVerT.txtSalidas.setText(obtenerSumaSalidas());
-                }
-                else{
+                } else {
                     JOptionPane.showMessageDialog(null, "No se encontraron transacciones registradas \n"
-                            + "para la búsqueda filtrada por la empresa/orden: "+empresa+"\n"
-                                    + "entre las fechas "+fecha_desde+" - "+fecha_hasta);
+                            + "para la búsqueda filtrada por la empresa/orden: " + empresa + "\n"
+                            + "entre las fechas " + fecha_desde + " - " + fecha_hasta);
                 }
-                
+
             } else {
                 JOptionPane.showMessageDialog(null, "Error al buscar transacción. \n"
                         + "Verifique que haya seleccionado las fechas en los campos \n"
@@ -939,16 +963,15 @@ public class VerTransaccionesController implements ActionListener {
 
                 java.sql.Date sqlFechaHasta = new java.sql.Date(formVerT.txtFechaHasta.getDate().getTime());
                 String fecha_hasta = sqlFechaHasta.toString();
-                
+
                 listTransacciones = queryVerT.obtenerTransaccionesPorFecha(fecha_desde, fecha_hasta);
-                if(!listTransacciones.isEmpty()){
-                iniciarTabla(listTransacciones);
-                formVerT.txtEntradas.setText(obtenerSumaEntradas());
-                formVerT.txtSalidas.setText(obtenerSumaSalidas());
-                }
-                else{
+                if (!listTransacciones.isEmpty()) {
+                    iniciarTabla(listTransacciones);
+                    formVerT.txtEntradas.setText(obtenerSumaEntradas());
+                    formVerT.txtSalidas.setText(obtenerSumaSalidas());
+                } else {
                     JOptionPane.showMessageDialog(null, "No se encontraron transacciones registradas entre las fechas \n"
-                            + "" +fecha_desde+" - "+fecha_hasta);
+                            + "" + fecha_desde + " - " + fecha_hasta);
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Error al buscar transacción. \n"
@@ -987,4 +1010,138 @@ public class VerTransaccionesController implements ActionListener {
 
     }
 
+    @Override
+    public void itemStateChanged(ItemEvent e){
+            accionIva10_5(e);
+            accionIva21(e);
+            accionIva27(e);
+    }
+
+    public void accionIva10_5(ItemEvent e) {
+        if (editVista.checkBoxIVA10.isSelected()) {
+            
+           
+            // Obtener el valor deseado
+            double valor = Double.parseDouble(editVista.txtImpNetoGrav.getText());
+
+            // Calcular el porcentaje
+            double porcentaje = valor * 0.105;
+            String ivaConPunto = String.format("%.2f", (porcentaje));
+            // Establecer el valor calculado en el JTextField
+            editVista.txtIvaFact.setText(ivaConPunto.replaceAll("\\,", "."));
+        } else {
+            // Establecer el JTextField en cero
+            editVista.txtIvaFact.setText(".00");
+        }
+    }
+    
+    public void accionIva21(ItemEvent e) {
+        if (editVista.checkBoxIVA21.isSelected()) {
+            
+            // Obtener el valor deseado
+            double valor = Double.parseDouble(editVista.txtImpNetoGrav.getText());
+
+            // Calcular el porcentaje
+            double porcentaje = valor * 0.21;
+            String ivaConPunto = String.format("%.2f", (porcentaje));
+            // Establecer el valor calculado en el JTextField
+            editVista.txtIvaFact21.setText(ivaConPunto.replaceAll("\\,", "."));
+            
+        } else {
+            // Establecer el JTextField en cero
+            editVista.txtIvaFact21.setText(".00");
+        }
+    }
+    
+    public void accionIva27(ItemEvent e) {
+        if (editVista.checkBoxIVA27.isSelected()) {
+            // Obtener el valor deseado
+            double valor = Double.parseDouble(editVista.txtImpNetoGrav.getText());
+
+            // Calcular el porcentaje
+            double porcentaje = valor * 0.27;
+
+            // Establecer el valor calculado en el JTextField
+            
+            String ivaConPunto = String.format("%.2f", (porcentaje));
+            editVista.txtIvaFac27.setText(ivaConPunto.replaceAll("\\,", "."));
+        } else {
+            // Establecer el JTextField en cero
+            editVista.txtIvaFac27.setText(".00");
+        }
+    }
+    
+    public void deshabilitarCamposIva(){
+        editVista.txtIvaFact.setEditable(false);
+        editVista.txtIvaFact21.setEditable(false);
+        editVista.txtIvaFac27.setEditable(false);
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+            //sumar();
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+    }
+    
+    private void sumar() {
+        try {
+            
+            double suma = Double.parseDouble(editVista.txtImpNetoGrav.getText())+
+                    Double.parseDouble(editVista.txtIvaFact.getText())+
+                    Double.parseDouble(editVista.txtIvaFact21.getText())+
+                    Double.parseDouble(editVista.txtImpInterno.getText())+
+                    Double.parseDouble(editVista.txtConceptoNoGrav.getText())+
+                    Double.parseDouble(editVista.txtPercepcionIVA.getText())+
+                    Double.parseDouble(editVista.txtRetGanan.getText())+
+                    Double.parseDouble(editVista.txtPercIvaC.getText())+
+                    Double.parseDouble(editVista.txtIvaDereReg.getText())+
+                    Double.parseDouble(editVista.txtCNoGravSellos.getText())+
+                    Double.parseDouble(editVista.txtRetIiBbV.getText())+
+                    Double.parseDouble(editVista.txtGravLey25413.getText())+
+                    Double.parseDouble(editVista.txtIntNumerales.getText())+
+                    Double.parseDouble(editVista.txtOpExentas.getText())+
+                    Double.parseDouble(editVista.txtIngBrutos.getText())+
+                    Double.parseDouble(editVista.txtRetIva.getText())+
+                    Double.parseDouble(editVista.txtImpRIngBrutos.getText())+
+                    Double.parseDouble(editVista.txtOtros.getText())+
+                    Double.parseDouble(editVista.txtIvaRg212.getText());
+            
+            String sumaTotal = String.format("%.2f", (suma));
+            String sumaTotalConPunto = sumaTotal.replaceAll("\\,", ".");
+            
+            // Actualizar el JTextField de la suma con el resultado
+            editVista.txtImpTotalFact.setText(sumaTotalConPunto);
+        } catch (NumberFormatException e) {
+            // Si alguno de los JTextField no contiene un número válido, no hacer nada
+        }
+    }
+    
+    
+    public void keyListenerCampos(){
+        editVista.txtIvaFact.addKeyListener(this);
+        editVista.txtIvaFact21.addKeyListener(this);
+        editVista.txtImpInterno.addKeyListener(this);
+        editVista.txtConceptoNoGrav.addKeyListener(this);
+        editVista.txtPercepcionIVA.addKeyListener(this);
+        editVista.txtRetGanan.addKeyListener(this);
+        editVista.txtPercIvaC.addKeyListener(this);
+        editVista.txtIvaDereReg.addKeyListener(this);
+        editVista.txtCNoGravSellos.addKeyListener(this);
+        editVista.txtRetIiBbV.addKeyListener(this);
+        editVista.txtGravLey25413.addKeyListener(this);
+        editVista.txtIntNumerales.addKeyListener(this);
+        editVista.txtOpExentas.addKeyListener(this);
+        editVista.txtIngBrutos.addKeyListener(this);
+        editVista.txtRetIva.addKeyListener(this);
+        editVista.txtImpRIngBrutos.addKeyListener(this);
+        editVista.txtOtros.addKeyListener(this);
+        editVista.txtIvaRg212.addKeyListener(this);
+    }
 }
