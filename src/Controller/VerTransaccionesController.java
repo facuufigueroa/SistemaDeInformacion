@@ -113,7 +113,7 @@ public class VerTransaccionesController implements ActionListener {
 
         modelo = new DefaultTableModel() {
             public boolean isCellEditable(int fila, int columna) {
-                if (columna == 1 && columna == 2 && columna == 3) {
+                if (columna == 9) {
                     return true;
                 } else {
                     return false;
@@ -129,12 +129,14 @@ public class VerTransaccionesController implements ActionListener {
         modelo.addColumn("Entradas");
         modelo.addColumn("A Impuesto ?");
         modelo.addColumn(" A IVA ?");
-        //modelo.addColumn("Empresa / Orden");
+        modelo.addColumn("Verificado");
 
         formVerT.tablaVerTransacciones.setRowHeight(25);
         formVerT.tablaVerTransacciones.setModel(modelo);
+        addCheckBox(9, formVerT.tablaVerTransacciones);
+        if (!listT.isEmpty()) {
             for (Transaccion t : listT) {
-                String[] dato = new String[10];
+                Object[] dato = new Object[10];
                 dato[0] = String.valueOf(t.getIdTransaccion());
                 dato[1] = t.getCodigo();
                 dato[2] = t.getFecha().toString();
@@ -144,8 +146,16 @@ public class VerTransaccionesController implements ActionListener {
                 dato[6] = "$" + evaluarNum(t.getEntrada());
                 dato[7] = cambiarFormatoIVA(t.isA_impuesto());
                 dato[8] = cambiarFormatoIVA(t.isA_iva());
+                dato[9] = t.isVerificada() == true;
                 modelo.addRow(dato);
             }
+        } else {
+            DefaultTableModel model = new DefaultTableModel(1, 1);
+            // Establezca el mensaje en la celda del modelo de tabla personalizado
+            model.setValueAt("No hay transaccion registradas", 0, 0);
+            // Establezca el modelo de tabla personalizado en la JTable
+            formVerT.tablaVerTransacciones.setModel(model);
+        }
 
     }
 
@@ -162,10 +172,15 @@ public class VerTransaccionesController implements ActionListener {
 
                 String categoria = (String) formVerT.cbbBuscarCategoria.getSelectedItem();
                 listTransacciones = queryVerT.obtenerTransaccionesPorCategorias(categoria, fecha_desde, fecha_hasta);
-                formVerT.txtBusqueda.setText(categoria);
-                iniciarTabla(listTransacciones);
-                formVerT.txtEntradas.setText(obtenerSumaEntradas());
-                formVerT.txtSalidas.setText(obtenerSumaSalidas());
+                if(!listTransacciones.isEmpty()){
+                    formVerT.txtBusqueda.setText(categoria);
+                    iniciarTabla(listTransacciones);
+                    formVerT.txtEntradas.setText(obtenerSumaEntradas());
+                    formVerT.txtSalidas.setText(obtenerSumaSalidas());
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "No se encontraron transacciones registradas para esta búsqueda");
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Error al buscar transacción. \n"
                         + "Verifique que haya seleccionado las fechas en los campos \n"
@@ -237,10 +252,18 @@ public class VerTransaccionesController implements ActionListener {
 
                 String empresa = (String) formVerT.cbbEmpresa.getSelectedItem();
                 listTransacciones = queryVerT.obtenerTransaccionesPorEmpresa(empresa, fecha_desde, fecha_hasta);
-                formVerT.txtBusqueda.setText(empresa);
-                iniciarTabla(listTransacciones);
-                formVerT.txtEntradas.setText(obtenerSumaEntradas());
-                formVerT.txtSalidas.setText(obtenerSumaSalidas());
+                if(!listTransacciones.isEmpty()){
+                    formVerT.txtBusqueda.setText(empresa);
+                    iniciarTabla(listTransacciones);
+                    formVerT.txtEntradas.setText(obtenerSumaEntradas());
+                    formVerT.txtSalidas.setText(obtenerSumaSalidas());
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "No se encontraron transacciones registradas \n"
+                            + "para la búsqueda filtrada por la empresa/orden: "+empresa+"\n"
+                                    + "entre las fechas "+fecha_desde+" - "+fecha_hasta);
+                }
+                
             } else {
                 JOptionPane.showMessageDialog(null, "Error al buscar transacción. \n"
                         + "Verifique que haya seleccionado las fechas en los campos \n"
@@ -253,10 +276,10 @@ public class VerTransaccionesController implements ActionListener {
         String entradasString = "";
         double entradas = 0.0;
         for (int i = 0; i < formVerT.tablaVerTransacciones.getRowCount(); i++) {
-                
-            /*String entradaSin$ = (formVerT.tablaVerTransacciones.getValueAt(i, 6)).toString().substring(1);
+
+            String entradaSin$ = (formVerT.tablaVerTransacciones.getValueAt(i, 6)).toString().substring(1);
             double entradasTotales = converFormatNumToDouble(entradaSin$);
-            entradas += entradasTotales;*/
+            entradas += entradasTotales;
         }
         DecimalFormat formato = new DecimalFormat("#,###.00");
         String entradasFormateado = formato.format(entradas);
@@ -269,9 +292,9 @@ public class VerTransaccionesController implements ActionListener {
         double salidas = 0.0;
         for (int i = 0; i < formVerT.tablaVerTransacciones.getRowCount(); i++) {
 
-            /*String salidaSin$ = (formVerT.tablaVerTransacciones.getValueAt(i, 5)).toString().substring(1);
+            String salidaSin$ = (formVerT.tablaVerTransacciones.getValueAt(i, 5)).toString().substring(1);
             double salidasTotales = converFormatNumToDouble(salidaSin$);
-            salidas += salidasTotales;*/
+            salidas += salidasTotales;
         }
         DecimalFormat formato = new DecimalFormat("#,###.00");
         String SalidasFormateado = formato.format(salidas);
@@ -364,7 +387,7 @@ public class VerTransaccionesController implements ActionListener {
                 }
             }
         };
-         
+
         modelo.addColumn("N° Transacc.");
         modelo.addColumn("Codigo Transacc.");
         modelo.addColumn("Fecha");
@@ -375,15 +398,15 @@ public class VerTransaccionesController implements ActionListener {
         modelo.addColumn("A Impuesto ?");
         modelo.addColumn(" A IVA ?");
         modelo.addColumn("Verificado");
-       
 
         formVerT.tablaVerTransacciones.setRowHeight(25);
         formVerT.tablaVerTransacciones.setModel(modelo);
-        addCheckBox(9,formVerT.tablaVerTransacciones);
-        
-        if(!listT.isEmpty()){
-            
-            for (Transaccion t : listT) { /*puede ser q no haya datos en la bdd y me tire excepcion*/
+        addCheckBox(9, formVerT.tablaVerTransacciones);
+
+        if (!listT.isEmpty()) {
+
+            for (Transaccion t : listT) {
+                /*puede ser q no haya datos en la bdd y me tire excepcion*/
                 Object[] dato = new Object[10];
                 dato[0] = String.valueOf(t.getIdTransaccion());
                 dato[1] = t.getCodigo();
@@ -397,7 +420,7 @@ public class VerTransaccionesController implements ActionListener {
                 dato[9] = t.isVerificada() == true;
                 modelo.addRow(dato);
             }
-        }else{
+        } else {
             DefaultTableModel model = new DefaultTableModel(1, 1);
             // Establezca el mensaje en la celda del modelo de tabla personalizado
             model.setValueAt("No hay transaccion registradas", 0, 0);
@@ -406,13 +429,12 @@ public class VerTransaccionesController implements ActionListener {
         }
 
     }
-    
-    
-    public void addCheckBox(int column, JTable table){
+
+    public void addCheckBox(int column, JTable table) {
         TableColumn tc = table.getColumnModel().getColumn(column);
         tc.setCellEditor(table.getDefaultEditor(Boolean.class));
         tc.setCellRenderer(table.getDefaultRenderer(Boolean.class));
-        
+
     }
 
     public String evaluarNum(double n) {
@@ -575,7 +597,7 @@ public class VerTransaccionesController implements ActionListener {
         editVista.txtCuit.setText(cvi.getCuit());
         editVista.txtImpNetoGrav.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getImp_neto_grav()))));
         editVista.txtIvaFact.setText(String.valueOf((converFormatNumToDouble2(formato.format(cvi.getIva_facturado())))));
-        
+
         editVista.txtImpInterno.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getImp_interno()))));
         editVista.txtConceptoNoGrav.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getConcep_no_grav()))));
         editVista.txtPercepcionIVA.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getPercepcion_iva()))));
@@ -897,7 +919,7 @@ public class VerTransaccionesController implements ActionListener {
         return dou;
 
     }
-    
+
     /*Método que realiza lo mismo que el de la linea 881 per con la diferencia que no es necesario convertirlo a doble al valor*/
     public String converFormatNumToDouble2(String s) {
         String yReemplaza = s.replaceAll("\\.", "");
@@ -911,17 +933,23 @@ public class VerTransaccionesController implements ActionListener {
             ArrayList<Transaccion> listTransacciones = new ArrayList<>();
             if (formVerT.txtFechaDesde.getDate() != null
                     && formVerT.txtFechaHasta.getDate() != null) {
-                
+
                 java.sql.Date sqlFechaDesde = new java.sql.Date(formVerT.txtFechaDesde.getDate().getTime());
                 String fecha_desde = sqlFechaDesde.toString();
 
                 java.sql.Date sqlFechaHasta = new java.sql.Date(formVerT.txtFechaHasta.getDate().getTime());
                 String fecha_hasta = sqlFechaHasta.toString();
-
+                
                 listTransacciones = queryVerT.obtenerTransaccionesPorFecha(fecha_desde, fecha_hasta);
+                if(!listTransacciones.isEmpty()){
                 iniciarTabla(listTransacciones);
                 formVerT.txtEntradas.setText(obtenerSumaEntradas());
                 formVerT.txtSalidas.setText(obtenerSumaSalidas());
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "No se encontraron transacciones registradas entre las fechas \n"
+                            + "" +fecha_desde+" - "+fecha_hasta);
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Error al buscar transacción. \n"
                         + "Verifique que haya seleccionado las fechas en los campos \n"
@@ -929,7 +957,7 @@ public class VerTransaccionesController implements ActionListener {
             }
         }
     }
-    
+
     /*Método para ir cambiando el estado de una transacción, lo que nos permite saber si se chequeo*/
     public void verificarTransaccion(ActionEvent e) {
         if (e.getSource() == formVerT.btnSetState) {

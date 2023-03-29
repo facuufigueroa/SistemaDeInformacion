@@ -59,6 +59,7 @@
               </Group>
               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -981,7 +982,7 @@
                               <Component id="txtIvaRg212" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnEditCvi" pref="48" max="32767" attributes="0"/>
+                          <Component id="btnEditCvi" pref="42" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>

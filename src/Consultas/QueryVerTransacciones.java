@@ -65,6 +65,8 @@ public class QueryVerTransacciones {
                 t.setA_impuesto(rs.getBoolean("a_impuestos_iva"));
                 t.setA_iva(rs.getBoolean("a_iva"));
                 t.setIdOrdenEmp(rs.getInt("id_orden_empresa"));
+                t.setVerificada(rs.getBoolean("verificada"));
+
                 transaccionesList.add(t);
             }
         } catch (Exception e) {
@@ -98,6 +100,8 @@ public class QueryVerTransacciones {
                 t.setA_impuesto(rs.getBoolean("a_impuestos_iva"));
                 t.setA_iva(rs.getBoolean("a_iva"));
                 t.setIdOrdenEmp(rs.getInt("id_orden_empresa"));
+                t.setVerificada(rs.getBoolean("verificada"));
+
                 transaccionesList.add(t);
             }
         } catch (Exception e) {
@@ -131,6 +135,7 @@ public class QueryVerTransacciones {
                 t.setA_impuesto(rs.getBoolean("a_impuestos_iva"));
                 t.setA_iva(rs.getBoolean("a_iva"));
                 t.setIdOrdenEmp(rs.getInt("id_orden_empresa"));
+                t.setVerificada(rs.getBoolean("verificada"));
                 transaccionesList.add(t);
             }
         } catch (Exception e) {
@@ -164,6 +169,7 @@ public class QueryVerTransacciones {
                 t.setA_impuesto(rs.getBoolean("a_impuestos_iva"));
                 t.setA_iva(rs.getBoolean("a_iva"));
                 t.setIdOrdenEmp(rs.getInt("id_orden_empresa"));
+                t.setVerificada(rs.getBoolean("verificada"));
                 transaccionesList.add(t);
             }
         } catch (Exception e) {
@@ -533,6 +539,7 @@ public class QueryVerTransacciones {
                 t.setA_impuesto(rs.getBoolean("a_impuestos_iva"));
                 t.setA_iva(rs.getBoolean("a_iva"));
                 t.setIdOrdenEmp(rs.getInt("id_orden_empresa"));
+                t.setVerificada(rs.getBoolean("verificada"));
                 transaccionesList.add(t);
             }
         } catch (Exception e) {

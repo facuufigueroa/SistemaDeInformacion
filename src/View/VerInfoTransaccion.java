@@ -931,7 +931,7 @@ public class VerInfoTransaccion extends javax.swing.JFrame {
                             .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtIvaRg212, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEditCvi, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)))
+                        .addComponent(btnEditCvi, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)))
                 .addGap(12, 12, 12))
         );
 
@@ -969,7 +969,8 @@ public class VerInfoTransaccion extends javax.swing.JFrame {
                     .addComponent(labelVerificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel31, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(4, 4, 4)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
