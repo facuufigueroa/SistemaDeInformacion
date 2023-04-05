@@ -156,6 +156,7 @@ public class Transacciones extends javax.swing.JFrame {
 
         txtDescripcion.setColumns(20);
         txtDescripcion.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        txtDescripcion.setForeground(new java.awt.Color(0, 0, 0));
         txtDescripcion.setRows(5);
         jScrollPane1.setViewportView(txtDescripcion);
 
@@ -196,7 +197,7 @@ public class Transacciones extends javax.swing.JFrame {
         checkAIva.setFont(new java.awt.Font("Arial Narrow", 1, 22)); // NOI18N
         checkAIva.setText("A IVA ?");
 
-        tablaTransacciones.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        tablaTransacciones.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         tablaTransacciones.setForeground(new java.awt.Color(0, 0, 0));
         tablaTransacciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
