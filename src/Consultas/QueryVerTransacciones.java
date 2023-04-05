@@ -307,6 +307,8 @@ public class QueryVerTransacciones {
 
         return cvi;
     }
+    
+   
 
     public void modificarTransaccion(Transaccion t, int id) {
         PreparedStatement ps = null;

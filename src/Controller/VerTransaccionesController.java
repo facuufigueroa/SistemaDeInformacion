@@ -29,6 +29,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
@@ -87,7 +88,7 @@ public class VerTransaccionesController implements ActionListener, ItemListener,
         editVista.checkBoxIVA21.addItemListener(this);
         editVista.checkBoxIVA27.addItemListener(this);
         
-        //keyListenerCampos();
+        /*keyListenerCampos();*/
         
     }
 
@@ -1046,10 +1047,21 @@ public class VerTransaccionesController implements ActionListener, ItemListener,
             String ivaConPunto = String.format("%.2f", (porcentaje));
             // Establecer el valor calculado en el JTextField
             editVista.txtIvaFact21.setText(ivaConPunto.replaceAll("\\,", "."));
+            double totalImpFact = Double.parseDouble(editVista.txtImpTotalFact.getText());
+            double txtIva21 = Double.parseDouble(editVista.txtIvaFact21.getText());
+            
+            String sumaTotal = String.format("%.2f", (totalImpFact+txtIva21)).replaceAll("\\,", ".");
+            editVista.txtImpTotalFact.setText(sumaTotal);
             
         } else {
             // Establecer el JTextField en cero
             editVista.txtIvaFact21.setText(".00");
+        }
+    }
+    
+    public void actualizarTotalConIVA(double totalImpFact, double iva,JTextField txtIva){
+        if(!".00".equals(txtIva.getText())){
+                    
         }
     }
     
@@ -1079,7 +1091,7 @@ public class VerTransaccionesController implements ActionListener, ItemListener,
 
     @Override
     public void keyTyped(KeyEvent e) {
-            //sumar();
+            /*sumar();*/
     }
 
     @Override
@@ -1088,12 +1100,14 @@ public class VerTransaccionesController implements ActionListener, ItemListener,
 
     @Override
     public void keyReleased(KeyEvent e) {
+        
     }
     
-    private void sumar() {
+    /*private void sumar() {
         try {
             
-            double suma = Double.parseDouble(editVista.txtImpNetoGrav.getText())+
+            double suma = 
+                    Double.parseDouble(editVista.txtImpNetoGrav.getText())+
                     Double.parseDouble(editVista.txtIvaFact.getText())+
                     Double.parseDouble(editVista.txtIvaFact21.getText())+
                     Double.parseDouble(editVista.txtImpInterno.getText())+
@@ -1113,7 +1127,9 @@ public class VerTransaccionesController implements ActionListener, ItemListener,
                     Double.parseDouble(editVista.txtOtros.getText())+
                     Double.parseDouble(editVista.txtIvaRg212.getText());
             
-            String sumaTotal = String.format("%.2f", (suma));
+            double totalImporte = Double.parseDouble(editVista.txtImpTotalFact.getText());
+            
+            String sumaTotal = String.format("%.2f", (suma+totalImporte));
             String sumaTotalConPunto = sumaTotal.replaceAll("\\,", ".");
             
             // Actualizar el JTextField de la suma con el resultado
@@ -1121,12 +1137,14 @@ public class VerTransaccionesController implements ActionListener, ItemListener,
         } catch (NumberFormatException e) {
             // Si alguno de los JTextField no contiene un número válido, no hacer nada
         }
-    }
+    }*/
     
     
-    public void keyListenerCampos(){
+    /*public void keyListenerCampos(){
+        editVista.txtImpNetoGrav.addKeyListener(this);
         editVista.txtIvaFact.addKeyListener(this);
         editVista.txtIvaFact21.addKeyListener(this);
+        editVista.txtIvaFac27.addKeyListener(this);
         editVista.txtImpInterno.addKeyListener(this);
         editVista.txtConceptoNoGrav.addKeyListener(this);
         editVista.txtPercepcionIVA.addKeyListener(this);
@@ -1143,5 +1161,8 @@ public class VerTransaccionesController implements ActionListener, ItemListener,
         editVista.txtImpRIngBrutos.addKeyListener(this);
         editVista.txtOtros.addKeyListener(this);
         editVista.txtIvaRg212.addKeyListener(this);
-    }
+    }*/
+    
+    
+    
 }

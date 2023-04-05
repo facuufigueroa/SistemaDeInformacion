@@ -92,7 +92,7 @@
                                       <EmptySpace min="17" pref="17" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="txtSalidas" pref="87" max="32767" attributes="0"/>
+                                      <Component id="txtSalidas" pref="113" max="32767" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="txtEntradas" min="-2" pref="102" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -104,7 +104,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="labelNumT" min="-2" pref="838" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="44" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -745,8 +745,23 @@
                           <Component id="txtIvaFac27" min="-2" pref="111" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="41" max="32767" attributes="0"/>
+                  <EmptySpace pref="107" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jLabel18" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel20" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel21" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel22" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="txtPercIvaC" min="-2" pref="111" max="-2" attributes="0"/>
+                              <Component id="txtIvaDereReg" min="-2" pref="111" max="-2" attributes="0"/>
+                              <Component id="txtCNoGravSellos" min="-2" pref="111" max="-2" attributes="0"/>
+                              <Component id="txtRetIiBbV" min="-2" pref="111" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -774,22 +789,10 @@
                           </Group>
                           <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jLabel18" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel19" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel20" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel21" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel22" alignment="1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtPercIvaC" min="-2" pref="111" max="-2" attributes="0"/>
-                              <Component id="txtImpTotalFact" min="-2" pref="111" max="-2" attributes="0"/>
-                              <Component id="txtIvaDereReg" min="-2" pref="111" max="-2" attributes="0"/>
-                              <Component id="txtCNoGravSellos" min="-2" pref="111" max="-2" attributes="0"/>
-                              <Component id="txtRetIiBbV" min="-2" pref="111" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="txtIvaRg212" min="-2" pref="111" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -838,20 +841,20 @@
                                               <Component id="txtRetIva" min="-2" pref="111" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="txtIvaRg212" min="-2" pref="111" max="-2" attributes="0"/>
-                                      </Group>
                                   </Group>
                                   <EmptySpace min="44" pref="44" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="239" max="-2" attributes="0"/>
-                          <Component id="btnModificarCVI" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                          <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="txtImpTotalFact" min="-2" pref="111" max="-2" attributes="0"/>
+                              <Component id="btnModificarCVI" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -951,25 +954,15 @@
                               <Component id="txtPercIvaC" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtImpTotalFact" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtIvaRg212" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel23" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtIvaDereReg" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel21" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                              <Component id="txtCNoGravSellos" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel22" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                              <Component id="txtRetIiBbV" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -1007,12 +1000,28 @@
                               <Component id="jLabel25" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
                               <Component id="txtOtros" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="12" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtIvaRg212" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel23" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                              <Component id="jLabel21" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                              <Component id="txtCNoGravSellos" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel22" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                              <Component id="txtRetIiBbV" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtImpTotalFact" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="8" max="32767" attributes="0"/>
                           <Component id="btnModificarCVI" min="-2" pref="42" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -1202,7 +1211,7 @@
         <Component class="javax.swing.JLabel" name="jLabel19">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial Narrow" size="18" style="1"/>
+              <Font name="Arial" size="18" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
