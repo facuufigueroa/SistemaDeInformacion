@@ -96,7 +96,7 @@ public class Transacciones extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Cuenta");
 
-        jLabel5.setFont(new java.awt.Font("Arial Narrow", 1, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("N° Cheque");
 
@@ -155,7 +155,7 @@ public class Transacciones extends javax.swing.JFrame {
         cbbEmpresa.setMaximumRowCount(4);
 
         txtDescripcion.setColumns(20);
-        txtDescripcion.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        txtDescripcion.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         txtDescripcion.setRows(5);
         jScrollPane1.setViewportView(txtDescripcion);
 
@@ -235,7 +235,7 @@ public class Transacciones extends javax.swing.JFrame {
             }
         });
 
-        jLabel19.setFont(new java.awt.Font("Arial Narrow", 1, 14)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("Tipo");
 
@@ -243,11 +243,11 @@ public class Transacciones extends javax.swing.JFrame {
         txtTipoFact.setForeground(new java.awt.Color(0, 0, 0));
         txtTipoFact.setMinimumSize(new java.awt.Dimension(14, 25));
 
-        jLabel20.setFont(new java.awt.Font("Arial Narrow", 1, 14)); // NOI18N
+        jLabel20.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("N° Factura");
 
-        jLabel21.setFont(new java.awt.Font("Arial Narrow", 1, 14)); // NOI18N
+        jLabel21.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
         jLabel21.setText("Factura");
 
