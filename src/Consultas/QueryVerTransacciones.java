@@ -564,4 +564,25 @@ public class QueryVerTransacciones {
             System.err.println(e);
         } 
     }
+    
+    
+    public double obtenerTotalImpFact(int idTransaccion) {
+        PreparedStatement ps = null;
+        Connection conn = conexion.getConnection();
+        double totalImp= 0.0;
+        try {
+            String sql = "SELECT imp_total_fact\n" +
+                        "FROM compra_ventas_iva as cv\n" +
+                        "WHERE cv.id_transaccion = " + idTransaccion;
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                totalImp = rs.getDouble("imp_total_fact");
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return totalImp;
+    }
 }
