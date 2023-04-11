@@ -1101,16 +1101,25 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="IVA Facturado 10.5%"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JCheckBox" name="checkIVA21">
           <Properties>
             <Property name="text" type="java.lang.String" value="IVA Facturado 21%"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JCheckBox" name="checkIVA27">
           <Properties>
             <Property name="text" type="java.lang.String" value="IVA Facturado 27%"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

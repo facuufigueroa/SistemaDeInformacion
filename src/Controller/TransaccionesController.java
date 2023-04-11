@@ -20,6 +20,8 @@ import View.FormComprasVentasIVA;
 import View.Transacciones;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import static java.lang.Integer.parseInt;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -28,10 +30,11 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
-public class TransaccionesController implements ActionListener {
+public class TransaccionesController implements ActionListener, ItemListener {
 
     QueryCategoria queryCategoria = new QueryCategoria();
     QueryCuentas queryCuentas = new QueryCuentas();
@@ -76,6 +79,10 @@ public class TransaccionesController implements ActionListener {
         this.transacciones.btnSaveSinIva.addActionListener(this);
 
         transacciones.labelNumT.setText(String.valueOf(id_new_transaccion));
+
+        this.formCVI.checkIVA10.addItemListener(this);
+        this.formCVI.checkIVA21.addItemListener(this);
+        this.formCVI.checkIVA27.addItemListener(this);
     }
 
     @Override
@@ -213,37 +220,36 @@ public class TransaccionesController implements ActionListener {
         }
 
     }
-    
-    public String evaluarNum(double n){
+
+    public String evaluarNum(double n) {
         String numero = "0";
-        if(n > 10000){
+        if (n > 10000) {
             numero = formatNumberMenosUno(n);
-        }
-        else{
-            if(n < 10000){
+        } else {
+            if (n < 10000) {
                 numero = formatNumber(n);
             }
         }
         return numero;
     }
-    
-    public String formatNumber(double numero){
-       NumberFormat formatoNumero = NumberFormat.getNumberInstance();
-       String num = formatoNumero.format(numero);
-       double b = converFormatNumToDouble(num);
-    
-       return num.substring(0,num.length());
+
+    public String formatNumber(double numero) {
+        NumberFormat formatoNumero = NumberFormat.getNumberInstance();
+        String num = formatoNumero.format(numero);
+        double b = converFormatNumToDouble(num);
+
+        return num.substring(0, num.length());
     }
-    public String formatNumberMenosUno(double numero){
-       NumberFormat formatoNumero = NumberFormat.getNumberInstance();
-       String num = formatoNumero.format(numero);
-       double b = converFormatNumToDouble(num);
-       
-    
-       DecimalFormat formato = new DecimalFormat("#,###.00");
-       String valorFormateado = formato.format(b);
-       
-       return valorFormateado;
+
+    public String formatNumberMenosUno(double numero) {
+        NumberFormat formatoNumero = NumberFormat.getNumberInstance();
+        String num = formatoNumero.format(numero);
+        double b = converFormatNumToDouble(num);
+
+        DecimalFormat formato = new DecimalFormat("#,###.00");
+        String valorFormateado = formato.format(b);
+
+        return valorFormateado;
     }
 
     public String convertAImpues(String a_imp) {
@@ -393,7 +399,7 @@ public class TransaccionesController implements ActionListener {
         t.setA_impuesto(obtenerSetImpuesto());
 
         t.setA_iva(a_iva());
-     
+
         return t;
     }
 
@@ -475,14 +481,14 @@ public class TransaccionesController implements ActionListener {
         formCVI.setVisible(true);
         formCVI.setLocationRelativeTo(null);
         formCVI.cbbEmpresa.setSelectedItem(obtenerEmpresa(IdEmpresa).getNombre());
-               
+
         iniciarComboBoxCuit(obtenerEmpresa(IdEmpresa).getCuit());
     }
-    
-    public EmpresaOrden obtenerEmpresa(int idEmpresa){
-        return queryEO.obtenerEmpresaPorId(idEmpresa);   
+
+    public EmpresaOrden obtenerEmpresa(int idEmpresa) {
+        return queryEO.obtenerEmpresaPorId(idEmpresa);
     }
-    
+
     public void iniciarComboBoxEmpresaCVI() {
 
         ArrayList<String> listEmpresas = queryEO.listarPorNombre();
@@ -682,13 +688,87 @@ public class TransaccionesController implements ActionListener {
             return numFact;
         }
     }
-    
-    public double converFormatNumToDouble(String s){
-        String yReemplaza = s.replaceAll("\\.","");
-        String flotanteNum = yReemplaza.replaceAll("\\,",".");
-        DecimalFormat formato = new DecimalFormat("#.##"); 
+
+    public double converFormatNumToDouble(String s) {
+        String yReemplaza = s.replaceAll("\\.", "");
+        String flotanteNum = yReemplaza.replaceAll("\\,", ".");
+        DecimalFormat formato = new DecimalFormat("#.##");
         double dou = Double.parseDouble((flotanteNum));
         return dou;
-    
+
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        accionIva10_5(e);
+        accionIva21(e);
+        accionIva27(e);
+    }
+
+    public void accionIva10_5(ItemEvent e) {
+        if (formCVI.checkIVA10.isSelected()) {
+
+            // Obtener el valor deseado
+            double valor = Double.parseDouble(formCVI.txtImpNetoGrav.getText());
+
+            // Calcular el porcentaje
+            double porcentaje = valor * 0.105;
+            String ivaConPunto = String.format("%.2f", (porcentaje));
+            // Establecer el valor calculado en el JTextField
+            formCVI.txtIvaFact.setText(ivaConPunto.replaceAll("\\,", "."));
+        } else {
+            // Establecer el JTextField en cero
+            formCVI.txtIvaFact.setText(".00");
+        }
+    }
+
+    public void accionIva21(ItemEvent e) {
+        if (formCVI.checkIVA21.isSelected()) {
+
+            // Obtener el valor deseado
+            double valor = Double.parseDouble(formCVI.txtImpNetoGrav.getText());
+
+            // Calcular el porcentaje
+            double porcentaje = valor * 0.21;
+            String ivaConPunto = String.format("%.2f", (porcentaje));
+            // Establecer el valor calculado en el JTextField
+            formCVI.txtIvaFact21.setText(ivaConPunto.replaceAll("\\,", "."));
+
+        } else {
+            // Establecer el JTextField en cero
+            formCVI.txtIvaFact21.setText(".00");
+        }
+    }
+
+    public void actualizarTotalConIVA(double totalImpFact, double iva, JTextField txtIva) {
+        if (!".00".equals(txtIva.getText())) {
+
+        }
+    }
+
+    public void accionIva27(ItemEvent e) {
+        if (!verificarNeto()) {
+            if (formCVI.checkIVA27.isSelected()) {
+                // Obtener el valor deseado
+                double valor = Double.parseDouble(formCVI.txtImpNetoGrav.getText());
+
+                // Calcular el porcentaje
+                double porcentaje = valor * 0.27;
+
+                // Establecer el valor calculado en el JTextField
+                String ivaConPunto = String.format("%.2f", (porcentaje));
+                formCVI.txtIvaFact27.setText(ivaConPunto.replaceAll("\\,", "."));
+            } else {
+                // Establecer el JTextField en cero
+                formCVI.txtIvaFact27.setText(".00");
+            }
+        } else {
+                JOptionPane.showInputDialog(null, "El Impuesto Neto esta vacio", "Error al calcular IVA",3);
+        }
+    }
+
+    /*Método para verificar que haya escrito valor en neto*/
+    public boolean verificarNeto() {
+        return formCVI.txtImpNetoGrav.getText().equals("");
     }
 }

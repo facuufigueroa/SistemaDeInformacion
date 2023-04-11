@@ -965,9 +965,9 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> cbbCuitEmpresa;
     public javax.swing.JComboBox<String> cbbEmpresa;
     public javax.swing.JComboBox<String> cbbOperacion;
-    private javax.swing.JCheckBox checkIVA10;
-    private javax.swing.JCheckBox checkIVA21;
-    private javax.swing.JCheckBox checkIVA27;
+    public javax.swing.JCheckBox checkIVA10;
+    public javax.swing.JCheckBox checkIVA21;
+    public javax.swing.JCheckBox checkIVA27;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
