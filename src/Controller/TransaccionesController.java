@@ -707,15 +707,20 @@ public class TransaccionesController implements ActionListener, ItemListener {
 
     public void accionIva10_5(ItemEvent e) {
         if (formCVI.checkIVA10.isSelected()) {
+            if (!verificarNeto()) {
 
-            // Obtener el valor deseado
-            double valor = Double.parseDouble(formCVI.txtImpNetoGrav.getText());
+                // Obtener el valor deseado
+                double valor = Double.parseDouble(formCVI.txtImpNetoGrav.getText());
 
-            // Calcular el porcentaje
-            double porcentaje = valor * 0.105;
-            String ivaConPunto = String.format("%.2f", (porcentaje));
-            // Establecer el valor calculado en el JTextField
-            formCVI.txtIvaFact.setText(ivaConPunto.replaceAll("\\,", "."));
+                // Calcular el porcentaje
+                double porcentaje = valor * 0.105;
+                String ivaConPunto = String.format("%.2f", (porcentaje));
+                // Establecer el valor calculado en el JTextField
+                formCVI.txtIvaFact.setText(ivaConPunto.replaceAll("\\,", "."));
+            } else {
+                JOptionPane.showMessageDialog(null, "El Impuesto Neto esta vacio", "Error al calcular IVA", 3);
+
+            }
         } else {
             // Establecer el JTextField en cero
             formCVI.txtIvaFact.setText(".00");
@@ -724,31 +729,29 @@ public class TransaccionesController implements ActionListener, ItemListener {
 
     public void accionIva21(ItemEvent e) {
         if (formCVI.checkIVA21.isSelected()) {
+            if (!verificarNeto()) {
+                // Obtener el valor deseado
+                double valor = Double.parseDouble(formCVI.txtImpNetoGrav.getText());
 
-            // Obtener el valor deseado
-            double valor = Double.parseDouble(formCVI.txtImpNetoGrav.getText());
+                // Calcular el porcentaje
+                double porcentaje = valor * 0.21;
+                String ivaConPunto = String.format("%.2f", (porcentaje));
+                // Establecer el valor calculado en el JTextField
+                formCVI.txtIvaFact21.setText(ivaConPunto.replaceAll("\\,", "."));
+            } else {
+                JOptionPane.showMessageDialog(null, "El Impuesto Neto esta vacio", "Error al calcular IVA", 3);
 
-            // Calcular el porcentaje
-            double porcentaje = valor * 0.21;
-            String ivaConPunto = String.format("%.2f", (porcentaje));
-            // Establecer el valor calculado en el JTextField
-            formCVI.txtIvaFact21.setText(ivaConPunto.replaceAll("\\,", "."));
-
+            }
         } else {
             // Establecer el JTextField en cero
             formCVI.txtIvaFact21.setText(".00");
         }
     }
 
-    public void actualizarTotalConIVA(double totalImpFact, double iva, JTextField txtIva) {
-        if (!".00".equals(txtIva.getText())) {
-
-        }
-    }
-
     public void accionIva27(ItemEvent e) {
-        if (!verificarNeto()) {
-            if (formCVI.checkIVA27.isSelected()) {
+
+        if (formCVI.checkIVA27.isSelected()) {
+            if (!verificarNeto()) {
                 // Obtener el valor deseado
                 double valor = Double.parseDouble(formCVI.txtImpNetoGrav.getText());
 
@@ -759,12 +762,13 @@ public class TransaccionesController implements ActionListener, ItemListener {
                 String ivaConPunto = String.format("%.2f", (porcentaje));
                 formCVI.txtIvaFact27.setText(ivaConPunto.replaceAll("\\,", "."));
             } else {
-                // Establecer el JTextField en cero
-                formCVI.txtIvaFact27.setText(".00");
+                JOptionPane.showMessageDialog(null, "El Impuesto Neto esta vacio", "Error al calcular IVA", 3);
             }
         } else {
-                JOptionPane.showInputDialog(null, "El Impuesto Neto esta vacio", "Error al calcular IVA",3);
+            // Establecer el JTextField en cero
+            formCVI.txtIvaFact27.setText(".00");
         }
+
     }
 
     /*Método para verificar que haya escrito valor en neto*/
