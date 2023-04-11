@@ -564,4 +564,71 @@ public class QueryVerTransacciones {
             System.err.println(e);
         } 
     }
+    
+    /*Método para verificar que si el iva es 10.5% se setee el checkbox*/
+    public boolean existeIva10(String idTransaccion) {
+        PreparedStatement ps = null;
+        Connection conn = conexion.getConnection();
+        try {
+            String sql = "SELECT iva_facturado_10\n" +
+                        "FROM compra_ventas_iva as cv\n" +
+                        "WHERE cv.id_transaccion = '" + idTransaccion+"'";
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                if(rs.getDouble(1)==0){
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return false;
+    }
+    
+    /*Método para verificar que si el iva es 21% se setee el checkbox*/
+    public boolean existeIva21(String idTransaccion) {
+        PreparedStatement ps = null;
+        Connection conn = conexion.getConnection();
+        double totalImp= 0.0;
+        try {
+            String sql = "SELECT iva_facturado_21\n" +
+                        "FROM compra_ventas_iva as cv\n" +
+                        "WHERE cv.id_transaccion = '" + idTransaccion+"'";
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                if(rs.getDouble(1)==0){
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return false;
+    }
+    
+    /*Método para verificar que si el iva es 27.5% se setee el checkbox*/
+    public boolean existeIva27(String idTransaccion) {
+        PreparedStatement ps = null;
+        Connection conn = conexion.getConnection();
+        try {
+            String sql = "SELECT iva_facturado_27\n" +
+                        "FROM compra_ventas_iva as cv\n" +
+                        "WHERE cv.id_transaccion = '" + idTransaccion+"'";
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                if(rs.getDouble(1)==0){
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return false;
+    }
 }

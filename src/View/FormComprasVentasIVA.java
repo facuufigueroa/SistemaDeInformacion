@@ -115,9 +115,9 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelIdTransaccion, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addContainerGap(403, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,11 +133,11 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(14, 18, 66));
 
-        jLabel5.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Operación");
 
-        jLabel6.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Fecha");
 
@@ -152,7 +152,7 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Tipo Comprobante");
 
@@ -160,19 +160,19 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
         txtNumComprobante.setForeground(new java.awt.Color(0, 0, 0));
         txtNumComprobante.setPreferredSize(new java.awt.Dimension(14, 28));
 
-        jLabel8.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("N° Comprobante");
 
-        jLabel9.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Imp. Neto Grav.");
 
-        jLabel10.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("C-U-I-T");
+        jLabel10.setText("C.U.I.T");
 
-        jLabel12.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Nombre");
 
@@ -183,55 +183,56 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
         cbbCuitEmpresa.setForeground(new java.awt.Color(0, 0, 0));
         cbbCuitEmpresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
-        jLabel13.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Imp. Interno");
 
-        jLabel14.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Concepto No Grav.");
 
-        jLabel15.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Percepción IVA");
 
-        jLabel16.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Ret. Ganancias");
 
-        jLabel17.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Perc.IIBB Compra");
 
         jLabel18.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/sigma.png"))); // NOI18N
         jLabel18.setText("Imp. Total Fact.");
 
-        jLabel19.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("Ite. IVA Dere. Reg.");
 
-        jLabel20.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel20.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("C. no Grav. Sellos");
 
-        jLabel21.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel21.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
         jLabel21.setText("Ret.II BB Venta");
 
-        jLabel22.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel22.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setText("IVA RG 212");
 
-        jLabel23.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel23.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("Grav. Ley 25413");
 
-        jLabel24.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel24.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(255, 255, 255));
         jLabel24.setText("Otros");
 
-        jLabel25.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel25.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(255, 255, 255));
         jLabel25.setText("Int. Numerales");
 
@@ -239,22 +240,22 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
         btnFinalizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/hecho.png"))); // NOI18N
         btnFinalizar.setText("Finalizar Operación");
 
-        jLabel26.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel26.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(255, 255, 255));
         jLabel26.setText("Operaciones Exentas");
 
         cbbOperacion.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
         cbbOperacion.setForeground(new java.awt.Color(0, 0, 0));
 
-        jLabel27.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel27.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
         jLabel27.setText("Ing. Brutos");
 
-        jLabel28.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel28.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel28.setForeground(new java.awt.Color(255, 255, 255));
         jLabel28.setText("Retencion IVA");
 
-        jLabel29.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        jLabel29.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(255, 255, 255));
         jLabel29.setText("Imp. R. Ing. Brutos");
 
@@ -453,7 +454,7 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
                     .addComponent(txtIvaFact21, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtIvaFact27, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtIvaFact, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(171, 171, 171)
+                .addGap(75, 75, 75)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel16)
@@ -495,9 +496,9 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtConceptoNoGrav, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtPercepcionIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(87, 87, 87)
+                .addGap(58, 58, 58)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addComponent(jLabel26)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -507,9 +508,9 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(txtIngBrutos, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel28)
-                                .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel29)
                                 .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -614,11 +615,7 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
                                 .addGap(10, 10, 10)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtRetIiBbV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(10, 10, 10)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtIvaRg212, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtRetIiBbV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -644,13 +641,16 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
                                     .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtImpRIngBrutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(10, 10, 10)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel18)
                                     .addComponent(txtImpTotalFact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addComponent(btnFinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(3, 3, 3)))))
-                .addContainerGap(33, Short.MAX_VALUE))
+                                .addComponent(btnFinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtIvaRg212, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -965,9 +965,9 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> cbbCuitEmpresa;
     public javax.swing.JComboBox<String> cbbEmpresa;
     public javax.swing.JComboBox<String> cbbOperacion;
-    private javax.swing.JCheckBox checkIVA10;
-    private javax.swing.JCheckBox checkIVA21;
-    private javax.swing.JCheckBox checkIVA27;
+    public javax.swing.JCheckBox checkIVA10;
+    public javax.swing.JCheckBox checkIVA21;
+    public javax.swing.JCheckBox checkIVA27;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;

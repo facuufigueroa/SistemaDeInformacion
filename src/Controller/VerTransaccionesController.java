@@ -34,7 +34,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
-public class VerTransaccionesController implements ActionListener, ItemListener,KeyListener {
+public class VerTransaccionesController implements ActionListener, ItemListener, KeyListener {
 
     FormVerTransacciones formVerT = new FormVerTransacciones();
     MenuPrincipal viewMenu = new MenuPrincipal();
@@ -88,8 +88,8 @@ public class VerTransaccionesController implements ActionListener, ItemListener,
         editVista.checkBoxIVA21.addItemListener(this);
         editVista.checkBoxIVA27.addItemListener(this);
         
-        /*keyListenerCampos();*/
         
+        /*keyListenerCampos();*/
     }
 
     @Override
@@ -605,6 +605,7 @@ public class VerTransaccionesController implements ActionListener, ItemListener,
                 editVista.txtNombre.setEditable(false);
                 editVista.txtCuit.setEditable(false);
                 editVista.txtOperacion.setEditable(false);
+           
 
             } else {
                 JOptionPane.showMessageDialog(null, "Para Modificar Transacciones debe seleccionar la fila en la tabla.\n"
@@ -1012,86 +1013,108 @@ public class VerTransaccionesController implements ActionListener, ItemListener,
     }
 
     @Override
-    public void itemStateChanged(ItemEvent e){
-            accionIva10_5(e);
-            accionIva21(e);
-            accionIva27(e);
+    public void itemStateChanged(ItemEvent e) {
+        accionIva10_5(e);
+        accionIva21(e);
+        accionIva27(e);
     }
 
     public void accionIva10_5(ItemEvent e) {
-        if (editVista.checkBoxIVA10.isSelected()) {
-            
-           
-            // Obtener el valor deseado
-            double valor = Double.parseDouble(editVista.txtImpNetoGrav.getText());
 
-            // Calcular el porcentaje
-            double porcentaje = valor * 0.105;
-            String ivaConPunto = String.format("%.2f", (porcentaje));
-            // Establecer el valor calculado en el JTextField
-            editVista.txtIvaFact.setText(ivaConPunto.replaceAll("\\,", "."));
+        if (editVista.checkBoxIVA10.isSelected()) {
+            if (!verificarNeto()) {
+                // Obtener el valor deseado
+                double valor = Double.parseDouble(editVista.txtImpNetoGrav.getText());
+
+                // Calcular el porcentaje
+                double porcentaje = valor * 0.105;
+                String ivaConPunto = String.format("%.2f", (porcentaje));
+                // Establecer el valor calculado en el JTextField
+                editVista.txtIvaFact.setText(ivaConPunto.replaceAll("\\,", "."));
+            } else {
+                JOptionPane.showMessageDialog(null, "El Impuesto Neto esta vacio", "Error al calcular IVA", 3);
+            }
         } else {
             // Establecer el JTextField en cero
             editVista.txtIvaFact.setText(".00");
+
         }
     }
-    
-    public void accionIva21(ItemEvent e) {
-        if (editVista.checkBoxIVA21.isSelected()) {
-            
-            // Obtener el valor deseado
-            double valor = Double.parseDouble(editVista.txtImpNetoGrav.getText());
 
-            // Calcular el porcentaje
-            double porcentaje = valor * 0.21;
-            String ivaConPunto = String.format("%.2f", (porcentaje));
-            // Establecer el valor calculado en el JTextField
-            editVista.txtIvaFact21.setText(ivaConPunto.replaceAll("\\,", "."));
-            double totalImpFact = Double.parseDouble(editVista.txtImpTotalFact.getText());
-            double txtIva21 = Double.parseDouble(editVista.txtIvaFact21.getText());
-            
-            String sumaTotal = String.format("%.2f", (totalImpFact+txtIva21)).replaceAll("\\,", ".");
-            editVista.txtImpTotalFact.setText(sumaTotal);
-            
+    public void accionIva21(ItemEvent e) {
+
+        if (editVista.checkBoxIVA21.isSelected()) {
+            if (!verificarNeto()) {
+
+                // Obtener el valor deseado
+                double valor = Double.parseDouble(editVista.txtImpNetoGrav.getText());
+
+                // Calcular el porcentaje
+                double porcentaje = valor * 0.21;
+                String ivaConPunto = String.format("%.2f", (porcentaje));
+                // Establecer el valor calculado en el JTextField
+                editVista.txtIvaFact21.setText(ivaConPunto.replaceAll("\\,", "."));
+                double totalImpFact = Double.parseDouble(editVista.txtImpTotalFact.getText());
+                double txtIva21 = Double.parseDouble(editVista.txtIvaFact21.getText());
+
+                String sumaTotal = String.format("%.2f", (totalImpFact + txtIva21)).replaceAll("\\,", ".");
+                editVista.txtImpTotalFact.setText(sumaTotal);
+            } else {
+                JOptionPane.showMessageDialog(null, "El Impuesto Neto esta vacio", "Error al calcular IVA", 3);
+            }
         } else {
             // Establecer el JTextField en cero
             editVista.txtIvaFact21.setText(".00");
         }
+
     }
-    
-    public void actualizarTotalConIVA(double totalImpFact, double iva,JTextField txtIva){
-        if(!".00".equals(txtIva.getText())){
-                    
+
+    public void actualizarTotalConIVA(double totalImpFact, double iva, JTextField txtIva) {
+        if (!".00".equals(txtIva.getText())) {
+
         }
     }
-    
+
     public void accionIva27(ItemEvent e) {
+
         if (editVista.checkBoxIVA27.isSelected()) {
-            // Obtener el valor deseado
-            double valor = Double.parseDouble(editVista.txtImpNetoGrav.getText());
+            if (!verificarNeto()) {
+                // Obtener el valor deseado
+                double valor = Double.parseDouble(editVista.txtImpNetoGrav.getText());
 
-            // Calcular el porcentaje
-            double porcentaje = valor * 0.27;
+                // Calcular el porcentaje
+                double porcentaje = valor * 0.27;
 
-            // Establecer el valor calculado en el JTextField
-            
-            String ivaConPunto = String.format("%.2f", (porcentaje));
-            editVista.txtIvaFac27.setText(ivaConPunto.replaceAll("\\,", "."));
+                // Establecer el valor calculado en el JTextField
+                String ivaConPunto = String.format("%.2f", (porcentaje));
+                editVista.txtIvaFac27.setText(ivaConPunto.replaceAll("\\,", "."));
+            }
+
+            JOptionPane.showMessageDialog(null, "El Impuesto Neto esta vacio", "Error al calcular IVA", 3);
+
         } else {
             // Establecer el JTextField en cero
             editVista.txtIvaFac27.setText(".00");
         }
     }
-    
-    public void deshabilitarCamposIva(){
+
+    public void deshabilitarCamposIva() {
         editVista.txtIvaFact.setEditable(false);
         editVista.txtIvaFact21.setEditable(false);
         editVista.txtIvaFac27.setEditable(false);
     }
 
+    /*Método para verificar que haya escrito valor en neto*/
+    public boolean verificarNeto() {
+        return editVista.txtImpNetoGrav.getText().equals("");
+    }
+    
+   
+    
+
     @Override
     public void keyTyped(KeyEvent e) {
-            /*sumar();*/
+        /*sumar();*/
     }
 
     @Override
@@ -1100,69 +1123,8 @@ public class VerTransaccionesController implements ActionListener, ItemListener,
 
     @Override
     public void keyReleased(KeyEvent e) {
-        
+
     }
-    
-    /*private void sumar() {
-        try {
-            
-            double suma = 
-                    Double.parseDouble(editVista.txtImpNetoGrav.getText())+
-                    Double.parseDouble(editVista.txtIvaFact.getText())+
-                    Double.parseDouble(editVista.txtIvaFact21.getText())+
-                    Double.parseDouble(editVista.txtImpInterno.getText())+
-                    Double.parseDouble(editVista.txtConceptoNoGrav.getText())+
-                    Double.parseDouble(editVista.txtPercepcionIVA.getText())+
-                    Double.parseDouble(editVista.txtRetGanan.getText())+
-                    Double.parseDouble(editVista.txtPercIvaC.getText())+
-                    Double.parseDouble(editVista.txtIvaDereReg.getText())+
-                    Double.parseDouble(editVista.txtCNoGravSellos.getText())+
-                    Double.parseDouble(editVista.txtRetIiBbV.getText())+
-                    Double.parseDouble(editVista.txtGravLey25413.getText())+
-                    Double.parseDouble(editVista.txtIntNumerales.getText())+
-                    Double.parseDouble(editVista.txtOpExentas.getText())+
-                    Double.parseDouble(editVista.txtIngBrutos.getText())+
-                    Double.parseDouble(editVista.txtRetIva.getText())+
-                    Double.parseDouble(editVista.txtImpRIngBrutos.getText())+
-                    Double.parseDouble(editVista.txtOtros.getText())+
-                    Double.parseDouble(editVista.txtIvaRg212.getText());
-            
-            double totalImporte = Double.parseDouble(editVista.txtImpTotalFact.getText());
-            
-            String sumaTotal = String.format("%.2f", (suma+totalImporte));
-            String sumaTotalConPunto = sumaTotal.replaceAll("\\,", ".");
-            
-            // Actualizar el JTextField de la suma con el resultado
-            editVista.txtImpTotalFact.setText(sumaTotalConPunto);
-        } catch (NumberFormatException e) {
-            // Si alguno de los JTextField no contiene un número válido, no hacer nada
-        }
-    }*/
-    
-    
-    /*public void keyListenerCampos(){
-        editVista.txtImpNetoGrav.addKeyListener(this);
-        editVista.txtIvaFact.addKeyListener(this);
-        editVista.txtIvaFact21.addKeyListener(this);
-        editVista.txtIvaFac27.addKeyListener(this);
-        editVista.txtImpInterno.addKeyListener(this);
-        editVista.txtConceptoNoGrav.addKeyListener(this);
-        editVista.txtPercepcionIVA.addKeyListener(this);
-        editVista.txtRetGanan.addKeyListener(this);
-        editVista.txtPercIvaC.addKeyListener(this);
-        editVista.txtIvaDereReg.addKeyListener(this);
-        editVista.txtCNoGravSellos.addKeyListener(this);
-        editVista.txtRetIiBbV.addKeyListener(this);
-        editVista.txtGravLey25413.addKeyListener(this);
-        editVista.txtIntNumerales.addKeyListener(this);
-        editVista.txtOpExentas.addKeyListener(this);
-        editVista.txtIngBrutos.addKeyListener(this);
-        editVista.txtRetIva.addKeyListener(this);
-        editVista.txtImpRIngBrutos.addKeyListener(this);
-        editVista.txtOtros.addKeyListener(this);
-        editVista.txtIvaRg212.addKeyListener(this);
-    }*/
-    
     
     
 }
