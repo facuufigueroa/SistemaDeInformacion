@@ -19,8 +19,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -30,11 +28,14 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
-public class VerTransaccionesController implements ActionListener, ItemListener, KeyListener {
+public class VerTransaccionesController implements ActionListener, ItemListener {
 
     FormVerTransacciones formVerT = new FormVerTransacciones();
     MenuPrincipal viewMenu = new MenuPrincipal();
@@ -47,6 +48,11 @@ public class VerTransaccionesController implements ActionListener, ItemListener,
     EditView editVista = new EditView();
     ArrayList<Transaccion> listT = queryVerT.listarTransacciones();
     DecimalFormat formato = new DecimalFormat("#,###.00");
+    private JTextField[] textFields = {editVista.txtImpNetoGrav, editVista.txtIvaFact, editVista.txtIvaFact21, editVista.txtIvaFac27,
+        editVista.txtImpInterno, editVista.txtConceptoNoGrav, editVista.txtPercepcionIVA, editVista.txtRetGanan, editVista.txtPercIvaC,
+        editVista.txtIvaRg212, editVista.txtIvaDereReg, editVista.txtCNoGravSellos, editVista.txtRetIiBbV, editVista.txtGravLey25413,
+        editVista.txtIntNumerales, editVista.txtOpExentas, editVista.txtIngBrutos, editVista.txtRetIva, editVista.txtImpRIngBrutos,
+        editVista.txtOtros};
 
     public VerTransaccionesController(MenuPrincipal menu) {
         updateTabla(listT);
@@ -87,9 +93,17 @@ public class VerTransaccionesController implements ActionListener, ItemListener,
         editVista.checkBoxIVA10.addItemListener(this);
         editVista.checkBoxIVA21.addItemListener(this);
         editVista.checkBoxIVA27.addItemListener(this);
-        
-        
+
         /*keyListenerCampos();*/
+        for (int i = 0; i < textFields.length; i++) {
+            textFields[i].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    updateSum();
+                }
+            });
+        }
+        addDocumentListenerTotalFact();
     }
 
     @Override
@@ -605,7 +619,6 @@ public class VerTransaccionesController implements ActionListener, ItemListener,
                 editVista.txtNombre.setEditable(false);
                 editVista.txtCuit.setEditable(false);
                 editVista.txtOperacion.setEditable(false);
-           
 
             } else {
                 JOptionPane.showMessageDialog(null, "Para Modificar Transacciones debe seleccionar la fila en la tabla.\n"
@@ -740,7 +753,7 @@ public class VerTransaccionesController implements ActionListener, ItemListener,
 
         cvi.setPerc_iibb_compra(Double.parseDouble(verificarBlanco(editVista.txtPercIvaC.getText())));
 
-        cvi.setImp_total_fact(Double.parseDouble(verificarBlanco(editVista.txtImpTotalFact.getText())));
+        cvi.setImp_total_fact(Double.parseDouble(verificarBlanco(converFormatNumToDouble2(editVista.txtImpTotalFact.getText()))));
 
         cvi.setIte_iva_dere_reg(Double.parseDouble(verificarBlanco(editVista.txtIvaDereReg.getText())));
 
@@ -1023,13 +1036,10 @@ public class VerTransaccionesController implements ActionListener, ItemListener,
 
         if (editVista.checkBoxIVA10.isSelected()) {
             if (!verificarNeto()) {
-                // Obtener el valor deseado
-                double valor = Double.parseDouble(editVista.txtImpNetoGrav.getText());
 
-                // Calcular el porcentaje
+                double valor = Double.parseDouble(editVista.txtImpNetoGrav.getText());
                 double porcentaje = valor * 0.105;
                 String ivaConPunto = String.format("%.2f", (porcentaje));
-                // Establecer el valor calculado en el JTextField
                 editVista.txtIvaFact.setText(ivaConPunto.replaceAll("\\,", "."));
             } else {
                 JOptionPane.showMessageDialog(null, "El Impuesto Neto esta vacio", "Error al calcular IVA", 3);
@@ -1046,19 +1056,11 @@ public class VerTransaccionesController implements ActionListener, ItemListener,
         if (editVista.checkBoxIVA21.isSelected()) {
             if (!verificarNeto()) {
 
-                // Obtener el valor deseado
                 double valor = Double.parseDouble(editVista.txtImpNetoGrav.getText());
-
-                // Calcular el porcentaje
                 double porcentaje = valor * 0.21;
                 String ivaConPunto = String.format("%.2f", (porcentaje));
-                // Establecer el valor calculado en el JTextField
                 editVista.txtIvaFact21.setText(ivaConPunto.replaceAll("\\,", "."));
-                double totalImpFact = Double.parseDouble(editVista.txtImpTotalFact.getText());
-                double txtIva21 = Double.parseDouble(editVista.txtIvaFact21.getText());
 
-                String sumaTotal = String.format("%.2f", (totalImpFact + txtIva21)).replaceAll("\\,", ".");
-                editVista.txtImpTotalFact.setText(sumaTotal);
             } else {
                 JOptionPane.showMessageDialog(null, "El Impuesto Neto esta vacio", "Error al calcular IVA", 3);
             }
@@ -1076,25 +1078,20 @@ public class VerTransaccionesController implements ActionListener, ItemListener,
     }
 
     public void accionIva27(ItemEvent e) {
-
         if (editVista.checkBoxIVA27.isSelected()) {
             if (!verificarNeto()) {
-                // Obtener el valor deseado
+
                 double valor = Double.parseDouble(editVista.txtImpNetoGrav.getText());
-
-                // Calcular el porcentaje
                 double porcentaje = valor * 0.27;
-
-                // Establecer el valor calculado en el JTextField
                 String ivaConPunto = String.format("%.2f", (porcentaje));
                 editVista.txtIvaFac27.setText(ivaConPunto.replaceAll("\\,", "."));
+            } else {
+                JOptionPane.showMessageDialog(null, "El Impuesto Neto esta vacio", "Error al calcular IVA", 3);
             }
-
-            JOptionPane.showMessageDialog(null, "El Impuesto Neto esta vacio", "Error al calcular IVA", 3);
-
         } else {
             // Establecer el JTextField en cero
             editVista.txtIvaFac27.setText(".00");
+
         }
     }
 
@@ -1108,23 +1105,45 @@ public class VerTransaccionesController implements ActionListener, ItemListener,
     public boolean verificarNeto() {
         return editVista.txtImpNetoGrav.getText().equals("");
     }
-    
-   
-    
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-        /*sumar();*/
+    /*Método donde se le aplica evento DocumentListener a txt Imp. Total Fact.*/
+    public void addDocumentListenerTotalFact() {
+        editVista.txtImpTotalFact.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateSum();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+
+            }
+        });
     }
 
-    @Override
-    public void keyPressed(KeyEvent e) {
+    /*Método que suma instantaniamente los campos y actualiza el campo imp. total facturado*/
+    private void updateSum() {
+        double sum = 0;
+        for (int i = 0; i < textFields.length; i++) {
+            try {
+                double value = Double.parseDouble(textFields[i].getText());
+                sum += value;
+            } catch (NumberFormatException e) {
+
+            }
+        }
+        final double totalSum = sum;
+
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                editVista.txtImpTotalFact.setText(String.format("%.2f", totalSum));
+            }
+        });
     }
 
-    @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
-    
-    
 }
