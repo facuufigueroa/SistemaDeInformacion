@@ -162,24 +162,20 @@
                       <Component id="checkIVA21" max="32767" attributes="0"/>
                       <Component id="checkIVA27" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace type="unrelated" pref="29" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="txtTipoComprobante" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="cbbOperacion" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtFecha" alignment="0" pref="166" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="cbbCuitEmpresa" alignment="0" pref="191" max="32767" attributes="0"/>
-                          <Component id="cbbEmpresa" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtNumComprobante" alignment="0" max="32767" attributes="0"/>
-                      </Group>
                       <Component id="txtImpNetoGrav" alignment="0" min="-2" pref="103" max="-2" attributes="0"/>
                       <Component id="txtIvaFact21" alignment="0" min="-2" pref="103" max="-2" attributes="0"/>
                       <Component id="txtIvaFact27" min="-2" pref="103" max="-2" attributes="0"/>
                       <Component id="txtIvaFact" min="-2" pref="103" max="-2" attributes="0"/>
+                      <Component id="cbbEmpresa" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtNumComprobante" alignment="0" max="32767" attributes="0"/>
+                      <Component id="cbbOperacion" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtFecha" alignment="0" pref="166" max="32767" attributes="0"/>
+                      <Component id="cbbCuitEmpresa" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+                  <EmptySpace pref="101" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
@@ -236,7 +232,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                  <EmptySpace pref="101" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
@@ -276,7 +272,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="54" max="32767" attributes="0"/>
+                  <EmptySpace pref="101" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -438,7 +434,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="31" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
