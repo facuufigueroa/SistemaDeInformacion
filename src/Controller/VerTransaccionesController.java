@@ -567,8 +567,8 @@ public class VerTransaccionesController implements ActionListener, ItemListener 
         dato[2] = t.getFecha().toString();
         dato[3] = t.getDescripcion();
         dato[4] = String.valueOf(t.getCantidad());
-        dato[5] = "$" + String.valueOf(t.getSalida());
-        dato[6] = "$" + String.valueOf(t.getEntrada());
+        dato[5] = "$" + evaluarNum(t.getSalida());
+        dato[6] = "$" + evaluarNum(t.getEntrada());
         dato[7] = cambiarFormatoIVA(t.isA_impuesto());
         dato[8] = cambiarFormatoIVA(t.isA_iva());
 
