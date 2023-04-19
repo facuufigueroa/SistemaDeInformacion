@@ -185,7 +185,7 @@ public class QueryVerTransacciones {
         Connection conn = conexion.getConnection();
         Transaccion trans = new Transaccion();
         try {
-            String sql = "SELECT t.idtransacciones,t.codigo,t.fecha,t.descripcion,t.cantidad,t.salidas,t.entradas,t.a_impuestos_iva,t.a_iva FROM transacciones as t WHERE t.idtransacciones= " + numT;
+            String sql = "SELECT t.idtransacciones,t.codigo,t.fecha,t.descripcion,t.cantidad,t.salidas,t.entradas,t.a_impuestos_iva,t.a_iva,t.verificada FROM transacciones as t WHERE t.idtransacciones= " + numT;
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery(sql);
             if (rs.next()) {
@@ -198,6 +198,7 @@ public class QueryVerTransacciones {
                 trans.setEntrada(rs.getFloat("entradas"));
                 trans.setA_impuesto(rs.getBoolean("a_impuestos_iva"));
                 trans.setA_iva(rs.getBoolean("a_iva"));
+                trans.setVerificada(rs.getBoolean("verificada"));
             }
 
         } catch (Exception e) {

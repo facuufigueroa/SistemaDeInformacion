@@ -557,22 +557,35 @@ public class VerTransaccionesController implements ActionListener, ItemListener 
         modelo.addColumn("Entradas");
         modelo.addColumn("A Impuesto ?");
         modelo.addColumn(" A IVA ?");
+        modelo.addColumn("Verificado");
 
         formVerT.tablaVerTransacciones.setRowHeight(25);
         formVerT.tablaVerTransacciones.setModel(modelo);
 
-        String[] dato = new String[10];
-        dato[0] = String.valueOf(t.getIdTransaccion());
-        dato[1] = t.getCodigo();
-        dato[2] = t.getFecha().toString();
-        dato[3] = t.getDescripcion();
-        dato[4] = String.valueOf(t.getCantidad());
-        dato[5] = "$" + evaluarNum(t.getSalida());
-        dato[6] = "$" + evaluarNum(t.getEntrada());
-        dato[7] = cambiarFormatoIVA(t.isA_impuesto());
-        dato[8] = cambiarFormatoIVA(t.isA_iva());
+        addCheckBox(9, formVerT.tablaVerTransacciones);
 
-        modelo.addRow(dato);
+        if (t != null) {
+                /*puede ser q no haya datos en la bdd y me tire excepcion*/
+                Object[] dato = new Object[10];
+                dato[0] = String.valueOf(t.getIdTransaccion());
+                dato[1] = t.getCodigo();
+                dato[2] = t.getFecha().toString();
+                dato[3] = t.getDescripcion();
+                dato[4] = String.valueOf(t.getCantidad());
+                dato[5] = "$" + evaluarNum(t.getSalida());
+                dato[6] = "$" + evaluarNum(t.getEntrada());
+                dato[7] = cambiarFormatoIVA(t.isA_impuesto());
+                dato[8] = cambiarFormatoIVA(t.isA_iva());
+                dato[9] = t.isVerificada() == true;
+                modelo.addRow(dato);
+            
+        } else {
+            DefaultTableModel model = new DefaultTableModel(1, 1);
+            // Establezca el mensaje en la celda del modelo de tabla personalizado
+            model.setValueAt("No hay transaccion registradas", 0, 0);
+            // Establezca el modelo de tabla personalizado en la JTable
+            formVerT.tablaVerTransacciones.setModel(model);
+        }
 
     }
 
