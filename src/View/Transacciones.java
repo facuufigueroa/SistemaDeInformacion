@@ -454,7 +454,7 @@ public class Transacciones extends javax.swing.JFrame {
 
         jLabel14.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("N° de Transacción:");
+        jLabel14.setText("- N° de Transacción:");
 
         labelNumT.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         labelNumT.setForeground(new java.awt.Color(255, 255, 255));

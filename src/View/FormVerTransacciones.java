@@ -445,7 +445,7 @@ public class FormVerTransacciones extends javax.swing.JFrame {
                         .addComponent(btnSetState)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEliminar)))
-                .addGap(30, 30, 30))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
