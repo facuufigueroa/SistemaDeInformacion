@@ -179,7 +179,7 @@ public class QueryVerTransacciones {
         return transaccionesList;
     }
 
-    public Transaccion obtenerTransaccion(int numT) {
+ public Transaccion obtenerTransaccion(int numT) {
         String nombre = "";
         PreparedStatement ps = null;
         Connection conn = conexion.getConnection();
