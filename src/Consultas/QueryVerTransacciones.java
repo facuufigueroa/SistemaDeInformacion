@@ -185,13 +185,14 @@ public class QueryVerTransacciones {
         Connection conn = conexion.getConnection();
         Transaccion trans = new Transaccion();
         try {
-            String sql = "SELECT t.idtransacciones,t.codigo,t.fecha,t.descripcion,t.salidas,t.entradas,t.a_impuestos_iva,t.a_iva FROM transacciones as t WHERE t.idtransacciones= " + numT;
+            String sql = "SELECT t.idtransacciones,t.codigo,t.fecha,t.descripcion,t.cantidad,t.salidas,t.entradas,t.a_impuestos_iva,t.a_iva FROM transacciones as t WHERE t.idtransacciones= " + numT;
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery(sql);
             if (rs.next()) {
                 trans.setIdTransaccion(rs.getInt("idtransacciones"));
                 trans.setCodigo(rs.getString("codigo"));
                 trans.setDescripcion(rs.getString("descripcion"));
+                trans.setCantidad(rs.getInt("cantidad"));
                 trans.setFecha(rs.getDate("fecha"));
                 trans.setSalida(rs.getFloat("salidas"));
                 trans.setEntrada(rs.getFloat("entradas"));
