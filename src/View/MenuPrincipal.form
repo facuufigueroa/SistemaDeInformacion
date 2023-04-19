@@ -1481,12 +1481,16 @@
                                               <Component id="cbbTipoCat" alignment="1" min="-2" pref="236" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Component id="btnSaveCat" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Component id="btnPrintCategoria" min="-2" pref="120" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="btnSaveCat" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <Component id="jLabel17" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jScrollPane4" max="32767" attributes="0"/>
+                              <Component id="jScrollPane4" pref="825" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -1509,7 +1513,10 @@
                                           <Component id="cbbTipoCat" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="btnSaveCat" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="btnSaveCat" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnPrintCategoria" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
+                                      </Group>
                                       <EmptySpace min="0" pref="49" max="32767" attributes="0"/>
                                   </Group>
                                   <Component id="jScrollPane4" pref="0" max="32767" attributes="0"/>
@@ -1630,6 +1637,20 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="NUEVA CATEGORIA"/>
                       </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="btnPrintCategoria">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Malgun Gothic" size="14" style="1"/>
+                        </Property>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/Imagenes/printer.png"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value=" Imprimir"/>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                      </AuxValues>
                     </Component>
                   </SubComponents>
                 </Container>

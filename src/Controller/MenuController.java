@@ -1,6 +1,7 @@
 package Controller;
 
 import Consultas.QueryReportes;
+import Reportes.CategoriasReport;
 import Reportes.ReportByT;
 import Reportes.ReportJMRContador;
 import Reportes.ReportMarContador;
@@ -91,6 +92,8 @@ public class MenuController implements ActionListener {
         this.formFechaReportByT.btnBuscar.addActionListener(this);
         
         HistoricoTransaccionController htController = new  HistoricoTransaccionController(menuPrincipal);
+        
+        this.menuPrincipal.btnPrintCategoria.addActionListener(this);
     }
 
     @Override
@@ -121,6 +124,7 @@ public class MenuController implements ActionListener {
             loadReporteMARContador(e);
             accionVerBancosYTarjetas(e);
             loadReportByT(e);
+            accionImprimirCategorias(e);
         } catch (ParseException ex) {
             Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -553,5 +557,13 @@ public class MenuController implements ActionListener {
         Calendar fecha = new GregorianCalendar();
         int año = fecha.get(Calendar.YEAR);  
         menuPrincipal.labelAño.setText("  AÑO: "+String.valueOf(año));
+    }
+    
+    /*Método para imprimir categorias junto a su tipo de categoria registradas en el sistema*/
+    public void accionImprimirCategorias(ActionEvent e){
+        if(e.getSource() == menuPrincipal.btnPrintCategoria){
+            CategoriasReport catReport = new CategoriasReport();
+            catReport.openReportCategorias();
+        }
     }
 }
