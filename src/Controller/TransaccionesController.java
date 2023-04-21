@@ -31,6 +31,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
@@ -58,6 +61,12 @@ public class TransaccionesController implements ActionListener, ItemListener {
     QueryCompraVentaIVA queryCVI = new QueryCompraVentaIVA();
     private int id_transaccion;
 
+    private JTextField[] textFields = {formCVI.txtImpNetoGrav, formCVI.txtIvaFact, formCVI.txtIvaFact21, formCVI.txtIvaFact27,
+        formCVI.txtImpInterno, formCVI.txtConceptoNoGrav, formCVI.txtPercepcionIVA, formCVI.txtRetGanan, formCVI.txtPercIvaC,
+        formCVI.txtIvaRg212, formCVI.txtIvaDereReg, formCVI.txtCNoGravSellos, formCVI.txtRetIiBbV, formCVI.txtGravLey25413,
+        formCVI.txtIntNumerales,formCVI.txtOpExentas, formCVI.txtIngBrutos, formCVI.txtRetIva,formCVI.txtImpRIngBrutos,
+        formCVI.txtOtros};
+    
     public TransaccionesController() {
         iniciarCamposEnCero();
         iniciarTabla();
@@ -83,6 +92,7 @@ public class TransaccionesController implements ActionListener, ItemListener {
         this.formCVI.checkIVA10.addItemListener(this);
         this.formCVI.checkIVA21.addItemListener(this);
         this.formCVI.checkIVA27.addItemListener(this);
+        addDocumentListenerTotalFact();
     }
 
     @Override
@@ -590,7 +600,7 @@ public class TransaccionesController implements ActionListener, ItemListener {
 
         cvi.setPerc_iibb_compra(Float.parseFloat(verificarBlanco(formCVI.txtPercIvaC.getText())));
 
-        cvi.setImp_total_fact(Float.parseFloat(verificarBlanco(formCVI.txtImpTotalFact.getText())));
+        cvi.setImp_total_fact(Float.parseFloat(verificarBlanco(converFormatNumToDouble2(formCVI.txtImpTotalFact.getText()))));
 
         cvi.setIte_iva_dere_reg(Float.parseFloat(verificarBlanco(formCVI.txtIvaDereReg.getText())));
 
@@ -774,5 +784,52 @@ public class TransaccionesController implements ActionListener, ItemListener {
     /*Método para verificar que haya escrito valor en neto*/
     public boolean verificarNeto() {
         return formCVI.txtImpNetoGrav.getText().equals("");
+    }
+    
+     /*Método donde se le aplica evento DocumentListener a txt Imp. Total Fact.*/
+    public void addDocumentListenerTotalFact() {
+        formCVI.txtImpTotalFact.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateSum();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+
+            }
+        });
+    }
+
+    /*Método que suma instantaniamente los campos y actualiza el campo imp. total facturado*/
+    private void updateSum() {
+        double sum = 0;
+        for (int i = 0; i < textFields.length; i++) {
+            try {
+                double value = Double.parseDouble(textFields[i].getText());
+                sum += value;
+            } catch (NumberFormatException e) {
+
+            }
+        }
+        final double totalSum = sum;
+
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                formCVI.txtImpTotalFact.setText(String.format("%.2f", totalSum));
+            }
+        });
+    }
+    
+    public String converFormatNumToDouble2(String s) {
+        String yReemplaza = s.replaceAll("\\.", "");
+        String flotanteNum = yReemplaza.replaceAll("\\,", ".");
+        return flotanteNum;
+
     }
 }
