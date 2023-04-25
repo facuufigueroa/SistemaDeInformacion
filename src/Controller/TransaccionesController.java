@@ -233,10 +233,10 @@ public class TransaccionesController implements ActionListener, ItemListener {
 
     public String evaluarNum(double n) {
         String numero = "0";
-        if (n > 10000) {
+        if (n >= 10000) {
             numero = formatNumberMenosUno(n);
         } else {
-            if (n < 10000) {
+            if (n <= 10000) {
                 numero = formatNumber(n);
             }
         }

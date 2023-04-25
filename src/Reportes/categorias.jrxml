@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="categorias" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0f57d96a-331a-4055-a2d9-5781c5eb838c">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SistemaInformacion2"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="526"/>
+	<property name="ireport.y" value="0"/>
 	<queryString>
 		<![CDATA[SELECT c.nombre as categoria , tc.nombre as tipo_categoria
 FROM categorias as c
@@ -42,7 +44,7 @@ ORDER BY c.nombre ASC]]>
 	<columnHeader>
 		<band height="32" splitType="Stretch">
 			<staticText>
-				<reportElement x="10" y="0" width="260" height="30" uuid="d7b7d8d4-3b09-4670-b3ab-262b10546825">
+				<reportElement x="271" y="1" width="238" height="30" uuid="d7b7d8d4-3b09-4670-b3ab-262b10546825">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="051fbfce-89d5-4d12-9a87-ef8d51717370"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -51,7 +53,7 @@ ORDER BY c.nombre ASC]]>
 				<text><![CDATA[Categoria	]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="273" y="0" width="236" height="30" uuid="1f498cea-9f5d-4a96-974e-e56b0413cd4e">
+				<reportElement x="11" y="0" width="259" height="30" uuid="1f498cea-9f5d-4a96-974e-e56b0413cd4e">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0171fbcc-b956-4521-a5dc-2e6282b95c99"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -79,7 +81,7 @@ ORDER BY c.nombre ASC]]>
 	<detail>
 		<band height="32" splitType="Stretch">
 			<textField>
-				<reportElement x="10" y="0" width="260" height="30" uuid="9e522bff-ad24-412b-b04c-567e7dcfc67d">
+				<reportElement x="271" y="0" width="238" height="30" uuid="9e522bff-ad24-412b-b04c-567e7dcfc67d">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="051fbfce-89d5-4d12-9a87-ef8d51717370"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -88,7 +90,7 @@ ORDER BY c.nombre ASC]]>
 				<textFieldExpression><![CDATA[$F{categoria}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="273" y="0" width="236" height="30" uuid="da094d66-6391-4ddd-a6e9-6f58779ef348">
+				<reportElement x="11" y="0" width="259" height="30" uuid="da094d66-6391-4ddd-a6e9-6f58779ef348">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0171fbcc-b956-4521-a5dc-2e6282b95c99"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
