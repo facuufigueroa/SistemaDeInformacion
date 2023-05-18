@@ -43,7 +43,8 @@
 FROM sistemainformacion.compra_ventas_iva
 WHERE 
 	sistemainformacion.compra_ventas_iva.operacion = 'compra' 
-	AND sistemainformacion.compra_ventas_iva.fecha BETWEEN $P{fecha_desde} AND $P{fecha_hasta}]]>
+	AND sistemainformacion.compra_ventas_iva.fecha BETWEEN $P{fecha_desde} AND $P{fecha_hasta}
+ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 	</queryString>
 	<field name="fecha" class="java.sql.Date">
 		<property name="com.jaspersoft.studio.field.label" value="fecha"/>

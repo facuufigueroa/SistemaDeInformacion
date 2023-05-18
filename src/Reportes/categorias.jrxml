@@ -3,14 +3,14 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SistemaInformacion2"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="ireport.zoom" value="3.0"/>
-	<property name="ireport.x" value="526"/>
+	<property name="ireport.x" value="496"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
 		<![CDATA[SELECT c.nombre as categoria , tc.nombre as tipo_categoria
 FROM categorias as c
 INNER JOIN tipo_categoria as tc 
 ON c.id_tipo_categoria = tc.idtipo_categoria
-ORDER BY c.nombre ASC]]>
+ORDER BY tc.nombre ASC]]>
 	</queryString>
 	<field name="categoria" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="categoria"/>
