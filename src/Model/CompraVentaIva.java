@@ -36,13 +36,23 @@ public class CompraVentaIva {
     private double imp_r_ing_brutos;
     private double iva_facturado_21;
     private double iva_facturado_27;
-
+    private double imp_pais;
+    private double imp_pais_arg;
+    private double perc_afip_rg_4815;
+    private double perc_iibb_bsas;
+    
     private String empresa;
 
     public CompraVentaIva() {
     }
 
-    public CompraVentaIva(int idTransaccion, String operacion, Date fecha, String tipo_comprobante, String numComprobante, String cuit, double imp_neto_grav, double iva_facturado, double imp_interno, double concep_no_grav, double percepcion_iva, double ret_ganancias, double perc_iibb_compra, double imp_total_fact, double ite_iva_dere_reg, double c_no_grav_sellos, double ret_iibb_venta, double iva_rg_212, double grav_ley_25413, double int_numerales, double otros, double operaciones_exentas, double ing_brutos, double ret_iva, double imp_r_ing_brutos, double iva_facturado_21, double iva_facturado_27, String empresa) {
+    public CompraVentaIva(int idTransaccion, String operacion, Date fecha, String tipo_comprobante, 
+            String numComprobante, String cuit, double imp_neto_grav, double iva_facturado, double imp_interno, 
+            double concep_no_grav, double percepcion_iva, double ret_ganancias, double perc_iibb_compra, 
+            double imp_total_fact, double ite_iva_dere_reg, double c_no_grav_sellos, double ret_iibb_venta, 
+            double iva_rg_212, double grav_ley_25413, double int_numerales, double otros, double operaciones_exentas,
+            double ing_brutos, double ret_iva, double imp_r_ing_brutos, double iva_facturado_21, double iva_facturado_27, String empresa, 
+            double imp_pais, double imp_pais_arg,double perc_afip_rg_4815, double perc_iibb_bsas) {
         this.idTransaccion = idTransaccion;
         this.operacion = operacion;
         this.fecha = fecha;
@@ -71,6 +81,10 @@ public class CompraVentaIva {
         this.iva_facturado_21 = iva_facturado_21;
         this.iva_facturado_27 = iva_facturado_27;
         this.empresa = empresa;
+        this.imp_pais = imp_pais;
+        this.imp_pais_arg = imp_pais_arg;
+        this.perc_afip_rg_4815 = perc_afip_rg_4815;
+        this.perc_iibb_bsas = perc_iibb_bsas;
     }
 
     public int getIdTransaccion() {
@@ -295,6 +309,38 @@ public class CompraVentaIva {
 
     public void setEmpresa(String empresa) {
         this.empresa = empresa;
+    }
+
+    public double getImp_pais() {
+        return imp_pais;
+    }
+
+    public void setImp_pais(double imp_pais) {
+        this.imp_pais = imp_pais;
+    }
+
+    public double getImp_pais_arg() {
+        return imp_pais_arg;
+    }
+
+    public void setImp_pais_arg(double imp_pais_arg) {
+        this.imp_pais_arg = imp_pais_arg;
+    }
+
+    public double getPerc_afip_rg_4815() {
+        return perc_afip_rg_4815;
+    }
+
+    public void setPerc_afip_rg_4815(double perc_afip_rg_4815) {
+        this.perc_afip_rg_4815 = perc_afip_rg_4815;
+    }
+
+    public double getPerc_iibb_bsas() {
+        return perc_iibb_bsas;
+    }
+
+    public void setPerc_iibb_bsas(double perc_iibb_bsas) {
+        this.perc_iibb_bsas = perc_iibb_bsas;
     }
 
     

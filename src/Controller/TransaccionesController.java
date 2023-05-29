@@ -65,7 +65,7 @@ public class TransaccionesController implements ActionListener, ItemListener {
         formCVI.txtImpInterno, formCVI.txtConceptoNoGrav, formCVI.txtPercepcionIVA, formCVI.txtRetGanan, formCVI.txtPercIvaC,
         formCVI.txtIvaRg212, formCVI.txtIvaDereReg, formCVI.txtCNoGravSellos, formCVI.txtRetIiBbV, formCVI.txtGravLey25413,
         formCVI.txtIntNumerales,formCVI.txtOpExentas, formCVI.txtIngBrutos, formCVI.txtRetIva,formCVI.txtImpRIngBrutos,
-        formCVI.txtOtros};
+        formCVI.txtOtros, formCVI.txtImpPais,formCVI.txtImpPaisArg, formCVI.txtAfipRG485, formCVI.txtPercIIBB_bsas};
     
     public TransaccionesController() {
         iniciarCamposEnCero();
@@ -629,7 +629,15 @@ public class TransaccionesController implements ActionListener, ItemListener {
         cvi.setIva_facturado_21(Float.parseFloat(verificarBlanco(formCVI.txtIvaFact21.getText())));
 
         cvi.setIva_facturado_27(Float.parseFloat(verificarBlanco(formCVI.txtIvaFact27.getText())));
-
+        
+        cvi.setImp_pais(Float.parseFloat(verificarBlanco(formCVI.txtImpPais.getText())));
+        
+        cvi.setImp_pais_arg(Float.parseFloat(verificarBlanco(formCVI.txtImpPaisArg.getText())));
+        
+        cvi.setPerc_afip_rg_4815(Float.parseFloat(verificarBlanco(formCVI.txtAfipRG485.getText())));
+        
+        cvi.setPerc_iibb_bsas(Float.parseFloat(verificarBlanco(formCVI.txtPercIIBB_bsas.getText())));
+        
         return cvi;
     }
 
@@ -669,6 +677,10 @@ public class TransaccionesController implements ActionListener, ItemListener {
         formCVI.txtImpRIngBrutos.setText("0.0");
         formCVI.txtIvaFact21.setText("0.0");
         formCVI.txtIvaFact27.setText("0.0");
+        formCVI.txtImpPais.setText("0.0");
+        formCVI.txtImpPaisArg.setText("0.0");
+        formCVI.txtAfipRG485.setText("0.0");
+        formCVI.txtPercIIBB_bsas.setText("0.0");
     }
 
     public boolean verificarBlancos() {
