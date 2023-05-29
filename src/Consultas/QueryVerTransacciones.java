@@ -268,7 +268,8 @@ public class QueryVerTransacciones {
         try {
             String sql = "SELECT c.operacion,c.fecha,c.tipo_comprobante,c.nro_comprobante,c.cuit,c.imp_neto_grav,c.iva_facturado_10,c.concepto_no_grav,c.imp_interno,c.percepcion_iva,\n"
                     + "c.ret_ganancias,c.perc_iibb_compra,c.imp_total_fac,c.ite_iva_dere_reg,c.c_no_grav_sellos,c.ret_ii_bb_venta,c.iva_rg_212, c.grav_ley_25413,\n"
-                    + "c.int_numerales,c.otros,c.nombre,c.operaciones_exentas,c.ing_brutos,c.ret_iva,c.imp_r_ing_brutos,c.iva_facturado_21,c.iva_facturado_27\n"
+                    + "c.int_numerales,c.otros,c.nombre,c.operaciones_exentas,c.ing_brutos,c.ret_iva,c.imp_r_ing_brutos,c.iva_facturado_21,c.iva_facturado_27, "
+                    + "c.imp_pais,c.imp_pais_arg,c.perc_afip_rg_4815,c.perc_iibb_bsas\n"
                     + "FROM compra_ventas_iva as c \n"
                     + "WHERE c.id_transaccion =" + idtransaccion;
             ps = conn.prepareStatement(sql);
@@ -301,6 +302,10 @@ public class QueryVerTransacciones {
                 cvi.setImp_r_ing_brutos(rs.getDouble("imp_r_ing_brutos"));
                 cvi.setIva_facturado_21(rs.getDouble("iva_facturado_21"));
                 cvi.setIva_facturado_27(rs.getDouble("iva_facturado_27"));
+                cvi.setImp_pais(rs.getDouble("imp_pais"));
+                cvi.setImp_pais_arg(rs.getDouble("imp_pais_arg"));
+                cvi.setPerc_afip_rg_4815(rs.getDouble("perc_afip_rg_4815"));
+                cvi.setPerc_iibb_bsas(rs.getDouble("perc_iibb_bsas"));
             }
 
         } catch (Exception e) {
@@ -351,7 +356,8 @@ public class QueryVerTransacciones {
                 + "set c.fecha = ? , c.tipo_comprobante=?, c.nro_comprobante = ?, c.imp_neto_grav = ?, c.iva_facturado_10=?,\n"
                 + "c.imp_interno = ?, c.concepto_no_grav =?, c.percepcion_iva = ?, c.ret_ganancias =?,c.perc_iibb_compra = ?,c.imp_total_fac =?, c.ite_iva_dere_reg =?,\n"
                 + "c.c_no_grav_sellos = ?,c.ret_ii_bb_venta=?,c.iva_rg_212=?,c.grav_ley_25413 =?, c.int_numerales=?, c.otros =?,c.operaciones_exentas =?,\n"
-                + "c.ing_brutos = ?, c.ret_iva =?,c.imp_r_ing_brutos = ?,c.iva_facturado_21=?,c.iva_facturado_27=? WHERE c.id_transaccion =  " + id;
+                + "c.ing_brutos = ?, c.ret_iva =?,c.imp_r_ing_brutos = ?,c.iva_facturado_21=?,c.iva_facturado_27= ?,c.imp_pais = ?, c.imp_pais_arg = ?,"
+                + "c.perc_afip_rg_4815 = ? , c.perc_iibb_bsas = ? WHERE c.id_transaccion =  " + id;
 
         try {
             ps = con.prepareStatement(sql);
@@ -379,6 +385,10 @@ public class QueryVerTransacciones {
             ps.setDouble(22, cvi.getImp_r_ing_brutos());
             ps.setDouble(23, cvi.getIva_facturado_21());
             ps.setDouble(24, cvi.getIva_facturado_27());
+            ps.setDouble(25, cvi.getImp_pais());
+            ps.setDouble(26, cvi.getImp_pais_arg());
+            ps.setDouble(27, cvi.getPerc_afip_rg_4815());
+            ps.setDouble(28, cvi.getPerc_iibb_bsas());
             ps.executeUpdate();
 
         } catch (SQLException e) {

@@ -52,7 +52,7 @@ public class VerTransaccionesController implements ActionListener, ItemListener 
         editVista.txtImpInterno, editVista.txtConceptoNoGrav, editVista.txtPercepcionIVA, editVista.txtRetGanan, editVista.txtPercIvaC,
         editVista.txtIvaRg212, editVista.txtIvaDereReg, editVista.txtCNoGravSellos, editVista.txtRetIiBbV, editVista.txtGravLey25413,
         editVista.txtIntNumerales, editVista.txtOpExentas, editVista.txtIngBrutos, editVista.txtRetIva, editVista.txtImpRIngBrutos,
-        editVista.txtOtros};
+        editVista.txtOtros, editVista.txtImpPais, editVista.txtImpPaisArg, editVista.txtAfipRG485, editVista.txtPercIIBB_bsas};
 
     public VerTransaccionesController(MenuPrincipal menu) {
         updateTabla(listT);
@@ -671,6 +671,11 @@ public class VerTransaccionesController implements ActionListener, ItemListener 
         editVista.txtOtros.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getOtros()))));
         editVista.txtIvaFact21.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getIva_facturado_21()))));
         editVista.txtIvaFac27.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getIva_facturado_27()))));
+        
+        editVista.txtImpPais.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getImp_pais()))));
+        editVista.txtImpPaisArg.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getImp_pais_arg()))));
+        editVista.txtAfipRG485.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getPerc_afip_rg_4815()))));
+        editVista.txtPercIIBB_bsas.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getPerc_iibb_bsas()))));
     }
 
     public double cambiarFormato(double numero) {
@@ -793,6 +798,12 @@ public class VerTransaccionesController implements ActionListener, ItemListener 
         cvi.setImp_r_ing_brutos((Double.parseDouble(verificarBlanco(editVista.txtImpRIngBrutos.getText()))));
         cvi.setIva_facturado_21(Double.parseDouble(verificarBlanco(editVista.txtIvaFact21.getText())));
         cvi.setIva_facturado_27(Double.parseDouble(verificarBlanco(editVista.txtIvaFac27.getText())));
+        
+        cvi.setImp_pais(Double.parseDouble(verificarBlanco(editVista.txtImpPais.getText())));
+        cvi.setImp_pais_arg(Double.parseDouble(verificarBlanco(editVista.txtImpPaisArg.getText())));
+        cvi.setPerc_afip_rg_4815(Double.parseDouble(verificarBlanco(editVista.txtAfipRG485.getText())));
+        cvi.setPerc_iibb_bsas(Double.parseDouble(verificarBlanco(editVista.txtPercIIBB_bsas.getText())));
+        
         return cvi;
     }
 

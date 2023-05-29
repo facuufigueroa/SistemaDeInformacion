@@ -449,7 +449,7 @@ public class FormComprasVentasIVA extends javax.swing.JFrame {
 
         jLabel32.setFont(new java.awt.Font("Arial Narrow", 3, 16)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel32.setText("Perc. AFIP RG 485");
+        jLabel32.setText("Perc. AFIP RG 4815");
 
         txtAfipRG485.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         txtAfipRG485.addKeyListener(new java.awt.event.KeyAdapter() {
