@@ -2,9 +2,9 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubReportElRocioContador" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="4745aead-5ee0-475e-895e-1ac2afabc6ee">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SistemaInformacion2"/>
-	<property name="ireport.zoom" value="4.0"/>
+	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="730"/>
+	<property name="ireport.y" value="106"/>
 	<parameter name="fecha_desde" class="java.sql.Date"/>
 	<parameter name="fecha_hasta" class="java.sql.Date"/>
 	<queryString>
@@ -96,19 +96,19 @@ ORDER BY c.nombre,t.fecha;]]>
 	<variable name="total_iva_fact" class="java.lang.Float" incrementType="Group" incrementGroup="Group1" calculation="Sum">
 		<variableExpression><![CDATA[$V{sum_iva_fact_10}]]></variableExpression>
 	</variable>
-	<variable name="sum_grav_ley" class="java.lang.Float" incrementType="Group" incrementGroup="Group1" calculation="Sum">
+	<variable name="sum_grav_ley" class="java.lang.Float" resetType="Group" resetGroup="Group1" calculation="Sum">
 		<variableExpression><![CDATA[$F{grav_ley_25413}]]></variableExpression>
 	</variable>
-	<variable name="sum_imp_pais" class="java.lang.Float" incrementType="Group" incrementGroup="Group1" calculation="Sum">
+	<variable name="sum_imp_pais" class="java.lang.Float" resetType="Group" resetGroup="Group1" calculation="Sum">
 		<variableExpression><![CDATA[$F{IFNULL(cvi.imp_pais,0)}]]></variableExpression>
 	</variable>
-	<variable name="sum_imp_pais_arg" class="java.lang.Float" incrementType="Group" incrementGroup="Group1" calculation="Sum">
+	<variable name="sum_imp_pais_arg" class="java.lang.Float" resetType="Group" resetGroup="Group1" calculation="Sum">
 		<variableExpression><![CDATA[$F{IFNULL(cvi.imp_pais_arg,0)}]]></variableExpression>
 	</variable>
-	<variable name="sum_perc_afip" class="java.lang.Float" incrementType="Group" incrementGroup="Group1" calculation="Sum">
+	<variable name="sum_perc_afip" class="java.lang.Float" resetType="Group" resetGroup="Group1" calculation="Sum">
 		<variableExpression><![CDATA[$F{IFNULL(cvi.perc_afip_rg_4815,0)}]]></variableExpression>
 	</variable>
-	<variable name="sum_perc_iibb_bsas" class="java.lang.Float" incrementType="Group" incrementGroup="Group1" calculation="Sum">
+	<variable name="sum_perc_iibb_bsas" class="java.lang.Float" resetType="Group" resetGroup="Group1" calculation="Sum">
 		<variableExpression><![CDATA[$F{IFNULL(cvi.perc_iibb_bsas,0)}]]></variableExpression>
 	</variable>
 	<variable name="total_grav_ley" class="java.lang.Float" incrementType="Group" incrementGroup="Group1" calculation="Sum">
@@ -258,7 +258,7 @@ ORDER BY c.nombre,t.fecha;]]>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$V{sum_grav_ley}]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField pattern="#,##0.00">
 					<reportElement x="336" y="1" width="52" height="26" uuid="911feb18-271d-4faf-9f5b-01319c772910"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$V{sum_imp_pais}]]></textFieldExpression>
@@ -643,22 +643,22 @@ Contador]]></text>
 				</textElement>
 				<text><![CDATA[$]]></text>
 			</staticText>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="337" y="1" width="51" height="29" uuid="a1a3cc52-e914-4d39-863e-b9447f844635"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{IFNULL(cvi.imp_pais,0)}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="389" y="1" width="52" height="29" uuid="ab3e0361-3102-477c-aaeb-605eecedb424"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{IFNULL(cvi.imp_pais_arg,0)}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="441" y="2" width="52" height="28" uuid="5f68f248-eef4-49a6-8148-733cd5a78187"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{IFNULL(cvi.perc_afip_rg_4815,0)}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="493" y="2" width="53" height="28" uuid="52bf6dfe-93e7-4278-b46e-385396fd42d5"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{IFNULL(cvi.perc_iibb_bsas,0)}]]></textFieldExpression>
@@ -764,7 +764,7 @@ Contador]]></text>
 			<textField pattern="#,##0.00">
 				<reportElement x="119" y="67" width="59" height="25" uuid="6f9ffe15-294a-46ca-9662-9133f597a90a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{total_otros}]]></textFieldExpression>
 			</textField>
@@ -892,12 +892,12 @@ Contador]]></text>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$V{total_imp_pais_arg}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="417" y="65" width="70" height="27" uuid="e0693479-8555-4337-ad05-86380bec9ac9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$V{total_perc_afip}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="487" y="66" width="60" height="26" uuid="33156581-b95e-4cc0-989f-9b3ff695f041"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$V{total_perc_iibb_bsas}]]></textFieldExpression>
