@@ -1376,19 +1376,51 @@ public class EditView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtImpTotalFactActionPerformed
 
     private void txtPercIIBB_bsasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPercIIBB_bsasKeyTyped
-        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        
+        if (((caracter < '0' || caracter > '9')) 
+                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != '.' || txtPercIIBB_bsas.getText().contains("."))) {
+            
+            evt.consume();
+            
+        }
     }//GEN-LAST:event_txtPercIIBB_bsasKeyTyped
 
     private void txtAfipRG485KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAfipRG485KeyTyped
-        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        
+        if (((caracter < '0' || caracter > '9')) 
+                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != '.' || txtAfipRG485.getText().contains("."))) {
+            
+            evt.consume();
+            
+        }
     }//GEN-LAST:event_txtAfipRG485KeyTyped
 
     private void txtImpPaisArgKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtImpPaisArgKeyTyped
-        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        
+        if (((caracter < '0' || caracter > '9')) 
+                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != '.' || txtImpPaisArg.getText().contains("."))) {
+            
+            evt.consume();
+            
+        }
     }//GEN-LAST:event_txtImpPaisArgKeyTyped
 
     private void txtImpPaisKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtImpPaisKeyTyped
-        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        
+        if (((caracter < '0' || caracter > '9')) 
+                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != '.' || txtImpPais.getText().contains("."))) {
+            
+            evt.consume();
+            
+        }
     }//GEN-LAST:event_txtImpPaisKeyTyped
 
     
