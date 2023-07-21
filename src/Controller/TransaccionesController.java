@@ -515,7 +515,7 @@ public class TransaccionesController implements ActionListener, ItemListener {
         formCVI.cbbOperacion.addItem("");
         formCVI.cbbOperacion.addItem("Venta");
         formCVI.cbbOperacion.addItem("Compra");
-        formCVI.cbbOperacion.addItem("Banco");
+        formCVI.cbbOperacion.addItem("Bancos y Tarjetas");
 
     }
 
