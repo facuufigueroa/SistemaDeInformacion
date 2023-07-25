@@ -4,7 +4,7 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SistemaInformacion2"/>
 	<property name="ireport.zoom" value="3.0"/>
 	<property name="ireport.x" value="471"/>
-	<property name="ireport.y" value="192"/>
+	<property name="ireport.y" value="113"/>
 	<parameter name="fecha_desde" class="java.sql.Date"/>
 	<parameter name="fecha_hasta" class="java.sql.Date"/>
 	<parameter name="totalImp_Neto_Grav" class="java.lang.Double"/>
@@ -34,7 +34,8 @@
 FROM sistemainformacion.compra_ventas_iva
 WHERE 
 	 sistemainformacion.compra_ventas_iva.operacion = 'venta' 
-	 AND sistemainformacion.compra_ventas_iva.fecha BETWEEN $P{fecha_desde} AND $P{fecha_hasta}]]>
+	 AND sistemainformacion.compra_ventas_iva.fecha BETWEEN $P{fecha_desde} AND $P{fecha_hasta}
+ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 	</queryString>
 	<field name="fecha" class="java.sql.Date">
 		<property name="com.jaspersoft.studio.field.label" value="fecha"/>

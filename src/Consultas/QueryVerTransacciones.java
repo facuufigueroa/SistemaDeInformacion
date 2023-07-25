@@ -65,6 +65,8 @@ public class QueryVerTransacciones {
                 t.setA_impuesto(rs.getBoolean("a_impuestos_iva"));
                 t.setA_iva(rs.getBoolean("a_iva"));
                 t.setIdOrdenEmp(rs.getInt("id_orden_empresa"));
+                t.setVerificada(rs.getBoolean("verificada"));
+
                 transaccionesList.add(t);
             }
         } catch (Exception e) {
@@ -98,6 +100,8 @@ public class QueryVerTransacciones {
                 t.setA_impuesto(rs.getBoolean("a_impuestos_iva"));
                 t.setA_iva(rs.getBoolean("a_iva"));
                 t.setIdOrdenEmp(rs.getInt("id_orden_empresa"));
+                t.setVerificada(rs.getBoolean("verificada"));
+
                 transaccionesList.add(t);
             }
         } catch (Exception e) {
@@ -131,6 +135,7 @@ public class QueryVerTransacciones {
                 t.setA_impuesto(rs.getBoolean("a_impuestos_iva"));
                 t.setA_iva(rs.getBoolean("a_iva"));
                 t.setIdOrdenEmp(rs.getInt("id_orden_empresa"));
+                t.setVerificada(rs.getBoolean("verificada"));
                 transaccionesList.add(t);
             }
         } catch (Exception e) {
@@ -164,6 +169,7 @@ public class QueryVerTransacciones {
                 t.setA_impuesto(rs.getBoolean("a_impuestos_iva"));
                 t.setA_iva(rs.getBoolean("a_iva"));
                 t.setIdOrdenEmp(rs.getInt("id_orden_empresa"));
+                t.setVerificada(rs.getBoolean("verificada"));
                 transaccionesList.add(t);
             }
         } catch (Exception e) {
@@ -173,24 +179,26 @@ public class QueryVerTransacciones {
         return transaccionesList;
     }
 
-    public Transaccion obtenerTransaccion(int numT) {
+ public Transaccion obtenerTransaccion(int numT) {
         String nombre = "";
         PreparedStatement ps = null;
         Connection conn = conexion.getConnection();
         Transaccion trans = new Transaccion();
         try {
-            String sql = "SELECT t.idtransacciones,t.codigo,t.fecha,t.descripcion,t.salidas,t.entradas,t.a_impuestos_iva,t.a_iva FROM transacciones as t WHERE t.idtransacciones= " + numT;
+            String sql = "SELECT t.idtransacciones,t.codigo,t.fecha,t.descripcion,t.cantidad,t.salidas,t.entradas,t.a_impuestos_iva,t.a_iva,t.verificada FROM transacciones as t WHERE t.idtransacciones= " + numT;
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery(sql);
             if (rs.next()) {
                 trans.setIdTransaccion(rs.getInt("idtransacciones"));
                 trans.setCodigo(rs.getString("codigo"));
                 trans.setDescripcion(rs.getString("descripcion"));
+                trans.setCantidad(rs.getInt("cantidad"));
                 trans.setFecha(rs.getDate("fecha"));
                 trans.setSalida(rs.getFloat("salidas"));
                 trans.setEntrada(rs.getFloat("entradas"));
                 trans.setA_impuesto(rs.getBoolean("a_impuestos_iva"));
                 trans.setA_iva(rs.getBoolean("a_iva"));
+                trans.setVerificada(rs.getBoolean("verificada"));
             }
 
         } catch (Exception e) {
@@ -224,6 +232,7 @@ public class QueryVerTransacciones {
                 t.setEntrada(rs.getDouble("entradas"));
                 t.setA_impuesto(rs.getBoolean("a_impuestos_iva"));
                 t.setA_iva(rs.getBoolean("a_iva"));
+                t.setVerificada(rs.getBoolean("verificada"));
                 tList.add(t);
             }
         } catch (NumberFormatException | SQLException e) {
@@ -259,7 +268,8 @@ public class QueryVerTransacciones {
         try {
             String sql = "SELECT c.operacion,c.fecha,c.tipo_comprobante,c.nro_comprobante,c.cuit,c.imp_neto_grav,c.iva_facturado_10,c.concepto_no_grav,c.imp_interno,c.percepcion_iva,\n"
                     + "c.ret_ganancias,c.perc_iibb_compra,c.imp_total_fac,c.ite_iva_dere_reg,c.c_no_grav_sellos,c.ret_ii_bb_venta,c.iva_rg_212, c.grav_ley_25413,\n"
-                    + "c.int_numerales,c.otros,c.nombre,c.operaciones_exentas,c.ing_brutos,c.ret_iva,c.imp_r_ing_brutos,c.iva_facturado_21,c.iva_facturado_27\n"
+                    + "c.int_numerales,c.otros,c.nombre,c.operaciones_exentas,c.ing_brutos,c.ret_iva,c.imp_r_ing_brutos,c.iva_facturado_21,c.iva_facturado_27, "
+                    + "c.imp_pais,c.imp_pais_arg,c.perc_afip_rg_4815,c.perc_iibb_bsas\n"
                     + "FROM compra_ventas_iva as c \n"
                     + "WHERE c.id_transaccion =" + idtransaccion;
             ps = conn.prepareStatement(sql);
@@ -292,6 +302,10 @@ public class QueryVerTransacciones {
                 cvi.setImp_r_ing_brutos(rs.getDouble("imp_r_ing_brutos"));
                 cvi.setIva_facturado_21(rs.getDouble("iva_facturado_21"));
                 cvi.setIva_facturado_27(rs.getDouble("iva_facturado_27"));
+                cvi.setImp_pais(rs.getDouble("imp_pais"));
+                cvi.setImp_pais_arg(rs.getDouble("imp_pais_arg"));
+                cvi.setPerc_afip_rg_4815(rs.getDouble("perc_afip_rg_4815"));
+                cvi.setPerc_iibb_bsas(rs.getDouble("perc_iibb_bsas"));
             }
 
         } catch (Exception e) {
@@ -300,6 +314,8 @@ public class QueryVerTransacciones {
 
         return cvi;
     }
+    
+   
 
     public void modificarTransaccion(Transaccion t, int id) {
         PreparedStatement ps = null;
@@ -340,7 +356,8 @@ public class QueryVerTransacciones {
                 + "set c.fecha = ? , c.tipo_comprobante=?, c.nro_comprobante = ?, c.imp_neto_grav = ?, c.iva_facturado_10=?,\n"
                 + "c.imp_interno = ?, c.concepto_no_grav =?, c.percepcion_iva = ?, c.ret_ganancias =?,c.perc_iibb_compra = ?,c.imp_total_fac =?, c.ite_iva_dere_reg =?,\n"
                 + "c.c_no_grav_sellos = ?,c.ret_ii_bb_venta=?,c.iva_rg_212=?,c.grav_ley_25413 =?, c.int_numerales=?, c.otros =?,c.operaciones_exentas =?,\n"
-                + "c.ing_brutos = ?, c.ret_iva =?,c.imp_r_ing_brutos = ?,c.iva_facturado_21=?,c.iva_facturado_27=? WHERE c.id_transaccion =  " + id;
+                + "c.ing_brutos = ?, c.ret_iva =?,c.imp_r_ing_brutos = ?,c.iva_facturado_21=?,c.iva_facturado_27= ?,c.imp_pais = ?, c.imp_pais_arg = ?,"
+                + "c.perc_afip_rg_4815 = ? , c.perc_iibb_bsas = ? WHERE c.id_transaccion =  " + id;
 
         try {
             ps = con.prepareStatement(sql);
@@ -368,6 +385,10 @@ public class QueryVerTransacciones {
             ps.setDouble(22, cvi.getImp_r_ing_brutos());
             ps.setDouble(23, cvi.getIva_facturado_21());
             ps.setDouble(24, cvi.getIva_facturado_27());
+            ps.setDouble(25, cvi.getImp_pais());
+            ps.setDouble(26, cvi.getImp_pais_arg());
+            ps.setDouble(27, cvi.getPerc_afip_rg_4815());
+            ps.setDouble(28, cvi.getPerc_iibb_bsas());
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -508,7 +529,7 @@ public class QueryVerTransacciones {
 
         return t;
     }
-    
+
     public ArrayList<Transaccion> obtenerTransaccionesPorFecha(String fecha_desde, String fecha_hasta) {
 
         PreparedStatement ps = null;
@@ -532,6 +553,7 @@ public class QueryVerTransacciones {
                 t.setA_impuesto(rs.getBoolean("a_impuestos_iva"));
                 t.setA_iva(rs.getBoolean("a_iva"));
                 t.setIdOrdenEmp(rs.getInt("id_orden_empresa"));
+                t.setVerificada(rs.getBoolean("verificada"));
                 transaccionesList.add(t);
             }
         } catch (Exception e) {
@@ -539,5 +561,86 @@ public class QueryVerTransacciones {
         }
 
         return transaccionesList;
+    }
+
+    public void setStateTransaccion(boolean estado, int id) {
+        PreparedStatement ps = null;
+        Connection con = getConnection();
+
+        String sql = "UPDATE transacciones AS t SET t.verificada = ? WHERE t.idtransacciones = "+id;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setBoolean(1, estado);
+            ps.execute();
+        } catch (SQLException e) {
+            System.err.println(e);
+        } 
+    }
+    
+    /*Método para verificar que si el iva es 10.5% se setee el checkbox*/
+    public boolean existeIva10(String idTransaccion) {
+        PreparedStatement ps = null;
+        Connection conn = conexion.getConnection();
+        try {
+            String sql = "SELECT iva_facturado_10\n" +
+                        "FROM compra_ventas_iva as cv\n" +
+                        "WHERE cv.id_transaccion = '" + idTransaccion+"'";
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                if(rs.getDouble(1)==0){
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return false;
+    }
+    
+    /*Método para verificar que si el iva es 21% se setee el checkbox*/
+    public boolean existeIva21(String idTransaccion) {
+        PreparedStatement ps = null;
+        Connection conn = conexion.getConnection();
+        double totalImp= 0.0;
+        try {
+            String sql = "SELECT iva_facturado_21\n" +
+                        "FROM compra_ventas_iva as cv\n" +
+                        "WHERE cv.id_transaccion = '" + idTransaccion+"'";
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                if(rs.getDouble(1)==0){
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return false;
+    }
+    
+    /*Método para verificar que si el iva es 27.5% se setee el checkbox*/
+    public boolean existeIva27(String idTransaccion) {
+        PreparedStatement ps = null;
+        Connection conn = conexion.getConnection();
+        try {
+            String sql = "SELECT iva_facturado_27\n" +
+                        "FROM compra_ventas_iva as cv\n" +
+                        "WHERE cv.id_transaccion = '" + idTransaccion+"'";
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(sql);
+            if (rs.next()) {
+                if(rs.getDouble(1)==0){
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return false;
     }
 }

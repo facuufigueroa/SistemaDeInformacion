@@ -17,6 +17,8 @@ import View.FormVerTransacciones;
 import View.MenuPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -24,10 +26,16 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
-public class VerTransaccionesController implements ActionListener {
+public class VerTransaccionesController implements ActionListener, ItemListener {
 
     FormVerTransacciones formVerT = new FormVerTransacciones();
     MenuPrincipal viewMenu = new MenuPrincipal();
@@ -40,9 +48,15 @@ public class VerTransaccionesController implements ActionListener {
     EditView editVista = new EditView();
     ArrayList<Transaccion> listT = queryVerT.listarTransacciones();
     DecimalFormat formato = new DecimalFormat("#,###.00");
+    private JTextField[] textFields = {editVista.txtImpNetoGrav, editVista.txtIvaFact, editVista.txtIvaFact21, editVista.txtIvaFac27,
+        editVista.txtImpInterno, editVista.txtConceptoNoGrav, editVista.txtPercepcionIVA, editVista.txtRetGanan, editVista.txtPercIvaC,
+        editVista.txtIvaRg212, editVista.txtIvaDereReg, editVista.txtCNoGravSellos, editVista.txtRetIiBbV, editVista.txtGravLey25413,
+        editVista.txtIntNumerales, editVista.txtOpExentas, editVista.txtIngBrutos, editVista.txtRetIva, editVista.txtImpRIngBrutos,
+        editVista.txtOtros, editVista.txtImpPais, editVista.txtImpPaisArg, editVista.txtAfipRG485, editVista.txtPercIIBB_bsas};
 
     public VerTransaccionesController(MenuPrincipal menu) {
         updateTabla(listT);
+        deshabilitarCamposIva();
         formVerT.setLocationRelativeTo(null);
         this.viewMenu = menu;
         viewMenu.btnVerTransacciones.addActionListener(this);
@@ -74,6 +88,22 @@ public class VerTransaccionesController implements ActionListener {
         this.editVista.cbbCuenta.addActionListener(this);
         this.editVista.cbbEmpresa.addActionListener(this);
         this.formVerT.btnBuscarPorFecha.addActionListener(this);
+        this.formVerT.btnSetState.addActionListener(this);
+
+        editVista.checkBoxIVA10.addItemListener(this);
+        editVista.checkBoxIVA21.addItemListener(this);
+        editVista.checkBoxIVA27.addItemListener(this);
+
+        /*keyListenerCampos();*/
+        for (int i = 0; i < textFields.length; i++) {
+            textFields[i].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    updateSum();
+                }
+            });
+        }
+        addDocumentListenerTotalFact();
     }
 
     @Override
@@ -94,6 +124,7 @@ public class VerTransaccionesController implements ActionListener {
             accionEditarTransaccion(e);
             accionCbbCuenta(e);
             accionCbbCategoria(e);
+            verificarTransaccion(e);
         } catch (ParseException ex) {
             Logger.getLogger(VerTransaccionesController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -109,7 +140,7 @@ public class VerTransaccionesController implements ActionListener {
 
         modelo = new DefaultTableModel() {
             public boolean isCellEditable(int fila, int columna) {
-                if (columna == 1 && columna == 2 && columna == 3) {
+                if (columna == 9) {
                     return true;
                 } else {
                     return false;
@@ -125,22 +156,32 @@ public class VerTransaccionesController implements ActionListener {
         modelo.addColumn("Entradas");
         modelo.addColumn("A Impuesto ?");
         modelo.addColumn(" A IVA ?");
-        //modelo.addColumn("Empresa / Orden");
+        modelo.addColumn("Verificado");
 
         formVerT.tablaVerTransacciones.setRowHeight(25);
         formVerT.tablaVerTransacciones.setModel(modelo);
-        for (Transaccion t : listT) {
-            String[] dato = new String[10];
-            dato[0] = String.valueOf(t.getIdTransaccion());
-            dato[1] = t.getCodigo();
-            dato[2] = t.getFecha().toString();
-            dato[3] = t.getDescripcion();
-            dato[4] = String.valueOf(t.getCantidad());
-            dato[5] = "$" + evaluarNum(t.getSalida());
-            dato[6] = "$" + evaluarNum(t.getEntrada());
-            dato[7] = cambiarFormatoIVA(t.isA_impuesto());
-            dato[8] = cambiarFormatoIVA(t.isA_iva());
-            modelo.addRow(dato);
+        addCheckBox(9, formVerT.tablaVerTransacciones);
+        if (!listT.isEmpty()) {
+            for (Transaccion t : listT) {
+                Object[] dato = new Object[10];
+                dato[0] = String.valueOf(t.getIdTransaccion());
+                dato[1] = t.getCodigo();
+                dato[2] = t.getFecha().toString();
+                dato[3] = t.getDescripcion();
+                dato[4] = String.valueOf(t.getCantidad());
+                dato[5] = "$" + evaluarNum(t.getSalida());
+                dato[6] = "$" + evaluarNum(t.getEntrada());
+                dato[7] = cambiarFormatoIVA(t.isA_impuesto());
+                dato[8] = cambiarFormatoIVA(t.isA_iva());
+                dato[9] = t.isVerificada() == true;
+                modelo.addRow(dato);
+            }
+        } else {
+            DefaultTableModel model = new DefaultTableModel(1, 1);
+            // Establezca el mensaje en la celda del modelo de tabla personalizado
+            model.setValueAt("No hay transaccion registradas", 0, 0);
+            // Establezca el modelo de tabla personalizado en la JTable
+            formVerT.tablaVerTransacciones.setModel(model);
         }
 
     }
@@ -158,10 +199,16 @@ public class VerTransaccionesController implements ActionListener {
 
                 String categoria = (String) formVerT.cbbBuscarCategoria.getSelectedItem();
                 listTransacciones = queryVerT.obtenerTransaccionesPorCategorias(categoria, fecha_desde, fecha_hasta);
-                formVerT.txtBusqueda.setText(categoria);
-                iniciarTabla(listTransacciones);
-                formVerT.txtEntradas.setText(obtenerSumaEntradas());
-                formVerT.txtSalidas.setText(obtenerSumaSalidas());
+                if (!listTransacciones.isEmpty()) {
+                    formVerT.txtBusqueda.setText(categoria);
+                    iniciarTabla(listTransacciones);
+                    formVerT.txtEntradas.setText(obtenerSumaEntradas());
+                    formVerT.txtSalidas.setText(obtenerSumaSalidas());
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se encontraron transacciones registradas \n"
+                            + "para la búsqueda filtrada por la Categoria: " + categoria + "\n"
+                            + "entre las fechas " + fecha_desde + " - " + fecha_hasta);
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Error al buscar transacción. \n"
                         + "Verifique que haya seleccionado las fechas en los campos \n"
@@ -183,10 +230,16 @@ public class VerTransaccionesController implements ActionListener {
 
                 String subcategoria = (String) formVerT.cbbSubCategoria.getSelectedItem();
                 listTransacciones = queryVerT.obtenerTransaccionesPorSubCategoria(subcategoria, fecha_desde, fecha_hasta);
-                formVerT.txtBusqueda.setText(subcategoria);
-                iniciarTabla(listTransacciones);
-                formVerT.txtEntradas.setText(obtenerSumaEntradas());
-                formVerT.txtSalidas.setText(obtenerSumaSalidas());
+                if (!listTransacciones.isEmpty()) {
+                    formVerT.txtBusqueda.setText(subcategoria);
+                    iniciarTabla(listTransacciones);
+                    formVerT.txtEntradas.setText(obtenerSumaEntradas());
+                    formVerT.txtSalidas.setText(obtenerSumaSalidas());
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se encontraron transacciones registradas \n"
+                            + "para la búsqueda filtrada por la SubCategoria: " + subcategoria + "\n"
+                            + "entre las fechas " + fecha_desde + " - " + fecha_hasta);
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Error al buscar transacción. \n"
                         + "Verifique que haya seleccionado las fechas en los campos \n"
@@ -208,10 +261,16 @@ public class VerTransaccionesController implements ActionListener {
 
                 String cuenta = (String) formVerT.cbbBuscarCuenta.getSelectedItem();
                 listTransacciones = queryVerT.obtenerTransaccionesPorCuenta(cuenta, fecha_desde, fecha_hasta);
-                formVerT.txtBusqueda.setText(cuenta);
-                iniciarTabla(listTransacciones);
-                formVerT.txtEntradas.setText(obtenerSumaEntradas());
-                formVerT.txtSalidas.setText(obtenerSumaSalidas());
+                if (!listTransacciones.isEmpty()) {
+                    formVerT.txtBusqueda.setText(cuenta);
+                    iniciarTabla(listTransacciones);
+                    formVerT.txtEntradas.setText(obtenerSumaEntradas());
+                    formVerT.txtSalidas.setText(obtenerSumaSalidas());
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se encontraron transacciones registradas \n"
+                            + "para la búsqueda filtrada por la cuenta: " + cuenta + "\n"
+                            + "entre las fechas " + fecha_desde + " - " + fecha_hasta);
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Error al buscar transacción. \n"
                         + "Verifique que haya seleccionado las fechas en los campos \n"
@@ -233,10 +292,17 @@ public class VerTransaccionesController implements ActionListener {
 
                 String empresa = (String) formVerT.cbbEmpresa.getSelectedItem();
                 listTransacciones = queryVerT.obtenerTransaccionesPorEmpresa(empresa, fecha_desde, fecha_hasta);
-                formVerT.txtBusqueda.setText(empresa);
-                iniciarTabla(listTransacciones);
-                formVerT.txtEntradas.setText(obtenerSumaEntradas());
-                formVerT.txtSalidas.setText(obtenerSumaSalidas());
+                if (!listTransacciones.isEmpty()) {
+                    formVerT.txtBusqueda.setText(empresa);
+                    iniciarTabla(listTransacciones);
+                    formVerT.txtEntradas.setText(obtenerSumaEntradas());
+                    formVerT.txtSalidas.setText(obtenerSumaSalidas());
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se encontraron transacciones registradas \n"
+                            + "para la búsqueda filtrada por la empresa/orden: " + empresa + "\n"
+                            + "entre las fechas " + fecha_desde + " - " + fecha_hasta);
+                }
+
             } else {
                 JOptionPane.showMessageDialog(null, "Error al buscar transacción. \n"
                         + "Verifique que haya seleccionado las fechas en los campos \n"
@@ -353,7 +419,7 @@ public class VerTransaccionesController implements ActionListener {
         ArrayList<Transaccion> listT = queryVerT.listarTransacciones();
         modelo = new DefaultTableModel() {
             public boolean isCellEditable(int fila, int columna) {
-                if (columna == 1 && columna == 2 && columna == 3) {
+                if (columna == 9) {
                     return true;
                 } else {
                     return false;
@@ -370,32 +436,52 @@ public class VerTransaccionesController implements ActionListener {
         modelo.addColumn("Entradas");
         modelo.addColumn("A Impuesto ?");
         modelo.addColumn(" A IVA ?");
+        modelo.addColumn("Verificado");
 
         formVerT.tablaVerTransacciones.setRowHeight(25);
         formVerT.tablaVerTransacciones.setModel(modelo);
-        for (Transaccion t : listT) {
-            String[] dato = new String[10];
-            dato[0] = String.valueOf(t.getIdTransaccion());
-            dato[1] = t.getCodigo();
-            dato[2] = t.getFecha().toString();
-            dato[3] = t.getDescripcion();
-            dato[4] = String.valueOf(t.getCantidad());
-            dato[5] = "$" + evaluarNum(t.getSalida());
-            dato[6] = "$" + evaluarNum(t.getEntrada());
-            dato[7] = cambiarFormatoIVA(t.isA_impuesto());
-            dato[8] = cambiarFormatoIVA(t.isA_iva());
+        addCheckBox(9, formVerT.tablaVerTransacciones);
 
-            modelo.addRow(dato);
+        if (!listT.isEmpty()) {
+
+            for (Transaccion t : listT) {
+                /*puede ser q no haya datos en la bdd y me tire excepcion*/
+                Object[] dato = new Object[10];
+                dato[0] = String.valueOf(t.getIdTransaccion());
+                dato[1] = t.getCodigo();
+                dato[2] = t.getFecha().toString();
+                dato[3] = t.getDescripcion();
+                dato[4] = String.valueOf(t.getCantidad());
+                dato[5] = "$" + evaluarNum(t.getSalida());
+                dato[6] = "$" + evaluarNum(t.getEntrada());
+                dato[7] = cambiarFormatoIVA(t.isA_impuesto());
+                dato[8] = cambiarFormatoIVA(t.isA_iva());
+                dato[9] = t.isVerificada() == true;
+                modelo.addRow(dato);
+            }
+        } else {
+            DefaultTableModel model = new DefaultTableModel(1, 1);
+            // Establezca el mensaje en la celda del modelo de tabla personalizado
+            model.setValueAt("No hay transaccion registradas", 0, 0);
+            // Establezca el modelo de tabla personalizado en la JTable
+            formVerT.tablaVerTransacciones.setModel(model);
         }
+
+    }
+
+    public void addCheckBox(int column, JTable table) {
+        TableColumn tc = table.getColumnModel().getColumn(column);
+        tc.setCellEditor(table.getDefaultEditor(Boolean.class));
+        tc.setCellRenderer(table.getDefaultRenderer(Boolean.class));
 
     }
 
     public String evaluarNum(double n) {
         String numero = "0";
-        if (n > 10000) {
+        if (n >= 10000) {
             numero = formatNumberMenosUno(n);
         } else {
-            if (n < 10000) {
+            if (n <= 10000) {
                 numero = formatNumber(n);
             }
         }
@@ -471,22 +557,35 @@ public class VerTransaccionesController implements ActionListener {
         modelo.addColumn("Entradas");
         modelo.addColumn("A Impuesto ?");
         modelo.addColumn(" A IVA ?");
+        modelo.addColumn("Verificado");
 
         formVerT.tablaVerTransacciones.setRowHeight(25);
         formVerT.tablaVerTransacciones.setModel(modelo);
 
-        String[] dato = new String[10];
-        dato[0] = String.valueOf(t.getIdTransaccion());
-        dato[1] = t.getCodigo();
-        dato[2] = t.getFecha().toString();
-        dato[3] = t.getDescripcion();
-        dato[4] = String.valueOf(t.getCantidad());
-        dato[5] = "$" + String.valueOf(t.getSalida());
-        dato[6] = "$" + String.valueOf(t.getEntrada());
-        dato[7] = cambiarFormatoIVA(t.isA_impuesto());
-        dato[8] = cambiarFormatoIVA(t.isA_iva());
+        addCheckBox(9, formVerT.tablaVerTransacciones);
 
-        modelo.addRow(dato);
+        if (t != null) {
+                /*puede ser q no haya datos en la bdd y me tire excepcion*/
+                Object[] dato = new Object[10];
+                dato[0] = String.valueOf(t.getIdTransaccion());
+                dato[1] = t.getCodigo();
+                dato[2] = t.getFecha().toString();
+                dato[3] = t.getDescripcion();
+                dato[4] = String.valueOf(t.getCantidad());
+                dato[5] = "$" + evaluarNum(t.getSalida());
+                dato[6] = "$" + evaluarNum(t.getEntrada());
+                dato[7] = cambiarFormatoIVA(t.isA_impuesto());
+                dato[8] = cambiarFormatoIVA(t.isA_iva());
+                dato[9] = t.isVerificada() == true;
+                modelo.addRow(dato);
+            
+        } else {
+            DefaultTableModel model = new DefaultTableModel(1, 1);
+            // Establezca el mensaje en la celda del modelo de tabla personalizado
+            model.setValueAt("No hay transaccion registradas", 0, 0);
+            // Establezca el modelo de tabla personalizado en la JTable
+            formVerT.tablaVerTransacciones.setModel(model);
+        }
 
     }
 
@@ -548,29 +647,35 @@ public class VerTransaccionesController implements ActionListener {
         editVista.txtOperacion.setText(cvi.getOperacion());
         editVista.txtNombre.setText(cvi.getEmpresa());
         editVista.txtCuit.setText(cvi.getCuit());
-        editVista.txtImpNetoGrav.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getImp_neto_grav()))));
-        editVista.txtIvaFact.setText(String.valueOf((converFormatNumToDouble(formato.format(cvi.getIva_facturado())))));
-        editVista.txtImpInterno.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getImp_interno()))));
-        editVista.txtConceptoNoGrav.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getConcep_no_grav()))));
-        editVista.txtPercepcionIVA.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getPercepcion_iva()))));
-        editVista.txtRetGanan.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getRet_ganancias()))));
-        editVista.txtPercIvaC.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getPerc_iibb_compra()))));
+        editVista.txtImpNetoGrav.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getImp_neto_grav()))));
+        editVista.txtIvaFact.setText(String.valueOf((converFormatNumToDouble2(formato.format(cvi.getIva_facturado())))));
 
-        editVista.txtImpTotalFact.setText(String.valueOf(converFormatNumToDouble((formato.format(cvi.getImp_total_fact())))));
+        editVista.txtImpInterno.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getImp_interno()))));
+        editVista.txtConceptoNoGrav.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getConcep_no_grav()))));
+        editVista.txtPercepcionIVA.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getPercepcion_iva()))));
+        editVista.txtRetGanan.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getRet_ganancias()))));
+        editVista.txtPercIvaC.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getPerc_iibb_compra()))));
 
-        editVista.txtIvaDereReg.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getIte_iva_dere_reg()))));
-        editVista.txtCNoGravSellos.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getC_no_grav_sellos()))));
-        editVista.txtRetIiBbV.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getRet_iibb_venta()))));
-        editVista.txtIvaRg212.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getIva_rg_212()))));
-        editVista.txtGravLey25413.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getGrav_ley_25413()))));
-        editVista.txtIntNumerales.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getInt_numerales()))));
-        editVista.txtOpExentas.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getOperaciones_exentas()))));
-        editVista.txtIngBrutos.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getIng_brutos()))));
-        editVista.txtRetIva.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getRet_iva()))));
-        editVista.txtImpRIngBrutos.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getImp_r_ing_brutos()))));
-        editVista.txtOtros.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getOtros()))));
-        editVista.txtIvaFact21.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getIva_facturado_21()))));
-        editVista.txtIvaFac27.setText(String.valueOf(converFormatNumToDouble(formato.format(cvi.getIva_facturado_27()))));
+        editVista.txtImpTotalFact.setText(String.valueOf(converFormatNumToDouble2((formato.format(cvi.getImp_total_fact())))));
+
+        editVista.txtIvaDereReg.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getIte_iva_dere_reg()))));
+        editVista.txtCNoGravSellos.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getC_no_grav_sellos()))));
+        editVista.txtRetIiBbV.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getRet_iibb_venta()))));
+        editVista.txtIvaRg212.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getIva_rg_212()))));
+        editVista.txtGravLey25413.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getGrav_ley_25413()))));
+        editVista.txtIntNumerales.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getInt_numerales()))));
+        editVista.txtOpExentas.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getOperaciones_exentas()))));
+        editVista.txtIngBrutos.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getIng_brutos()))));
+        editVista.txtRetIva.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getRet_iva()))));
+        editVista.txtImpRIngBrutos.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getImp_r_ing_brutos()))));
+        editVista.txtOtros.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getOtros()))));
+        editVista.txtIvaFact21.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getIva_facturado_21()))));
+        editVista.txtIvaFac27.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getIva_facturado_27()))));
+        
+        editVista.txtImpPais.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getImp_pais()))));
+        editVista.txtImpPaisArg.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getImp_pais_arg()))));
+        editVista.txtAfipRG485.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getPerc_afip_rg_4815()))));
+        editVista.txtPercIIBB_bsas.setText(String.valueOf(converFormatNumToDouble2(formato.format(cvi.getPerc_iibb_bsas()))));
     }
 
     public double cambiarFormato(double numero) {
@@ -666,7 +771,7 @@ public class VerTransaccionesController implements ActionListener {
 
         cvi.setPerc_iibb_compra(Double.parseDouble(verificarBlanco(editVista.txtPercIvaC.getText())));
 
-        cvi.setImp_total_fact(Double.parseDouble(verificarBlanco(editVista.txtImpTotalFact.getText())));
+        cvi.setImp_total_fact(Double.parseDouble(verificarBlanco(converFormatNumToDouble2(editVista.txtImpTotalFact.getText()))));
 
         cvi.setIte_iva_dere_reg(Double.parseDouble(verificarBlanco(editVista.txtIvaDereReg.getText())));
 
@@ -693,6 +798,12 @@ public class VerTransaccionesController implements ActionListener {
         cvi.setImp_r_ing_brutos((Double.parseDouble(verificarBlanco(editVista.txtImpRIngBrutos.getText()))));
         cvi.setIva_facturado_21(Double.parseDouble(verificarBlanco(editVista.txtIvaFact21.getText())));
         cvi.setIva_facturado_27(Double.parseDouble(verificarBlanco(editVista.txtIvaFac27.getText())));
+        
+        cvi.setImp_pais(Double.parseDouble(verificarBlanco(editVista.txtImpPais.getText())));
+        cvi.setImp_pais_arg(Double.parseDouble(verificarBlanco(editVista.txtImpPaisArg.getText())));
+        cvi.setPerc_afip_rg_4815(Double.parseDouble(verificarBlanco(editVista.txtAfipRG485.getText())));
+        cvi.setPerc_iibb_bsas(Double.parseDouble(verificarBlanco(editVista.txtPercIIBB_bsas.getText())));
+        
         return cvi;
     }
 
@@ -872,12 +983,20 @@ public class VerTransaccionesController implements ActionListener {
 
     }
 
+    /*Método que realiza lo mismo que el de la linea 881 per con la diferencia que no es necesario convertirlo a doble al valor*/
+    public String converFormatNumToDouble2(String s) {
+        String yReemplaza = s.replaceAll("\\.", "");
+        String flotanteNum = yReemplaza.replaceAll("\\,", ".");
+        return flotanteNum;
+
+    }
+
     public void accionBuscarPorFecha(ActionEvent e) {
         if (e.getSource() == formVerT.btnBuscarPorFecha) {
             ArrayList<Transaccion> listTransacciones = new ArrayList<>();
             if (formVerT.txtFechaDesde.getDate() != null
                     && formVerT.txtFechaHasta.getDate() != null) {
-                
+
                 java.sql.Date sqlFechaDesde = new java.sql.Date(formVerT.txtFechaDesde.getDate().getTime());
                 String fecha_desde = sqlFechaDesde.toString();
 
@@ -885,9 +1004,14 @@ public class VerTransaccionesController implements ActionListener {
                 String fecha_hasta = sqlFechaHasta.toString();
 
                 listTransacciones = queryVerT.obtenerTransaccionesPorFecha(fecha_desde, fecha_hasta);
-                iniciarTabla(listTransacciones);
-                formVerT.txtEntradas.setText(obtenerSumaEntradas());
-                formVerT.txtSalidas.setText(obtenerSumaSalidas());
+                if (!listTransacciones.isEmpty()) {
+                    iniciarTabla(listTransacciones);
+                    formVerT.txtEntradas.setText(obtenerSumaEntradas());
+                    formVerT.txtSalidas.setText(obtenerSumaSalidas());
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se encontraron transacciones registradas entre las fechas \n"
+                            + "" + fecha_desde + " - " + fecha_hasta);
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Error al buscar transacción. \n"
                         + "Verifique que haya seleccionado las fechas en los campos \n"
@@ -895,4 +1019,155 @@ public class VerTransaccionesController implements ActionListener {
             }
         }
     }
+
+    /*Método para ir cambiando el estado de una transacción, lo que nos permite saber si se chequeo*/
+    public void verificarTransaccion(ActionEvent e) {
+        if (e.getSource() == formVerT.btnSetState) {
+
+            for (int i = 0; i < formVerT.tablaVerTransacciones.getRowCount(); i++) {
+                if (isSelected(i, 9, formVerT.tablaVerTransacciones)) {
+                    queryVerT.setStateTransaccion(true, Integer.parseInt(formVerT.tablaVerTransacciones.getValueAt(i, 0).toString()));
+
+                } else {
+                    if (!isSelected(i, 9, formVerT.tablaVerTransacciones)) {
+                        queryVerT.setStateTransaccion(false, Integer.parseInt(formVerT.tablaVerTransacciones.getValueAt(i, 0).toString()));
+                    }
+                }
+
+            }
+            JOptionPane.showMessageDialog(null, "Cambios Guardados Correctamente");
+        }
+    }
+
+    public boolean isSelected(int row, int column, JTable table) {
+        Boolean s = Boolean.parseBoolean(String.valueOf(table.getValueAt(row, column)));
+        if (s == true) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        accionIva10_5(e);
+        accionIva21(e);
+        accionIva27(e);
+    }
+
+    public void accionIva10_5(ItemEvent e) {
+
+        if (editVista.checkBoxIVA10.isSelected()) {
+            if (!verificarNeto()) {
+
+                double valor = Double.parseDouble(editVista.txtImpNetoGrav.getText());
+                double porcentaje = valor * 0.105;
+                String ivaConPunto = String.format("%.2f", (porcentaje));
+                editVista.txtIvaFact.setText(ivaConPunto.replaceAll("\\,", "."));
+            } else {
+                JOptionPane.showMessageDialog(null, "El Impuesto Neto esta vacio", "Error al calcular IVA", 3);
+            }
+        } else {
+            // Establecer el JTextField en cero
+            editVista.txtIvaFact.setText(".00");
+
+        }
+    }
+
+    public void accionIva21(ItemEvent e) {
+
+        if (editVista.checkBoxIVA21.isSelected()) {
+            if (!verificarNeto()) {
+
+                double valor = Double.parseDouble(editVista.txtImpNetoGrav.getText());
+                double porcentaje = valor * 0.21;
+                String ivaConPunto = String.format("%.2f", (porcentaje));
+                editVista.txtIvaFact21.setText(ivaConPunto.replaceAll("\\,", "."));
+
+            } else {
+                JOptionPane.showMessageDialog(null, "El Impuesto Neto esta vacio", "Error al calcular IVA", 3);
+            }
+        } else {
+            // Establecer el JTextField en cero
+            editVista.txtIvaFact21.setText(".00");
+        }
+
+    }
+
+    public void actualizarTotalConIVA(double totalImpFact, double iva, JTextField txtIva) {
+        if (!".00".equals(txtIva.getText())) {
+
+        }
+    }
+
+    public void accionIva27(ItemEvent e) {
+        if (editVista.checkBoxIVA27.isSelected()) {
+            if (!verificarNeto()) {
+
+                double valor = Double.parseDouble(editVista.txtImpNetoGrav.getText());
+                double porcentaje = valor * 0.27;
+                String ivaConPunto = String.format("%.2f", (porcentaje));
+                editVista.txtIvaFac27.setText(ivaConPunto.replaceAll("\\,", "."));
+            } else {
+                JOptionPane.showMessageDialog(null, "El Impuesto Neto esta vacio", "Error al calcular IVA", 3);
+            }
+        } else {
+            // Establecer el JTextField en cero
+            editVista.txtIvaFac27.setText(".00");
+
+        }
+    }
+
+    public void deshabilitarCamposIva() {
+        editVista.txtIvaFact.setEditable(false);
+        editVista.txtIvaFact21.setEditable(false);
+        editVista.txtIvaFac27.setEditable(false);
+    }
+
+    /*Método para verificar que haya escrito valor en neto*/
+    public boolean verificarNeto() {
+        return editVista.txtImpNetoGrav.getText().equals("");
+    }
+
+    /*Método donde se le aplica evento DocumentListener a txt Imp. Total Fact.*/
+    public void addDocumentListenerTotalFact() {
+        editVista.txtImpTotalFact.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateSum();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+
+            }
+        });
+    }
+
+    /*Método que suma instantaniamente los campos y actualiza el campo imp. total facturado*/
+    private void updateSum() {
+        double sum = 0;
+        for (int i = 0; i < textFields.length; i++) {
+            try {
+                double value = Double.parseDouble(textFields[i].getText());
+                sum += value;
+            } catch (NumberFormatException e) {
+
+            }
+        }
+        final double totalSum = sum;
+
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                editVista.txtImpTotalFact.setText(String.format("%.2f", totalSum));
+            }
+        });
+    }
+
 }

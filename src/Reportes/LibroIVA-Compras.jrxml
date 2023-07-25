@@ -5,7 +5,7 @@
 	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="308"/>
 	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="678"/>
 	<property name="ireport.zoom" value="4.0"/>
-	<property name="ireport.x" value="454"/>
+	<property name="ireport.x" value="1098"/>
 	<property name="ireport.y" value="144"/>
 	<parameter name="fecha_desde" class="java.sql.Date"/>
 	<parameter name="fecha_hasta" class="java.sql.Date"/>
@@ -43,7 +43,8 @@
 FROM sistemainformacion.compra_ventas_iva
 WHERE 
 	sistemainformacion.compra_ventas_iva.operacion = 'compra' 
-	AND sistemainformacion.compra_ventas_iva.fecha BETWEEN $P{fecha_desde} AND $P{fecha_hasta}]]>
+	AND sistemainformacion.compra_ventas_iva.fecha BETWEEN $P{fecha_desde} AND $P{fecha_hasta}
+ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 	</queryString>
 	<field name="fecha" class="java.sql.Date">
 		<property name="com.jaspersoft.studio.field.label" value="fecha"/>
@@ -125,7 +126,7 @@ WHERE
 	<variable name="total_iva_fact_21" class="java.lang.Float" calculation="Sum">
 		<variableExpression><![CDATA[$F{iva_facturado_21}]]></variableExpression>
 	</variable>
-	<variable name="total_iva_27" class="java.lang.Float" calculation="Sum">
+	<variable name="total_iva_27" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{iva_facturado_27}]]></variableExpression>
 	</variable>
 	<group name="fecha">
@@ -944,7 +945,7 @@ WHERE
 				</textElement>
 				<text><![CDATA[$]]></text>
 			</staticText>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="320" y="2" width="43" height="28" uuid="1afa7eca-3030-421e-a59e-24c487086cb9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>

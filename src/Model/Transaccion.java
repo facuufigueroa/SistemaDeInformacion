@@ -28,7 +28,8 @@ public class Transaccion {
     private float ret_ing_brutos;
     private boolean a_iva;
     private boolean a_impuesto;
-
+    private boolean verificada;
+    
     public Transaccion(String codigo,int idTransaccion, int idCuenta, int idOrdenEmp, int idCat, int idSubCat, String numChequeFact, Date fecha, String descripcion, int cantidad,double salida,double entrada, float retenciones_g, float ret_ing_brutos, boolean a_iva, boolean a_impuesto,String numFactura) {
         this.codigo=codigo;
         this.idTransaccion = idTransaccion;
@@ -65,6 +66,29 @@ public class Transaccion {
         this.a_iva = a_iva;
         this.a_impuesto = a_impuesto;
     }
+
+    public Transaccion(int idTransaccion, String codigo, int idCuenta, int idOrdenEmp, int idCat, int idSubCat, String numCheque, String numFactura, Date fecha, String descripcion, int cantidad, double salida, double entrada, float retenciones_g, float ret_ing_brutos, boolean a_iva, boolean a_impuesto, boolean verificada) {
+        this.idTransaccion = idTransaccion;
+        this.codigo = codigo;
+        this.idCuenta = idCuenta;
+        this.idOrdenEmp = idOrdenEmp;
+        this.idCat = idCat;
+        this.idSubCat = idSubCat;
+        this.numCheque = numCheque;
+        this.numFactura = numFactura;
+        this.fecha = fecha;
+        this.descripcion = descripcion;
+        this.cantidad = cantidad;
+        this.salida = salida;
+        this.entrada = entrada;
+        this.retenciones_g = retenciones_g;
+        this.ret_ing_brutos = ret_ing_brutos;
+        this.a_iva = a_iva;
+        this.a_impuesto = a_impuesto;
+        this.verificada = false;
+    }
+    
+    
 
     public Transaccion() {
     }
@@ -215,6 +239,14 @@ public class Transaccion {
 
     public void setNumFactura(String numFactura) {
         this.numFactura = numFactura;
+    }
+
+    public boolean isVerificada() {
+        return verificada;
+    }
+
+    public void setVerificada(boolean verificada) {
+        this.verificada = verificada;
     }
     
    

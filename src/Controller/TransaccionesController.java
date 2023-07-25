@@ -20,6 +20,8 @@ import View.FormComprasVentasIVA;
 import View.Transacciones;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import static java.lang.Integer.parseInt;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -28,10 +30,14 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
-public class TransaccionesController implements ActionListener {
+public class TransaccionesController implements ActionListener, ItemListener {
 
     QueryCategoria queryCategoria = new QueryCategoria();
     QueryCuentas queryCuentas = new QueryCuentas();
@@ -55,6 +61,12 @@ public class TransaccionesController implements ActionListener {
     QueryCompraVentaIVA queryCVI = new QueryCompraVentaIVA();
     private int id_transaccion;
 
+    private JTextField[] textFields = {formCVI.txtImpNetoGrav, formCVI.txtIvaFact, formCVI.txtIvaFact21, formCVI.txtIvaFact27,
+        formCVI.txtImpInterno, formCVI.txtConceptoNoGrav, formCVI.txtPercepcionIVA, formCVI.txtRetGanan, formCVI.txtPercIvaC,
+        formCVI.txtIvaRg212, formCVI.txtIvaDereReg, formCVI.txtCNoGravSellos, formCVI.txtRetIiBbV, formCVI.txtGravLey25413,
+        formCVI.txtIntNumerales,formCVI.txtOpExentas, formCVI.txtIngBrutos, formCVI.txtRetIva,formCVI.txtImpRIngBrutos,
+        formCVI.txtOtros, formCVI.txtImpPais,formCVI.txtImpPaisArg, formCVI.txtAfipRG485, formCVI.txtPercIIBB_bsas};
+    
     public TransaccionesController() {
         iniciarCamposEnCero();
         iniciarTabla();
@@ -76,6 +88,11 @@ public class TransaccionesController implements ActionListener {
         this.transacciones.btnSaveSinIva.addActionListener(this);
 
         transacciones.labelNumT.setText(String.valueOf(id_new_transaccion));
+
+        this.formCVI.checkIVA10.addItemListener(this);
+        this.formCVI.checkIVA21.addItemListener(this);
+        this.formCVI.checkIVA27.addItemListener(this);
+        addDocumentListenerTotalFact();
     }
 
     @Override
@@ -213,37 +230,36 @@ public class TransaccionesController implements ActionListener {
         }
 
     }
-    
-    public String evaluarNum(double n){
+
+    public String evaluarNum(double n) {
         String numero = "0";
-        if(n > 10000){
+        if (n >= 10000) {
             numero = formatNumberMenosUno(n);
-        }
-        else{
-            if(n < 10000){
+        } else {
+            if (n <= 10000) {
                 numero = formatNumber(n);
             }
         }
         return numero;
     }
-    
-    public String formatNumber(double numero){
-       NumberFormat formatoNumero = NumberFormat.getNumberInstance();
-       String num = formatoNumero.format(numero);
-       double b = converFormatNumToDouble(num);
-    
-       return num.substring(0,num.length());
+
+    public String formatNumber(double numero) {
+        NumberFormat formatoNumero = NumberFormat.getNumberInstance();
+        String num = formatoNumero.format(numero);
+        double b = converFormatNumToDouble(num);
+
+        return num.substring(0, num.length());
     }
-    public String formatNumberMenosUno(double numero){
-       NumberFormat formatoNumero = NumberFormat.getNumberInstance();
-       String num = formatoNumero.format(numero);
-       double b = converFormatNumToDouble(num);
-       
-    
-       DecimalFormat formato = new DecimalFormat("#,###.00");
-       String valorFormateado = formato.format(b);
-       
-       return valorFormateado;
+
+    public String formatNumberMenosUno(double numero) {
+        NumberFormat formatoNumero = NumberFormat.getNumberInstance();
+        String num = formatoNumero.format(numero);
+        double b = converFormatNumToDouble(num);
+
+        DecimalFormat formato = new DecimalFormat("#,###.00");
+        String valorFormateado = formato.format(b);
+
+        return valorFormateado;
     }
 
     public String convertAImpues(String a_imp) {
@@ -475,14 +491,14 @@ public class TransaccionesController implements ActionListener {
         formCVI.setVisible(true);
         formCVI.setLocationRelativeTo(null);
         formCVI.cbbEmpresa.setSelectedItem(obtenerEmpresa(IdEmpresa).getNombre());
-               
+
         iniciarComboBoxCuit(obtenerEmpresa(IdEmpresa).getCuit());
     }
-    
-    public EmpresaOrden obtenerEmpresa(int idEmpresa){
-        return queryEO.obtenerEmpresaPorId(idEmpresa);   
+
+    public EmpresaOrden obtenerEmpresa(int idEmpresa) {
+        return queryEO.obtenerEmpresaPorId(idEmpresa);
     }
-    
+
     public void iniciarComboBoxEmpresaCVI() {
 
         ArrayList<String> listEmpresas = queryEO.listarPorNombre();
@@ -499,7 +515,7 @@ public class TransaccionesController implements ActionListener {
         formCVI.cbbOperacion.addItem("");
         formCVI.cbbOperacion.addItem("Venta");
         formCVI.cbbOperacion.addItem("Compra");
-        formCVI.cbbOperacion.addItem("Banco");
+        formCVI.cbbOperacion.addItem("Bancos y Tarjetas");
 
     }
 
@@ -584,7 +600,7 @@ public class TransaccionesController implements ActionListener {
 
         cvi.setPerc_iibb_compra(Float.parseFloat(verificarBlanco(formCVI.txtPercIvaC.getText())));
 
-        cvi.setImp_total_fact(Float.parseFloat(verificarBlanco(formCVI.txtImpTotalFact.getText())));
+        cvi.setImp_total_fact(Float.parseFloat(verificarBlanco(converFormatNumToDouble2(formCVI.txtImpTotalFact.getText()))));
 
         cvi.setIte_iva_dere_reg(Float.parseFloat(verificarBlanco(formCVI.txtIvaDereReg.getText())));
 
@@ -613,7 +629,15 @@ public class TransaccionesController implements ActionListener {
         cvi.setIva_facturado_21(Float.parseFloat(verificarBlanco(formCVI.txtIvaFact21.getText())));
 
         cvi.setIva_facturado_27(Float.parseFloat(verificarBlanco(formCVI.txtIvaFact27.getText())));
-
+        
+        cvi.setImp_pais(Float.parseFloat(verificarBlanco(formCVI.txtImpPais.getText())));
+        
+        cvi.setImp_pais_arg(Float.parseFloat(verificarBlanco(formCVI.txtImpPaisArg.getText())));
+        
+        cvi.setPerc_afip_rg_4815(Float.parseFloat(verificarBlanco(formCVI.txtAfipRG485.getText())));
+        
+        cvi.setPerc_iibb_bsas(Float.parseFloat(verificarBlanco(formCVI.txtPercIIBB_bsas.getText())));
+        
         return cvi;
     }
 
@@ -653,6 +677,10 @@ public class TransaccionesController implements ActionListener {
         formCVI.txtImpRIngBrutos.setText("0.0");
         formCVI.txtIvaFact21.setText("0.0");
         formCVI.txtIvaFact27.setText("0.0");
+        formCVI.txtImpPais.setText("0.0");
+        formCVI.txtImpPaisArg.setText("0.0");
+        formCVI.txtAfipRG485.setText("0.0");
+        formCVI.txtPercIIBB_bsas.setText("0.0");
     }
 
     public boolean verificarBlancos() {
@@ -682,13 +710,138 @@ public class TransaccionesController implements ActionListener {
             return numFact;
         }
     }
-    
-    public double converFormatNumToDouble(String s){
-        String yReemplaza = s.replaceAll("\\.","");
-        String flotanteNum = yReemplaza.replaceAll("\\,",".");
-        DecimalFormat formato = new DecimalFormat("#.##"); 
+
+    public double converFormatNumToDouble(String s) {
+        String yReemplaza = s.replaceAll("\\.", "");
+        String flotanteNum = yReemplaza.replaceAll("\\,", ".");
+        DecimalFormat formato = new DecimalFormat("#.##");
         double dou = Double.parseDouble((flotanteNum));
         return dou;
+
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        accionIva10_5(e);
+        accionIva21(e);
+        accionIva27(e);
+    }
+
+    public void accionIva10_5(ItemEvent e) {
+        if (formCVI.checkIVA10.isSelected()) {
+            if (!verificarNeto()) {
+
+                // Obtener el valor deseado
+                double valor = Double.parseDouble(formCVI.txtImpNetoGrav.getText());
+
+                // Calcular el porcentaje
+                double porcentaje = valor * 0.105;
+                String ivaConPunto = String.format("%.2f", (porcentaje));
+                // Establecer el valor calculado en el JTextField
+                formCVI.txtIvaFact.setText(ivaConPunto.replaceAll("\\,", "."));
+            } else {
+                JOptionPane.showMessageDialog(null, "El Impuesto Neto esta vacio", "Error al calcular IVA", 3);
+
+            }
+        } else {
+            // Establecer el JTextField en cero
+            formCVI.txtIvaFact.setText(".00");
+        }
+    }
+
+    public void accionIva21(ItemEvent e) {
+        if (formCVI.checkIVA21.isSelected()) {
+            if (!verificarNeto()) {
+                // Obtener el valor deseado
+                double valor = Double.parseDouble(formCVI.txtImpNetoGrav.getText());
+
+                // Calcular el porcentaje
+                double porcentaje = valor * 0.21;
+                String ivaConPunto = String.format("%.2f", (porcentaje));
+                // Establecer el valor calculado en el JTextField
+                formCVI.txtIvaFact21.setText(ivaConPunto.replaceAll("\\,", "."));
+            } else {
+                JOptionPane.showMessageDialog(null, "El Impuesto Neto esta vacio", "Error al calcular IVA", 3);
+
+            }
+        } else {
+            // Establecer el JTextField en cero
+            formCVI.txtIvaFact21.setText(".00");
+        }
+    }
+
+    public void accionIva27(ItemEvent e) {
+
+        if (formCVI.checkIVA27.isSelected()) {
+            if (!verificarNeto()) {
+                // Obtener el valor deseado
+                double valor = Double.parseDouble(formCVI.txtImpNetoGrav.getText());
+
+                // Calcular el porcentaje
+                double porcentaje = valor * 0.27;
+
+                // Establecer el valor calculado en el JTextField
+                String ivaConPunto = String.format("%.2f", (porcentaje));
+                formCVI.txtIvaFact27.setText(ivaConPunto.replaceAll("\\,", "."));
+            } else {
+                JOptionPane.showMessageDialog(null, "El Impuesto Neto esta vacio", "Error al calcular IVA", 3);
+            }
+        } else {
+            // Establecer el JTextField en cero
+            formCVI.txtIvaFact27.setText(".00");
+        }
+
+    }
+
+    /*Método para verificar que haya escrito valor en neto*/
+    public boolean verificarNeto() {
+        return formCVI.txtImpNetoGrav.getText().equals("");
+    }
     
+     /*Método donde se le aplica evento DocumentListener a txt Imp. Total Fact.*/
+    public void addDocumentListenerTotalFact() {
+        formCVI.txtImpTotalFact.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateSum();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+
+            }
+        });
+    }
+
+    /*Método que suma instantaniamente los campos y actualiza el campo imp. total facturado*/
+    private void updateSum() {
+        double sum = 0;
+        for (int i = 0; i < textFields.length; i++) {
+            try {
+                double value = Double.parseDouble(textFields[i].getText());
+                sum += value;
+            } catch (NumberFormatException e) {
+
+            }
+        }
+        final double totalSum = sum;
+
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                formCVI.txtImpTotalFact.setText(String.format("%.2f", totalSum));
+            }
+        });
+    }
+    
+    public String converFormatNumToDouble2(String s) {
+        String yReemplaza = s.replaceAll("\\.", "");
+        String flotanteNum = yReemplaza.replaceAll("\\,", ".");
+        return flotanteNum;
+
     }
 }

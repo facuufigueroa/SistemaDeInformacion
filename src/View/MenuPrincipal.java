@@ -104,6 +104,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         btnSaveCat = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
+        btnPrintCategoria = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tablaTipoCategorias = new javax.swing.JTable();
@@ -897,6 +898,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/nuevo-documento.png"))); // NOI18N
         jLabel17.setText("NUEVA CATEGORIA");
 
+        btnPrintCategoria.setFont(new java.awt.Font("Malgun Gothic", 1, 14)); // NOI18N
+        btnPrintCategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/printer.png"))); // NOI18N
+        btnPrintCategoria.setText(" Imprimir");
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
@@ -913,10 +918,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
                             .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtNomCat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(cbbTipoCat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(btnSaveCat))
+                        .addGroup(jPanel10Layout.createSequentialGroup()
+                            .addComponent(btnPrintCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnSaveCat)))
                     .addComponent(jLabel17))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane4)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
@@ -935,7 +943,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                             .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbbTipoCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(btnSaveCat)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnSaveCat)
+                            .addComponent(btnPrintCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 49, Short.MAX_VALUE))
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
@@ -1752,6 +1762,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public javax.swing.JButton btnNewTransaccion14;
     public javax.swing.JButton btnNewTransaccion15;
     public javax.swing.JButton btnNewTransaccion4;
+    public javax.swing.JButton btnPrintCategoria;
     public javax.swing.JButton btnReportCuentasAC;
     public javax.swing.JButton btnRocioContador;
     public javax.swing.JButton btnSaveCat;
