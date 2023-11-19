@@ -136,42 +136,28 @@ AND t.fecha BETWEEN $P{fecha_desde} AND  $P{fecha_hasta}]]>
 	<summary>
 		<band height="75" splitType="Stretch">
 			<staticText>
-				<reportElement x="255" y="10" width="140" height="30" uuid="7efa82ac-7d4f-49b3-8dcf-372bb655eab7"/>
+				<reportElement x="0" y="13" width="145" height="30" uuid="7efa82ac-7d4f-49b3-8dcf-372bb655eab7"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Suma Total Entradas: ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="255" y="43" width="140" height="30" uuid="b65f7c2a-3e6a-4f11-8d50-5dc2b8c69136"/>
+				<reportElement x="0" y="43" width="145" height="30" uuid="b65f7c2a-3e6a-4f11-8d50-5dc2b8c69136"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Suma Total Salidas:]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="394" y="44" width="10" height="28" uuid="d270d2ec-0ca5-45af-9999-061d73cdf8a8"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[$]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="395" y="10" width="10" height="28" uuid="17d0a2df-1ecd-479f-8729-6baa25017335"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[$]]></text>
-			</staticText>
 			<textField evaluationTime="Auto" pattern="#,##0.00">
-				<reportElement x="405" y="43" width="140" height="30" uuid="b87fe719-c949-4e38-be2d-3bb1242f0183"/>
+				<reportElement x="145" y="43" width="285" height="30" uuid="b87fe719-c949-4e38-be2d-3bb1242f0183"/>
 				<textElement verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{total_salidas}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="405" y="10" width="140" height="30" uuid="861e1aaa-37ee-4797-b02d-973e4ade216f"/>
+				<reportElement x="145" y="11" width="285" height="30" uuid="861e1aaa-37ee-4797-b02d-973e4ade216f"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>

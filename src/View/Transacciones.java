@@ -1,9 +1,9 @@
 
 package View;
 
-import com.sun.glass.events.KeyEvent;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 
 
 
@@ -531,7 +531,7 @@ public class Transacciones extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtSalida.getText().contains("."))) {
             
             evt.consume();
@@ -543,7 +543,7 @@ public class Transacciones extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtEntrada.getText().contains("."))) {
             
             evt.consume();

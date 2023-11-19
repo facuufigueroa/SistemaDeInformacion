@@ -2,9 +2,9 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LibroIVA-Ventas" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1c348f58-a0c0-4502-981a-36c38d95f59d">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SistemaInformacion2"/>
-	<property name="ireport.zoom" value="3.0"/>
-	<property name="ireport.x" value="471"/>
-	<property name="ireport.y" value="113"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="fecha_desde" class="java.sql.Date"/>
 	<parameter name="fecha_hasta" class="java.sql.Date"/>
 	<parameter name="totalImp_Neto_Grav" class="java.lang.Double"/>
@@ -163,26 +163,26 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 			<staticText>
 				<reportElement x="10" y="28" width="222" height="30" uuid="61b1a583-0420-4926-b4a8-d3198d835618"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Arial Narrow" size="24" isBold="true"/>
+					<font fontName="SansSerif" size="22" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Libro IVA - Ventas]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="10" y="0" width="131" height="28" uuid="e5d4b716-ee56-48e3-adb5-fe6313e46f63"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Arial Narrow" size="18" isItalic="true"/>
+					<font fontName="SansSerif" size="18" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Con fecha desde:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="220" y="0" width="60" height="28" uuid="22a41d21-4f88-406c-b4d5-5bd6bfcc49de"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial Narrow" size="18" isItalic="true"/>
+					<font fontName="SansSerif" size="18" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[hasta:]]></text>
 			</staticText>
 			<line>
-				<reportElement x="0" y="0" width="754" height="1" uuid="92985f54-a981-417e-b909-9a4774b454ff">
+				<reportElement x="0" y="0" width="803" height="1" uuid="92985f54-a981-417e-b909-9a4774b454ff">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 			</line>
@@ -190,12 +190,12 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 				<reportElement x="0" y="0" width="1" height="61" uuid="405f10ce-7196-412a-8f9e-e1811ccde8f2"/>
 			</line>
 			<line>
-				<reportElement x="754" y="0" width="1" height="61" uuid="c600273a-645f-4566-adac-2d0b42f5ac56">
+				<reportElement x="802" y="0" width="1" height="61" uuid="c600273a-645f-4566-adac-2d0b42f5ac56">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="0" y="61" width="754" height="1" uuid="000b60a4-aa6f-45bc-96c9-2eb596c38968">
+				<reportElement x="0" y="61" width="803" height="1" uuid="000b60a4-aa6f-45bc-96c9-2eb596c38968">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
@@ -203,14 +203,14 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 			<textField>
 				<reportElement x="140" y="1" width="80" height="27" uuid="e7d78dc3-afea-4b54-b8a8-25d656d26032"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font size="18" isItalic="true"/>
+					<font fontName="SansSerif" size="18" isItalic="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{fecha_desde}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="280" y="0" width="85" height="28" uuid="c3dcb426-fb69-4060-8277-f57da058bdaa"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font size="18" isItalic="true"/>
+					<font fontName="SansSerif" size="18" isItalic="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{fecha_hasta}]]></textFieldExpression>
 			</textField>
@@ -223,49 +223,49 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="274610a1-f8da-4b58-9a6e-4d0d22a18437"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="50" y="0" width="90" height="30" uuid="1b0033bc-7263-45e3-a885-72850aab76a1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="6" isBold="true"/>
+					<font fontName="SansSerif" size="6" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Comprobante]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="50" y="30" width="32" height="24" uuid="824feabe-39a3-47e8-b01c-c3c812e3dd17"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="6" isBold="true"/>
+					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tipo]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="82" y="30" width="58" height="24" uuid="fb52c04e-2a9f-4f56-bc44-b2365e71e217"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="6" isBold="true"/>
+					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Número]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="141" y="0" width="108" height="30" uuid="ebfad9c7-740d-43e3-8ba2-5eb47a39f49b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="6" isBold="true"/>
+					<font fontName="SansSerif" size="6" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Proveedor]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="141" y="30" width="48" height="23" uuid="9b2d8839-32de-4326-91f0-33e5bed8723a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="6" isBold="true"/>
+					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nombre]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="189" y="29" width="60" height="24" uuid="43136663-056a-44a3-a05f-9af534883722"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="6" isBold="true"/>
+					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[C.U.I.T]]></text>
 			</staticText>
@@ -275,7 +275,7 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Imp. Neto Grav.]]></text>
 			</staticText>
@@ -285,7 +285,7 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Ite. Iva Dere. Reg]]></text>
 			</staticText>
@@ -295,7 +295,7 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[C No Grav.]]></text>
 			</staticText>
@@ -305,7 +305,7 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Ret. II.BB]]></text>
 			</staticText>
@@ -314,16 +314,16 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9dcb5747-f55a-4762-9dbd-9471d7e2bd48"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Ret. Ganancias]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="686" y="10" width="57" height="30" uuid="56238878-cfe9-4582-bfc8-db384ce6dfb5">
+				<reportElement x="686" y="10" width="116" height="30" uuid="56238878-cfe9-4582-bfc8-db384ce6dfb5">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ee467a05-628b-463f-90a7-8728ae4db147"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Imp. Total Fac.]]></text>
 			</staticText>
@@ -336,7 +336,7 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Reten. IVA]]></text>
 			</staticText>
@@ -362,7 +362,7 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 				<reportElement x="249" y="0" width="1" height="53" uuid="427be4f7-7d61-43f8-b818-0656bafb69b3"/>
 			</line>
 			<line>
-				<reportElement x="0" y="53" width="754" height="1" uuid="35310a2c-e1ce-4fb0-bc29-89eda4354ccc">
+				<reportElement x="0" y="53" width="803" height="1" uuid="35310a2c-e1ce-4fb0-bc29-89eda4354ccc">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
@@ -377,12 +377,12 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 				<reportElement x="0" y="0" width="1" height="53" uuid="21d8cad2-44c1-4876-9476-6428141484d8"/>
 			</line>
 			<line>
-				<reportElement x="754" y="0" width="1" height="54" uuid="02be9ee7-4dc7-4202-97b4-20fa766655f8"/>
+				<reportElement x="802" y="0" width="1" height="54" uuid="02be9ee7-4dc7-4202-97b4-20fa766655f8"/>
 			</line>
 			<staticText>
 				<reportElement x="321" y="10" width="58" height="30" uuid="4e14cc8b-cc0b-4c59-ace4-dba7727b293c"/>
 				<textElement textAlignment="Center">
-					<font isBold="true"/>
+					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[IVA Fact 21%]]></text>
 			</staticText>
@@ -394,7 +394,9 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 				<reportElement x="0" y="7" width="50" height="20" uuid="13e415df-f5af-4590-8ab7-1a18172d0030">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="274610a1-f8da-4b58-9a6e-4d0d22a18437"/>
 				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
@@ -403,7 +405,9 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{imp_neto_grav}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -422,7 +426,7 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0b290401-a673-4c82-ab29-a0e6aadcd0fb"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{tipo_comprobante}]]></textFieldExpression>
 			</textField>
@@ -431,7 +435,7 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="416b7bcd-bd21-4796-aeda-80564e493cd3"/>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font size="8"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nro_comprobante}]]></textFieldExpression>
 			</textField>
@@ -440,7 +444,9 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d6577846-4548-455e-89f8-709145864a1b"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{ite_iva_dere_reg}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
@@ -449,7 +455,9 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{ret_ii_bb_venta}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
@@ -458,16 +466,18 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{ret_ganancias}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="686" y="6" width="68" height="24" uuid="c4d49f58-7cf7-4307-b7ec-af215e6a78eb">
+				<reportElement x="686" y="6" width="116" height="26" uuid="c4d49f58-7cf7-4307-b7ec-af215e6a78eb">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ee467a05-628b-463f-90a7-8728ae4db147"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="9" isBold="false"/>
+					<font fontName="SansSerif" size="8" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{imp_total_fac}]]></textFieldExpression>
 			</textField>
@@ -507,20 +517,22 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="0" y="36" width="755" height="1" uuid="db5f7279-8ccc-4399-98bd-a881c470004f">
+				<reportElement x="0" y="36" width="803" height="1" uuid="db5f7279-8ccc-4399-98bd-a881c470004f">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 			</line>
 			<line>
-				<reportElement x="754" y="0" width="1" height="37" uuid="8444b7fc-3422-49ab-b7bc-b8106ec1af64">
+				<reportElement x="802" y="0" width="1" height="37" uuid="8444b7fc-3422-49ab-b7bc-b8106ec1af64">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 			</line>
 			<textField pattern="#,##0.00">
 				<reportElement x="445" y="7" width="60" height="25" uuid="8a6a3ff2-3b8e-4c9b-8c79-0ecf3a827b14"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{c_no_grav_sellos}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -529,18 +541,22 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font size="8"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cuit}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="321" y="6" width="58" height="26" uuid="797077a5-ff97-4b69-8263-7645cf5b5a53"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{iva_facturado_21}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="570" y="7" width="55" height="25" uuid="fdba4aec-b920-4c8e-ba02-c9e8fe23a065"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="570" y="7" width="55" height="26" uuid="fdba4aec-b920-4c8e-ba02-c9e8fe23a065"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{ret_iva}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -550,7 +566,7 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 			<staticText>
 				<reportElement x="200" y="0" width="47" height="30" uuid="a7ff3b06-de28-4018-8012-3be82eb3af4d"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10" isBold="true"/>
+					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Totales]]></text>
 			</staticText>
@@ -582,10 +598,10 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 				<reportElement x="685" y="0" width="1" height="30" uuid="0491aba8-c2d4-47c5-90f5-76082ed226d6"/>
 			</line>
 			<line>
-				<reportElement x="754" y="0" width="1" height="30" uuid="6cef2d8d-d641-4fe0-a06b-7973a5dc2caa"/>
+				<reportElement x="802" y="0" width="1" height="30" uuid="6cef2d8d-d641-4fe0-a06b-7973a5dc2caa"/>
 			</line>
 			<line>
-				<reportElement x="199" y="30" width="555" height="1" uuid="1630efd1-0373-4af5-bc57-f05d523b7644">
+				<reportElement x="199" y="30" width="604" height="1" uuid="1630efd1-0373-4af5-bc57-f05d523b7644">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
@@ -593,55 +609,57 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 			<textField pattern="#,##0.00">
 				<reportElement x="250" y="0" width="70" height="30" uuid="c4b6d995-0915-496f-8ee8-442b77033b41"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="9"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{total_imp_neto_grav}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="321" y="0" width="59" height="30" uuid="108f65ab-6e1e-48ea-ad23-8ca408cbcdb1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="9"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{total_iva_21}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="380" y="0" width="63" height="30" uuid="6e2cec4b-653d-4a5b-ac12-701404ee6960"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="9"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{total_ite_iva_dere}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="506" y="0" width="64" height="30" uuid="c710c79c-350d-49a0-b105-5aa6813efddc"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="9"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{total_ret_ibb}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="570" y="0" width="55" height="30" uuid="278fe6ac-41af-4c41-828f-c08dcf859fa2"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="9"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{total_ret_iva}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="625" y="0" width="60" height="30" uuid="8a65323f-443c-453b-8384-ac6b71a82484"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="9"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{total_ret_ganancias}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="685" y="0" width="70" height="30" uuid="99186fb0-c09e-4624-a4e4-a1380e1005dc"/>
+				<reportElement x="685" y="0" width="117" height="30" uuid="99186fb0-c09e-4624-a4e4-a1380e1005dc"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="9"/>
+					<font fontName="SansSerif" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{total_imp_total}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="443" y="0" width="62" height="30" uuid="ffe72256-8223-49c5-8d3e-d46479b16c88"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{total_c_no_grav_sellos}]]></textFieldExpression>
 			</textField>
 		</band>

@@ -18,8 +18,9 @@ public class ReportMarContador {
     
     public void openReportMARContador(Date fecha_desde, Date fecha_hasta){
         try {
-            Conexion conexion = new Conexion();
-            Connection conn = conexion.getConnection();
+            Conexion conexion;
+            conexion = new Conexion();
+            Connection conn = Conexion.getConnection();
             
             HashMap parametro = new HashMap();
            
