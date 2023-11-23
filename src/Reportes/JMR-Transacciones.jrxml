@@ -133,6 +133,19 @@ AND t.fecha BETWEEN $P{fecha_desde} AND  $P{fecha_hasta}]]>
 			</subreport>
 		</band>
 	</detail>
+	<pageFooter>
+		<band height="24">
+			<textField>
+				<reportElement x="425" y="0" width="80" height="20" uuid="f7179838-0da5-4ee0-94c6-ea91fc89bb89"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pág "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="505" y="0" width="40" height="20" uuid="499a1fb9-77f0-4f74-868b-724b9b2c73e9"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
 	<summary>
 		<band height="75" splitType="Stretch">
 			<staticText>

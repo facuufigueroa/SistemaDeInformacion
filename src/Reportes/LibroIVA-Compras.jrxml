@@ -4,9 +4,9 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SistemaInformacion2"/>
 	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="308"/>
 	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="678"/>
-	<property name="ireport.zoom" value="3.0"/>
-	<property name="ireport.x" value="1512"/>
-	<property name="ireport.y" value="82"/>
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="495"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="fecha_desde" class="java.sql.Date"/>
 	<parameter name="fecha_hasta" class="java.sql.Date"/>
 	<parameter name="totalImp_Neto_Grav" class="java.lang.Double">
@@ -342,7 +342,7 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 				<text><![CDATA[Imp. Total Fac.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="596" y="13" width="55" height="30" uuid="99fcd02d-1e93-4c21-9f1f-1319817b7b19">
+				<reportElement x="596" y="14" width="55" height="29" uuid="99fcd02d-1e93-4c21-9f1f-1319817b7b19">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9dcb5747-f55a-4762-9dbd-9471d7e2bd48"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
@@ -352,7 +352,7 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 				<text><![CDATA[Perc. IVA]]></text>
 			</staticText>
 			<line>
-				<reportElement x="651" y="0" width="1" height="54" uuid="1e9f76c3-8b5c-4761-8323-bd53c8af284d"/>
+				<reportElement x="651" y="-1" width="1" height="55" uuid="1e9f76c3-8b5c-4761-8323-bd53c8af284d"/>
 			</line>
 			<line>
 				<reportElement x="595" y="0" width="1" height="53" uuid="7d0c17ce-6a44-4fd6-ae8c-99417fc0876d"/>
@@ -404,7 +404,7 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 				<reportElement x="823" y="0" width="1" height="54" uuid="02be9ee7-4dc7-4202-97b4-20fa766655f8"/>
 			</line>
 			<line>
-				<reportElement x="707" y="1" width="1" height="52" uuid="77046557-2418-4c01-b972-2c8d9754e97b"/>
+				<reportElement x="707" y="-1" width="1" height="54" uuid="77046557-2418-4c01-b972-2c8d9754e97b"/>
 			</line>
 			<staticText>
 				<reportElement x="333" y="14" width="43" height="28" uuid="27aa6f60-de56-40f1-b930-16092184810e">
@@ -622,6 +622,19 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 			</textField>
 		</band>
 	</detail>
+	<pageFooter>
+		<band height="15">
+			<textField evaluationTime="Report">
+				<reportElement x="784" y="0" width="40" height="14" uuid="5253ab34-027e-4262-938e-d04cfb5cbfe6"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="689" y="0" width="95" height="14" uuid="ee13d8f2-f4f8-4812-ae65-7e57e3651b3b"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pág "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
 	<summary>
 		<band height="44" splitType="Stretch">
 			<staticText>
@@ -676,7 +689,7 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 				<textFieldExpression><![CDATA[$V{total_concep_no_grav}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="287" y="0" width="45" height="28" uuid="a5acd30d-f3f0-4a5d-a89c-c3164899cc77"/>
+				<reportElement x="286" y="2" width="45" height="30" uuid="a5acd30d-f3f0-4a5d-a89c-c3164899cc77"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
@@ -740,7 +753,7 @@ ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
 				<reportElement x="332" y="0" width="1" height="30" uuid="d5019c1e-d3dc-4fd7-b99d-ad8d6d607a34"/>
 			</line>
 			<textField pattern="#,##0.00">
-				<reportElement x="332" y="1" width="44" height="28" uuid="1afa7eca-3030-421e-a59e-24c487086cb9"/>
+				<reportElement x="332" y="4" width="44" height="26" uuid="1afa7eca-3030-421e-a59e-24c487086cb9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>

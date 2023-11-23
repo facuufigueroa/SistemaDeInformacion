@@ -3,8 +3,8 @@
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SistemaInformacion2"/>
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="30"/>
-	<property name="ireport.y" value="280"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="fecha_desde" class="java.sql.Date"/>
 	<parameter name="fecha_hasta" class="java.sql.Date"/>
 	<queryString>
@@ -372,11 +372,11 @@ Informe Contador]]></text>
 	<detail>
 		<band height="31" splitType="Stretch">
 			<textField pattern="dd/MM/yy">
-				<reportElement x="2" y="5" width="48" height="20" uuid="dc1e51f2-db1f-41f6-b0ed-93af18728434">
+				<reportElement x="3" y="5" width="47" height="20" uuid="dc1e51f2-db1f-41f6-b0ed-93af18728434">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bb55705a-0adb-441f-b4b8-f564d4629733"/>
 				</reportElement>
-				<textElement textAlignment="Center">
-					<font size="8" isBold="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
 			</textField>
@@ -443,6 +443,19 @@ Informe Contador]]></text>
 			</line>
 		</band>
 	</detail>
+	<pageFooter>
+		<band height="50">
+			<textField>
+				<reportElement x="436" y="0" width="80" height="20" uuid="a8036724-6bbd-4ecf-a2fa-7347febf5c27"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pág "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="516" y="0" width="40" height="20" uuid="e5336822-c701-403c-9c04-982fd68dfa95"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
 	<summary>
 		<band height="83" splitType="Stretch">
 			<staticText>

@@ -13,9 +13,9 @@ t.descripcion
 FROM tipo_categoria as tc
 INNER JOIN categorias as c ON tc.idtipo_categoria = c.id_tipo_categoria
 INNER JOIN transacciones as t ON t.id_categoria = c.idcategorias
-GROUP BY tc.nombre, c.nombre, t.fecha, t.entradas, t.salidas, t.a_impuestos_iva
-HAVING tc.nombre ="tt) María Amalia Roqués" AND t.a_impuestos_iva = 1
-AND t.fecha BETWEEN  $P{fecha_desde} AND  $P{fecha_hasta}]]>
+WHERE tc.idtipo_categoria = 27 AND t.a_impuestos_iva = 1
+AND t.fecha BETWEEN  $P{fecha_desde} AND  $P{fecha_hasta}
+GROUP BY tc.nombre, c.nombre, t.fecha, t.entradas, t.salidas, t.a_impuestos_iva,t.cantidad,t.descripcion]]>
 	</queryString>
 	<field name="tipo_categoria" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="tipo_categoria"/>
@@ -325,7 +325,7 @@ Informe Contador]]></text>
 				</textElement>
 				<text><![CDATA[Con fecha desde:]]></text>
 			</staticText>
-			<textField>
+			<textField pattern="dd/MM/yy">
 				<reportElement x="139" y="0" width="61" height="30" uuid="d8e4a959-c0db-432a-9872-4f19ec73c769"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="14"/>
@@ -339,7 +339,7 @@ Informe Contador]]></text>
 				</textElement>
 				<text><![CDATA[hasta:]]></text>
 			</staticText>
-			<textField>
+			<textField pattern="dd/MM/yy">
 				<reportElement x="253" y="0" width="59" height="30" uuid="61460d5b-edd5-441b-aee0-302ac47218d0"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="14"/>
@@ -350,12 +350,12 @@ Informe Contador]]></text>
 	</columnHeader>
 	<detail>
 		<band height="31" splitType="Stretch">
-			<textField>
+			<textField pattern="dd/MM/yy">
 				<reportElement x="2" y="5" width="48" height="20" uuid="dc1e51f2-db1f-41f6-b0ed-93af18728434">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bb55705a-0adb-441f-b4b8-f564d4629733"/>
 				</reportElement>
-				<textElement textAlignment="Center">
-					<font size="12" isBold="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
 			</textField>
@@ -387,7 +387,7 @@ Informe Contador]]></text>
 				<textFieldExpression><![CDATA[$F{salidas}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="50" y="1" width="158" height="30" uuid="ba5d0c8f-5198-420f-9f96-97d2024c4c1f">
+				<reportElement x="52" y="1" width="156" height="30" uuid="ba5d0c8f-5198-420f-9f96-97d2024c4c1f">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e9794e62-cce6-4710-a719-c8f3242b0440"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
@@ -422,6 +422,19 @@ Informe Contador]]></text>
 			</line>
 		</band>
 	</detail>
+	<pageFooter>
+		<band height="50">
+			<textField>
+				<reportElement x="434" y="0" width="80" height="20" uuid="d56895d6-ad5b-4c84-996d-08b25d279c64"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pág "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="514" y="0" width="40" height="20" uuid="56c00424-0141-4bfe-909a-b79c0c17a9d1"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
 	<summary>
 		<band height="83" splitType="Stretch">
 			<staticText>
