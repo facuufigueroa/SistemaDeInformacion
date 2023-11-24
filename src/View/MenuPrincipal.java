@@ -69,8 +69,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         btnReportCuentasAC = new javax.swing.JButton();
         btnCuentasAPagar = new javax.swing.JButton();
-        btnNewTransaccion14 = new javax.swing.JButton();
-        btnNewTransaccion15 = new javax.swing.JButton();
         jLabel27 = new javax.swing.JLabel();
         jInternalFrame3 = new javax.swing.JInternalFrame();
         jPanel3 = new javax.swing.JPanel();
@@ -465,28 +463,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnNewTransaccion14.setBackground(new java.awt.Color(102, 102, 102));
-        btnNewTransaccion14.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        btnNewTransaccion14.setForeground(new java.awt.Color(255, 255, 255));
-        btnNewTransaccion14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/documentos.png"))); // NOI18N
-        btnNewTransaccion14.setText("A1_ Transacciones Sin Clasificar");
-        btnNewTransaccion14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewTransaccion14ActionPerformed(evt);
-            }
-        });
-
-        btnNewTransaccion15.setBackground(new java.awt.Color(102, 102, 102));
-        btnNewTransaccion15.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        btnNewTransaccion15.setForeground(new java.awt.Color(255, 255, 255));
-        btnNewTransaccion15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/documentos.png"))); // NOI18N
-        btnNewTransaccion15.setText("A1_ Transferencias");
-        btnNewTransaccion15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewTransaccion15ActionPerformed(evt);
-            }
-        });
-
         jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logo mas chico.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -497,15 +473,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGap(68, 68, 68)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel25)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(btnJmrContador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnMARContador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnRocioContador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 497, Short.MAX_VALUE)
+                        .addGap(6, 799, Short.MAX_VALUE)
                         .addComponent(jLabel27)
                         .addGap(46, 46, 46))
                     .addGroup(jPanel5Layout.createSequentialGroup()
@@ -517,14 +485,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                     .addGroup(jPanel5Layout.createSequentialGroup()
                                         .addGap(6, 6, 6)
                                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnNewTransaccion4)
+                                            .addComponent(jLabel25)
+                                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                    .addComponent(btnJmrContador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(btnMARContador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(btnRocioContador)))
                                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                 .addComponent(btnMarT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(btnJMRT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(btnElRocioT, javax.swing.GroupLayout.Alignment.LEADING))
-                                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(btnNewTransaccion4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(btnNewTransaccion14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(btnNewTransaccion15, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                                .addComponent(btnElRocioT, javax.swing.GroupLayout.Alignment.LEADING)))))
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel5Layout.createSequentialGroup()
                                         .addGap(57, 57, 57)
@@ -539,8 +511,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                             .addComponent(btnLibroVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                             .addComponent(btnLibroIvaCompras, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)))
-                                                    .addComponent(btnCuentasAPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(btnReportCuentasAC)))))
+                                                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                        .addComponent(btnCuentasAPagar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(btnReportCuentasAC, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                                         .addGap(63, 63, 63)
                                         .addComponent(btnNewTransaccion11, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -560,11 +533,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                 .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnNewTransaccion4)
-                                .addGap(10, 10, 10)
-                                .addComponent(btnNewTransaccion14)
-                                .addGap(10, 10, 10)
-                                .addComponent(btnNewTransaccion15)
-                                .addGap(17, 17, 17)
+                                .addGap(18, 18, 18)
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnElRocioT, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -572,10 +541,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                 .addComponent(btnJMRT, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(10, 10, 10)
                                 .addComponent(btnMarT, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
+                                .addGap(18, 18, 18)
                                 .addComponent(jLabel25)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnJmrContador))
+                                .addComponent(btnJmrContador)
+                                .addGap(10, 10, 10)
+                                .addComponent(btnRocioContador)
+                                .addGap(10, 10, 10)
+                                .addComponent(btnMARContador))
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel24)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -592,11 +565,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                 .addComponent(btnReportCuentasAC, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(10, 10, 10)
                                 .addComponent(btnCuentasAPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(10, 10, 10)
-                        .addComponent(btnRocioContador)
-                        .addGap(10, 10, 10)
-                        .addComponent(btnMARContador)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(113, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -654,7 +623,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel2.setText("NUEVA CUENTA");
 
         tablaCuentas.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        tablaCuentas.setForeground(new java.awt.Color(0, 0, 0));
         tablaCuentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -719,7 +687,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel7.setText("NUEVO TIPO DE CUENTA");
 
         tablaTipoCuenta.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        tablaTipoCuenta.setForeground(new java.awt.Color(0, 0, 0));
         tablaTipoCuenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
@@ -816,7 +783,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(labelBienvenido2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -856,7 +823,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel10.setBackground(new java.awt.Color(14, 18, 66));
 
         tablaCategoria.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        tablaCategoria.setForeground(new java.awt.Color(0, 0, 0));
         tablaCategoria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -954,7 +920,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel11.setBackground(new java.awt.Color(14, 18, 66));
 
         tablaTipoCategorias.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        tablaTipoCategorias.setForeground(new java.awt.Color(0, 0, 0));
         tablaTipoCategorias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -1055,7 +1020,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         txtNomSubCat.setFont(new java.awt.Font("Malgun Gothic", 0, 14)); // NOI18N
 
         tablaSubCategoria.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        tablaSubCategoria.setForeground(new java.awt.Color(0, 0, 0));
         tablaSubCategoria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
@@ -1220,7 +1184,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
 
         tablaEmpresa.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        tablaEmpresa.setForeground(new java.awt.Color(0, 0, 0));
         tablaEmpresa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -1389,17 +1352,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         panelPaginacion.setBackground(new java.awt.Color(204, 204, 204));
 
         btnAnterior.setFont(new java.awt.Font("Arial Narrow", 1, 14)); // NOI18N
-        btnAnterior.setForeground(new java.awt.Color(0, 0, 0));
         btnAnterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/anterior.png"))); // NOI18N
         btnAnterior.setText("Anterior");
 
         txtPaginacion.setEditable(false);
         txtPaginacion.setBackground(new java.awt.Color(255, 255, 255));
         txtPaginacion.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        txtPaginacion.setForeground(new java.awt.Color(0, 0, 0));
 
         btnSiguiente.setFont(new java.awt.Font("Arial Narrow", 1, 14)); // NOI18N
-        btnSiguiente.setForeground(new java.awt.Color(0, 0, 0));
         btnSiguiente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/siguiente.png"))); // NOI18N
         btnSiguiente.setText("Siguiente");
 
@@ -1706,14 +1666,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCuentasAPagarActionPerformed
 
-    private void btnNewTransaccion14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTransaccion14ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNewTransaccion14ActionPerformed
-
-    private void btnNewTransaccion15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewTransaccion15ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNewTransaccion15ActionPerformed
-
     private void txtNomTipoCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomTipoCatActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomTipoCatActionPerformed
@@ -1759,8 +1711,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public javax.swing.JButton btnMarT;
     public javax.swing.JButton btnNewTransaccion;
     public javax.swing.JButton btnNewTransaccion11;
-    public javax.swing.JButton btnNewTransaccion14;
-    public javax.swing.JButton btnNewTransaccion15;
     public javax.swing.JButton btnNewTransaccion4;
     public javax.swing.JButton btnPrintCategoria;
     public javax.swing.JButton btnReportCuentasAC;
