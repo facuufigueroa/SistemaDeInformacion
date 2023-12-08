@@ -15,6 +15,7 @@ import Reportes.ReporteLibroComprasIVA;
 import Reportes.ReporteLibroVentasIVA;
 import View.FormFechas;
 import View.MenuPrincipal;
+import com.formdev.flatlaf.FlatLightLaf;
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,6 +27,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class MenuController implements ActionListener {
 
@@ -137,7 +139,7 @@ public class MenuController implements ActionListener {
 
     }
     
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -155,6 +157,22 @@ public class MenuController implements ActionListener {
                 menuPrincipal.setLocationRelativeTo(null);
             }
         });
+    }*/
+    
+    public static void main(String args[]) {
+        try {
+            // Configura el Look and Feel de FlatLaf
+            UIManager.setLookAndFeel(new FlatLightLaf());  // Utiliza FlatDarkLaf para el tema oscuro, o FlatLightLaf para el tema claro
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
+        java.awt.EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        menuPrincipal.setVisible(true);
+                        menuPrincipal.setLocationRelativeTo(null);
+                    }
+                });
+                // Resto del código de tu aplicación...
     }
 
     /*Metodo que abre la vista para generar nuevas transacciones*/

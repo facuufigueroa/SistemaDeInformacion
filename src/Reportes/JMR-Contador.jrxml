@@ -2,30 +2,37 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubReportElRocioContador" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="4745aead-5ee0-475e-895e-1ac2afabc6ee">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SistemaInformacion2"/>
-	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="fecha_desde" class="java.sql.Date"/>
 	<parameter name="fecha_hasta" class="java.sql.Date"/>
-	<queryString language="SQL">
-		<![CDATA[SELECT tc.nombre as tipo_categoria, c.nombre as categoria,t.salidas,t.entradas,t.fecha,t.cantidad,
-t.descripcion
-FROM tipo_categoria as tc
-INNER JOIN categorias as c ON tc.idtipo_categoria = c.id_tipo_categoria
-INNER JOIN transacciones as t ON t.id_categoria = c.idcategorias
-WHERE (((tc.nombre)="y) JMR: a. Ingresos"
-Or (tc.nombre)="z) JMR: b. egresos"
-Or (tc.nombre)="zz) Anita Roqués"
-Or (tc.nombre)="zz) JMR: c. Gastos profesionales"
-Or (tc.nombre)="zz) JMR: d. Gastos Propiedades"
-Or (tc.nombre)="zz) JMR: f. Operaciones"
-Or (tc.nombre)="zz) JMR: g. Sucesión"
-Or (tc.nombre)="zz) Juan E.Roqués")
-And ((c.nombre)<>"saldo al 1 de enero"
-And (c.nombre)<>"transferencias Bco.")
-And ((t.a_impuestos_iva)=1))
-And t.fecha BETWEEN  $P{fecha_desde} And  $P{fecha_hasta} 
-ORDER BY tc.nombre,c.nombre,t.fecha]]>
+	<queryString>
+		<![CDATA[SELECT
+    tc.nombre AS tipo_categoria,
+    c.nombre AS categoria,
+    t.salidas,
+    t.entradas,
+    t.fecha,
+    t.cantidad,
+    t.descripcion
+FROM
+    tipo_categoria AS tc
+INNER JOIN
+    categorias AS c ON tc.idtipo_categoria = c.id_tipo_categoria
+INNER JOIN
+    transacciones AS t ON t.id_categoria = c.idcategorias
+WHERE
+    (
+        tc.idtipo_categoria IN (32, 33, 35, 37, 38, 40)
+        AND c.idcategorias NOT IN (121, 138)
+        AND t.a_impuestos_iva = 1
+        AND t.fecha BETWEEN $P{fecha_desde} AND $P{fecha_hasta}
+    )
+ORDER BY
+    tc.nombre,
+    c.nombre,
+    t.fecha;]]>
 	</queryString>
 	<field name="tipo_categoria" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="tipo_categoria"/>
@@ -246,7 +253,7 @@ ORDER BY tc.nombre,c.nombre,t.fecha]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="70">
+		<band height="83">
 			<staticText>
 				<reportElement x="130" y="10" width="340" height="60" forecolor="#061747" uuid="288510a3-c698-4ff2-8736-ee250002e3b0"/>
 				<textElement textAlignment="Center">
@@ -255,12 +262,40 @@ ORDER BY tc.nombre,c.nombre,t.fecha]]>
 				<text><![CDATA[José María Roqués
 Informe Contador]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="68" width="71" height="15" uuid="f7f67902-ab2b-4dee-b334-51b9bb3bd56c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Con fecha desde:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yy">
+				<reportElement x="71" y="68" width="41" height="15" uuid="d8e4a959-c0db-432a-9872-4f19ec73c769"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fecha_desde}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="112" y="68" width="29" height="15" uuid="497d4565-cdcc-4a38-9646-45b6a00b936b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[hasta:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yy">
+				<reportElement x="141" y="68" width="36" height="15" uuid="61460d5b-edd5-441b-aee0-302ac47218d0"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fecha_hasta}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<columnHeader>
-		<band height="84" splitType="Stretch">
+		<band height="55" splitType="Stretch">
 			<staticText>
-				<reportElement x="2" y="40" width="48" height="30" uuid="9b18da88-0e3f-44bc-b445-73478c98abb0">
+				<reportElement x="2" y="15" width="48" height="30" uuid="9b18da88-0e3f-44bc-b445-73478c98abb0">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bb55705a-0adb-441f-b4b8-f564d4629733"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -269,7 +304,7 @@ Informe Contador]]></text>
 				<text><![CDATA[Fecha]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="220" y="40" width="54" height="30" uuid="5637c7af-1c09-45a5-8fad-786e81579f94">
+				<reportElement x="220" y="15" width="54" height="30" uuid="5637c7af-1c09-45a5-8fad-786e81579f94">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="646fc64d-e352-468f-870b-acfd3373e5d2"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -278,7 +313,7 @@ Informe Contador]]></text>
 				<text><![CDATA[Cantidad]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="274" y="40" width="148" height="30" uuid="1d355c46-3870-47d6-ab92-a02aa5be038c">
+				<reportElement x="274" y="15" width="148" height="30" uuid="1d355c46-3870-47d6-ab92-a02aa5be038c">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4745fad2-1b3f-468e-8042-09548a1117fb"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -287,7 +322,7 @@ Informe Contador]]></text>
 				<text><![CDATA[Entradas]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="422" y="40" width="133" height="30" uuid="62f820e4-c567-4e2b-9aec-f2bd8545aa88">
+				<reportElement x="422" y="15" width="133" height="30" uuid="62f820e4-c567-4e2b-9aec-f2bd8545aa88">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eae9da65-8848-4188-9d47-ab74dd3d32a9"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -296,7 +331,7 @@ Informe Contador]]></text>
 				<text><![CDATA[Salidas]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="51" y="40" width="169" height="30" uuid="75eb5d2d-184a-43b1-87aa-29ae4e7c52e3">
+				<reportElement x="51" y="15" width="169" height="30" uuid="75eb5d2d-184a-43b1-87aa-29ae4e7c52e3">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e9794e62-cce6-4710-a719-c8f3242b0440"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -305,57 +340,29 @@ Informe Contador]]></text>
 				<text><![CDATA[Descripción]]></text>
 			</staticText>
 			<line>
-				<reportElement x="0" y="70" width="556" height="1" uuid="190896f2-2bb3-49a2-bda0-6bfbf4b26002"/>
+				<reportElement x="0" y="45" width="556" height="1" uuid="190896f2-2bb3-49a2-bda0-6bfbf4b26002"/>
 			</line>
 			<line>
-				<reportElement x="0" y="40" width="556" height="1" uuid="f51f594a-9bc5-48fa-be23-606d641fbe24"/>
+				<reportElement x="0" y="15" width="556" height="1" uuid="f51f594a-9bc5-48fa-be23-606d641fbe24"/>
 			</line>
 			<line>
-				<reportElement x="555" y="40" width="1" height="30" uuid="fba06af0-b65d-4e49-8374-00a988e3247b"/>
+				<reportElement x="221" y="15" width="1" height="30" uuid="003d725f-fc2b-47f2-bc6b-1f29900e4fc9"/>
 			</line>
 			<line>
-				<reportElement x="422" y="40" width="1" height="30" uuid="7ea628f2-9bb9-41da-af47-cda80f38d978"/>
+				<reportElement x="51" y="15" width="1" height="30" uuid="c0ba7439-abb1-4bb4-9e59-44439fe56ef6"/>
 			</line>
 			<line>
-				<reportElement x="274" y="40" width="1" height="30" uuid="6bcb9be3-5a19-456d-b39d-1c08df093fae"/>
+				<reportElement x="0" y="15" width="1" height="30" uuid="9c9decf8-bbcf-456d-b40a-cacb946fbc34"/>
 			</line>
 			<line>
-				<reportElement x="221" y="40" width="1" height="30" uuid="003d725f-fc2b-47f2-bc6b-1f29900e4fc9"/>
+				<reportElement x="555" y="15" width="1" height="30" uuid="fba06af0-b65d-4e49-8374-00a988e3247b"/>
 			</line>
 			<line>
-				<reportElement x="51" y="40" width="1" height="30" uuid="c0ba7439-abb1-4bb4-9e59-44439fe56ef6"/>
+				<reportElement x="422" y="15" width="1" height="30" uuid="7ea628f2-9bb9-41da-af47-cda80f38d978"/>
 			</line>
 			<line>
-				<reportElement x="0" y="40" width="1" height="30" uuid="9c9decf8-bbcf-456d-b40a-cacb946fbc34"/>
+				<reportElement x="274" y="15" width="1" height="30" uuid="6bcb9be3-5a19-456d-b39d-1c08df093fae"/>
 			</line>
-			<staticText>
-				<reportElement x="0" y="0" width="140" height="30" uuid="f7f67902-ab2b-4dee-b334-51b9bb3bd56c"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8" isItalic="true"/>
-				</textElement>
-				<text><![CDATA[Con fecha desde:]]></text>
-			</staticText>
-			<textField pattern="dd/MM/yy">
-				<reportElement x="139" y="0" width="61" height="30" uuid="d8e4a959-c0db-432a-9872-4f19ec73c769"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{fecha_desde}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="200" y="0" width="52" height="30" uuid="497d4565-cdcc-4a38-9646-45b6a00b936b"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8"/>
-				</textElement>
-				<text><![CDATA[hasta:]]></text>
-			</staticText>
-			<textField pattern="dd/MM/yy">
-				<reportElement x="253" y="0" width="59" height="30" uuid="61460d5b-edd5-441b-aee0-302ac47218d0"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{fecha_hasta}]]></textFieldExpression>
-			</textField>
 		</band>
 	</columnHeader>
 	<detail>
