@@ -216,7 +216,6 @@ public class QueryVerTransacciones {
         Statement st;
         try {
             String sql = "SELECT * FROM transacciones AS t \n"
-                    + "WHERE YEAR(t.fecha)=" + añoActual + "\n"
                     + "ORDER BY t.idtransacciones DESC";
             st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
