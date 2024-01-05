@@ -31,6 +31,16 @@ public class QuerySubCategoria {
         } catch (NumberFormatException | SQLException e) {
             System.out.println(e);
         }
+        finally {
+        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        }
        return subCategoriaList;
     }
     
@@ -70,6 +80,16 @@ public class QuerySubCategoria {
         } catch (Exception e) {
             System.out.println(e);
         }
+        finally {
+        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        }
 
         return id_subCat;
     }
@@ -90,6 +110,16 @@ public class QuerySubCategoria {
 
         } catch (Exception e) {
             System.out.println(e);
+        }
+        finally {
+        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
         }
 
         return nombre;
