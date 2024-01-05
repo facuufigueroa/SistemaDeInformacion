@@ -26,6 +26,15 @@ public class QueryCategoria {
         } catch (Exception e) {
             System.out.println(e);
         }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 
         return nombreTipoCat;
     }
@@ -47,6 +56,15 @@ public class QueryCategoria {
 
         } catch (Exception e) {
             System.out.println(e);
+        }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
         }
 
         return id_tipo_categoria;
@@ -73,6 +91,15 @@ public class QueryCategoria {
         } catch (NumberFormatException | SQLException e) {
             System.out.println(e);
         }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        }
         return categoriaList;
     }
 
@@ -89,6 +116,15 @@ public class QueryCategoria {
             }
         } catch (NumberFormatException | SQLException e) {
             System.out.println(e);
+        }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
         }
         return categoriaList;
     }
@@ -133,6 +169,15 @@ public class QueryCategoria {
         } catch (NumberFormatException | SQLException e) {
             System.out.println(e);
         }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        }
         return categoriaList;
     }
 
@@ -154,7 +199,15 @@ public class QueryCategoria {
         } catch (Exception e) {
             System.out.println(e);
         }
-
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        }
         return id_categoria;
     }
 
@@ -173,6 +226,15 @@ public class QueryCategoria {
             }
         } catch (Exception e) {
             System.out.println(e);
+        }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
         }
 
         return nombreTipoCat;
@@ -194,6 +256,15 @@ public class QueryCategoria {
 
         } catch (Exception e) {
             System.out.println(e);
+        }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
         }
 
         return id_cat;
@@ -217,6 +288,15 @@ public class QueryCategoria {
             }
         } catch (Exception e) {
             System.out.println(e);
+        }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
         }
 
         return nombreTipoCat;

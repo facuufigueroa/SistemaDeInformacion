@@ -37,6 +37,15 @@ public class QueryVerTransacciones {
         } catch (Exception e) {
             System.out.println(e);
         }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        }
 
         return nombre;
     }
@@ -71,6 +80,15 @@ public class QueryVerTransacciones {
             }
         } catch (Exception e) {
             System.out.println(e);
+        }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
         }
 
         return transaccionesList;
@@ -107,6 +125,15 @@ public class QueryVerTransacciones {
         } catch (Exception e) {
             System.out.println(e);
         }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        }
 
         return transaccionesList;
     }
@@ -140,6 +167,15 @@ public class QueryVerTransacciones {
             }
         } catch (Exception e) {
             System.out.println(e);
+        }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
         }
 
         return transaccionesList;
@@ -175,6 +211,15 @@ public class QueryVerTransacciones {
         } catch (Exception e) {
             System.out.println(e);
         }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        }
 
         return transaccionesList;
     }
@@ -203,6 +248,15 @@ public class QueryVerTransacciones {
 
         } catch (Exception e) {
             System.out.println(e);
+        }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
         }
 
         return trans;
@@ -236,6 +290,15 @@ public class QueryVerTransacciones {
         } catch (NumberFormatException | SQLException e) {
             System.out.println(e);
         }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        }
         return tList;
     }
 
@@ -253,6 +316,15 @@ public class QueryVerTransacciones {
 
         } catch (Exception e) {
             System.out.println(e);
+        }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
         }
 
         return false;
@@ -308,6 +380,15 @@ public class QueryVerTransacciones {
 
         } catch (Exception e) {
             System.out.println(e);
+        }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
         }
 
         return cvi;
@@ -460,6 +541,15 @@ public class QueryVerTransacciones {
         } catch (Exception e) {
             System.out.println(e);
         }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        }
 
         return false;
     }
@@ -493,6 +583,15 @@ public class QueryVerTransacciones {
         } catch (SQLException e) {
             System.out.println(e);
         }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        }
 
         return t;
     }
@@ -523,6 +622,15 @@ public class QueryVerTransacciones {
             }
         } catch (SQLException e) {
             System.out.println(e);
+        }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
         }
 
         return t;
@@ -556,6 +664,15 @@ public class QueryVerTransacciones {
             }
         } catch (Exception e) {
             System.out.println(e);
+        }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
         }
 
         return transaccionesList;
@@ -593,6 +710,15 @@ public class QueryVerTransacciones {
         } catch (SQLException e) {
             System.out.println(e);
         }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        }
 
         return false;
     }
@@ -616,6 +742,15 @@ public class QueryVerTransacciones {
         } catch (SQLException e) {
             System.out.println(e);
         }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        }
 
         return false;
     }
@@ -637,6 +772,15 @@ public class QueryVerTransacciones {
             }
         } catch (SQLException e) {
             System.out.println(e);
+        }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
         }
 
         return false;
