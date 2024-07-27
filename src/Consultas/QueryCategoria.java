@@ -27,7 +27,6 @@ public class QueryCategoria {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -59,7 +58,6 @@ public class QueryCategoria {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -94,7 +92,6 @@ public class QueryCategoria {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -121,7 +118,6 @@ public class QueryCategoria {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -174,7 +170,6 @@ public class QueryCategoria {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -205,7 +200,6 @@ public class QueryCategoria {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -214,7 +208,6 @@ public class QueryCategoria {
             System.out.println(e);
         }
         }
-
         return id_categoria;
     }
 
@@ -235,7 +228,6 @@ public class QueryCategoria {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -266,7 +258,6 @@ public class QueryCategoria {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -299,7 +290,6 @@ public class QueryCategoria {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();

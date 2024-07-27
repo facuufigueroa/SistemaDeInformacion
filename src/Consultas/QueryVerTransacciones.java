@@ -38,7 +38,6 @@ public class QueryVerTransacciones {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -83,7 +82,6 @@ public class QueryVerTransacciones {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -128,7 +126,6 @@ public class QueryVerTransacciones {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -172,7 +169,6 @@ public class QueryVerTransacciones {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -216,7 +212,6 @@ public class QueryVerTransacciones {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -255,7 +250,6 @@ public class QueryVerTransacciones {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -271,7 +265,6 @@ public class QueryVerTransacciones {
     public ArrayList<Transaccion> listarTransacciones() {
         ArrayList<Transaccion> tList = new ArrayList<>();
         Calendar fecha = new GregorianCalendar();
-        String añoActual = String.valueOf(fecha.get(Calendar.YEAR));
         Connection conn = Conexion.getConnection();
         Statement st;
         try {
@@ -298,7 +291,6 @@ public class QueryVerTransacciones {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -326,7 +318,6 @@ public class QueryVerTransacciones {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -391,7 +382,6 @@ public class QueryVerTransacciones {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -552,7 +542,6 @@ public class QueryVerTransacciones {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -595,7 +584,6 @@ public class QueryVerTransacciones {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -636,7 +624,6 @@ public class QueryVerTransacciones {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -679,7 +666,6 @@ public class QueryVerTransacciones {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -725,7 +711,6 @@ public class QueryVerTransacciones {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -758,7 +743,6 @@ public class QueryVerTransacciones {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -790,7 +774,6 @@ public class QueryVerTransacciones {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();

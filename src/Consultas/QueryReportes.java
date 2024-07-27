@@ -27,7 +27,6 @@ public class QueryReportes {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -55,7 +54,6 @@ public class QueryReportes {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -83,7 +81,6 @@ public class QueryReportes {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -110,6 +107,15 @@ public class QueryReportes {
         } catch (Exception e) {
             System.out.println(e);
         }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        }
         return total;
     }
     
@@ -129,7 +135,6 @@ public class QueryReportes {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -157,7 +162,6 @@ public class QueryReportes {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -185,7 +189,6 @@ public class QueryReportes {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -213,7 +216,6 @@ public class QueryReportes {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -245,7 +247,6 @@ public class QueryReportes {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -273,7 +274,6 @@ public class QueryReportes {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -301,7 +301,6 @@ public class QueryReportes {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -329,7 +328,6 @@ public class QueryReportes {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -357,7 +355,6 @@ public class QueryReportes {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -385,7 +382,6 @@ public class QueryReportes {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -412,6 +408,15 @@ public class QueryReportes {
         } catch (Exception e) {
             System.out.println(e);
         }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        }
         return total;
     }
     
@@ -431,7 +436,6 @@ public class QueryReportes {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -466,7 +470,6 @@ public class QueryReportes {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -500,7 +503,6 @@ public class QueryReportes {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
@@ -540,7 +542,6 @@ public class QueryReportes {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();

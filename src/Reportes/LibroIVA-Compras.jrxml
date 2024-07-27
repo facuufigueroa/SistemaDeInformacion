@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LibroIVA-Ventas" pageWidth="864" pageHeight="595" orientation="Landscape" columnWidth="824" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1c348f58-a0c0-4502-981a-36c38d95f59d">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LibroIVA-Compras" pageWidth="864" pageHeight="595" orientation="Landscape" columnWidth="824" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1c348f58-a0c0-4502-981a-36c38d95f59d">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SistemaInformacion2"/>
 	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="308"/>
@@ -24,27 +24,27 @@
 		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT sistemainformacion.compra_ventas_iva.fecha,
-	sistemainformacion.compra_ventas_iva.tipo_comprobante,
-	sistemainformacion.compra_ventas_iva.nro_comprobante,
-	sistemainformacion.compra_ventas_iva.cuit,
-	TRUNCATE( sistemainformacion.compra_ventas_iva.imp_neto_grav,2) AS imp_neto_grav,
-	TRUNCATE( sistemainformacion.compra_ventas_iva.iva_facturado_10,2) AS iva_facturado,
-	TRUNCATE( sistemainformacion.compra_ventas_iva.imp_interno,2) AS imp_interno,
-	TRUNCATE( sistemainformacion.compra_ventas_iva.concepto_no_grav,2) AS concepto_no_grav,
-	TRUNCATE( sistemainformacion.compra_ventas_iva.ret_ganancias,2) AS ret_ganancias,
-	TRUNCATE( sistemainformacion.compra_ventas_iva.imp_total_fac,2) AS imp_total_fac,
-	TRUNCATE( sistemainformacion.compra_ventas_iva.imp_interno,2) AS imp_interno,
-	TRUNCATE( sistemainformacion.compra_ventas_iva.perc_iibb_compra,2) AS perc_iibb_compra,
-	sistemainformacion.compra_ventas_iva.nombre,
-	TRUNCATE( sistemainformacion.compra_ventas_iva.percepcion_iva,2) AS percepcion_iva,
-	TRUNCATE( sistemainformacion.compra_ventas_iva.iva_facturado_21,2) AS iva_facturado_21,
-	IFNULL(TRUNCATE( sistemainformacion.compra_ventas_iva.iva_facturado_27,2),0) AS iva_facturado_27
-FROM sistemainformacion.compra_ventas_iva
+		<![CDATA[SELECT cvi.fecha,
+	cvi.tipo_comprobante,
+	cvi.nro_comprobante,
+	cvi.cuit,
+	TRUNCATE( cvi.imp_neto_grav,2) AS imp_neto_grav,
+	TRUNCATE( cvi.iva_facturado_10,2) AS iva_facturado,
+	TRUNCATE( cvi.imp_interno,2) AS imp_interno,
+	TRUNCATE( cvi.concepto_no_grav,2) AS concepto_no_grav,
+	TRUNCATE( cvi.ret_ganancias,2) AS ret_ganancias,
+	TRUNCATE( cvi.imp_total_fac,2) AS imp_total_fac,
+	TRUNCATE( cvi.imp_interno,2) AS imp_interno,
+	TRUNCATE( cvi.perc_iibb_compra,2) AS perc_iibb_compra,
+	cvi.nombre,
+	TRUNCATE( cvi.percepcion_iva,2) AS percepcion_iva,
+	TRUNCATE( cvi.iva_facturado_21,2) AS iva_facturado_21,
+	IFNULL(TRUNCATE( cvi.iva_facturado_27,2),0) AS iva_facturado_27
+FROM compra_ventas_iva as cvi
 WHERE 
-	sistemainformacion.compra_ventas_iva.operacion = 'compra' 
-	AND sistemainformacion.compra_ventas_iva.fecha BETWEEN $P{fecha_desde} AND $P{fecha_hasta}
-ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
+	cvi.operacion = 'compra' 
+	AND cvi.fecha BETWEEN $P{fecha_desde} AND $P{fecha_hasta}
+ORDER BY cvi.fecha ASC]]>
 	</queryString>
 	<field name="fecha" class="java.sql.Date">
 		<property name="com.jaspersoft.studio.field.label" value="fecha"/>

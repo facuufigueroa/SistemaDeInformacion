@@ -32,7 +32,6 @@ public class QueryTipoCategoria {
             System.out.println(e);
         }
         finally {
-        // Cerrar la conexión en el bloque finally para asegurar que se cierre incluso si ocurre una excepción.
         try {
             if (conn != null) {
                 conn.close();
