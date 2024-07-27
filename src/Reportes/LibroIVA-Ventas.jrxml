@@ -16,26 +16,26 @@
 	<parameter name="total_ret_iva" class="java.lang.Double"/>
 	<parameter name="total_imp_total_fac" class="java.lang.Double"/>
 	<queryString>
-		<![CDATA[SELECT sistemainformacion.compra_ventas_iva.fecha,
-	sistemainformacion.compra_ventas_iva.tipo_comprobante,
-	sistemainformacion.compra_ventas_iva.nro_comprobante,
-	sistemainformacion.compra_ventas_iva.cuit,
-	TRUNCATE( sistemainformacion.compra_ventas_iva.imp_neto_grav,2) AS imp_neto_grav,
-	TRUNCATE( sistemainformacion.compra_ventas_iva.iva_facturado_21,2) AS iva_facturado_21,
-	TRUNCATE( sistemainformacion.compra_ventas_iva.imp_interno,2) AS imp_interno,
-	TRUNCATE( sistemainformacion.compra_ventas_iva.concepto_no_grav,2) AS concepto_no_grav,
-	TRUNCATE( sistemainformacion.compra_ventas_iva.ret_ganancias,2) AS ret_ganancias,
-	TRUNCATE( sistemainformacion.compra_ventas_iva.imp_total_fac,2) AS imp_total_fac,
-	TRUNCATE( sistemainformacion.compra_ventas_iva.ite_iva_dere_reg,2) AS ite_iva_dere_reg,
-	TRUNCATE( sistemainformacion.compra_ventas_iva.c_no_grav_sellos,2) AS c_no_grav_sellos,
-	TRUNCATE( sistemainformacion.compra_ventas_iva.ret_ii_bb_venta,2) AS ret_ii_bb_venta,
-	sistemainformacion.compra_ventas_iva.nombre,
-	TRUNCATE( sistemainformacion.compra_ventas_iva.ret_iva,2) AS ret_iva
-FROM sistemainformacion.compra_ventas_iva
+		<![CDATA[SELECT cvi.fecha,
+	cvi.tipo_comprobante,
+	cvi.nro_comprobante,
+	cvi.cuit,
+	TRUNCATE( cvi.imp_neto_grav,2) AS imp_neto_grav,
+	TRUNCATE( cvi.iva_facturado_21,2) AS iva_facturado_21,
+	TRUNCATE( cvi.imp_interno,2) AS imp_interno,
+	TRUNCATE( cvi.concepto_no_grav,2) AS concepto_no_grav,
+	TRUNCATE( cvi.ret_ganancias,2) AS ret_ganancias,
+	TRUNCATE( cvi.imp_total_fac,2) AS imp_total_fac,
+	TRUNCATE( cvi.ite_iva_dere_reg,2) AS ite_iva_dere_reg,
+	TRUNCATE( cvi.c_no_grav_sellos,2) AS c_no_grav_sellos,
+	TRUNCATE( cvi.ret_ii_bb_venta,2) AS ret_ii_bb_venta,
+	cvi.nombre,
+	TRUNCATE( cvi.ret_iva,2) AS ret_iva
+FROM compra_ventas_iva as cvi
 WHERE 
-	 sistemainformacion.compra_ventas_iva.operacion = 'venta' 
-	 AND sistemainformacion.compra_ventas_iva.fecha BETWEEN $P{fecha_desde} AND $P{fecha_hasta}
-ORDER BY sistemainformacion.compra_ventas_iva.fecha ASC]]>
+	 cvi.operacion = 'venta' 
+	 AND cvi.fecha BETWEEN $P{fecha_desde} AND $P{fecha_hasta}
+ORDER BY cvi.fecha ASC]]>
 	</queryString>
 	<field name="fecha" class="java.sql.Date">
 		<property name="com.jaspersoft.studio.field.label" value="fecha"/>
