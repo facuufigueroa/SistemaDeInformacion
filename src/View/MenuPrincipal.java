@@ -160,6 +160,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel14 = new javax.swing.JPanel();
         jLabel30 = new javax.swing.JLabel();
         btnEliminar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SISTEMA DE INFORMACIÓN");
@@ -1511,6 +1512,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/proteccion-de-datos.png"))); // NOI18N
         btnEliminar.setText("Eliminar");
 
+        jButton1.setText("BackUp");
+
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
@@ -1518,9 +1521,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEliminar)
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addComponent(btnEliminar)
+                        .addGap(71, 71, 71)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel30))
-                .addContainerGap(793, Short.MAX_VALUE))
+                .addContainerGap(700, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1528,7 +1534,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel30)
                 .addGap(18, 18, 18)
-                .addComponent(btnEliminar)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
 
@@ -1721,6 +1729,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> cbbTipoCat;
     public javax.swing.JComboBox<String> cbbTipoCuenta;
     public javax.swing.JInternalFrame internalFrame;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton5;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JInternalFrame jInternalFrame2;
