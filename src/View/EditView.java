@@ -1,9 +1,9 @@
 
 package View;
 
-import com.sun.glass.events.KeyEvent;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 
 
 public class EditView extends javax.swing.JFrame {
@@ -1095,7 +1095,7 @@ public class EditView extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtSalidas.getText().contains("."))) {
             
             evt.consume();
@@ -1107,7 +1107,7 @@ public class EditView extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtEntradas.getText().contains("."))) {
             
             evt.consume();
@@ -1119,7 +1119,7 @@ public class EditView extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtImpNetoGrav.getText().contains("."))) {
             
             evt.consume();
@@ -1131,7 +1131,7 @@ public class EditView extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtIvaFact.getText().contains("."))) {
             
             evt.consume();
@@ -1143,7 +1143,7 @@ public class EditView extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtIvaFact21.getText().contains("."))) {
             
             evt.consume();
@@ -1155,7 +1155,7 @@ public class EditView extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtImpInterno.getText().contains("."))) {
             
             evt.consume();
@@ -1167,7 +1167,7 @@ public class EditView extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtConceptoNoGrav.getText().contains("."))) {
             
             evt.consume();
@@ -1179,7 +1179,7 @@ public class EditView extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtPercepcionIVA.getText().contains("."))) {
             
             evt.consume();
@@ -1191,7 +1191,7 @@ public class EditView extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtRetGanan.getText().contains("."))) {
             
             evt.consume();
@@ -1203,7 +1203,7 @@ public class EditView extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtPercIvaC.getText().contains("."))) {
             
             evt.consume();
@@ -1215,7 +1215,7 @@ public class EditView extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtImpTotalFact.getText().contains("."))) {
             
             evt.consume();
@@ -1227,7 +1227,7 @@ public class EditView extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtIvaDereReg.getText().contains("."))) {
             
             evt.consume();
@@ -1239,7 +1239,7 @@ public class EditView extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtCNoGravSellos.getText().contains("."))) {
             
             evt.consume();
@@ -1251,7 +1251,7 @@ public class EditView extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtRetIiBbV.getText().contains("."))) {
             
             evt.consume();
@@ -1263,7 +1263,7 @@ public class EditView extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtIvaRg212.getText().contains("."))) {
             
             evt.consume();
@@ -1275,7 +1275,7 @@ public class EditView extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtGravLey25413.getText().contains("."))) {
             
             evt.consume();
@@ -1287,7 +1287,7 @@ public class EditView extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtIntNumerales.getText().contains("."))) {
             
             evt.consume();
@@ -1299,7 +1299,7 @@ public class EditView extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtOpExentas.getText().contains("."))) {
             
             evt.consume();
@@ -1311,7 +1311,7 @@ public class EditView extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtIngBrutos.getText().contains("."))) {
             
             evt.consume();
@@ -1323,7 +1323,7 @@ public class EditView extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtRetIva.getText().contains("."))) {
             
             evt.consume();
@@ -1335,7 +1335,7 @@ public class EditView extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtImpRIngBrutos.getText().contains("."))) {
             
             evt.consume();
@@ -1347,7 +1347,7 @@ public class EditView extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtOtros.getText().contains("."))) {
             
             evt.consume();
@@ -1379,7 +1379,7 @@ public class EditView extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtPercIIBB_bsas.getText().contains("."))) {
             
             evt.consume();
@@ -1391,7 +1391,7 @@ public class EditView extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtAfipRG485.getText().contains("."))) {
             
             evt.consume();
@@ -1403,7 +1403,7 @@ public class EditView extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtImpPaisArg.getText().contains("."))) {
             
             evt.consume();
@@ -1415,7 +1415,7 @@ public class EditView extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtImpPais.getText().contains("."))) {
             
             evt.consume();

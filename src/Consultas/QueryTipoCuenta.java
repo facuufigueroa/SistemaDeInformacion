@@ -33,6 +33,15 @@ public class QueryTipoCuenta {
         } catch (NumberFormatException | SQLException e) {
             System.out.println(e);
         }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        }
        return tipoCuentas;
     }
     

@@ -2,9 +2,9 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="JMR-Transacciones" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7414aa28-7a3b-4fcd-a12e-aa724fe12450">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SistemaInformacion2"/>
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="3.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="576"/>
 	<parameter name="fecha_desde" class="java.sql.Date"/>
 	<parameter name="fecha_hasta" class="java.sql.Date"/>
 	<queryString language="SQL">
@@ -95,7 +95,7 @@ AND t.fecha BETWEEN $P{fecha_desde} AND  $P{fecha_hasta}]]>
 		</band>
 	</title>
 	<detail>
-		<band height="162" splitType="Stretch">
+		<band height="160" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="110" height="30" uuid="029bcdf4-6999-4d2f-9f31-21fd608abbaa"/>
 				<textElement verticalAlignment="Middle">
@@ -133,45 +133,44 @@ AND t.fecha BETWEEN $P{fecha_desde} AND  $P{fecha_hasta}]]>
 			</subreport>
 		</band>
 	</detail>
+	<pageFooter>
+		<band height="24">
+			<textField>
+				<reportElement x="425" y="0" width="80" height="20" uuid="f7179838-0da5-4ee0-94c6-ea91fc89bb89"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pág "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="505" y="0" width="40" height="20" uuid="499a1fb9-77f0-4f74-868b-724b9b2c73e9"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
 	<summary>
 		<band height="75" splitType="Stretch">
 			<staticText>
-				<reportElement x="255" y="10" width="140" height="30" uuid="7efa82ac-7d4f-49b3-8dcf-372bb655eab7"/>
+				<reportElement x="0" y="13" width="145" height="30" uuid="7efa82ac-7d4f-49b3-8dcf-372bb655eab7"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Suma Total Entradas: ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="255" y="43" width="140" height="30" uuid="b65f7c2a-3e6a-4f11-8d50-5dc2b8c69136"/>
+				<reportElement x="0" y="43" width="145" height="30" uuid="b65f7c2a-3e6a-4f11-8d50-5dc2b8c69136"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Suma Total Salidas:]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="394" y="44" width="10" height="28" uuid="d270d2ec-0ca5-45af-9999-061d73cdf8a8"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[$]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="395" y="10" width="10" height="28" uuid="17d0a2df-1ecd-479f-8729-6baa25017335"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[$]]></text>
-			</staticText>
 			<textField evaluationTime="Auto" pattern="#,##0.00">
-				<reportElement x="405" y="43" width="140" height="30" uuid="b87fe719-c949-4e38-be2d-3bb1242f0183"/>
+				<reportElement x="145" y="43" width="285" height="30" uuid="b87fe719-c949-4e38-be2d-3bb1242f0183"/>
 				<textElement verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{total_salidas}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="405" y="10" width="140" height="30" uuid="861e1aaa-37ee-4797-b02d-973e4ade216f"/>
+				<reportElement x="145" y="11" width="285" height="30" uuid="861e1aaa-37ee-4797-b02d-973e4ade216f"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>

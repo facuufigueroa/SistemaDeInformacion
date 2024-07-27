@@ -3,7 +3,7 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SistemaInformacion2"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="ireport.zoom" value="3.0"/>
-	<property name="ireport.x" value="496"/>
+	<property name="ireport.x" value="610"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
 		<![CDATA[SELECT c.nombre as categoria , tc.nombre as tipo_categoria
@@ -112,4 +112,17 @@ ORDER BY tc.nombre ASC]]>
 			</line>
 		</band>
 	</detail>
+	<pageFooter>
+		<band height="50">
+			<textField>
+				<reportElement x="431" y="0" width="80" height="20" uuid="c67b3979-b896-4a57-bb0b-f68d32f03c9b"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pág "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="511" y="0" width="40" height="20" uuid="2feb03d4-ef95-495e-970a-266e28feda5d"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
 </jasperReport>

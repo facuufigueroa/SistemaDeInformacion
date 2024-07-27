@@ -31,6 +31,15 @@ public class QueryEmpresaOrden {
         } catch (NumberFormatException | SQLException e) {
             System.out.println(e);
         }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        }
        return empresaOrdenList;
     }
 
@@ -47,6 +56,15 @@ public class QueryEmpresaOrden {
             }
         } catch (NumberFormatException | SQLException e) {
             System.out.println(e);
+        }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
         }
        return empresaOrdenList;
     }
@@ -118,6 +136,15 @@ public class QueryEmpresaOrden {
         } catch (Exception e) {
             System.out.println(e);
         }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        }
 
         return id_emp;
     }
@@ -138,6 +165,15 @@ public class QueryEmpresaOrden {
 
         } catch (Exception e) {
             System.out.println(e);
+        }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
         }
 
         return cuit;
@@ -161,6 +197,15 @@ public class QueryEmpresaOrden {
 
         } catch (Exception e) {
             System.out.println(e);
+        }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
         }
 
         return empresa;

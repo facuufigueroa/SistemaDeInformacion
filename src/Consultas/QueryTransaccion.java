@@ -71,6 +71,15 @@ public class QueryTransaccion {
         } catch (NumberFormatException | SQLException e) {
             System.out.println(e);
         }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        }
         return tList;
     }
 
@@ -88,6 +97,15 @@ public class QueryTransaccion {
             }
         } catch (Exception e) {
             System.out.println(e);
+        }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
         }
 
         return max_id;
@@ -156,6 +174,15 @@ public class QueryTransaccion {
         } catch (Exception e) {
             System.out.println(e);
         }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        }
 
         return id;
     }
@@ -173,6 +200,15 @@ public class QueryTransaccion {
             }
         } catch (Exception e) {
             System.out.println(e);
+        }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
         }
 
         return false;
@@ -192,6 +228,15 @@ public class QueryTransaccion {
         } catch (Exception e) {
             System.out.println(e);
         }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        }
 
         return false;
     }
@@ -209,6 +254,15 @@ public class QueryTransaccion {
             }
         } catch (Exception e) {
             System.out.println(e);
+        }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
         }
 
         return false;
@@ -248,6 +302,15 @@ public class QueryTransaccion {
             }
         } catch (NumberFormatException | SQLException e) {
             System.out.println(e);
+        }
+        finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
         }
         return tList;
     }

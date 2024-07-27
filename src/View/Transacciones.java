@@ -1,9 +1,9 @@
 
 package View;
 
-import com.sun.glass.events.KeyEvent;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 
 
 
@@ -125,14 +125,11 @@ public class Transacciones extends javax.swing.JFrame {
         jLabel11.setText("SubCategoria");
 
         cbbTipoCuenta.setFont(new java.awt.Font("Arial Narrow", 1, 15)); // NOI18N
-        cbbTipoCuenta.setForeground(new java.awt.Color(0, 0, 0));
 
         cbbTipoCategoria.setFont(new java.awt.Font("Arial Narrow", 1, 15)); // NOI18N
-        cbbTipoCategoria.setForeground(new java.awt.Color(0, 0, 0));
         cbbTipoCategoria.setRequestFocusEnabled(false);
 
         cbbCuentas.setFont(new java.awt.Font("Arial Narrow", 1, 15)); // NOI18N
-        cbbCuentas.setForeground(new java.awt.Color(0, 0, 0));
         cbbCuentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbbCuentasActionPerformed(evt);
@@ -140,7 +137,6 @@ public class Transacciones extends javax.swing.JFrame {
         });
 
         txtNumCheque.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        txtNumCheque.setForeground(new java.awt.Color(0, 0, 0));
         txtNumCheque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNumChequeActionPerformed(evt);
@@ -151,17 +147,14 @@ public class Transacciones extends javax.swing.JFrame {
         txtFecha.setPreferredSize(new java.awt.Dimension(118, 25));
 
         cbbEmpresa.setFont(new java.awt.Font("Arial Narrow", 1, 15)); // NOI18N
-        cbbEmpresa.setForeground(new java.awt.Color(0, 0, 0));
         cbbEmpresa.setMaximumRowCount(4);
 
         txtDescripcion.setColumns(20);
         txtDescripcion.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        txtDescripcion.setForeground(new java.awt.Color(0, 0, 0));
         txtDescripcion.setRows(5);
         jScrollPane1.setViewportView(txtDescripcion);
 
         txtCantidad.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        txtCantidad.setForeground(new java.awt.Color(0, 0, 0));
         txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCantidadKeyTyped(evt);
@@ -169,10 +162,8 @@ public class Transacciones extends javax.swing.JFrame {
         });
 
         cbbCategorias.setFont(new java.awt.Font("Arial Narrow", 1, 15)); // NOI18N
-        cbbCategorias.setForeground(new java.awt.Color(0, 0, 0));
 
         cbbSubCategoria.setFont(new java.awt.Font("Arial Narrow", 1, 15)); // NOI18N
-        cbbSubCategoria.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel12.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
@@ -198,7 +189,6 @@ public class Transacciones extends javax.swing.JFrame {
         checkAIva.setText("A IVA ?");
 
         tablaTransacciones.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        tablaTransacciones.setForeground(new java.awt.Color(0, 0, 0));
         tablaTransacciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -214,7 +204,6 @@ public class Transacciones extends javax.swing.JFrame {
 
         btnCompraVentasIVA.setBackground(new java.awt.Color(204, 204, 204));
         btnCompraVentasIVA.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        btnCompraVentasIVA.setForeground(new java.awt.Color(0, 0, 0));
         btnCompraVentasIVA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/formulario-de-inscripcion.png"))); // NOI18N
         btnCompraVentasIVA.setText("CompraVenta_IVA");
         btnCompraVentasIVA.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -229,7 +218,6 @@ public class Transacciones extends javax.swing.JFrame {
         jLabel17.setText("TRANSACCIONES REGISTRADAS");
 
         txtNumFact.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        txtNumFact.setForeground(new java.awt.Color(0, 0, 0));
         txtNumFact.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNumFactActionPerformed(evt);
@@ -241,7 +229,6 @@ public class Transacciones extends javax.swing.JFrame {
         jLabel19.setText("Tipo");
 
         txtTipoFact.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        txtTipoFact.setForeground(new java.awt.Color(0, 0, 0));
         txtTipoFact.setMinimumSize(new java.awt.Dimension(14, 25));
 
         jLabel20.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
@@ -268,7 +255,6 @@ public class Transacciones extends javax.swing.JFrame {
 
         btnSaveSinIva.setBackground(new java.awt.Color(204, 204, 204));
         btnSaveSinIva.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        btnSaveSinIva.setForeground(new java.awt.Color(0, 0, 0));
         btnSaveSinIva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/disquete.png"))); // NOI18N
         btnSaveSinIva.setText("Guardar Sin IVA");
         btnSaveSinIva.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -319,20 +305,17 @@ public class Transacciones extends javax.swing.JFrame {
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel6))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbbTipoCuenta, 0, 219, Short.MAX_VALUE)
-                                    .addComponent(cbbEmpresa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cbbCuentas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(57, 57, 57)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel8)
-                                            .addComponent(jLabel11)
-                                            .addComponent(jLabel3)))
+                                    .addComponent(cbbEmpresa, 0, 219, Short.MAX_VALUE)
+                                    .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                                    .addComponent(cbbTipoCuenta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbbCuentas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel10)
                                         .addGap(12, 12, 12)))))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -363,7 +346,6 @@ public class Transacciones extends javax.swing.JFrame {
                                         .addComponent(cbbImp, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 158, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnSaveSinIva, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnCompraVentasIVA)))))
@@ -531,7 +513,7 @@ public class Transacciones extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtSalida.getText().contains("."))) {
             
             evt.consume();
@@ -543,7 +525,7 @@ public class Transacciones extends javax.swing.JFrame {
         char caracter = evt.getKeyChar();
         
         if (((caracter < '0' || caracter > '9')) 
-                && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || txtEntrada.getText().contains("."))) {
             
             evt.consume();

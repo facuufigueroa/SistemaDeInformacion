@@ -3,8 +3,8 @@
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SistemaInformacion2"/>
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="164"/>
-	<property name="ireport.y" value="494"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="135"/>
 	<parameter name="fecha_desde" class="java.sql.Date"/>
 	<parameter name="fecha_hasta" class="java.sql.Date"/>
 	<queryString>
@@ -537,6 +537,19 @@ Contador]]></text>
 			</textField>
 		</band>
 	</detail>
+	<pageFooter>
+		<band height="50">
+			<textField>
+				<reportElement x="429" y="0" width="80" height="20" uuid="c0d4075f-b99e-4183-8788-feeda4aaf073"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pág "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="509" y="0" width="40" height="20" uuid="f9b23451-1608-4a3f-b5b2-d8c6ed72ff4d"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
 	<summary>
 		<band height="217" splitType="Prevent">
 			<staticText>
