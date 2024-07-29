@@ -2733,7 +2733,7 @@
                                   <Group type="102" attributes="0">
                                       <Component id="btnEliminar" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-                                      <Component id="jButton1" min="-2" pref="111" max="-2" attributes="0"/>
+                                      <Component id="btnBackup" min="-2" pref="111" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -2749,7 +2749,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="btnEliminar" max="32767" attributes="0"/>
-                                  <Component id="jButton1" max="32767" attributes="0"/>
+                                  <Component id="btnBackup" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace pref="46" max="32767" attributes="0"/>
                           </Group>
@@ -2782,10 +2782,13 @@
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JButton" name="jButton1">
+                    <Component class="javax.swing.JButton" name="btnBackup">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="BackUp"/>
                       </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                      </AuxValues>
                     </Component>
                   </SubComponents>
                 </Container>

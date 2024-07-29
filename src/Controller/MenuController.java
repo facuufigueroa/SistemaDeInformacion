@@ -1,5 +1,6 @@
 package Controller;
 
+import APIGoogleDrive.GoogleDriveBackup;
 import Consultas.QueryReportes;
 import Reportes.CategoriasReport;
 import Reportes.ReportByT;
@@ -19,13 +20,17 @@ import com.formdev.flatlaf.FlatLightLaf;
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -93,6 +98,7 @@ public class MenuController implements ActionListener {
         this.menuPrincipal.btnByT.addActionListener(this);
         this.formFechaReportByT.btnBuscar.addActionListener(this);
         
+        this.menuPrincipal.btnBackup.addActionListener(this);
         HistoricoTransaccionController htController = new  HistoricoTransaccionController(menuPrincipal);
         
         this.menuPrincipal.btnPrintCategoria.addActionListener(this);
@@ -127,6 +133,7 @@ public class MenuController implements ActionListener {
             accionVerBancosYTarjetas(e);
             loadReportByT(e);
             accionImprimirCategorias(e);
+            realizarBackup(e);
         } catch (ParseException ex) {
             Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -158,6 +165,46 @@ public class MenuController implements ActionListener {
             }
         });
     }*/
+    public void realizarBackup(ActionEvent e){
+        if(e.getSource() == menuPrincipal.btnBackup){
+            //JOptionPane.showMessageDialog(null, "Creando copia de seguridad, aguarde...");
+
+            // Crear una nueva instancia de GoogleDriveBackup
+            GoogleDriveBackup backup = new GoogleDriveBackup();
+
+            JOptionPane optionPane = new JOptionPane("Creando copia de seguridad, aguarde...", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+        final JDialog dialog = optionPane.createDialog("Por favor espere");
+
+        // Utilizar SwingWorker para ejecutar la tarea en un hilo de fondo
+        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws IOException, GeneralSecurityException {
+                backup.backupDatabase();
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                // Cerrar el diálogo de espera
+                dialog.dispose();
+                try {
+                    // Verificar si ocurrió una excepción
+                    get();
+                    JOptionPane.showMessageDialog(null, "Backup realizado con éxito.");
+                } catch (Exception ex) {
+                    // Mostrar mensaje de error
+                    JOptionPane.showMessageDialog(null, "Error al realizar el backup: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    ex.printStackTrace();
+                }
+            }
+        };
+
+        // Mostrar el diálogo de espera y ejecutar el SwingWorker
+        worker.execute();
+        dialog.setVisible(true);
+    }
+
+    }
     
     public static void main(String args[]) {
         try {

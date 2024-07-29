@@ -160,7 +160,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel14 = new javax.swing.JPanel();
         jLabel30 = new javax.swing.JLabel();
         btnEliminar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnBackup = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SISTEMA DE INFORMACIÓN");
@@ -1512,7 +1512,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/proteccion-de-datos.png"))); // NOI18N
         btnEliminar.setText("Eliminar");
 
-        jButton1.setText("BackUp");
+        btnBackup.setText("BackUp");
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -1524,7 +1524,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addComponent(btnEliminar)
                         .addGap(71, 71, 71)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnBackup, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel30))
                 .addContainerGap(700, Short.MAX_VALUE))
         );
@@ -1536,7 +1536,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnBackup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
 
@@ -1698,6 +1698,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAnterior;
+    public javax.swing.JButton btnBackup;
     public javax.swing.JButton btnBuscarPorFechaH;
     public javax.swing.JButton btnByT;
     public javax.swing.JButton btnCuentasAPagar;
@@ -1729,7 +1730,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> cbbTipoCat;
     public javax.swing.JComboBox<String> cbbTipoCuenta;
     public javax.swing.JInternalFrame internalFrame;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton5;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JInternalFrame jInternalFrame2;
